@@ -42,10 +42,11 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="space-y-4">
             <Link href="/" className="inline-block">
-              <span className="text-green text-2xl font-serif tracking-wider font-bold">
-                MIRRIAM
-                <span className="text-white font-sans font-light text-lg ml-1">MALL</span>
-              </span>
+              <img
+                src="/MIRRIA LOGO.png"
+                alt="Mirriam Mall"
+                className="h-12 w-auto object-contain brightness-0 invert"
+              />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed">
               O novo centro de compras, negócios, lazer e investimento no Distrito de Homoíne, 

@@ -50,12 +50,11 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-green text-2xl font-serif tracking-wider font-bold group-hover:text-green-light transition-colors">
-              MIRRIAM
-              <span className="text-primary font-sans font-light text-lg tracking-normal ml-1">
-                MALL
-              </span>
-            </span>
+            <img
+              src="/MIRRIA LOGO.png"
+              alt="Mirriam Mall"
+              className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+            />
           </Link>
 
           {/* Desktop Navigation */}

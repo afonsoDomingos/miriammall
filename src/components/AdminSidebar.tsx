@@ -42,10 +42,16 @@ export default function AdminSidebar() {
         {/* Sidebar Header */}
         <div className="p-6 border-b border-green/10 flex items-center justify-between">
           <Link href="/admin/dashboard" className="block">
-            <span className="text-green text-lg font-serif tracking-wider font-bold block">
-              MIRRIAM
-              <span className="text-white font-sans font-light text-sm ml-1">ADMIN</span>
-            </span>
+            <div className="flex items-center gap-2">
+              <img
+                src="/MIRRIA LOGO.png"
+                alt="Mirriam Mall"
+                className="h-8 w-auto object-contain brightness-0 invert"
+              />
+              <span className="text-[9px] bg-green/10 text-green px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
+                Admin
+              </span>
+            </div>
           </Link>
         </div>
 

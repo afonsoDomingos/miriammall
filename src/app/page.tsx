@@ -98,7 +98,7 @@ export default function Home() {
                 className="max-w-2xl text-white"
               >
                 <span className="text-green font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center gap-2 mb-3">
-                  <Palmtree className="w-4.5 h-4.5 text-green animate-pulse" /> Terra dos Coqueiros • Homoíne, Inhambane
+                  <Palmtree className="w-4.5 h-4.5 text-green animate-pulse" /> Terra de Boa Gente • Homoíne, Inhambane
                 </span>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold tracking-tight mb-4">
                   {activeBanner.title}
@@ -152,7 +152,7 @@ export default function Home() {
                 <div className="space-y-4 text-primary/70 leading-relaxed text-sm sm:text-base">
                   <p>
                     O **Mirriam Mall** surge com a missão de transformar o cenário económico e social do Distrito de Homoíne, na célebre Província de Inhambane. 
-                    Pensado detalhadamente para fundir a sofisticação de um centro comercial moderno com o charme natural da terra dos coqueiros, o shopping reúne o melhor in marcas, conveniência e bem-estar.
+                    Pensado detalhadamente para fundir a sofisticação de um centro comercial moderno com o charme natural da Terra de Boa Gente, o shopping reúne o melhor in marcas, conveniência e bem-estar.
                   </p>
                   <p>
                     Mais do que uma estrutura comercial, oferecemos um ambiente de negócios vibrante e refrescante. 
