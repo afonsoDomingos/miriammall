@@ -74,7 +74,7 @@ function ContactFormContent() {
             <Phone className="w-6 h-6 text-green" />
             <div>
               <h4 className="font-bold text-primary text-sm">Telemóvel & WhatsApp</h4>
-              <p className="text-xs text-primary/60">+258 84 123 4567 | +258 82 999 0000</p>
+              <p className="text-xs text-primary/60">+258 86 554 3026</p>
             </div>
           </div>
           <div className="flex items-center gap-4 p-4 rounded-lg bg-light-gray border border-primary/5">
@@ -93,7 +93,7 @@ function ContactFormContent() {
             <p className="text-xs text-primary/60">Fale com um comercial de forma rápida e direta.</p>
           </div>
           <a
-            href="https://wa.me/258841234567"
+            href="https://wa.me/258865543026"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#25D366] hover:bg-[#20ba56] text-white text-xs font-bold uppercase tracking-wider py-2.5 px-4 rounded flex items-center gap-1.5 transition-colors shrink-0"

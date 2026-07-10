@@ -197,7 +197,7 @@ export const initialStores: Store[] = [
     floor: 0,
     schedule: '09:00 - 18:30',
     description: 'Líder em vestuário de baixo custo, calçado, artigos para o lar e tecnologia acessível para toda a família.',
-    contact: '+258 84 123 4567'
+    contact: '+258 86 554 3026'
   },
   {
     id: 'store-vodacom',

@@ -438,7 +438,7 @@ export default function Home() {
                     <Phone className="w-6 h-6 text-green" />
                     <div>
                       <h4 className="font-bold text-primary text-sm">Telefone e WhatsApp</h4>
-                      <p className="text-xs text-primary/60">+258 84 123 4567 | +258 82 999 0000</p>
+                      <p className="text-xs text-primary/60">+258 86 554 3026</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4 p-4 rounded-lg bg-light-gray border border-primary/5">
@@ -452,7 +452,7 @@ export default function Home() {
 
                 <div className="flex gap-4">
                   <a
-                    href="https://wa.me/258841234567"
+                    href="https://wa.me/258865543026"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 text-center bg-[#25D366] hover:bg-[#20ba56] text-white text-xs font-bold uppercase tracking-wider py-3 rounded flex items-center justify-center gap-2"
