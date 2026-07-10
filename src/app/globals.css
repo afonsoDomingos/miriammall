@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #0B1F3A;
+  --color-primary-light: #153054;
+  --color-primary-dark: #06101F;
+  /* Green theme values mapped to the green color variable for layout markup compatibility */
+  --color-green: #10B981;       /* Emerald Green */
+  --color-green-light: #34D399; /* Mint Green */
+  --color-green-dark: #059669;  /* Deep Forest Green */
+  --color-light-gray: #F8F9FA;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-outfit), system-ui, sans-serif;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0B1F3A;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom classes for premium look with green accent */
+.glass {
+  background: rgba(11, 31, 58, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(16, 185, 129, 0.15); /* 16, 185, 129 is Emerald Green */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.glass-light {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(11, 31, 58, 0.05);
+}
+
+.green-glow {
+  box-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.15);
+}
+
+.green-glow-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.green-glow-hover:hover {
+  box-shadow: 0 12px 30px -5px rgba(16, 185, 129, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B1F3A;
+}
+::-webkit-scrollbar-thumb {
+  background: #10B981; /* Green scrollbar */
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #34D399;
+}
+
+/* Swiper slider styles customization */
+.swiper-pagination-bullet-active {
+  background: #10B981 !important;
 }
