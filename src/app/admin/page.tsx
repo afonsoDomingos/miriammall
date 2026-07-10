@@ -18,13 +18,27 @@ export default function AdminLogin() {
     }
   }, [router]);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === 'admin' && password === 'mirriam2026') {
-      sessionStorage.setItem('mirriam_admin_authenticated', 'true');
-      router.push('/admin/dashboard');
-    } else {
-      setError('Credenciais incorretas. Tente novamente.');
+    setError('');
+    
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+      
+      if (data.success) {
+        sessionStorage.setItem('mirriam_admin_authenticated', 'true');
+        router.push('/admin/dashboard');
+      } else {
+        setError(data.error || 'Credenciais incorretas. Tente novamente.');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('Erro de ligação ao servidor. Tente novamente mais tarde.');
     }
   };
 
@@ -99,7 +113,7 @@ export default function AdminLogin() {
         </form>
 
         <div className="text-center mt-6 text-[10px] text-white/40 border-t border-white/5 pt-4">
-          Credenciais demonstrativas: <strong className="text-green">admin</strong> / <strong className="text-green">mirriam2026</strong>
+          Credenciais: <strong className="text-green">admin@miriammall.com</strong> / <strong className="text-green">@Admin123@</strong>
         </div>
       </div>
     </div>

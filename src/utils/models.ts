@@ -103,6 +103,13 @@ export function serializeDoc(doc: any) {
   return obj;
 }
 
+// 8. AdminUser Schema
+const AdminUserSchema = new Schema({
+  _id: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+}, { timestamps: true });
+
 // Compile or reuse Mongoose models
 export const Space = mongoose.models.Space || mongoose.model('Space', SpaceSchema);
 export const Banner = mongoose.models.Banner || mongoose.model('Banner', BannerSchema);
@@ -111,3 +118,4 @@ export const Restaurant = mongoose.models.Restaurant || mongoose.model('Restaura
 export const MallEvent = mongoose.models.MallEvent || mongoose.model('MallEvent', MallEventSchema);
 export const Promotion = mongoose.models.Promotion || mongoose.model('Promotion', PromotionSchema);
 export const RentalRequest = mongoose.models.RentalRequest || mongoose.model('RentalRequest', RentalRequestSchema);
+export const AdminUser = mongoose.models.AdminUser || mongoose.model('AdminUser', AdminUserSchema);

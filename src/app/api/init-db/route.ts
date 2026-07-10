@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '../../../utils/db';
+import bcrypt from 'bcryptjs';
 import {
   Space,
   Banner,
@@ -7,7 +8,8 @@ import {
   Restaurant,
   MallEvent,
   Promotion,
-  RentalRequest
+  RentalRequest,
+  AdminUser
 } from '../../../utils/models';
 import {
   initialSpaces,
@@ -78,6 +80,19 @@ export async function GET() {
     if (reqCount === 0) {
       const mapped = initialRentalRequests.map(item => ({ ...item, _id: item.id }));
       await RentalRequest.insertMany(mapped);
+      seeded = true;
+    }
+
+    // 8. Seed Admin User
+    const adminExists = await AdminUser.findOne({ email: 'admin@miriammall.com' });
+    if (!adminExists) {
+      const hashedPassword = await bcrypt.hash('@Admin123@', 10);
+      const admin = new AdminUser({
+        _id: `admin-${Date.now()}`,
+        email: 'admin@miriammall.com',
+        password: hashedPassword
+      });
+      await admin.save();
       seeded = true;
     }
 
