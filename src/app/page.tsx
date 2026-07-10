@@ -29,6 +29,24 @@ import { useDatabase } from '../context/DatabaseContext';
 export default function Home() {
   const { spaces, stores, events, promotions, banners } = useDatabase();
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: 'easeOut' as const }
+    }
+  };
+
   // Get active banner
   const activeBanner = banners.find((b) => b.isActive) || banners[0];
 
@@ -119,7 +137,12 @@ export default function Home() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8 }}
+              >
                 <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center gap-1.5">
                   <Palmtree className="w-3.5 h-3.5" /> O Empreendimento
                 </span>
@@ -129,7 +152,7 @@ export default function Home() {
                 <div className="space-y-4 text-primary/70 leading-relaxed text-sm sm:text-base">
                   <p>
                     O **Mirriam Mall** surge com a missão de transformar o cenário económico e social do Distrito de Homoíne, na célebre Província de Inhambane. 
-                    Pensado detalhadamente para fundir a sofisticação de um centro comercial moderno com o charme natural da terra dos coqueiros, o shopping reúne o melhor em marcas, conveniência e bem-estar.
+                    Pensado detalhadamente para fundir a sofisticação de um centro comercial moderno com o charme natural da terra dos coqueiros, o shopping reúne o melhor in marcas, conveniência e bem-estar.
                   </p>
                   <p>
                     Mais do que uma estrutura comercial, oferecemos um ambiente de negócios vibrante e refrescante. 
@@ -152,8 +175,14 @@ export default function Home() {
                     <span className="text-[10px] text-primary/60 uppercase font-medium tracking-wide">Design Sustentável</span>
                   </div>
                 </div>
-              </div>
-              <div className="relative p-2 bg-slate-50 border border-slate-200/60 rounded-2xl shadow-green-glow shadow-green-glow-hover transition-all duration-500">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative p-2 bg-slate-50 border border-slate-200/60 rounded-2xl shadow-green-glow shadow-green-glow-hover transition-all duration-500"
+              >
                 <div className="relative h-[440px] rounded-xl overflow-hidden group">
                   <img
                     src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80"
@@ -162,7 +191,7 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none" />
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -184,12 +213,19 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            >
               {benefits.map((benefit, index) => {
                 const IconComponent = benefit.icon;
                 return (
-                  <div
+                  <motion.div
                     key={index}
+                    variants={cardVariants}
                     className="p-6 rounded-xl bg-primary/45 border border-white/5 shadow-md shadow-green-glow hover:border-green/45 transition-all duration-300 hover:-translate-y-1.5 active:translate-y-0 group cursor-default"
                   >
                     <div className="w-12 h-12 rounded-lg bg-green/10 flex items-center justify-center mb-5 group-hover:bg-green transition-all duration-300 transform group-hover:scale-110">
@@ -197,10 +233,10 @@ export default function Home() {
                     </div>
                     <h3 className="text-lg font-bold mb-2.5 group-hover:text-green transition-colors">{benefit.title}</h3>
                     <p className="text-white/70 text-xs sm:text-sm leading-relaxed">{benefit.text}</p>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -227,10 +263,17 @@ export default function Home() {
             </div>
 
             {/* Grid of Preview Spaces */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            >
               {previewSpaces.map((space) => (
-                <div
+                <motion.div
                   key={space.id}
+                  variants={cardVariants}
                   className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md flex flex-col justify-between hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group"
                 >
                   <div>
@@ -273,9 +316,9 @@ export default function Home() {
                       Arrendar
                     </Link>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             <div className="text-center mt-12">
               <Link
@@ -308,10 +351,17 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+            >
               {previewStores.map((store) => (
-                <div
+                <motion.div
                   key={store.id}
+                  variants={cardVariants}
                   className="bg-white p-6 rounded-2xl border border-slate-100 text-center flex flex-col justify-between shadow-md hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group"
                 >
                   <div className="flex flex-col items-center">
@@ -329,9 +379,9 @@ export default function Home() {
                   <div className="text-xs text-primary/50 border-t border-slate-100 pt-4 mt-2">
                     <span className="block font-medium">Piso {store.floor} | Horário: {store.schedule}</span>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
