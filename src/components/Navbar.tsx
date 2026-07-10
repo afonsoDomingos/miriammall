@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Landmark, ShieldCheck, Mail, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
@@ -42,7 +42,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-primary/95 backdrop-blur-md border-b border-green/10 shadow-lg ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm ${
         isScrolled ? 'py-3' : 'py-4'
       }`}
     >
@@ -52,7 +52,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 group">
             <span className="text-green text-2xl font-serif tracking-wider font-bold group-hover:text-green-light transition-colors">
               MIRRIAM
-              <span className="text-white font-sans font-light text-lg tracking-normal ml-1">
+              <span className="text-primary font-sans font-light text-lg tracking-normal ml-1">
                 MALL
               </span>
             </span>
@@ -67,7 +67,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={`text-sm tracking-wide font-medium transition-colors hover:text-green relative py-1 ${
-                    isActive ? 'text-green' : 'text-white/90'
+                    isActive ? 'text-green' : 'text-primary/80'
                   }`}
                 >
                   {link.name}
@@ -103,7 +103,7 @@ export default function Navbar() {
           <div className="flex lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-green focus:outline-none"
+              className="text-primary hover:text-green focus:outline-none"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -120,7 +120,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-primary/98 border-b border-green/20"
+            className="lg:hidden bg-white border-b border-slate-200"
           >
             <div className="px-4 pt-2 pb-6 space-y-2 sm:px-6">
               {navLinks.map((link) => {
@@ -130,8 +130,8 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-3 py-2.5 rounded text-base font-medium transition-colors hover:bg-white/5 hover:text-green ${
-                      isActive ? 'text-green bg-white/5' : 'text-white/95'
+                    className={`block px-3 py-2.5 rounded text-base font-medium transition-colors hover:bg-slate-50 hover:text-green ${
+                      isActive ? 'text-green bg-slate-50' : 'text-primary/90'
                     }`}
                   >
                     {link.name}

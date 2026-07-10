@@ -12,8 +12,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Por favor, preencha todos os campos.' }, { status: 400 });
     }
 
+    const emailToSearch = username.toLowerCase().trim();
+    // Support both 'admin' and 'admin@miriammall.com' as usernames
+    const queryEmail = emailToSearch === 'admin' ? 'admin@miriammall.com' : emailToSearch;
+    
     // Find the user by email
-    const user = await AdminUser.findOne({ email: username.toLowerCase().trim() });
+    const user = await AdminUser.findOne({ email: queryEmail });
 
     if (!user) {
       return NextResponse.json({ success: false, error: 'Credenciais incorretas.' }, { status: 401 });
