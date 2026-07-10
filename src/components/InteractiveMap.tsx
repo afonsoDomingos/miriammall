@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Space } from '../utils/mockData';
 import { useDatabase } from '../context/DatabaseContext';
-import { Info, HelpCircle, X, CheckCircle, Clock, AlertTriangle } from 'lucide-react';
+import { Info, HelpCircle, X, CheckCircle, Clock, AlertTriangle, Palmtree } from 'lucide-react';
 import Link from 'next/link';
 
 export default function InteractiveMap() {
@@ -50,7 +50,7 @@ export default function InteractiveMap() {
   };
 
   return (
-    <div className="bg-light-gray p-6 rounded-xl border border-green/10 green-glow">
+    <div className="bg-slate-50/50 p-6 rounded-xl">
       {/* Floor Selector */}
       <div className="flex justify-center gap-4 mb-8">
         <button
@@ -78,8 +78,8 @@ export default function InteractiveMap() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* SVG Map (Left 3 cols) */}
         <div className="lg:col-span-3 bg-white p-4 rounded-lg border border-primary/5 flex flex-col items-center justify-center relative min-h-[400px]">
-          <h3 className="text-center font-serif text-lg text-primary mb-4">
-            Planta Interativa - Piso {selectedFloor}
+          <h3 className="text-center font-serif text-lg text-primary mb-4 flex items-center justify-center gap-1.5">
+            <Palmtree className="w-5 h-5 text-green" /> Planta Interativa - Piso {selectedFloor}
           </h3>
 
           <div className="w-full overflow-x-auto max-w-full">

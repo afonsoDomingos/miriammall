@@ -21,11 +21,25 @@ import {
   initialRentalRequests
 } from '../../../utils/mockData';
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
     await dbConnect();
 
+    const { searchParams } = new URL(req.url);
+    const reset = searchParams.get('reset') === 'true';
+
     let seeded = false;
+
+    if (reset) {
+      await Banner.deleteMany({});
+      await Space.deleteMany({});
+      await Store.deleteMany({});
+      await Restaurant.deleteMany({});
+      await MallEvent.deleteMany({});
+      await Promotion.deleteMany({});
+      await RentalRequest.deleteMany({});
+      await AdminUser.deleteMany({});
+    }
 
     // 1. Seed Banners
     const bannerCount = await Banner.countDocuments();

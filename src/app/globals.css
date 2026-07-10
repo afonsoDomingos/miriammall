@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0B1F3A;
-  --color-primary-light: #153054;
-  --color-primary-dark: #06101F;
+  --color-primary: #7F1D1D;       /* Deep Luxury Red */
+  --color-primary-light: #991B1B; /* Rich Crimson Red */
+  --color-primary-dark: #450A0A;  /* Deep Burgundy/Wine Black */
   /* Green theme values mapped to the green color variable for layout markup compatibility */
   --color-green: #10B981;       /* Emerald Green */
   --color-green-light: #34D399; /* Mint Green */
@@ -15,12 +15,12 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0B1F3A;
+  --foreground: #450A0A;
 }
 
 /* Custom classes for premium look with green accent */
 .glass {
-  background: rgba(11, 31, 58, 0.85);
+  background: rgba(69, 10, 10, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(16, 185, 129, 0.15); /* 16, 185, 129 is Emerald Green */
@@ -30,7 +30,7 @@
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(11, 31, 58, 0.05);
+  border: 1px solid rgba(127, 29, 29, 0.08);
 }
 
 .green-glow {
@@ -64,7 +64,7 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B1F3A;
+  background: #450A0A;
 }
 ::-webkit-scrollbar-thumb {
   background: #10B981; /* Green scrollbar */
