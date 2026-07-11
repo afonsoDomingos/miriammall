@@ -149,6 +149,30 @@ export default function Home() {
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* Scroll Down Indicator */}
+          <a
+            href="#sobre"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 group transition-all duration-300"
+            aria-label="Rolar para baixo"
+          >
+            <span className="text-[10px] text-white/50 font-sans tracking-widest uppercase group-hover:text-green transition-colors duration-300">
+              Descobrir
+            </span>
+            <div className="w-6 h-10 rounded-full border-2 border-white/30 group-hover:border-green flex items-start justify-center p-1.5 transition-all duration-300 shadow-lg shadow-black/10">
+              <motion.div
+                animate={{
+                  y: [0, 12, 0],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="w-1.5 h-1.5 rounded-full bg-white group-hover:bg-green transition-colors duration-300"
+              />
+            </div>
+          </a>
         </section>
 
         {/* ABOUT SECTION */}
