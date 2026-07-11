@@ -110,6 +110,22 @@ const AdminUserSchema = new Schema({
   password: { type: String, required: true },
 }, { timestamps: true });
 
+// 9. NewsletterEmail Schema
+const NewsletterEmailSchema = new Schema({
+  email: { type: String, required: true, unique: true, trim: true, lowercase: true },
+}, { timestamps: true });
+
+// 10. BlogPost Schema
+const BlogPostSchema = new Schema({
+  _id: { type: String, required: true },
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  summary: { type: String, required: true },
+  image: { type: String, required: true },
+  date: { type: String, required: true },
+  author: { type: String, required: true },
+}, { timestamps: true });
+
 // Compile or reuse Mongoose models
 export const Space = mongoose.models.Space || mongoose.model('Space', SpaceSchema);
 export const Banner = mongoose.models.Banner || mongoose.model('Banner', BannerSchema);
@@ -119,3 +135,6 @@ export const MallEvent = mongoose.models.MallEvent || mongoose.model('MallEvent'
 export const Promotion = mongoose.models.Promotion || mongoose.model('Promotion', PromotionSchema);
 export const RentalRequest = mongoose.models.RentalRequest || mongoose.model('RentalRequest', RentalRequestSchema);
 export const AdminUser = mongoose.models.AdminUser || mongoose.model('AdminUser', AdminUserSchema);
+export const NewsletterEmail = mongoose.models.NewsletterEmail || mongoose.model('NewsletterEmail', NewsletterEmailSchema);
+export const BlogPost = mongoose.models.BlogPost || mongoose.model('BlogPost', BlogPostSchema);
+

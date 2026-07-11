@@ -8,7 +8,8 @@ import {
   MallEvent,
   Promotion,
   RentalRequest,
-  serializeDoc
+  serializeDoc,
+  BlogPost
 } from '../../../utils/models';
 
 export const dynamic = 'force-dynamic';
@@ -25,7 +26,8 @@ export async function GET() {
       restaurantsRaw,
       eventsRaw,
       promotionsRaw,
-      rentalRequestsRaw
+      rentalRequestsRaw,
+      blogPostsRaw
     ] = await Promise.all([
       Space.find({}),
       Banner.find({}),
@@ -33,7 +35,8 @@ export async function GET() {
       Restaurant.find({}),
       MallEvent.find({}),
       Promotion.find({}),
-      RentalRequest.find({}).sort({ date: -1 }) // Sort requests to show newest first
+      RentalRequest.find({}).sort({ date: -1 }),
+      BlogPost.find({}).sort({ createdAt: -1 }) // Sort requests to show newest first
     ]);
 
     // Serialize documents
@@ -44,6 +47,7 @@ export async function GET() {
     const events = eventsRaw.map(serializeDoc);
     const promotions = promotionsRaw.map(serializeDoc);
     const rentalRequests = rentalRequestsRaw.map(serializeDoc);
+    const blogPosts = blogPostsRaw.map(serializeDoc);
 
     return NextResponse.json({
       success: true,
@@ -54,7 +58,8 @@ export async function GET() {
         restaurants,
         events,
         promotions,
-        rentalRequests
+        rentalRequests,
+        blogPosts
       }
     });
   } catch (error: any) {

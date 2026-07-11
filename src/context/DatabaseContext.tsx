@@ -8,7 +8,8 @@ import {
   MallEvent,
   Promotion,
   RentalRequest,
-  Banner
+  Banner,
+  BlogPost
 } from '../utils/mockData';
 
 interface DatabaseContextType {
@@ -19,6 +20,7 @@ interface DatabaseContextType {
   promotions: Promotion[];
   rentalRequests: RentalRequest[];
   banners: Banner[];
+  blogPosts: BlogPost[];
   isLoaded: boolean;
   
   // Banners CRUD
@@ -56,6 +58,11 @@ interface DatabaseContextType {
   addRentalRequest: (req: Omit<RentalRequest, 'id' | 'date' | 'status'>) => Promise<void>;
   updateRentalRequestStatus: (id: string, status: RentalRequest['status']) => Promise<void>;
   deleteRentalRequest: (id: string) => Promise<void>;
+
+  // Blog CRUD
+  addBlogPost: (post: Omit<BlogPost, 'id'>) => Promise<void>;
+  updateBlogPost: (post: BlogPost) => Promise<void>;
+  deleteBlogPost: (id: string) => Promise<void>;
 }
 
 const DatabaseContext = createContext<DatabaseContextType | undefined>(undefined);
@@ -68,6 +75,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
   const [promotions, setPromotions] = useState<Promotion[]>([]);
   const [rentalRequests, setRentalRequests] = useState<RentalRequest[]>([]);
   const [banners, setBanners] = useState<Banner[]>([]);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -81,7 +89,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
         const payload = await res.json();
         
         if (payload.success && payload.data) {
-          const { spaces, stores, restaurants, events, promotions, rentalRequests, banners } = payload.data;
+          const { spaces, stores, restaurants, events, promotions, rentalRequests, banners, blogPosts } = payload.data;
           setSpaces(spaces || []);
           setStores(stores || []);
           setRestaurants(restaurants || []);
@@ -89,6 +97,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
           setPromotions(promotions || []);
           setRentalRequests(rentalRequests || []);
           setBanners(banners || []);
+          setBlogPosts(blogPosts || []);
         }
       } catch (e) {
         console.error('Failed to load data from API', e);
@@ -450,6 +459,53 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // Blog CRUD Implementation
+  const addBlogPost = async (post: Omit<BlogPost, 'id'>) => {
+    try {
+      const res = await fetch('/api/blog', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post),
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        setBlogPosts(prev => [data.data, ...prev]);
+      }
+    } catch (e) {
+      console.error('Failed to add blog post', e);
+    }
+  };
+
+  const updateBlogPost = async (updatedPost: BlogPost) => {
+    try {
+      const res = await fetch(`/api/blog/${updatedPost.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedPost),
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        setBlogPosts(prev => prev.map(p => p.id === updatedPost.id ? data.data : p));
+      }
+    } catch (e) {
+      console.error('Failed to update blog post', e);
+    }
+  };
+
+  const deleteBlogPost = async (id: string) => {
+    try {
+      const res = await fetch(`/api/blog/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success) {
+        setBlogPosts(prev => prev.filter(p => p.id !== id));
+      }
+    } catch (e) {
+      console.error('Failed to delete blog post', e);
+    }
+  };
+
   return (
     <DatabaseContext.Provider value={{
       spaces,
@@ -460,6 +516,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
       rentalRequests,
       banners,
       isLoaded,
+      blogPosts,
       addBanner,
       updateBanner,
       deleteBanner,
@@ -481,7 +538,10 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
       deletePromotion,
       addRentalRequest,
       updateRentalRequestStatus,
-      deleteRentalRequest
+      deleteRentalRequest,
+      addBlogPost,
+      updateBlogPost,
+      deleteBlogPost
     }}>
       {children}
     </DatabaseContext.Provider>

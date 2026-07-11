@@ -77,6 +77,16 @@ export interface RentalRequest {
   status: 'novo' | 'respondido' | 'arquivado';
 }
 
+export interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+  summary: string;
+  image: string;
+  date: string;
+  author: string;
+}
+
 export const initialSpaces: Space[] = [
   {
     id: 'space-101',
@@ -409,5 +419,26 @@ export const initialBanners: Banner[] = [
     buttonText2: 'Arrendar um Espaço',
     buttonLink2: '/espacos',
     isActive: true
+  }
+];
+
+export const initialBlogPosts: BlogPost[] = [
+  {
+    id: 'post-1',
+    title: 'Miriam Mall Impulsiona o Empreendedorismo no Distrito de Homoíne',
+    summary: 'Como a inauguração do novo centro comercial está a criar oportunidades de negócios para empreendedores locais e marcas nacionais.',
+    content: 'O Miriam Mall representa um marco histórico para o desenvolvimento socioeconómico do Distrito de Homoíne, na Província de Inhambane. Com uma infraestrutura comercial moderna, o shopping atrai marcas consolidadas e também oferece condições favoráveis para que pequenos empreendedores e produtores da região possam expor e comercializar as suas marcas. Este novo polo não só gera empregos diretos e indiretos, mas também promove a fixação de serviços e capital no distrito, evitando a necessidade de deslocações frequentes para a capital provincial.',
+    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80',
+    date: '12 de Julho de 2026',
+    author: 'Miriam Mall Editorial'
+  },
+  {
+    id: 'post-2',
+    title: 'As Vantagens do Design Sustentável e Climatização Natural do Miriam Mall',
+    summary: 'Conheça o conceito arquitetónico por trás do primeiro grande centro comercial de Homoíne e as suas vantagens de design sustentável.',
+    content: 'A arquitetura do Miriam Mall foi cuidadosamente planeada para aliar o luxo moderno ao charme rústico de Inhambane. Sob o balanço de coqueiros típicos da região, o design prioriza a ventilação natural nas áreas comuns e praça de alimentação, reduzindo significativamente o consumo de energia e mantendo um clima agradável e fresco mesmo nos dias mais quentes. Além disso, as montras de vidro duplo garantem isolamento acústico e térmico excecional para cada uma das lojas, permitindo total conforto para clientes e lojistas.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+    date: '10 de Julho de 2026',
+    author: 'Equipa de Engenharia Miriam Mall'
   }
 ];

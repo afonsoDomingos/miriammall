@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageCircle, Loader2 } from 'lucide-react';
 
 const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -34,10 +34,85 @@ export default function Footer() {
   if (isAdminRoute) return null; // Admin dashboard does not show the public footer
 
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    setMessage('');
+    
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      
+      if (res.ok && data.success) {
+        setStatus('success');
+        setMessage(data.message);
+        setEmail('');
+      } else {
+        setStatus('error');
+        setMessage(data.error || 'Erro ao subscrever. Tente novamente.');
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+      setMessage('Erro de conexão. Verifique a rede.');
+    }
+  };
 
   return (
     <footer className="bg-primary-dark text-white border-t border-green/10 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Newsletter Row */}
+        <div className="border-b border-white/10 pb-10 mb-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+          <div className="max-w-md">
+            <h3 className="text-lg font-serif font-bold text-white flex items-center gap-2">
+              <Mail className="w-5 h-5 text-green" /> Subscreva a Nossa Newsletter
+            </h3>
+            <p className="text-white/60 text-xs mt-1">
+              Fique a par de todas as novidades, eventos e promoções exclusivas do Miriam Mall diretamente no seu e-mail.
+            </p>
+          </div>
+          <div className="w-full lg:w-auto">
+            <form onSubmit={handleSubscribe} className="w-full flex flex-col sm:flex-row gap-2 shrink-0">
+              <input
+                type="email"
+                required
+                placeholder="Introduza o seu e-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={status === 'loading'}
+                className="w-full sm:w-64 bg-white/5 border border-white/10 rounded px-4 py-2.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-green focus:bg-white/10 disabled:opacity-50 transition-all"
+              />
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="bg-green hover:bg-green-light text-primary text-xs font-bold uppercase tracking-wider py-2.5 px-6 rounded transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed flex items-center justify-center gap-1.5 shrink-0"
+              >
+                {status === 'loading' ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>A subscrever...</span>
+                  </>
+                ) : (
+                  'Subscrever'
+                )}
+              </button>
+            </form>
+            {message && (
+              <p className={`text-[10px] mt-1.5 font-semibold ${status === 'success' ? 'text-emerald-400' : 'text-rose-400'}`}>
+                {message}
+              </p>
+            )}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Column */}
           <div className="space-y-4">

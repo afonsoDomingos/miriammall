@@ -3,6 +3,8 @@ import { Playfair_Display, Outfit } from 'next/font/google';
 import './globals.css';
 import { DatabaseProvider } from '../context/DatabaseContext';
 import ScrollToTop from '../components/ScrollToTop';
+import WhatsAppWidget from '../components/WhatsAppWidget';
+import WelcomePopup from '../components/WelcomePopup';
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -53,6 +55,8 @@ export default function RootLayout({
         <DatabaseProvider>
           {children}
           <ScrollToTop />
+          <WhatsAppWidget />
+          <WelcomePopup />
         </DatabaseProvider>
       </body>
     </html>

@@ -9,7 +9,8 @@ import {
   MallEvent,
   Promotion,
   RentalRequest,
-  AdminUser
+  AdminUser,
+  BlogPost
 } from '../../../utils/models';
 import {
   initialSpaces,
@@ -18,7 +19,8 @@ import {
   initialRestaurants,
   initialEvents,
   initialPromotions,
-  initialRentalRequests
+  initialRentalRequests,
+  initialBlogPosts
 } from '../../../utils/mockData';
 
 export async function GET(req: Request) {
@@ -39,6 +41,7 @@ export async function GET(req: Request) {
       await Promotion.deleteMany({});
       await RentalRequest.deleteMany({});
       await AdminUser.deleteMany({});
+      await BlogPost.deleteMany({});
     }
 
     // 1. Seed Banners
@@ -94,6 +97,14 @@ export async function GET(req: Request) {
     if (reqCount === 0) {
       const mapped = initialRentalRequests.map(item => ({ ...item, _id: item.id }));
       await RentalRequest.insertMany(mapped);
+      seeded = true;
+    }
+
+    // 8. Seed Blog Posts
+    const blogCount = await BlogPost.countDocuments();
+    if (blogCount === 0) {
+      const mapped = initialBlogPosts.map(item => ({ ...item, _id: item.id }));
+      await BlogPost.insertMany(mapped);
       seeded = true;
     }
 

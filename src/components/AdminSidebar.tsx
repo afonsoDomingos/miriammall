@@ -13,7 +13,8 @@ import {
   Calendar,
   LogOut,
   Globe,
-  Sliders
+  Sliders,
+  BookOpen
 } from 'lucide-react';
 
 export default function AdminSidebar() {
@@ -28,7 +29,8 @@ export default function AdminSidebar() {
     { name: 'Restaurantes', href: '/admin/restaurantes', icon: UtensilsCrossed },
     { name: 'Promoções', href: '/admin/promocoes', icon: Tag },
     { name: 'Eventos', href: '/admin/eventos', icon: Calendar },
-    { name: 'Pedidos de Arrendamento', href: '/admin/pedidos', icon: FileText }
+    { name: 'Pedidos de Arrendamento', href: '/admin/pedidos', icon: FileText },
+    { name: 'Artigos de Blog', href: '/admin/blog', icon: BookOpen }
   ];
 
   const handleLogout = () => {

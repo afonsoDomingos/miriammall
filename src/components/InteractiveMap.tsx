@@ -271,7 +271,8 @@ export default function InteractiveMap() {
           <div className="bg-white rounded-xl max-w-lg w-full overflow-hidden border border-green/20 shadow-2xl relative animate-in fade-in zoom-in duration-300">
             <button
               onClick={() => setSelectedSpace(null)}
-              className="absolute top-4 right-4 text-primary/40 hover:text-primary bg-light-gray w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+              className="absolute top-4 right-4 z-20 text-slate-700 hover:text-green bg-white/90 hover:bg-white w-8 h-8 rounded-full flex items-center justify-center transition-all shadow-md focus:outline-none"
+              aria-label="Fechar"
             >
               <X className="w-4 h-4" />
             </button>
