@@ -52,7 +52,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 group">
             <img
               src="/MIRRIA LOGO.png"
-              alt="Mirriam Mall"
+              alt="Miriam Mall"
               className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </Link>

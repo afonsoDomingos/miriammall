@@ -24,7 +24,7 @@ export default function AdminLayout({
     }
 
     const checkAuth = () => {
-      const auth = sessionStorage.getItem('mirriam_admin_authenticated');
+      const auth = sessionStorage.getItem('miriam_admin_authenticated');
       if (auth === 'true') {
         setIsAuthenticated(true);
       } else {

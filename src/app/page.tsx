@@ -25,6 +25,12 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import InteractiveMap from '../components/InteractiveMap';
 import { useDatabase } from '../context/DatabaseContext';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
 
 export default function Home() {
   const { spaces, stores, events, promotions, banners } = useDatabase();
@@ -47,8 +53,9 @@ export default function Home() {
     }
   };
 
-  // Get active banner
-  const activeBanner = banners.find((b) => b.isActive) || banners[0];
+  // Get active banners for carousel
+  const activeBanners = banners.filter((b) => b.isActive);
+  const displayBanners = activeBanners.length > 0 ? activeBanners : banners;
 
   // Get available/reserved spaces for display (limit to 3 for preview)
   const previewSpaces = spaces
@@ -75,58 +82,73 @@ export default function Home() {
 
       <main className="flex-grow pt-16">
         {/* HERO SECTION */}
-        <section className="relative h-[90vh] flex items-center justify-center bg-primary-dark overflow-hidden">
-          {/* Background image overlay */}
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/95 via-primary-dark/85 to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-transparent to-transparent opacity-70 z-10" />
-            {activeBanner && (
-              <img
-                src={activeBanner.image}
-                alt={activeBanner.title}
-                className="w-full h-full object-cover object-center animate-ken-burns"
-              />
-            )}
-          </div>
-
-          <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-left">
-            {activeBanner && (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="max-w-2xl text-white"
-              >
-                <span className="text-green font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center gap-2 mb-3">
-                  <Palmtree className="w-4.5 h-4.5 text-green animate-pulse" /> Terra de Boa Gente • Homoíne, Inhambane
-                </span>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold tracking-tight mb-4">
-                  {activeBanner.title}
-                </h1>
-                <p className="text-base sm:text-lg md:text-xl text-white/80 font-light mb-8 leading-relaxed">
-                  {activeBanner.subtitle}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  {activeBanner.buttonText1 && (
-                    <Link
-                      href={activeBanner.buttonLink1}
-                      className="bg-green hover:bg-green-light text-primary text-xs sm:text-sm font-bold uppercase tracking-wider py-4 px-8 rounded transition-all duration-300 text-center shadow-lg hover:shadow-green/25 hover:-translate-y-0.5 active:translate-y-0"
-                    >
-                      {activeBanner.buttonText1}
-                    </Link>
-                  )}
-                  {activeBanner.buttonText2 && (
-                    <Link
-                      href={activeBanner.buttonLink2}
-                      className="border border-white/80 hover:border-white hover:bg-white hover:text-primary text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-4 px-8 rounded transition-all duration-300 text-center hover:-translate-y-0.5 active:translate-y-0"
-                    >
-                      {activeBanner.buttonText2}
-                    </Link>
-                  )}
+        <section className="relative h-[90vh] bg-primary-dark overflow-hidden hero-swiper-section">
+          <Swiper
+            modules={[Autoplay, EffectFade, Pagination]}
+            effect={'fade'}
+            fadeEffect={{ crossFade: true }}
+            speed={1000}
+            autoplay={{
+              delay: 6000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            className="h-full w-full"
+          >
+            {displayBanners.map((banner) => (
+              <SwiperSlide key={banner.id} className="relative h-full w-full flex items-center justify-center">
+                {/* Background image overlay */}
+                <div className="absolute inset-0 z-0">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/95 via-primary-dark/85 to-transparent z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-transparent to-transparent opacity-70 z-10" />
+                  <img
+                    src={banner.image}
+                    alt={banner.title}
+                    className="w-full h-full object-cover object-center animate-ken-burns"
+                  />
                 </div>
-              </motion.div>
-            )}
-          </div>
+
+                <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center text-left">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="max-w-2xl text-white"
+                  >
+                    <span className="text-green font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center gap-2 mb-3">
+                      <Palmtree className="w-4.5 h-4.5 text-green animate-pulse" /> Terra de Boa Gente • Homoíne, Inhambane
+                    </span>
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold tracking-tight mb-4">
+                      {banner.title}
+                    </h1>
+                    <p className="text-base sm:text-lg md:text-xl text-white/80 font-light mb-8 leading-relaxed">
+                      {banner.subtitle}
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      {banner.buttonText1 && (
+                        <Link
+                          href={banner.buttonLink1}
+                          className="bg-green hover:bg-green-light text-primary text-xs sm:text-sm font-bold uppercase tracking-wider py-4 px-8 rounded transition-all duration-300 text-center shadow-lg hover:shadow-green/25 hover:-translate-y-0.5 active:translate-y-0"
+                        >
+                          {banner.buttonText1}
+                        </Link>
+                      )}
+                      {banner.buttonText2 && (
+                        <Link
+                          href={banner.buttonLink2}
+                          className="border border-white/80 hover:border-white hover:bg-white hover:text-primary text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-4 px-8 rounded transition-all duration-300 text-center hover:-translate-y-0.5 active:translate-y-0"
+                        >
+                          {banner.buttonText2}
+                        </Link>
+                      )}
+                    </div>
+                  </motion.div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </section>
 
         {/* ABOUT SECTION */}
@@ -151,7 +173,7 @@ export default function Home() {
                 </h2>
                 <div className="space-y-4 text-primary/70 leading-relaxed text-sm sm:text-base">
                   <p>
-                    O **Mirriam Mall** surge com a missão de transformar o cenário económico e social do Distrito de Homoíne, na célebre Província de Inhambane. 
+                    O **Miriam Mall** surge com a missão de transformar o cenário económico e social do Distrito de Homoíne, na célebre Província de Inhambane. 
                     Pensado detalhadamente para fundir a sofisticação de um centro comercial moderno com o charme natural da Terra de Boa Gente, o shopping reúne o melhor in marcas, conveniência e bem-estar.
                   </p>
                   <p>
@@ -207,9 +229,9 @@ export default function Home() {
               <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
                 <Palmtree className="w-3.5 h-3.5" /> Oportunidade Comercial
               </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-4">Porquê Investir no Mirriam Mall?</h2>
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-4">Porquê Investir no Miriam Mall?</h2>
               <p className="text-white/60 text-sm">
-                Conheça as vantagens competitivas que tornam o Mirriam Mall a melhor escolha para expandir a sua marca ou iniciar o seu negócio sob o potencial de Homoíne.
+                Conheça as vantagens competitivas que tornam o Miriam Mall a melhor escolha para expandir a sua marca ou iniciar o seu negócio sob o potencial de Homoíne.
               </p>
             </div>
 
@@ -393,7 +415,7 @@ export default function Home() {
               <Palmtree className="w-8 h-8 hidden md:block" /> Faça Parte do Maior Centro Comercial de Homoíne
             </h2>
             <p className="text-base sm:text-lg text-white/80 font-light max-w-3xl mx-auto mb-10 leading-relaxed">
-              Leve a sua marca para um espaço moderno, seguro e estrategicamente localizado. Sob a brisa dos coqueiros e o dinamismo de Inhambane, o Mirriam Mall oferece as melhores oportunidades para marcas e investidores que procuram crescer na região.
+              Leve a sua marca para um espaço moderno, seguro e estrategicamente localizado. Sob a brisa dos coqueiros e o dinamismo de Inhambane, o Miriam Mall oferece as melhores oportunidades para marcas e investidores que procuram crescer na região.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
@@ -431,7 +453,7 @@ export default function Home() {
                     <MapPin className="w-6 h-6 text-green" />
                     <div>
                       <h4 className="font-bold text-primary text-sm">Endereço</h4>
-                      <p className="text-xs text-primary/60">Mirriam Mall, Homoíne, Província de Inhambane, Moçambique</p>
+                      <p className="text-xs text-primary/60">Miriam Mall, Homoíne, Província de Inhambane, Moçambique</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4 p-4 rounded-lg bg-light-gray border border-primary/5">
@@ -445,7 +467,7 @@ export default function Home() {
                     <Mail className="w-6 h-6 text-green" />
                     <div>
                       <h4 className="font-bold text-primary text-sm">E-mail Oficial</h4>
-                      <p className="text-xs text-primary/60">info@mirriammall.co.mz</p>
+                      <p className="text-xs text-primary/60">info@miriammall.co.mz</p>
                     </div>
                   </div>
                 </div>
@@ -472,7 +494,7 @@ export default function Home() {
               <div className="rounded-lg overflow-hidden border border-green/10 green-glow h-[450px] relative">
                 {/* Custom Styled Leaflet/Google Map Mockup with high visual quality or standard map embedding */}
                 <iframe
-                  title="Mirriam Mall Location Map"
+                  title="Miriam Mall Location Map"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14541.776092004245!2d35.10903333333333!3d-24.16875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1edd376e1a067a21%3A0xe5a3c2de30f5a3bd!2zSG9tb8OObmUsIE1vY2FtYmlxdWU!5e0!3m2!1spt!2spt!4v1700000000000!5m2!1spt!2spt"
                   width="100%"
                   height="100%"

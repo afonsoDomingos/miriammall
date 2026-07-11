@@ -187,7 +187,7 @@ export default function AdminBanners() {
                 <input
                   type="text"
                   required
-                  placeholder="Ex: Mirriam Mall"
+                  placeholder="Ex: Miriam Mall"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-green"

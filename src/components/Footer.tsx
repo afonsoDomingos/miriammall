@@ -44,7 +44,7 @@ export default function Footer() {
             <Link href="/" className="inline-block">
               <img
                 src="/MIRRIA LOGO.png"
-                alt="Mirriam Mall"
+                alt="Miriam Mall"
                 className="h-12 w-auto object-contain brightness-0 invert"
               />
             </Link>
@@ -150,7 +150,7 @@ export default function Footer() {
               <li className="flex gap-2 items-start">
                 <MapPin className="w-5 h-5 text-green shrink-0 mt-0.5" />
                 <span>
-                  Mirriam Mall, Distrito de Homoíne,
+                  Miriam Mall, Distrito de Homoíne,
                   <br />
                   Província de Inhambane, Moçambique
                 </span>
@@ -174,8 +174,8 @@ export default function Footer() {
               </li>
               <li className="flex gap-2 items-center">
                 <Mail className="w-4 h-4 text-green" />
-                <a href="mailto:info@mirriammall.co.mz" className="hover:text-green transition-colors">
-                  info@mirriammall.co.mz
+                <a href="mailto:info@miriammall.co.mz" className="hover:text-green transition-colors">
+                  info@miriammall.co.mz
                 </a>
               </li>
             </ul>
@@ -184,7 +184,17 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/50 gap-4">
-          <p>&copy; {currentYear} Mirriam Mall. Todos os direitos reservados.</p>
+          <p>
+            &copy; {currentYear} Miriam Mall. Todos os direitos reservados. | Powered by{' '}
+            <a
+              href="https://www.linkedin.com/in/afonso-domingos-6b59361a5/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green hover:text-green-light hover:underline transition-all font-medium"
+            >
+              Vibe
+            </a>
+          </p>
           <div className="flex gap-6">
             <Link href="/politica-de-privacidade" className="hover:text-green transition-colors">
               Política de Privacidade

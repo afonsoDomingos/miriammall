@@ -62,7 +62,7 @@ export default function AdminPromocoes() {
         <div>
           <h1 className="font-serif text-2xl font-bold text-slate-800">Gestão de Promoções</h1>
           <p className="text-xs text-slate-500 mt-1">
-            Publique campanhas promocionais ativas das marcas e restaurantes do Mirriam Mall.
+            Publique campanhas promocionais ativas das marcas e restaurantes do Miriam Mall.
           </p>
         </div>
         <button

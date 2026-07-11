@@ -21,7 +21,7 @@ export default function Eventos() {
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Agenda Cultural</span>
             <h1 className="text-4xl font-serif font-bold mb-4">Agenda de Eventos</h1>
             <p className="text-white/70 text-sm max-w-2xl mx-auto leading-relaxed">
-              Descubra os concertos, feiras gastronómicas, atividades infantis e eventos sazonais agendados no Mirriam Mall.
+              Descubra os concertos, feiras gastronómicas, atividades infantis e eventos sazonais agendados no Miriam Mall.
             </p>
           </div>
         </section>

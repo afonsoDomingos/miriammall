@@ -32,7 +32,7 @@ export default function AdminSidebar() {
   ];
 
   const handleLogout = () => {
-    sessionStorage.removeItem('mirriam_admin_authenticated');
+    sessionStorage.removeItem('miriam_admin_authenticated');
     router.push('/admin');
   };
 
@@ -45,7 +45,7 @@ export default function AdminSidebar() {
             <div className="flex items-center gap-2">
               <img
                 src="/MIRRIA LOGO.png"
-                alt="Mirriam Mall"
+                alt="Miriam Mall"
                 className="h-8 w-auto object-contain brightness-0 invert"
               />
               <span className="text-[9px] bg-green/10 text-green px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">

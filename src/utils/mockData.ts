@@ -121,7 +121,7 @@ export const initialSpaces: Space[] = [
     area: 55,
     status: 'disponivel',
     price: 'Sob Consulta',
-    description: 'Espaço amplo com pé-direito alto próximo à entrada principal do Mirriam Mall. Perfeito para sapatarias ou lojas de cosméticos.',
+    description: 'Espaço amplo com pé-direito alto próximo à entrada principal do Miriam Mall. Perfeito para sapatarias ou lojas de cosméticos.',
     amenities: ['Segurança 24h', 'Ar condicionado instalado', 'Luzes LED embutidas'],
     image: 'https://images.unsplash.com/photo-1582037928769-181f2644ecb7?auto=format&fit=crop&w=800&q=80',
     blueprint: '/blueprints/floor0-104.png'
@@ -308,7 +308,7 @@ export const initialRestaurants: Restaurant[] = [
     image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80',
     menuLink: '#',
     menuItems: [
-      { name: 'Pizza Mirriam Especial', price: '550 MT', description: 'Molho de tomate caseiro, queijo mozzarella, bacon crocante, cogumelos e azeitonas.' },
+      { name: 'Pizza Miriam Especial', price: '550 MT', description: 'Molho de tomate caseiro, queijo mozzarella, bacon crocante, cogumelos e azeitonas.' },
       { name: 'Hambúrguer Gourmet Double', price: '400 MT', description: 'Duas carnes de novilho 120g, queijo cheddar derretido, alface, tomate e molho da casa, em pão brioche.' },
       { name: 'Combo Asas de Frango Picantes', price: '380 MT', description: '8 asas de frango marinadas em molho picante com batata frita e bebida.' }
     ]
@@ -318,7 +318,7 @@ export const initialRestaurants: Restaurant[] = [
 export const initialEvents: MallEvent[] = [
   {
     id: 'event-1',
-    title: 'Grande Abertura do Mirriam Mall',
+    title: 'Grande Abertura do Miriam Mall',
     date: '10 de Outubro de 2026',
     description: 'A inauguração oficial do shopping que trará uma nova era comercial a Homoíne. Concerto ao vivo de artistas moçambicanos consagrados, atividades infantis e super descontos em todas as lojas.',
     location: 'Praça Central do Shopping',
@@ -401,7 +401,7 @@ export const initialRentalRequests: RentalRequest[] = [
 export const initialBanners: Banner[] = [
   {
     id: 'banner-1',
-    title: 'Mirriam Mall',
+    title: 'Miriam Mall',
     subtitle: 'O novo destino de compras, negócios, lazer e investimento no Distrito de Homoíne.',
     image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80',
     buttonText1: 'Explorar o Shopping',

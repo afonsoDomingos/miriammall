@@ -37,7 +37,7 @@ export default function Espacos() {
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Investimento</span>
             <h1 className="text-4xl font-serif font-bold mb-4">Espaços Disponíveis para Arrendamento</h1>
             <p className="text-white/70 text-sm max-w-2xl mx-auto leading-relaxed">
-              Descubra o local ideal para o seu negócio no Mirriam Mall. Navegue pela planta interativa ou explore a listagem detalhada de lojas abaixo.
+              Descubra o local ideal para o seu negócio no Miriam Mall. Navegue pela planta interativa ou explore a listagem detalhada de lojas abaixo.
             </p>
           </div>
         </section>

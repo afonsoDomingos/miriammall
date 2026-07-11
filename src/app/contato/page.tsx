@@ -58,7 +58,7 @@ function ContactFormContent() {
         <div>
           <h2 className="text-2xl font-serif font-bold text-primary mb-4">Informações de Contacto</h2>
           <p className="text-primary/70 text-sm leading-relaxed mb-6">
-            A equipa de gestão do Mirriam Mall está sempre ao seu dispor. Contacte-nos pelos canais tradicionais ou visite-nos diretamente em Homoíne.
+            A equipa de gestão do Miriam Mall está sempre ao seu dispor. Contacte-nos pelos canais tradicionais ou visite-nos diretamente em Homoíne.
           </p>
         </div>
 
@@ -67,7 +67,7 @@ function ContactFormContent() {
             <MapPin className="w-6 h-6 text-green" />
             <div>
               <h4 className="font-bold text-primary text-sm">Localização</h4>
-              <p className="text-xs text-primary/60">Mirriam Mall, Distrito de Homoíne, Província de Inhambane, Moçambique</p>
+              <p className="text-xs text-primary/60">Miriam Mall, Distrito de Homoíne, Província de Inhambane, Moçambique</p>
             </div>
           </div>
           <div className="flex items-center gap-4 p-4 rounded-lg bg-light-gray border border-primary/5">
@@ -81,7 +81,7 @@ function ContactFormContent() {
             <Mail className="w-6 h-6 text-green" />
             <div>
               <h4 className="font-bold text-primary text-sm">E-mail Comercial</h4>
-              <p className="text-xs text-primary/60">info@mirriammall.co.mz</p>
+              <p className="text-xs text-primary/60">info@miriammall.co.mz</p>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@ function ContactFormContent() {
         {/* Map iframe */}
         <div className="h-[250px] rounded-lg overflow-hidden border border-primary/10 shadow-sm relative">
           <iframe
-            title="Mirriam Mall Location Map Page"
+            title="Miriam Mall Location Map Page"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14541.776092004245!2d35.10903333333333!3d-24.16875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1edd376e1a067a21%3A0xe5a3c2de30f5a3bd!2zSG9tb8OObmUsIE1vY2FtYmlxdWU!5e0!3m2!1spt!2spt!4v1700000000000!5m2!1spt!2spt"
             width="100%"
             height="100%"
@@ -128,7 +128,7 @@ function ContactFormContent() {
             <CheckCircle className="w-12 h-12 text-emerald-600 mx-auto" />
             <h4 className="font-bold text-lg">Candidatura Registada!</h4>
             <p className="text-xs leading-relaxed">
-              Obrigado pelo seu contacto. Os seus dados foram submetidos com sucesso. A equipa comercial do Mirriam Mall entrará em contacto muito brevemente.
+              Obrigado pelo seu contacto. Os seus dados foram submetidos com sucesso. A equipa comercial do Miriam Mall entrará em contacto muito brevemente.
             </p>
             <button
               onClick={() => setIsSubmitted(false)}

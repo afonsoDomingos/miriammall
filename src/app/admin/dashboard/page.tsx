@@ -73,7 +73,7 @@ export default function AdminDashboard() {
         <div>
           <h1 className="font-serif text-2xl font-bold">Olá, Administrador!</h1>
           <p className="text-xs text-white/70 mt-1">
-            Aqui está o resumo geral das operações, arrendamentos e contactos do Mirriam Mall de hoje.
+            Aqui está o resumo geral das operações, arrendamentos e contactos do Miriam Mall de hoje.
           </p>
         </div>
         <div className="bg-white/10 px-4 py-2 rounded text-xs font-semibold flex items-center gap-2 shrink-0 self-start sm:self-auto">

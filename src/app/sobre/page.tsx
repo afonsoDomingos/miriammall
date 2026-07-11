@@ -26,7 +26,7 @@ export default function Sobre() {
           <div className="absolute inset-0 z-0 bg-cover bg-center opacity-25" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80')" }} />
           <div className="relative z-10 max-w-4xl mx-auto px-4">
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Quem Somos</span>
-            <h1 className="text-4xl font-serif font-bold mb-4">Sobre o Mirriam Mall</h1>
+            <h1 className="text-4xl font-serif font-bold mb-4">Sobre o Miriam Mall</h1>
             <p className="text-white/70 text-sm sm:text-base font-light max-w-2xl mx-auto leading-relaxed">
               Conheça a história, a visão e a infraestrutura do mais moderno empreendimento comercial do Distrito de Homoíne.
             </p>
@@ -39,10 +39,10 @@ export default function Sobre() {
             <div className="space-y-6">
               <h2 className="text-3xl font-serif font-bold text-primary">Impulsionando o Futuro de Homoíne</h2>
               <p className="text-primary/70 text-sm sm:text-base leading-relaxed">
-                O **Mirriam Mall** foi projetado para responder à crescente necessidade de espaços comerciais modernos no Distrito de Homoíne, na Província de Inhambane. Como pioneiros na região, acreditamos que a descentralização do retalho de luxo e conveniência é um passo vital para o desenvolvimento económico local.
+                O **Miriam Mall** foi projetado para responder à crescente necessidade de espaços comerciais modernos no Distrito de Homoíne, na Província de Inhambane. Como pioneiros na região, acreditamos que a descentralização do retalho de luxo e conveniência é um passo vital para o desenvolvimento económico local.
               </p>
               <p className="text-primary/70 text-sm sm:text-base leading-relaxed">
-                A nossa visão é estabelecer o Mirriam Mall como o ponto de encontro favorito da população, gerando empregos, apoiando empreendedores locais e oferecendo produtos e serviços de marcas líderes nacionais e internacionais num só lugar, com o máximo conforto e elegância.
+                A nossa visão é estabelecer o Miriam Mall como o ponto de encontro favorito da população, gerando empregos, apoiando empreendedores locais e oferecendo produtos e serviços de marcas líderes nacionais e internacionais num só lugar, com o máximo conforto e elegância.
               </p>
               <div className="pt-4 flex flex-wrap gap-4">
                 <Link
@@ -62,7 +62,7 @@ export default function Sobre() {
             <div className="relative h-[400px] rounded-lg overflow-hidden border border-green/10 green-glow">
               <img
                 src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=800&q=80"
-                alt="Mirriam Mall Galeria Comercial"
+                alt="Miriam Mall Galeria Comercial"
                 className="w-full h-full object-cover"
               />
             </div>

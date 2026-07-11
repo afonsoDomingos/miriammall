@@ -91,7 +91,7 @@ export default function Galeria() {
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Imagens</span>
             <h1 className="text-4xl font-serif font-bold mb-4">Galeria de Fotos</h1>
             <p className="text-white/70 text-sm max-w-2xl mx-auto leading-relaxed">
-              Explore o Mirriam Mall através da nossa lente. Imagens em alta resolução do exterior, interiores modernos e momentos vibrantes.
+              Explore o Miriam Mall através da nossa lente. Imagens em alta resolução do exterior, interiores modernos e momentos vibrantes.
             </p>
           </div>
         </section>

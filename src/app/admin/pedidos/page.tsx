@@ -32,7 +32,7 @@ export default function AdminPedidos() {
         <div>
           <h1 className="font-serif text-2xl font-bold text-slate-800">Pedidos de Arrendamento</h1>
           <p className="text-xs text-slate-500 mt-1">
-            Gerencie as candidaturas enviadas por empresas e marcas interessadas no Mirriam Mall.
+            Gerencie as candidaturas enviadas por empresas e marcas interessadas no Miriam Mall.
           </p>
         </div>
       </div>

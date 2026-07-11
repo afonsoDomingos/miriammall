@@ -62,7 +62,7 @@ export default function AdminEventos() {
         <div>
           <h1 className="font-serif text-2xl font-bold text-slate-800">Gestão de Eventos</h1>
           <p className="text-xs text-slate-500 mt-1">
-            Publique a agenda de espetáculos, feiras e festividades de lazer do Mirriam Mall.
+            Publique a agenda de espetáculos, feiras e festividades de lazer do Miriam Mall.
           </p>
         </div>
         <button
@@ -162,7 +162,7 @@ export default function AdminEventos() {
                 <input
                   type="text"
                   required
-                  placeholder="Ex: Show de Abertura Mirriam Mall"
+                  placeholder="Ex: Show de Abertura Miriam Mall"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-green"

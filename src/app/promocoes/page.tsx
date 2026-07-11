@@ -22,7 +22,7 @@ export default function Promocoes() {
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Campanhas</span>
             <h1 className="text-4xl font-serif font-bold mb-4">Campanhas e Promoções Ativas</h1>
             <p className="text-white/70 text-sm max-w-2xl mx-auto leading-relaxed">
-              Economize nas suas compras. Fique atento às ofertas exclusivas das lojas e restaurantes parceiros do Mirriam Mall.
+              Economize nas suas compras. Fique atento às ofertas exclusivas das lojas e restaurantes parceiros do Miriam Mall.
             </p>
           </div>
         </section>

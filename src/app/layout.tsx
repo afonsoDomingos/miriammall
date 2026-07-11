@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Playfair_Display, Outfit } from 'next/font/google';
 import './globals.css';
 import { DatabaseProvider } from '../context/DatabaseContext';
+import ScrollToTop from '../components/ScrollToTop';
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -21,11 +22,11 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Mirriam Mall | O Novo Centro de Compras e Negócios de Homoíne',
+  title: 'Miriam Mall | O Novo Centro de Compras e Negócios de Homoíne',
   description:
-    'Seja bem-vindo ao Mirriam Mall no Distrito de Homoíne, Inhambane. O destino de compras, lazer e a melhor oportunidade de investimento e arrendamento de espaços comerciais da região.',
+    'Seja bem-vindo ao Miriam Mall no Distrito de Homoíne, Inhambane. O destino de compras, lazer e a melhor oportunidade de investimento e arrendamento de espaços comerciais da região.',
   keywords: [
-    'Mirriam Mall',
+    'Miriam Mall',
     'Homoíne',
     'Inhambane',
     'Moçambique',
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     'Comércio Inhambane',
     'Investimento Moçambique',
   ],
-  authors: [{ name: 'Mirriam Mall' }],
+  authors: [{ name: 'Miriam Mall' }],
   robots: 'index, follow',
 };
 
@@ -51,6 +52,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-white text-primary">
         <DatabaseProvider>
           {children}
+          <ScrollToTop />
         </DatabaseProvider>
       </body>
     </html>

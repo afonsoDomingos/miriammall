@@ -47,7 +47,7 @@ export default function Lojas() {
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Shopping</span>
             <h1 className="text-4xl font-serif font-bold mb-4">Diretório de Lojas</h1>
             <p className="text-white/70 text-sm max-w-2xl mx-auto leading-relaxed">
-              Explore o mapa comercial do Mirriam Mall. Encontre os seus produtos favoritos, serviços e bancos para resolver tudo no mesmo espaço.
+              Explore o mapa comercial do Miriam Mall. Encontre os seus produtos favoritos, serviços e bancos para resolver tudo no mesmo espaço.
             </p>
           </div>
         </section>

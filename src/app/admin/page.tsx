@@ -13,7 +13,7 @@ export default function AdminLogin() {
 
   useEffect(() => {
     // If already logged in, redirect to dashboard
-    if (sessionStorage.getItem('mirriam_admin_authenticated') === 'true') {
+    if (sessionStorage.getItem('miriam_admin_authenticated') === 'true') {
       router.push('/admin/dashboard');
     }
   }, [router]);
@@ -31,7 +31,7 @@ export default function AdminLogin() {
       const data = await res.json();
       
       if (data.success) {
-        sessionStorage.setItem('mirriam_admin_authenticated', 'true');
+        sessionStorage.setItem('miriam_admin_authenticated', 'true');
         router.push('/admin/dashboard');
       } else {
         setError(data.error || 'Credenciais incorretas. Tente novamente.');
@@ -58,7 +58,7 @@ export default function AdminLogin() {
             <ShieldAlert className="w-8 h-8 text-green" />
           </div>
           <h2 className="font-serif text-2xl font-bold text-white tracking-wide">Área Administrativa</h2>
-          <p className="text-xs text-white/60 mt-1.5">Faça login para gerir o Mirriam Mall</p>
+          <p className="text-xs text-white/60 mt-1.5">Faça login para gerir o Miriam Mall</p>
         </div>
 
         {error && (

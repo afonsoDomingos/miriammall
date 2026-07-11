@@ -212,7 +212,7 @@ export default function EspacoDetalhe() {
                   <CheckCircle className="w-12 h-12 text-emerald-600 mx-auto" />
                   <h4 className="font-bold text-lg">Pedido Submetido!</h4>
                   <p className="text-xs leading-relaxed">
-                    Agradecemos o seu interesse no Mirriam Mall. O seu pedido de contacto foi registado e a nossa equipa entrará em contacto muito brevemente.
+                    Agradecemos o seu interesse no Miriam Mall. O seu pedido de contacto foi registado e a nossa equipa entrará em contacto muito brevemente.
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}
