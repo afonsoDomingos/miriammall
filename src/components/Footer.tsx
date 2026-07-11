@@ -43,7 +43,7 @@ export default function Footer() {
           <div className="space-y-4">
             <Link href="/" className="inline-block">
               <img
-                src="/MIRRIA LOGO.png"
+                src="/MIRIAM LOGO.png"
                 alt="Miriam Mall"
                 className="h-12 w-auto object-contain brightness-0 invert"
               />

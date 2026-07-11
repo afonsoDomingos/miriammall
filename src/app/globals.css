@@ -114,3 +114,24 @@ body {
   box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.25);
   transform: translateY(-2px);
 }
+
+/* Swiper Pagination Positioning to prevent overlaps */
+.hero-swiper-section .swiper-pagination {
+  bottom: 32px !important;
+  left: auto !important;
+  right: 48px !important;
+  width: auto !important;
+  transform: none !important;
+}
+
+@media (max-width: 768px) {
+  .hero-swiper-section .swiper-pagination {
+    left: 50% !important;
+    right: auto !important;
+    bottom: 16px !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
+

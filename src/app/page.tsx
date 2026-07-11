@@ -153,7 +153,7 @@ export default function Home() {
           {/* Scroll Down Indicator */}
           <a
             href="#sobre"
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 group transition-all duration-300"
+            className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex-col items-center gap-2 group transition-all duration-300"
             aria-label="Rolar para baixo"
           >
             <span className="text-[10px] text-white/50 font-sans tracking-widest uppercase group-hover:text-green transition-colors duration-300">
