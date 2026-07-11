@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { Camera, Layers, X } from 'lucide-react';
+import ImageWithLoader from '../../components/ImageWithLoader';
 
 interface GalleryItem {
   id: string;
@@ -123,7 +124,7 @@ export default function Galeria() {
                 onClick={() => setLightboxImage(item)}
                 className="relative h-64 rounded-xl overflow-hidden group cursor-pointer border border-primary/5 hover:border-green/20 shadow-sm transition-all duration-300"
               >
-                <img
+                <ImageWithLoader
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -161,7 +162,7 @@ export default function Galeria() {
             onClick={(e) => e.stopPropagation()}
             className="max-w-4xl w-full flex flex-col items-center bg-transparent cursor-default animate-in zoom-in-95 duration-300"
           >
-            <img
+            <ImageWithLoader
               src={lightboxImage.image}
               alt={lightboxImage.title}
               className="max-h-[75vh] w-auto max-w-full rounded-lg object-contain border border-green/10 shadow-2xl"

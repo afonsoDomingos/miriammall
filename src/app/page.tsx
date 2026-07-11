@@ -25,6 +25,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import InteractiveMap from '../components/InteractiveMap';
 import { useDatabase } from '../context/DatabaseContext';
+import ImageWithLoader from '../components/ImageWithLoader';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 
@@ -103,7 +104,7 @@ export default function Home() {
                 <div className="absolute inset-0 z-0">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/95 via-primary-dark/85 to-transparent z-10" />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-transparent to-transparent opacity-70 z-10" />
-                  <img
+                  <ImageWithLoader
                     src={banner.image}
                     alt={banner.title}
                     className="w-full h-full object-cover object-center animate-ken-burns"
@@ -230,7 +231,7 @@ export default function Home() {
                 className="relative p-2 bg-slate-50 border border-slate-200/60 rounded-2xl shadow-green-glow shadow-green-glow-hover transition-all duration-500"
               >
                 <div className="relative h-[440px] rounded-xl overflow-hidden group">
-                  <img
+                  <ImageWithLoader
                     src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80"
                     alt="Interior do Shopping"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -324,7 +325,7 @@ export default function Home() {
                 >
                   <div>
                     <div className="h-52 relative bg-primary-dark overflow-hidden">
-                      <img 
+                      <ImageWithLoader 
                         src={space.image} 
                         alt={space.number} 
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
@@ -412,7 +413,7 @@ export default function Home() {
                 >
                   <div className="flex flex-col items-center">
                     <div className="w-20 h-20 rounded-full overflow-hidden border border-slate-100 mb-4 bg-slate-50 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform duration-500">
-                      <img src={store.logo} alt={store.name} className="w-full h-full object-cover" />
+                      <ImageWithLoader src={store.logo} alt={store.name} className="w-full h-full object-cover" />
                     </div>
                     <span className="text-[10px] uppercase font-bold text-green bg-green/5 px-2.5 py-1 rounded-full mb-3">
                       {store.category}

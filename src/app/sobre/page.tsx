@@ -5,6 +5,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { Shield, Users, Clock, Landmark, Compass, Award } from 'lucide-react';
 import Link from 'next/link';
+import ImageWithLoader from '../../components/ImageWithLoader';
 
 export default function Sobre() {
   const features = [
@@ -60,7 +61,7 @@ export default function Sobre() {
               </div>
             </div>
             <div className="relative h-[400px] rounded-lg overflow-hidden border border-green/10 green-glow">
-              <img
+              <ImageWithLoader
                 src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=800&q=80"
                 alt="Miriam Mall Galeria Comercial"
                 className="w-full h-full object-cover"
