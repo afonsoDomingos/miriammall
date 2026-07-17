@@ -21,7 +21,9 @@ import {
   Compass,
   Palmtree,
   Calendar,
-  Tag
+  Tag,
+  UtensilsCrossed,
+  Star
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -36,7 +38,7 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
 export default function Home() {
-  const { spaces, stores, events, promotions, banners } = useDatabase();
+  const { spaces, stores, restaurants, events, promotions, banners } = useDatabase();
 
   const containerVariants = {
     hidden: {},
@@ -67,6 +69,9 @@ export default function Home() {
 
   // Get 4 stores for showcase preview
   const previewStores = stores.slice(0, 4);
+
+  // Get 4 restaurants for showcase preview
+  const previewRestaurants = restaurants.slice(0, 4);
 
   const benefits = [
     { icon: Users, title: 'Grande Fluxo de Visitantes', text: 'Localização central que atrai consumidores de todo o distrito de Homoíne e arredores.' },
@@ -242,6 +247,54 @@ export default function Home() {
                 </div>
               </motion.div>
             </div>
+          </div>
+        </section>
+
+        {/* STATISTICS SECTION */}
+        <section className="py-20 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                <TrendingUp className="w-3.5 h-3.5" /> Números que Impressionam
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
+                Miriam Mall em Números
+              </h2>
+            </div>
+
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-8"
+            >
+              {[
+                { number: "50+", label: "Lojas", icon: Building },
+                { number: "2", label: "Pisos", icon: Layers },
+                { number: "24/7", label: "Segurança", icon: Shield },
+                { number: "500+", label: "Estacionamento", icon: Compass }
+              ].map((stat, index) => {
+                const IconComponent = stat.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    variants={cardVariants}
+                    className="text-center group"
+                  >
+                    <div className="w-16 h-16 rounded-full bg-green/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-green transition-all duration-300 transform group-hover:scale-110">
+                      <IconComponent className="w-8 h-8 text-green group-hover:text-primary transition-colors" />
+                    </div>
+                    <div className="text-4xl sm:text-5xl font-serif font-bold text-primary mb-2 group-hover:text-green transition-colors">
+                      {stat.number}
+                    </div>
+                    <div className="text-xs uppercase tracking-wider text-primary/60 font-semibold">
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
           </div>
         </section>
 
@@ -434,6 +487,76 @@ export default function Home() {
           </div>
         </section>
 
+        {/* RESTAURANTS SECTION */}
+        {restaurants && restaurants.length > 0 && (
+          <section className="py-24 bg-gradient-to-b from-white to-light-gray relative overflow-hidden">
+            <Palmtree className="absolute -right-24 -bottom-24 w-96 h-96 text-green/5 pointer-events-none transform rotate-12" />
+            
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                  <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center gap-1.5">
+                    <UtensilsCrossed className="w-3.5 h-3.5" /> Gastronomia
+                  </span>
+                  <h2 className="text-3xl font-serif font-bold text-primary">Nossos Restaurantes</h2>
+                </div>
+                <Link
+                  href="/restaurantes"
+                  className="text-xs uppercase tracking-wider text-green hover:text-green-light font-bold flex items-center gap-1 mt-4 md:mt-0 transition-colors"
+                >
+                  Ver Todos os Restaurantes <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+              >
+                {previewRestaurants.map((restaurant) => (
+                  <motion.div
+                    key={restaurant.id}
+                    variants={cardVariants}
+                    className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group"
+                  >
+                    <div className="h-48 relative bg-primary-dark overflow-hidden">
+                      <ImageWithLoader
+                        src={restaurant.image}
+                        alt={restaurant.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute top-4 left-4 bg-green text-primary text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded shadow-md">
+                        {restaurant.category}
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="font-serif text-lg font-bold text-primary mb-2 group-hover:text-green transition-colors">
+                        {restaurant.name}
+                      </h3>
+                      <div className="flex items-center gap-1 text-xs text-primary/60 mb-3">
+                        <Clock className="w-3 h-3" />
+                        <span>{restaurant.schedule}</span>
+                      </div>
+                      {restaurant.menuItems && restaurant.menuItems.length > 0 && (
+                        <div className="space-y-2">
+                          {restaurant.menuItems.slice(0, 2).map((item, i) => (
+                            <div key={i} className="flex justify-between items-center text-xs">
+                              <span className="text-primary/70">{item.name}</span>
+                              <span className="font-semibold text-green">{item.price}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </section>
+        )}
+
         {/* PROMOTIONS SECTION */}
         {promotions && promotions.length > 0 && (
           <section className="py-24 bg-white relative overflow-hidden">
@@ -587,6 +710,122 @@ export default function Home() {
               >
                 Saber Mais Sobre Nós
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* NEWSLETTER SECTION */}
+        <section className="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-10">
+              <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                <Mail className="w-3.5 h-3.5" /> Mantenha-se Informado
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
+                Newsletter Miriam Mall
+              </h2>
+              <p className="text-primary/70 text-sm max-w-2xl mx-auto">
+                Receba atualizações sobre novas lojas, promoções exclusivas e eventos no Miriam Mall. Junte-se à nossa comunidade!
+              </p>
+            </div>
+
+            <form 
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const email = (e.currentTarget as HTMLFormElement).email.value;
+                try {
+                  const res = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                  });
+                  if (res.ok) {
+                    alert('Obrigado por subscrever a nossa newsletter!');
+                    (e.currentTarget as HTMLFormElement).reset();
+                  } else {
+                    alert('Erro ao subscrever. Tente novamente.');
+                  }
+                } catch (err) {
+                  alert('Erro de ligação. Tente novamente.');
+                }
+              }}
+              className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto"
+            >
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="Seu melhor e-mail"
+                className="flex-1 px-6 py-4 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-green focus:ring-2 focus:ring-green/10 transition-all duration-300"
+              />
+              <button
+                type="submit"
+                className="bg-green hover:bg-green-dark text-white font-semibold text-sm uppercase tracking-wider py-4 px-8 rounded-xl transition-all duration-300 shadow-lg shadow-green/20 hover:shadow-green/30 flex items-center justify-center gap-2"
+              >
+                <Mail className="w-4 h-4" /> Subscrever
+              </button>
+            </form>
+
+            <p className="text-center text-xs text-primary/40 mt-4">
+              Respeitamos a sua privacidade. Pode cancelar a subscrição a qualquer momento.
+            </p>
+          </div>
+        </section>
+
+        {/* OPENING HOURS SECTION */}
+        <section className="py-20 bg-white relative overflow-hidden">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                <Clock className="w-3.5 h-3.5" /> Quando Visitar
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
+                Horários de Funcionamento
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl border border-slate-100 shadow-md">
+                <h3 className="font-serif text-xl font-bold text-primary mb-6 flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-green" /> Dias da Semana
+                </h3>
+                <div className="space-y-4">
+                  {[
+                    { days: "Segunda a Sexta", hours: "08:00 - 20:00" },
+                    { days: "Sábado", hours: "09:00 - 21:00" },
+                    { days: "Domingo", hours: "10:00 - 18:00" }
+                  ].map((schedule, index) => (
+                    <div key={index} className="flex justify-between items-center py-3 border-b border-slate-100 last:border-0">
+                      <span className="font-semibold text-primary">{schedule.days}</span>
+                      <span className="text-green font-mono">{schedule.hours}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-primary/5 to-slate-50 p-8 rounded-2xl border border-green/10 shadow-md">
+                <h3 className="font-serif text-xl font-bold text-primary mb-6 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-green" /> Informações Adicionais
+                </h3>
+                <div className="space-y-4 text-sm text-primary/70">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
+                    <p>Feriados nacionais: Horário especial de 10:00 - 16:00</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
+                    <p>Food Court: Aberto até 30 minutos após o fecho do shopping</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
+                    <p>Cinemas: Funcionamento independente, consulte programação</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
+                    <p>Estacionamento gratuito disponível 24/7</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
