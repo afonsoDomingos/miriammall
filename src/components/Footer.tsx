@@ -262,7 +262,7 @@ export default function Footer() {
           <p>
             &copy; {currentYear} Miriam Mall. Todos os direitos reservados. | Powered by{' '}
             <a
-              href="https://www.linkedin.com/in/afonso-domingos-6b59361a5/"
+              href="http://isvibe.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-green hover:text-green-light hover:underline transition-all font-medium"
