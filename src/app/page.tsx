@@ -787,19 +787,16 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl border border-slate-100 shadow-md">
                 <h3 className="font-serif text-xl font-bold text-primary mb-6 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-green" /> Dias da Semana
+                  <Clock className="w-5 h-5 text-green" /> Horários
                 </h3>
                 <div className="space-y-4">
-                  {[
-                    { days: "Segunda a Sexta", hours: "08:00 - 20:00" },
-                    { days: "Sábado", hours: "09:00 - 21:00" },
-                    { days: "Domingo", hours: "10:00 - 18:00" }
-                  ].map((schedule, index) => (
-                    <div key={index} className="flex justify-between items-center py-3 border-b border-slate-100 last:border-0">
-                      <span className="font-semibold text-primary">{schedule.days}</span>
-                      <span className="text-green font-mono">{schedule.hours}</span>
-                    </div>
-                  ))}
+                  <div className="flex justify-between items-center py-3 border-b border-slate-100">
+                    <span className="font-semibold text-primary">Todos os Dias</span>
+                    <span className="text-green font-mono text-lg">24/7</span>
+                  </div>
+                  <p className="text-sm text-primary/60 pt-2">
+                    O Miriam Mall está aberto 24 horas por dia, 7 dias por semana para sua conveniência.
+                  </p>
                 </div>
               </div>
 
@@ -810,19 +807,19 @@ export default function Home() {
                 <div className="space-y-4 text-sm text-primary/70">
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
-                    <p>Feriados nacionais: Horário especial de 10:00 - 16:00</p>
+                    <p>Acesso ao estacionamento disponível 24/7</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
-                    <p>Food Court: Aberto até 30 minutos após o fecho do shopping</p>
+                    <p>Segurança permanente e vigilância 24 horas</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
-                    <p>Cinemas: Funcionamento independente, consulte programação</p>
+                    <p>Lojas e restaurantes com horários individuais</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
-                    <p>Estacionamento gratuito disponível 24/7</p>
+                    <p>Consulte cada loja para horários específicos</p>
                   </div>
                 </div>
               </div>
