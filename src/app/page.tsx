@@ -97,11 +97,14 @@ export default function Home() {
             fadeEffect={{ crossFade: true }}
             speed={1000}
             autoplay={{
-              delay: 6000,
+              delay: 5000,
               disableOnInteraction: false,
+              pauseOnMouseEnter: true,
             }}
+            loop={true}
             pagination={{
               clickable: true,
+              dynamicBullets: true,
             }}
             className="h-full w-full"
           >
