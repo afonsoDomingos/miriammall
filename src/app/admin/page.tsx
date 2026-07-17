@@ -49,139 +49,187 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden bg-primary-dark">
-      {/* Background architectural image */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center opacity-30 scale-105 filter blur-[3px]"
-        style={{ backgroundImage: "url('/MIRIAM_BUILDING.jpg')" }}
-      />
-      {/* Premium Burgundy to Dark Wine gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/95 via-primary-dark/85 to-primary-dark/98 z-0" />
-      
-      {/* Glowing background orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-green/10 blur-[100px] pointer-events-none animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-primary/20 blur-[120px] pointer-events-none"></div>
+    <div className="min-h-screen flex bg-white">
+      {/* Left Side - Image */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/MIRIAM_BUILDING.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary-dark/70" />
+        <div className="relative z-10 flex flex-col justify-center items-center p-12 text-white h-full">
+          <img 
+            src="/MIRIAM LOGO.png" 
+            alt="Miriam Mall" 
+            className="h-20 w-auto mb-8 brightness-0 invert"
+          />
+          <h2 className="text-4xl font-serif font-bold mb-4 text-center">
+            Bem-vindo ao Miriam Mall
+          </h2>
+          <p className="text-white/80 text-center max-w-md leading-relaxed">
+            Centro comercial moderno em Homoíne, Inhambane. Gerencie espaços, lojas e eventos do seu shopping com facilidade.
+          </p>
+          <div className="mt-12 flex gap-8">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green">2</div>
+              <div className="text-xs text-white/60 uppercase tracking-wider mt-1">Pisos</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green">24/7</div>
+              <div className="text-xs text-white/60 uppercase tracking-wider mt-1">Segurança</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green">50+</div>
+              <div className="text-xs text-white/60 uppercase tracking-wider mt-1">Espaços</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95, y: 15 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.8, type: 'spring', stiffness: 100 }}
-        className="relative z-10 w-full max-w-md backdrop-blur-xl bg-primary-dark/65 border border-green/20 rounded-[2rem] p-8 sm:p-10 shadow-[0_20px_50px_rgba(16,185,129,0.12)] border-t-white/10"
-      >
-        <div className="text-center mb-8">
+      {/* Right Side - Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gradient-to-br from-slate-50 to-white">
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full max-w-md"
+        >
+          {/* Mobile Logo */}
+          <div className="lg:hidden text-center mb-8">
+            <img 
+              src="/MIRIAM LOGO.png" 
+              alt="Miriam Mall" 
+              className="h-12 w-auto mx-auto mb-4"
+            />
+            <h2 className="text-2xl font-serif font-bold text-primary">Miriam Mall</h2>
+          </div>
+
+          {/* Back Link */}
           <Link 
             href="/" 
-            className="inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-green transition-colors mb-6 group"
+            className="inline-flex items-center gap-2 text-sm text-primary/60 hover:text-green transition-colors mb-8 group"
           >
-            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" /> 
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> 
             Voltar ao Website
           </Link>
-          
-          <div className="flex justify-center mb-2">
-            <h1 className="text-3xl font-serif font-bold text-white tracking-widest flex flex-col items-center">
-              <span className="flex items-center gap-1.5 font-sans text-green text-[10px] tracking-[0.25em] font-semibold uppercase mb-1">
-                <Sparkles className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '6s' }} /> Área Administrativa
-              </span>
-              MIRIAM
-              <span className="text-green text-xs font-sans tracking-[0.3em] font-light mt-1">
-                MALL SHOPPING
-              </span>
+
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-serif font-bold text-primary mb-2">
+              Painel Administrativo
             </h1>
-          </div>
-        </div>
-
-        <AnimatePresence>
-          {error && (
-            <motion.div 
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="bg-red-500/10 border border-red-500/30 text-red-400 p-3 rounded-xl text-xs text-center mb-6 overflow-hidden"
-            >
-              {error}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <form onSubmit={handleLogin} className="space-y-6">
-          <div>
-            <label className="block text-[10px] font-bold uppercase text-white/50 mb-2 tracking-widest">
-              Nome de Utilizador
-            </label>
-            <div className="relative group">
-              <input
-                type="text"
-                required
-                disabled={isLoading}
-                placeholder="Introduza o e-mail ou 'admin'"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full bg-primary-dark/80 border border-white/10 rounded-xl pl-11 pr-4 py-3.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-green focus:ring-2 focus:ring-green/10 transition-all duration-300"
-              />
-              <User className="w-4 h-4 text-white/30 absolute left-3.5 top-4 transition-colors group-focus-within:text-green" />
-            </div>
+            <p className="text-primary/60 text-sm">
+              Entre com suas credenciais para acessar o painel
+            </p>
           </div>
 
-          <div>
-            <label className="block text-[10px] font-bold uppercase text-white/50 mb-2 tracking-widest">
-              Palavra-passe
-            </label>
-            <div className="relative group">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                required
-                disabled={isLoading}
-                placeholder="Introduza a palavra-passe"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-primary-dark/80 border border-white/10 rounded-xl pl-11 pr-11 py-3.5 text-xs text-white placeholder-white/20 focus:outline-none focus:border-green focus:ring-2 focus:ring-green/10 transition-all duration-300"
-              />
-              <Lock className="w-4 h-4 text-white/30 absolute left-3.5 top-4 transition-colors group-focus-within:text-green" />
-              <button
-                type="button"
-                tabIndex={-1}
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3.5 top-4 text-white/30 hover:text-green transition-colors focus:outline-none"
-                aria-label={showPassword ? 'Ocultar palavra-passe' : 'Mostrar palavra-passe'}
+          {/* Error Message */}
+          <AnimatePresence>
+            {error && (
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-xl text-sm mb-6 flex items-center gap-3"
               >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+                  <Lock className="w-4 h-4" />
+                </div>
+                {error}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Form */}
+          <form onSubmit={handleLogin} className="space-y-5">
+            <div>
+              <label className="block text-sm font-semibold text-primary mb-2">
+                E-mail ou Nome de Utilizador
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  required
+                  disabled={isLoading}
+                  placeholder="admin@miriammall.com"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-full bg-white border border-slate-200 rounded-xl pl-12 pr-4 py-3.5 text-sm text-primary placeholder-slate-400 focus:outline-none focus:border-green focus:ring-2 focus:ring-green/10 transition-all duration-300"
+                />
+                <User className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-primary mb-2">
+                Palavra-passe
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  disabled={isLoading}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-white border border-slate-200 rounded-xl pl-12 pr-12 py-3.5 text-sm text-primary placeholder-slate-400 focus:outline-none focus:border-green focus:ring-2 focus:ring-green/10 transition-all duration-300"
+                />
+                <Lock className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                <button
+                  type="button"
+                  tabIndex={-1}
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-green transition-colors focus:outline-none"
+                  aria-label={showPassword ? 'Ocultar palavra-passe' : 'Mostrar palavra-passe'}
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-green hover:bg-green-dark text-white font-semibold text-sm py-4 rounded-xl shadow-lg shadow-green/20 hover:shadow-green/30 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                {isLoading ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    A entrar...
+                  </>
+                ) : (
+                  <>
+                    <KeyRound className="w-5 h-5" /> Entrar no Painel
+                  </>
+                )}
               </button>
             </div>
-          </div>
+          </form>
 
-          <div className="pt-2">
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-green to-green-dark hover:from-green-light hover:to-green disabled:from-green/50 disabled:to-green-dark/50 disabled:cursor-not-allowed text-primary font-bold text-xs uppercase tracking-widest py-4 rounded-xl shadow-[0_4px_20px_rgba(16,185,129,0.2)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.35)] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              {isLoading ? (
-                <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-              ) : (
-                <>
-                  <KeyRound className="w-4 h-4" /> Entrar no Painel
-                </>
-              )}
-            </button>
-          </div>
-        </form>
-
-        {/* Development credentials box */}
-        <div className="mt-8 text-center bg-primary-dark/40 border border-white/5 rounded-2xl p-4 text-[10px] text-white/40">
-          <div className="font-semibold tracking-wider text-[9px] uppercase text-white/30">Credenciais Padrão:</div>
-          <div className="mt-2 flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-2">
-            <div>
-              <span className="text-white/50 font-medium">E-mail:</span>{' '}
-              <span className="text-green font-mono">admin@miriammall.com</span>
+          {/* Credentials Box */}
+          <div className="mt-8 p-4 bg-slate-50 rounded-xl border border-slate-100">
+            <div className="text-xs font-semibold text-primary/40 uppercase tracking-wider mb-3">
+              Credenciais de Desenvolvimento
             </div>
-            <span className="hidden sm:inline text-white/20">|</span>
-            <div>
-              <span className="text-white/50 font-medium">Senha:</span>{' '}
-              <span className="text-green font-mono">@Admin123@</span>
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between items-center">
+                <span className="text-primary/60">E-mail:</span>
+                <span className="font-mono text-green font-medium">admin@miriammall.com</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-primary/60">Senha:</span>
+                <span className="font-mono text-green font-medium">@Admin123@</span>
+              </div>
             </div>
           </div>
-        </div>
-      </motion.div>
+
+          {/* Footer */}
+          <div className="mt-8 text-center text-xs text-primary/40">
+            © 2024 Miriam Mall. Todos os direitos reservados.
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
