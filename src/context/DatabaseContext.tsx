@@ -9,7 +9,15 @@ import {
   Promotion,
   RentalRequest,
   Banner,
-  BlogPost
+  BlogPost,
+  initialSpaces,
+  initialBanners,
+  initialStores,
+  initialRestaurants,
+  initialEvents,
+  initialPromotions,
+  initialRentalRequests,
+  initialBlogPosts
 } from '../utils/mockData';
 
 interface DatabaseContextType {
@@ -82,25 +90,43 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
     async function initAndFetchData() {
       try {
         // 1. Initialize DB (seeds mock data if MongoDB is empty)
-        await fetch('/api/init-db');
+        try {
+          await fetch('/api/init-db');
+        } catch (initErr) {
+          console.warn('Could not initialize database, using fallback data.', initErr);
+        }
         
         // 2. Fetch all collections
         const res = await fetch('/api/all-data');
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const payload = await res.json();
         
         if (payload.success && payload.data) {
           const { spaces, stores, restaurants, events, promotions, rentalRequests, banners, blogPosts } = payload.data;
-          setSpaces(spaces || []);
-          setStores(stores || []);
-          setRestaurants(restaurants || []);
-          setEvents(events || []);
-          setPromotions(promotions || []);
-          setRentalRequests(rentalRequests || []);
-          setBanners(banners || []);
-          setBlogPosts(blogPosts || []);
+          setSpaces(spaces && spaces.length > 0 ? spaces : initialSpaces);
+          setStores(stores && stores.length > 0 ? stores : initialStores);
+          setRestaurants(restaurants && restaurants.length > 0 ? restaurants : initialRestaurants);
+          setEvents(events && events.length > 0 ? events : initialEvents);
+          setPromotions(promotions && promotions.length > 0 ? promotions : initialPromotions);
+          setRentalRequests(rentalRequests && rentalRequests.length > 0 ? rentalRequests : initialRentalRequests);
+          setBanners(banners && banners.length > 0 ? banners : initialBanners);
+          setBlogPosts(blogPosts && blogPosts.length > 0 ? blogPosts : initialBlogPosts);
+        } else {
+          throw new Error(payload.error || 'API response was unsuccessful');
         }
       } catch (e) {
-        console.error('Failed to load data from API', e);
+        console.error('Failed to load data from API, falling back to mock data:', e);
+        // Fallback to local mock data
+        setSpaces(initialSpaces);
+        setStores(initialStores);
+        setRestaurants(initialRestaurants);
+        setEvents(initialEvents);
+        setPromotions(initialPromotions);
+        setRentalRequests(initialRentalRequests);
+        setBanners(initialBanners);
+        setBlogPosts(initialBlogPosts);
       } finally {
         setIsLoaded(true);
       }

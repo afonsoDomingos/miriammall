@@ -19,7 +19,9 @@ import {
   ArrowRight,
   ChevronRight,
   Compass,
-  Palmtree
+  Palmtree,
+  Calendar,
+  Tag
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -431,6 +433,136 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
+
+        {/* PROMOTIONS SECTION */}
+        {promotions && promotions.length > 0 && (
+          <section className="py-24 bg-white relative overflow-hidden">
+            <Palmtree className="absolute -right-24 -bottom-24 w-96 h-96 text-primary/5 pointer-events-none transform -rotate-12" />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="text-center max-w-2xl mx-auto mb-16">
+                <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                  <Tag className="w-3.5 h-3.5" /> Oportunidades Únicas
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
+                  Promoções em Destaque
+                </h2>
+                <p className="text-primary/70 text-sm">
+                  Aproveite as ofertas exclusivas e descontos imperdíveis das nossas lojas parceiras no Miriam Mall.
+                </p>
+              </div>
+
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              >
+                {promotions.slice(0, 3).map((promo) => (
+                  <motion.div
+                    key={promo.id}
+                    variants={cardVariants}
+                    className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md flex flex-col justify-between hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group"
+                  >
+                    <div>
+                      <div className="h-48 relative bg-primary-dark overflow-hidden">
+                        <ImageWithLoader
+                          src={promo.image}
+                          alt={promo.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute top-4 left-4 bg-green text-primary text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded shadow-md">
+                          {promo.storeName}
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <h3 className="font-serif text-lg font-bold text-primary mb-3 line-clamp-1 group-hover:text-green transition-colors">
+                          {promo.title}
+                        </h3>
+                        <p className="text-primary/70 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">
+                          {promo.description}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="px-6 pb-6 pt-2 border-t border-slate-50 flex items-center gap-2 text-xs text-primary/60 font-medium">
+                      <Clock className="w-4 h-4 text-green" />
+                      <span>{promo.validity}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </section>
+        )}
+
+        {/* EVENTS SECTION */}
+        {events && events.length > 0 && (
+          <section className="py-24 bg-light-gray border-t border-slate-200/40 relative overflow-hidden">
+            <Palmtree className="absolute -left-24 -top-24 w-96 h-96 text-green/5 pointer-events-none transform rotate-45" />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="text-center max-w-2xl mx-auto mb-16">
+                <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5" /> Vida no Shopping
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
+                  Próximos Eventos & Agenda
+                </h2>
+                <p className="text-primary/70 text-sm">
+                  Fique por dentro das atividades culturais, concertos e feiras que movimentam a comunidade de Homoíne.
+                </p>
+              </div>
+
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              >
+                {events.slice(0, 3).map((event) => (
+                  <motion.div
+                    key={event.id}
+                    variants={cardVariants}
+                    className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md flex flex-col justify-between hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group"
+                  >
+                    <div>
+                      <div className="h-48 relative bg-primary-dark overflow-hidden">
+                        <ImageWithLoader
+                          src={event.image}
+                          alt={event.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute top-4 left-4 bg-primary/95 text-green text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded flex items-center gap-1 shadow-md">
+                          <MapPin className="w-3 h-3" /> {event.location}
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <div className="flex items-center gap-2 text-xs font-bold text-green mb-2.5">
+                          <Calendar className="w-4 h-4" />
+                          <span>{event.date}</span>
+                        </div>
+                        <h3 className="font-serif text-lg font-bold text-primary mb-3 line-clamp-1 group-hover:text-green transition-colors">
+                          {event.title}
+                        </h3>
+                        <p className="text-primary/70 text-xs sm:text-sm line-clamp-3 leading-relaxed">
+                          {event.description}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="px-6 pb-6 pt-4 border-t border-slate-50 text-center">
+                      <Link
+                        href="/eventos"
+                        className="text-xs uppercase tracking-wider text-green hover:text-green-light font-bold flex items-center justify-center gap-1 transition-colors"
+                      >
+                        Ver Detalhes do Evento <ChevronRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </section>
+        )}
 
         {/* CTA BANNERS / INVESTORS SECTION */}
         <section className="py-24 bg-gradient-to-b from-primary to-primary-dark text-white relative">
