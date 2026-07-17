@@ -59,21 +59,6 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #450A0A;
-}
-::-webkit-scrollbar-thumb {
-  background: #10B981; /* Green scrollbar */
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #34D399;
-}
-
 /* Swiper slider styles customization */
 .swiper-pagination-bullet-active {
   background: #10B981 !important;
