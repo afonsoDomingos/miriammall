@@ -32,6 +32,7 @@ import {
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import InteractiveMap from '../components/InteractiveMap';
+import ScrollReveal from '../components/ScrollReveal';
 import { useDatabase } from '../context/DatabaseContext';
 import ImageWithLoader from '../components/ImageWithLoader';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -255,12 +256,7 @@ export default function Home() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8 }}
-              >
+              <ScrollReveal direction="left" delay={0.1}>
                 <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center gap-1.5">
                   <Palmtree className="w-3.5 h-3.5" /> O Empreendimento
                 </span>
@@ -293,23 +289,19 @@ export default function Home() {
                     <span className="text-[10px] text-primary/60 uppercase font-medium tracking-wide">Design Sustentável</span>
                   </div>
                 </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative p-2 bg-slate-50 border border-slate-200/60 rounded-2xl shadow-green-glow shadow-green-glow-hover transition-all duration-500"
-              >
-                <div className="relative h-[440px] rounded-xl overflow-hidden group">
-                  <ImageWithLoader
-                    src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80"
-                    alt="Interior do Shopping"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none" />
+              </ScrollReveal>
+              <ScrollReveal direction="right" delay={0.2}>
+                <div className="relative p-2 bg-slate-50 border border-slate-200/60 rounded-2xl shadow-green-glow shadow-green-glow-hover transition-all duration-500">
+                  <div className="relative h-[440px] rounded-xl overflow-hidden group">
+                    <ImageWithLoader
+                      src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80"
+                      alt="Interior do Shopping"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none" />
+                  </div>
                 </div>
-              </motion.div>
+              </ScrollReveal>
             </div>
           </div>
         </section>
@@ -918,89 +910,93 @@ export default function Home() {
 
         {/* FAQ SECTION */}
         <section className="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
-                <HelpCircle className="w-3.5 h-3.5" /> Dúvidas Frequentes
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
-                Perguntas Frequentes
-              </h2>
-              <p className="text-primary/70 text-sm">
-                Encontre respostas para as perguntas mais comuns sobre o Miriam Mall
-              </p>
-            </div>
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                  <HelpCircle className="w-3.5 h-3.5" /> Dúvidas Frequentes
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
+                  Perguntas Frequentes
+                </h2>
+                <p className="text-primary/70 text-sm">
+                  Encontre respostas para as perguntas mais comuns sobre o Miriam Mall
+                </p>
+              </div>
 
-            <div className="space-y-4">
-              {[
-                {
-                  question: "Como posso arrendar um espaço no Miriam Mall?",
-                  answer: "Para arrendar um espaço, visite a página de Espaços Disponíveis, escolha o espaço que melhor se adapta ao seu negócio e preencha o formulário de contacto. A nossa equipa comercial entrará em contacto consigo em até 48 horas."
-                },
-                {
-                  question: "Quais são os custos de arrendamento?",
-                  answer: "Os custos variam conforme o tamanho, localização e tipo de espaço. Consulte a página de Espaços para ver os preços indicativos. Para um orçamento personalizado, entre em contacto connosco através do formulário ou WhatsApp."
-                },
-                {
-                  question: "O shopping oferece estacionamento?",
-                  answer: "Sim, o Miriam Mall dispõe de um parque de estacionamento amplo e organizado com mais de 500 lugares, disponível 24/7 para clientes, fornecedores e lojistas."
-                },
-                {
-                  question: "Quais são os horários de funcionamento?",
-                  answer: "O Miriam Mall está aberto 24 horas por dia, 7 dias por semana. No entanto, cada loja e restaurante pode ter horários individuais. Consulte cada estabelecimento para horários específicos."
-                },
-                {
-                  question: "O shopping tem segurança?",
-                  answer: "Sim, contamos com segurança permanente 24/7, incluindo vigilância física e circuito fechado de TV (CCTV) para garantir total tranquilidade para lojistas e visitantes."
-                },
-                {
-                  question: "Posso abrir qualquer tipo de negócio?",
-                  answer: "Aceitamos diversos tipos de negócios: retalho, serviços, restauração, escritórios e mais. Cada proposta é analisada individualmente para garantir diversidade e qualidade no mix de lojas."
-                }
-              ].map((faq, index) => (
-                <div key={index} className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
-                  <button
-                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                    className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
-                  >
-                    <span className="font-semibold text-primary pr-4">{faq.question}</span>
-                    <ChevronDown 
-                      className={`w-5 h-5 text-green transition-transform duration-300 shrink-0 ${
-                        openFaq === index ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  <AnimatePresence>
-                    {openFaq === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
+              <div className="space-y-4">
+                {[
+                  {
+                    question: "Como posso arrendar um espaço no Miriam Mall?",
+                    answer: "Para arrendar um espaço, visite a página de Espaços Disponíveis, escolha o espaço que melhor se adapta ao seu negócio e preencha o formulário de contacto. A nossa equipa comercial entrará em contacto consigo em até 48 horas."
+                  },
+                  {
+                    question: "Quais são os custos de arrendamento?",
+                    answer: "Os custos variam conforme o tamanho, localização e tipo de espaço. Consulte a página de Espaços para ver os preços indicativos. Para um orçamento personalizado, entre em contacto connosco através do formulário ou WhatsApp."
+                  },
+                  {
+                    question: "O shopping oferece estacionamento?",
+                    answer: "Sim, o Miriam Mall dispõe de um parque de estacionamento amplo e organizado com mais de 500 lugares, disponível 24/7 para clientes, fornecedores e lojistas."
+                  },
+                  {
+                    question: "Quais são os horários de funcionamento?",
+                    answer: "O Miriam Mall está aberto 24 horas por dia, 7 dias por semana. No entanto, cada loja e restaurante pode ter horários individuais. Consulte cada estabelecimento para horários específicos."
+                  },
+                  {
+                    question: "O shopping tem segurança?",
+                    answer: "Sim, contamos com segurança permanente 24/7, incluindo vigilância física e circuito fechado de TV (CCTV) para garantir total tranquilidade para lojistas e visitantes."
+                  },
+                  {
+                    question: "Posso abrir qualquer tipo de negócio?",
+                    answer: "Aceitamos diversos tipos de negócios: retalho, serviços, restauração, escritórios e mais. Cada proposta é analisada individualmente para garantir diversidade e qualidade no mix de lojas."
+                  }
+                ].map((faq, index) => (
+                  <ScrollReveal key={index} direction="up" delay={index * 0.05}>
+                    <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+                      <button
+                        onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                        className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
                       >
-                        <div className="px-6 pb-5 pt-0 text-sm text-primary/70 leading-relaxed border-t border-slate-100">
-                          {faq.answer}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
-            </div>
+                        <span className="font-semibold text-primary pr-4">{faq.question}</span>
+                        <ChevronDown 
+                          className={`w-5 h-5 text-green transition-transform duration-300 shrink-0 ${
+                            openFaq === index ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {openFaq === index && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="px-6 pb-5 pt-0 text-sm text-primary/70 leading-relaxed border-t border-slate-100">
+                              {faq.answer}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
 
-            <div className="text-center mt-10">
-              <p className="text-primary/60 text-sm mb-4">
-                Não encontrou a resposta que procurava?
-              </p>
-              <Link
-                href="/contato"
-                className="inline-flex items-center gap-2 text-green font-bold uppercase tracking-wider text-xs sm:text-sm border-b-2 border-green pb-1 hover:text-green-light hover:border-green-light transition-colors"
-              >
-                Fale Connosco <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="text-center mt-10">
+                <p className="text-primary/60 text-sm mb-4">
+                  Não encontrou a resposta que procurava?
+                </p>
+                <Link
+                  href="/contato"
+                  className="inline-flex items-center gap-2 text-green font-bold uppercase tracking-wider text-xs sm:text-sm border-b-2 border-green pb-1 hover:text-green-light hover:border-green-light transition-colors"
+                >
+                  Fale Connosco <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </section>
 
         {/* CONTACT & LOCALIZATION */}
