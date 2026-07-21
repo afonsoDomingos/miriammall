@@ -17,7 +17,9 @@ export async function POST(req: Request) {
     await dbConnect();
     const body = await req.json();
     const _id = body.id || `banner-${Date.now()}`;
-    const doc = new Banner({ ...body, _id });
+    // Set isActive to true by default if not provided
+    const bannerData = { ...body, _id, isActive: body.isActive !== undefined ? body.isActive : true };
+    const doc = new Banner(bannerData);
     await doc.save();
     return NextResponse.json({ success: true, data: serializeDoc(doc) });
   } catch (error: any) {

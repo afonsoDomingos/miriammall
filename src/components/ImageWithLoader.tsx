@@ -23,8 +23,8 @@ export default function ImageWithLoader({
     <div className={`relative overflow-hidden w-full h-full flex items-center justify-center ${containerClassName}`}>
       {/* Loading Spinner */}
       {isLoading && !hasError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/5 z-10 transition-opacity duration-300">
-          <Loader2 className={`w-6 h-6 animate-spin text-green ${spinnerClassName}`} />
+        <div className="absolute inset-0 flex items-center justify-center bg-primary-dark/20 z-10 transition-opacity duration-300">
+          <Loader2 className={`w-10 h-10 animate-spin text-green ${spinnerClassName}`} />
         </div>
       )}
 
