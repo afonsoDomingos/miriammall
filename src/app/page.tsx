@@ -545,68 +545,62 @@ export default function Home() {
           <section className="py-24 bg-gradient-to-b from-white to-light-gray relative overflow-hidden">
             <Palmtree className="absolute -right-24 -bottom-24 w-96 h-96 text-green/5 pointer-events-none transform rotate-12" />
             
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-                <div>
-                  <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center gap-1.5">
-                    <UtensilsCrossed className="w-3.5 h-3.5" /> Gastronomia
-                  </span>
-                  <h2 className="text-3xl font-serif font-bold text-primary">Nossos Restaurantes</h2>
-                </div>
-                <Link
-                  href="/restaurantes"
-                  className="text-xs uppercase tracking-wider text-green hover:text-green-light font-bold flex items-center gap-1 mt-4 md:mt-0 transition-colors"
-                >
-                  Ver Todos os Restaurantes <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
-
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
-              >
-                {previewRestaurants.map((restaurant) => (
-                  <motion.div
-                    key={restaurant.id}
-                    variants={cardVariants}
-                    className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group"
+            <ScrollReveal direction="up" delay={0.1}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+                  <div>
+                    <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center gap-1.5">
+                      <UtensilsCrossed className="w-3.5 h-3.5" /> Gastronomia
+                    </span>
+                    <h2 className="text-3xl font-serif font-bold text-primary">Nossos Restaurantes</h2>
+                  </div>
+                  <Link
+                    href="/restaurantes"
+                    className="text-xs uppercase tracking-wider text-green hover:text-green-light font-bold flex items-center gap-1 mt-4 md:mt-0 transition-colors"
                   >
-                    <div className="h-48 relative bg-primary-dark overflow-hidden">
-                      <ImageWithLoader
-                        src={restaurant.image}
-                        alt={restaurant.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute top-4 left-4 bg-green text-primary text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded shadow-md">
-                        {restaurant.category}
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="font-serif text-lg font-bold text-primary mb-2 group-hover:text-green transition-colors">
-                        {restaurant.name}
-                      </h3>
-                      <div className="flex items-center gap-1 text-xs text-primary/60 mb-3">
-                        <Clock className="w-3 h-3" />
-                        <span>{restaurant.schedule}</span>
-                      </div>
-                      {restaurant.menuItems && restaurant.menuItems.length > 0 && (
-                        <div className="space-y-2">
-                          {restaurant.menuItems.slice(0, 2).map((item, i) => (
-                            <div key={i} className="flex justify-between items-center text-xs">
-                              <span className="text-primary/70">{item.name}</span>
-                              <span className="font-semibold text-green">{item.price}</span>
-                            </div>
-                          ))}
+                    Ver Todos os Restaurantes <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {previewRestaurants.map((restaurant, index) => (
+                    <ScrollReveal key={restaurant.id} direction="up" delay={index * 0.1}>
+                      <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group">
+                        <div className="h-48 relative bg-primary-dark overflow-hidden">
+                          <ImageWithLoader
+                            src={restaurant.image}
+                            alt={restaurant.name}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute top-4 left-4 bg-green text-primary text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded shadow-md">
+                            {restaurant.category}
+                          </div>
                         </div>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
+                        <div className="p-6">
+                          <h3 className="font-serif text-lg font-bold text-primary mb-2 group-hover:text-green transition-colors">
+                            {restaurant.name}
+                          </h3>
+                          <div className="flex items-center gap-1 text-xs text-primary/60 mb-3">
+                            <Clock className="w-3 h-3" />
+                            <span>{restaurant.schedule}</span>
+                          </div>
+                          {restaurant.menuItems && restaurant.menuItems.length > 0 && (
+                            <div className="space-y-2">
+                              {restaurant.menuItems.slice(0, 2).map((item, i) => (
+                                <div key={i} className="flex justify-between items-center text-xs">
+                                  <span className="text-primary/70">{item.name}</span>
+                                  <span className="font-semibold text-green">{item.price}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </ScrollReveal>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
           </section>
         )}
 
@@ -769,143 +763,124 @@ export default function Home() {
 
         {/* NEWSLETTER SECTION */}
         <section className="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-10">
-              <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
-                <Mail className="w-3.5 h-3.5" /> Mantenha-se Informado
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
-                Newsletter Miriam Mall
-              </h2>
-              <p className="text-primary/70 text-sm max-w-2xl mx-auto">
-                Receba atualizações sobre novas lojas, promoções exclusivas e eventos no Miriam Mall. Junte-se à nossa comunidade!
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="text-center mb-10">
+                <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5" /> Mantenha-se Informado
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
+                  Newsletter Miriam Mall
+                </h2>
+                <p className="text-primary/70 text-sm max-w-2xl mx-auto">
+                  Receba atualizações sobre novas lojas, promoções exclusivas e eventos no Miriam Mall. Junte-se à nossa comunidade!
+                </p>
+              </div>
+
+              <form 
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const form = e.currentTarget as HTMLFormElement;
+                  const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+                  try {
+                    const res = await fetch('/api/newsletter', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ email })
+                    });
+                    if (res.ok) {
+                      showToast('success', 'Obrigado! Bem-vindo à nossa newsletter 🎉');
+                      form.reset();
+                    } else {
+                      showToast('error', 'Erro ao subscrever. Tente novamente.');
+                    }
+                  } catch {
+                    showToast('error', 'Erro de ligação. Tente novamente.');
+                  }
+                }}
+                className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto"
+              >
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Seu melhor e-mail"
+                  className="flex-1 px-6 py-4 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-green focus:ring-2 focus:ring-green/10 transition-all duration-300"
+                />
+                <button
+                  type="submit"
+                  className="bg-green hover:bg-green-dark text-white font-semibold text-sm uppercase tracking-wider py-4 px-8 rounded-xl transition-all duration-300 shadow-lg shadow-green/20 hover:shadow-green/30 flex items-center justify-center gap-2"
+                >
+                  <Mail className="w-4 h-4" /> Subscrever
+                </button>
+              </form>
+
+              <p className="text-center text-xs text-primary/40 mt-4">
+                Respeitamos a sua privacidade. Pode cancelar a subscrição a qualquer momento.
               </p>
             </div>
-
-            <form 
-              onSubmit={async (e) => {
-                e.preventDefault();
-                const form = e.currentTarget as HTMLFormElement;
-                const email = (form.elements.namedItem('email') as HTMLInputElement).value;
-                try {
-                  const res = await fetch('/api/newsletter', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email })
-                  });
-                  if (res.ok) {
-                    showToast('success', 'Obrigado! Bem-vindo à nossa newsletter 🎉');
-                    form.reset();
-                  } else {
-                    showToast('error', 'Erro ao subscrever. Tente novamente.');
-                  }
-                } catch {
-                  showToast('error', 'Erro de ligação. Tente novamente.');
-                }
-              }}
-              className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto"
-            >
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="Seu melhor e-mail"
-                className="flex-1 px-6 py-4 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-green focus:ring-2 focus:ring-green/10 transition-all duration-300"
-              />
-              <button
-                type="submit"
-                className="bg-green hover:bg-green-dark text-white font-semibold text-sm uppercase tracking-wider py-4 px-8 rounded-xl transition-all duration-300 shadow-lg shadow-green/20 hover:shadow-green/30 flex items-center justify-center gap-2"
-              >
-                <Mail className="w-4 h-4" /> Subscrever
-              </button>
-            </form>
-
-            <p className="text-center text-xs text-primary/40 mt-4">
-              Respeitamos a sua privacidade. Pode cancelar a subscrição a qualquer momento.
-            </p>
-
-            {/* ── Toast notification ───────────────────────────────────── */}
-            <AnimatePresence>
-              {toast && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
-                  className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl text-sm font-semibold backdrop-blur-sm border ${
-                    toast.type === 'success'
-                      ? 'bg-emerald-50/95 border-emerald-200 text-emerald-800'
-                      : 'bg-red-50/95 border-red-200 text-red-800'
-                  }`}
-                >
-                  {toast.type === 'success'
-                    ? <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
-                    : <XCircle className="w-5 h-5 text-red-500 shrink-0" />}
-                  {toast.message}
-                  <button
-                    onClick={() => setToast(null)}
-                    className="ml-2 text-current/60 hover:text-current transition-colors text-lg leading-none"
-                    aria-label="Fechar"
-                  >×</button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          </ScrollReveal>
         </section>
 
         {/* OPENING HOURS SECTION */}
         <section className="py-20 bg-white relative overflow-hidden">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
-                <Clock className="w-3.5 h-3.5" /> Quando Visitar
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
-                Horários de Funcionamento
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl border border-slate-100 shadow-md">
-                <h3 className="font-serif text-xl font-bold text-primary mb-6 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-green" /> Horários
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 border-b border-slate-100">
-                    <span className="font-semibold text-primary">Todos os Dias</span>
-                    <span className="text-green font-mono text-lg">24/7</span>
-                  </div>
-                  <p className="text-sm text-primary/60 pt-2">
-                    O Miriam Mall está aberto 24 horas por dia, 7 dias por semana para sua conveniência.
-                  </p>
-                </div>
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5" /> Quando Visitar
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
+                  Horários de Funcionamento
+                </h2>
               </div>
 
-              <div className="bg-gradient-to-br from-primary/5 to-slate-50 p-8 rounded-2xl border border-green/10 shadow-md">
-                <h3 className="font-serif text-xl font-bold text-primary mb-6 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-green" /> Informações Adicionais
-                </h3>
-                <div className="space-y-4 text-sm text-primary/70">
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
-                    <p>Acesso ao estacionamento disponível 24/7</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <ScrollReveal direction="left" delay={0.2}>
+                  <div className="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl border border-slate-100 shadow-md">
+                    <h3 className="font-serif text-xl font-bold text-primary mb-6 flex items-center gap-2">
+                      <Clock className="w-5 h-5 text-green" /> Horários
+                    </h3>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center py-3 border-b border-slate-100">
+                        <span className="font-semibold text-primary">Todos os Dias</span>
+                        <span className="text-green font-mono text-lg">24/7</span>
+                      </div>
+                      <p className="text-sm text-primary/60 pt-2">
+                        O Miriam Mall está aberto 24 horas por dia, 7 dias por semana para sua conveniência.
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
-                    <p>Segurança permanente e vigilância 24 horas</p>
+                </ScrollReveal>
+
+                <ScrollReveal direction="right" delay={0.3}>
+                  <div className="bg-gradient-to-br from-primary/5 to-slate-50 p-8 rounded-2xl border border-green/10 shadow-md">
+                    <h3 className="font-serif text-xl font-bold text-primary mb-6 flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-green" /> Informações Adicionais
+                    </h3>
+                    <div className="space-y-4 text-sm text-primary/70">
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
+                        <p>Acesso ao estacionamento disponível 24/7</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
+                        <p>Segurança permanente e vigilância 24 horas</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
+                        <p>Lojas e restaurantes com horários individuais</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
+                        <p>Consulte cada loja para horários específicos</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
-                    <p>Lojas e restaurantes com horários individuais</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-green mt-2 shrink-0" />
-                    <p>Consulte cada loja para horários específicos</p>
-                  </div>
-                </div>
+                </ScrollReveal>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </section>
 
         {/* FAQ SECTION */}
@@ -1074,6 +1049,33 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      {/* Toast notification */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl text-sm font-semibold backdrop-blur-sm border ${
+              toast.type === 'success'
+                ? 'bg-emerald-50/95 border-emerald-200 text-emerald-800'
+                : 'bg-red-50/95 border-red-200 text-red-800'
+            }`}
+          >
+            {toast.type === 'success'
+              ? <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
+              : <XCircle className="w-5 h-5 text-red-500 shrink-0" />}
+            {toast.message}
+            <button
+              onClick={() => setToast(null)}
+              className="ml-2 text-current/60 hover:text-current transition-colors text-lg leading-none"
+              aria-label="Fechar"
+            >×</button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </>
