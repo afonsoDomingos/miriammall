@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import {
   Shield,
   MapPin,
@@ -23,7 +23,9 @@ import {
   Calendar,
   Tag,
   UtensilsCrossed,
-  Star
+  Star,
+  CheckCircle,
+  XCircle
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -37,8 +39,88 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
+// ── Animated counter hook ────────────────────────────────────────────────────
+function useCountUp(target: number, duration = 1800, startOnView = true) {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!startOnView) { setHasStarted(true); return; }
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setHasStarted(true); observer.disconnect(); } },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [startOnView]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    let start = 0;
+    const step = Math.ceil(target / (duration / 16));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { setCount(target); clearInterval(timer); }
+      else setCount(start);
+    }, 16);
+    return () => clearInterval(timer);
+  }, [hasStarted, target, duration]);
+
+  return { count, ref };
+}
+
+// ── Store category cover images ──────────────────────────────────────────────
+const CATEGORY_COVERS: Record<string, string> = {
+  'Moda': 'https://images.unsplash.com/photo-1567401893930-7cb7138e319d?auto=format&fit=crop&w=600&q=80',
+  'Tecnologia': 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
+  'Alimentação': 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80',
+  'Bancos': 'https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?auto=format&fit=crop&w=600&q=80',
+  'Farmácia': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
+  'Beleza': 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80',
+  'Crianças': 'https://images.unsplash.com/photo-1515488042361-404e9250afef?auto=format&fit=crop&w=600&q=80',
+};
+const DEFAULT_COVER = 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=600&q=80';
+
+// ── AnimatedStatCard component ───────────────────────────────────────────────
+function AnimatedStatCard({
+  stat,
+  cardVariants,
+  IconComponent,
+}: {
+  stat: { target: number; suffix: string; label: string };
+  cardVariants: Variants;
+  IconComponent: React.ElementType;
+}) {
+  const { count, ref } = useCountUp(stat.target, 1600);
+  return (
+    <motion.div
+      ref={ref}
+      variants={cardVariants}
+      className="text-center group"
+    >
+      <div className="w-16 h-16 rounded-full bg-green/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-green transition-all duration-300 transform group-hover:scale-110">
+        <IconComponent className="w-8 h-8 text-green group-hover:text-primary transition-colors" />
+      </div>
+      <div className="text-4xl sm:text-5xl font-serif font-bold text-primary mb-2 group-hover:text-green transition-colors tabular-nums">
+        {count}{stat.suffix}
+      </div>
+      <div className="text-xs uppercase tracking-wider text-primary/60 font-semibold">
+        {stat.label}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Home() {
   const { spaces, stores, restaurants, events, promotions, banners } = useDatabase();
+
+  // ── Newsletter toast state ─────────────────────────────────────────────────
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const showToast = (type: 'success' | 'error', message: string) => {
+    setToast({ type, message });
+    setTimeout(() => setToast(null), 4000);
+  };
 
   const containerVariants = {
     hidden: {},
@@ -208,11 +290,11 @@ export default function Home() {
                 </h2>
                 <div className="space-y-4 text-primary/70 leading-relaxed text-sm sm:text-base">
                   <p>
-                    O **Miriam Mall** surge com a missão de transformar o cenário económico e social do Distrito de Homoíne, na célebre Província de Inhambane. 
-                    Pensado detalhadamente para fundir a sofisticação de um centro comercial moderno com o charme natural da Terra de Boa Gente, o shopping reúne o melhor in marcas, conveniência e bem-estar.
+                    O <strong className="text-primary font-semibold">Miriam Mall</strong> surge com a missão de transformar o cenário económico e social do Distrito de Homoíne, na célebre Província de Inhambane.
+                    Pensado detalhadamente para fundir a sofisticação de um centro comercial moderno com o charme natural da Terra de Boa Gente, o shopping reúne o melhor em marcas, conveniência e bem-estar.
                   </p>
                   <p>
-                    Mais do que uma estrutura comercial, oferecemos um ambiente de negócios vibrante e refrescante. 
+                    Mais do que uma estrutura comercial, oferecemos um ambiente de negócios vibrante e refrescante.
                     Lojas climatizadas, segurança permanente, estacionamento organizado e uma praça de alimentação ampla, rodeada de ventilação natural e da beleza da nossa flora local.
                   </p>
                 </div>
@@ -273,28 +355,14 @@ export default function Home() {
               className="grid grid-cols-2 md:grid-cols-4 gap-8"
             >
               {[
-                { number: "50+", label: "Lojas", icon: Building },
-                { number: "2", label: "Pisos", icon: Layers },
-                { number: "24/7", label: "Segurança", icon: Shield },
-                { number: "500+", label: "Estacionamento", icon: Compass }
+                { target: 50, suffix: '+', label: 'Lojas', icon: Building },
+                { target: 2, suffix: '', label: 'Pisos', icon: Layers },
+                { target: 24, suffix: '/7', label: 'Segurança', icon: Shield },
+                { target: 500, suffix: '+', label: 'Estacionamentos', icon: Compass },
               ].map((stat, index) => {
                 const IconComponent = stat.icon;
                 return (
-                  <motion.div
-                    key={index}
-                    variants={cardVariants}
-                    className="text-center group"
-                  >
-                    <div className="w-16 h-16 rounded-full bg-green/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-green transition-all duration-300 transform group-hover:scale-110">
-                      <IconComponent className="w-8 h-8 text-green group-hover:text-primary transition-colors" />
-                    </div>
-                    <div className="text-4xl sm:text-5xl font-serif font-bold text-primary mb-2 group-hover:text-green transition-colors">
-                      {stat.number}
-                    </div>
-                    <div className="text-xs uppercase tracking-wider text-primary/60 font-semibold">
-                      {stat.label}
-                    </div>
-                  </motion.div>
+                  <AnimatedStatCard key={index} stat={stat} cardVariants={cardVariants} IconComponent={IconComponent} />
                 );
               })}
             </motion.div>
@@ -467,22 +535,33 @@ export default function Home() {
                 <motion.div
                   key={store.id}
                   variants={cardVariants}
-                  className="bg-white p-6 rounded-2xl border border-slate-100 text-center flex flex-col justify-between shadow-md hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group"
+                  className="bg-white rounded-2xl border border-slate-100 overflow-hidden flex flex-col shadow-md hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group"
                 >
-                  <div className="flex flex-col items-center">
-                    <div className="w-20 h-20 rounded-full overflow-hidden border border-slate-100 mb-4 bg-slate-50 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform duration-500">
+                  {/* Cover image banner */}
+                  <div className="relative h-36 bg-primary-dark overflow-hidden">
+                    <ImageWithLoader
+                      src={CATEGORY_COVERS[store.category] ?? DEFAULT_COVER}
+                      alt={store.category}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
+                    {/* Logo circle overlapping image bottom */}
+                    <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full overflow-hidden border-2 border-white bg-white shadow-lg z-10">
                       <ImageWithLoader src={store.logo} alt={store.name} className="w-full h-full object-cover" />
                     </div>
-                    <span className="text-[10px] uppercase font-bold text-green bg-green/5 px-2.5 py-1 rounded-full mb-3">
+                  </div>
+                  {/* Content */}
+                  <div className="flex flex-col flex-1 items-center text-center px-5 pt-10 pb-5">
+                    <span className="text-[10px] uppercase font-bold text-green bg-green/5 px-2.5 py-1 rounded-full mb-2">
                       {store.category}
                     </span>
-                    <h3 className="text-base font-bold text-primary mb-1.5">{store.name}</h3>
+                    <h3 className="text-base font-bold text-primary mb-1.5 group-hover:text-green transition-colors">{store.name}</h3>
                     <p className="text-xs text-primary/60 line-clamp-2 mb-4 leading-relaxed">
                       {store.description}
                     </p>
-                  </div>
-                  <div className="text-xs text-primary/50 border-t border-slate-100 pt-4 mt-2">
-                    <span className="block font-medium">Piso {store.floor} | Horário: {store.schedule}</span>
+                    <div className="mt-auto text-xs text-primary/50 border-t border-slate-100 pt-3 w-full">
+                      <span className="block font-medium">Piso {store.floor} | Horário: {store.schedule}</span>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -735,7 +814,8 @@ export default function Home() {
             <form 
               onSubmit={async (e) => {
                 e.preventDefault();
-                const email = (e.currentTarget as HTMLFormElement).email.value;
+                const form = e.currentTarget as HTMLFormElement;
+                const email = (form.elements.namedItem('email') as HTMLInputElement).value;
                 try {
                   const res = await fetch('/api/newsletter', {
                     method: 'POST',
@@ -743,13 +823,13 @@ export default function Home() {
                     body: JSON.stringify({ email })
                   });
                   if (res.ok) {
-                    alert('Obrigado por subscrever a nossa newsletter!');
-                    (e.currentTarget as HTMLFormElement).reset();
+                    showToast('success', 'Obrigado! Bem-vindo à nossa newsletter 🎉');
+                    form.reset();
                   } else {
-                    alert('Erro ao subscrever. Tente novamente.');
+                    showToast('error', 'Erro ao subscrever. Tente novamente.');
                   }
-                } catch (err) {
-                  alert('Erro de ligação. Tente novamente.');
+                } catch {
+                  showToast('error', 'Erro de ligação. Tente novamente.');
                 }
               }}
               className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto"
@@ -772,6 +852,33 @@ export default function Home() {
             <p className="text-center text-xs text-primary/40 mt-4">
               Respeitamos a sua privacidade. Pode cancelar a subscrição a qualquer momento.
             </p>
+
+            {/* ── Toast notification ───────────────────────────────────── */}
+            <AnimatePresence>
+              {toast && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl text-sm font-semibold backdrop-blur-sm border ${
+                    toast.type === 'success'
+                      ? 'bg-emerald-50/95 border-emerald-200 text-emerald-800'
+                      : 'bg-red-50/95 border-red-200 text-red-800'
+                  }`}
+                >
+                  {toast.type === 'success'
+                    ? <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
+                    : <XCircle className="w-5 h-5 text-red-500 shrink-0" />}
+                  {toast.message}
+                  <button
+                    onClick={() => setToast(null)}
+                    className="ml-2 text-current/60 hover:text-current transition-colors text-lg leading-none"
+                    aria-label="Fechar"
+                  >×</button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </section>
 
