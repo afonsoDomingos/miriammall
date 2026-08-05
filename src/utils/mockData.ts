@@ -21,6 +21,15 @@ export interface Building {
   order: number;
 }
 
+export interface Note {
+  id: string;
+  title: string;
+  content: string;
+  category: 'geral' | 'importante' | 'urgente' | 'lembrete';
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Banner {
   id: string;
   title: string;
@@ -495,5 +504,32 @@ export const initialBuildings: Building[] = [
       'Salas de conferências'
     ],
     order: 3
+  }
+];
+
+export const initialNotes: Note[] = [
+  {
+    id: 'note-1',
+    title: 'Reunião com investidores',
+    content: 'Preparar apresentação sobre expansão do Miriam Mall para segunda região. Revisar projeções financeiras e plano de negócios.',
+    category: 'importante',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  },
+  {
+    id: 'note-2',
+    title: 'Manutenção ar condicionado',
+    content: 'Agendar manutenção preventiva do sistema de ar condicionado do Edifício Comercial para próxima semana.',
+    category: 'urgente',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  },
+  {
+    id: 'note-3',
+    title: 'Novos inquilinos',
+    content: 'Ligar com a Zara e H&M sobre possível abertura de lojas no Miriam Mall. Enviar proposta comercial.',
+    category: 'lembrete',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   }
 ];

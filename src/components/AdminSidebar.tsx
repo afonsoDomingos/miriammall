@@ -18,7 +18,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Menu,
-  Building2
+  Building2,
+  StickyNote
 } from 'lucide-react';
 
 export default function AdminSidebar() {
@@ -36,7 +37,8 @@ export default function AdminSidebar() {
     { name: 'Promoções', href: '/admin/promocoes', icon: Tag },
     { name: 'Eventos', href: '/admin/eventos', icon: Calendar },
     { name: 'Pedidos', href: '/admin/pedidos', icon: FileText },
-    { name: 'Blog', href: '/admin/blog', icon: BookOpen }
+    { name: 'Blog', href: '/admin/blog', icon: BookOpen },
+    { name: 'Notas', href: '/admin/notas', icon: StickyNote }
   ];
 
   const handleLogout = () => {

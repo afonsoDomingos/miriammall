@@ -11,6 +11,7 @@ import {
   Banner,
   BlogPost,
   Building,
+  Note,
   initialSpaces,
   initialBanners,
   initialStores,
@@ -19,7 +20,8 @@ import {
   initialPromotions,
   initialRentalRequests,
   initialBlogPosts,
-  initialBuildings
+  initialBuildings,
+  initialNotes
 } from '../utils/mockData';
 
 interface DatabaseContextType {
@@ -32,6 +34,7 @@ interface DatabaseContextType {
   banners: Banner[];
   blogPosts: BlogPost[];
   buildings: Building[];
+  notes: Note[];
   isLoaded: boolean;
   
   // Banners CRUD
@@ -79,6 +82,11 @@ interface DatabaseContextType {
   addBuilding: (building: Omit<Building, 'id'>) => Promise<void>;
   updateBuilding: (building: Building) => Promise<void>;
   deleteBuilding: (id: string) => Promise<void>;
+
+  // Notes CRUD
+  addNote: (note: Omit<Note, 'id'>) => Promise<void>;
+  updateNote: (note: Note) => Promise<void>;
+  deleteNote: (id: string) => Promise<void>;
 }
 
 const DatabaseContext = createContext<DatabaseContextType | undefined>(undefined);
@@ -93,6 +101,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
   const [banners, setBanners] = useState<Banner[]>([]);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [buildings, setBuildings] = useState<Building[]>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -113,7 +122,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
         const payload = await res.json();
         
         if (payload.success && payload.data) {
-          const { spaces, stores, restaurants, events, promotions, rentalRequests, banners, blogPosts, buildings } = payload.data;
+          const { spaces, stores, restaurants, events, promotions, rentalRequests, banners, blogPosts, buildings, notes } = payload.data;
           setSpaces(spaces && spaces.length > 0 ? spaces : initialSpaces);
           setStores(stores && stores.length > 0 ? stores : initialStores);
           setRestaurants(restaurants && restaurants.length > 0 ? restaurants : initialRestaurants);
@@ -123,6 +132,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
           setBanners(banners && banners.length > 0 ? banners : initialBanners);
           setBlogPosts(blogPosts && blogPosts.length > 0 ? blogPosts : initialBlogPosts);
           setBuildings(buildings && buildings.length > 0 ? buildings : initialBuildings);
+          setNotes(notes && notes.length > 0 ? notes : initialNotes);
         } else {
           throw new Error(payload.error || 'API response was unsuccessful');
         }
@@ -138,6 +148,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
         setBanners(initialBanners);
         setBlogPosts(initialBlogPosts);
         setBuildings(initialBuildings);
+        setNotes(initialNotes);
       } finally {
         setIsLoaded(true);
       }
@@ -590,6 +601,53 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // Notes CRUD
+  const addNote = async (note: Omit<Note, 'id'>) => {
+    try {
+      const res = await fetch('/api/notes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(note),
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        setNotes(prev => [...prev, data.data]);
+      }
+    } catch (e) {
+      console.error('Failed to add note', e);
+    }
+  };
+
+  const updateNote = async (updatedNote: Note) => {
+    try {
+      const res = await fetch(`/api/notes/${updatedNote.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedNote),
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        setNotes(prev => prev.map(n => n.id === updatedNote.id ? data.data : n));
+      }
+    } catch (e) {
+      console.error('Failed to update note', e);
+    }
+  };
+
+  const deleteNote = async (id: string) => {
+    try {
+      const res = await fetch(`/api/notes/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success) {
+        setNotes(prev => prev.filter(n => n.id !== id));
+      }
+    } catch (e) {
+      console.error('Failed to delete note', e);
+    }
+  };
+
   return (
     <DatabaseContext.Provider value={{
       spaces,
@@ -629,7 +687,11 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
       deleteBlogPost,
       addBuilding,
       updateBuilding,
-      deleteBuilding
+      deleteBuilding,
+      notes,
+      addNote,
+      updateNote,
+      deleteNote
     }}>
       {children}
     </DatabaseContext.Provider>

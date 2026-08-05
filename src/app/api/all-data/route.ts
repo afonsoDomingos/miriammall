@@ -42,6 +42,9 @@ export async function GET() {
     // Fetch buildings from MongoDB directly (no model yet)
     const mongoose = await dbConnect();
     const buildingsRaw = await mongoose.connection.db.collection('buildings').find({}).sort({ order: 1 }).toArray();
+    
+    // Fetch notes from MongoDB directly (no model yet)
+    const notesRaw = await mongoose.connection.db.collection('notes').find({}).sort({ createdAt: -1 }).toArray();
 
     // Serialize documents
     const spaces = spacesRaw.map(serializeDoc);
@@ -53,6 +56,7 @@ export async function GET() {
     const rentalRequests = rentalRequestsRaw.map(serializeDoc);
     const blogPosts = blogPostsRaw.map(serializeDoc);
     const buildings = buildingsRaw.map(serializeDoc);
+    const notes = notesRaw.map(serializeDoc);
 
     return NextResponse.json({
       success: true,
@@ -65,7 +69,8 @@ export async function GET() {
         promotions,
         rentalRequests,
         blogPosts,
-        buildings
+        buildings,
+        notes
       }
     });
   } catch (error: any) {

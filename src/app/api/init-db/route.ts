@@ -21,7 +21,8 @@ import {
   initialPromotions,
   initialRentalRequests,
   initialBlogPosts,
-  initialBuildings
+  initialBuildings,
+  initialNotes
 } from '../../../utils/mockData';
 
 export async function GET(req: Request) {
@@ -45,6 +46,7 @@ export async function GET(req: Request) {
       await BlogPost.deleteMany({});
       const mongoose = await dbConnect();
       await mongoose.connection.db.collection('buildings').deleteMany({});
+      await mongoose.connection.db.collection('notes').deleteMany({});
     }
 
     // 1. Seed Banners
@@ -120,7 +122,15 @@ export async function GET(req: Request) {
       seeded = true;
     }
 
-    // 10. Seed Admin User
+    // 10. Seed Notes
+    const notesCount = await mongoose.connection.db.collection('notes').countDocuments();
+    if (notesCount === 0) {
+      const mapped = initialNotes.map(item => item);
+      await mongoose.connection.db.collection('notes').insertMany(mapped);
+      seeded = true;
+    }
+
+    // 11. Seed Admin User
     const adminExists = await AdminUser.findOne({ email: 'admin@miriammall.com' });
     if (!adminExists) {
       const hashedPassword = await bcrypt.hash('@Admin123@', 10);
