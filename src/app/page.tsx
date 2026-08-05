@@ -27,7 +27,8 @@ import {
   CheckCircle,
   XCircle,
   ChevronDown,
-  HelpCircle
+  HelpCircle,
+  ArrowUp
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -118,6 +119,28 @@ function AnimatedStatCard({
 export default function Home() {
   const { spaces, stores, restaurants, events, promotions, banners } = useDatabase();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  // Scroll progress indicator
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrolled = (window.scrollY / documentHeight) * 100;
+      setScrollProgress(scrolled);
+      
+      // Show back to top button after scrolling 300px
+      setShowBackToTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // ── Newsletter toast state ─────────────────────────────────────────────────
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -173,6 +196,14 @@ export default function Home() {
   return (
     <>
       <Navbar />
+
+      {/* Scroll Progress Bar */}
+      <div className="fixed top-16 left-0 right-0 h-1 bg-slate-100 z-50">
+        <div 
+          className="h-full bg-green transition-all duration-150 ease-out"
+          style={{ width: `${Math.min(scrollProgress, 100)}%` }}
+        />
+      </div>
 
       <main className="flex-grow pt-16">
         {/* HERO SECTION */}
@@ -297,6 +328,8 @@ export default function Home() {
                       src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80"
                       alt="Interior do Shopping"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      parallax={true}
+                      parallaxSpeed={0.3}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none" />
                   </div>
@@ -346,123 +379,111 @@ export default function Home() {
           <Palmtree className="absolute -left-20 -bottom-20 w-80 h-80 text-white/5 pointer-events-none transform rotate-12" />
           <Palmtree className="absolute -right-20 -top-20 w-80 h-80 text-white/5 pointer-events-none transform -rotate-45" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
-                <Palmtree className="w-3.5 h-3.5" /> Oportunidade Comercial
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-4">Porquê Investir no Miriam Mall?</h2>
-              <p className="text-white/60 text-sm">
-                Conheça as vantagens competitivas que tornam o Miriam Mall a melhor escolha para expandir a sua marca ou iniciar o seu negócio sob o potencial de Homoíne.
-              </p>
-            </div>
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="text-center max-w-2xl mx-auto mb-16">
+                <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                  <Palmtree className="w-3.5 h-3.5" /> Oportunidade Comercial
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold mb-4">Porquê Investir no Miriam Mall?</h2>
+                <p className="text-white/60 text-sm">
+                  Conheça as vantagens competitivas que tornam o Miriam Mall a melhor escolha para expandir a sua marca ou iniciar o seu negócio sob o potencial de Homoíne.
+                </p>
+              </div>
 
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-            >
-              {benefits.map((benefit, index) => {
-                const IconComponent = benefit.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    variants={cardVariants}
-                    className="p-6 rounded-xl bg-primary/45 border border-white/5 shadow-md shadow-green-glow hover:border-green/45 transition-all duration-300 hover:-translate-y-1.5 active:translate-y-0 group cursor-default"
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-green/10 flex items-center justify-center mb-5 group-hover:bg-green transition-all duration-300 transform group-hover:scale-110">
-                      <IconComponent className="w-6 h-6 text-green group-hover:text-primary transition-colors" />
-                    </div>
-                    <h3 className="text-lg font-bold mb-2.5 group-hover:text-green transition-colors">{benefit.title}</h3>
-                    <p className="text-white/70 text-xs sm:text-sm leading-relaxed">{benefit.text}</p>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {benefits.map((benefit, index) => {
+                  const IconComponent = benefit.icon;
+                  return (
+                    <ScrollReveal key={index} direction="up" delay={index * 0.1}>
+                      <div className="p-6 rounded-xl bg-primary/45 border border-white/5 shadow-md shadow-green-glow hover:border-green/45 transition-all duration-300 hover:-translate-y-1.5 active:translate-y-0 group cursor-default">
+                        <div className="w-12 h-12 rounded-lg bg-green/10 flex items-center justify-center mb-5 group-hover:bg-green transition-all duration-300 transform group-hover:scale-110">
+                          <IconComponent className="w-6 h-6 text-green group-hover:text-primary transition-colors" />
+                        </div>
+                        <h3 className="text-lg font-bold mb-2.5 group-hover:text-green transition-colors">{benefit.title}</h3>
+                        <p className="text-white/70 text-xs sm:text-sm leading-relaxed">{benefit.text}</p>
+                      </div>
+                    </ScrollReveal>
+                  );
+                })}
+              </div>
+            </div>
+          </ScrollReveal>
         </section>
 
         {/* AVAILABLE SPACES SECTION */}
         <section id="arrendamentos" className="py-24 bg-gradient-to-b from-white to-light-gray relative overflow-hidden">
           <Palmtree className="absolute -right-24 top-1/3 w-96 h-96 text-primary/5 pointer-events-none transform rotate-45" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
-                <Palmtree className="w-3.5 h-3.5" /> Espaços Disponíveis
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
-                Espaços Disponíveis para Arrendamento
-              </h2>
-              <p className="text-primary/60 text-sm">
-                Consulte as nossas lojas comerciais e encontre o espaço perfeito. Utilize o mapa interativo abaixo ou candidate-se a um espaço.
-              </p>
-            </div>
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="text-center max-w-2xl mx-auto mb-16">
+                <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                  <Palmtree className="w-3.5 h-3.5" /> Espaços Disponíveis
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
+                  Espaços Disponíveis para Arrendamento
+                </h2>
+                <p className="text-primary/60 text-sm">
+                  Consulte as nossas lojas comerciais e encontre o espaço perfeito. Utilize o mapa interativo abaixo ou candidate-se a um espaço.
+                </p>
+              </div>
 
-            {/* Interactive Map Component */}
-            <div className="mb-16 p-2 bg-white border border-slate-200/60 rounded-2xl shadow-lg relative z-20">
-              <InteractiveMap />
-            </div>
+              {/* Interactive Map Component */}
+              <ScrollReveal direction="up" delay={0.2}>
+                <div className="mb-16 p-2 bg-white border border-slate-200/60 rounded-2xl shadow-lg relative z-20">
+                  <InteractiveMap />
+                </div>
+              </ScrollReveal>
 
-            {/* Grid of Preview Spaces */}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            >
-              {previewSpaces.map((space) => (
-                <motion.div
-                  key={space.id}
-                  variants={cardVariants}
-                  className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md flex flex-col justify-between hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group"
-                >
-                  <div>
-                    <div className="h-52 relative bg-primary-dark overflow-hidden">
-                      <ImageWithLoader 
-                        src={space.image} 
-                        alt={space.number} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                      />
-                      <div className="absolute top-4 left-4 bg-primary/90 backdrop-blur-sm px-3 py-1 rounded text-[10px] text-green font-bold uppercase tracking-wider">
-                        Piso {space.floor}
+              {/* Grid of Preview Spaces */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {previewSpaces.map((space, index) => (
+                  <ScrollReveal key={space.id} direction="up" delay={0.3 + index * 0.1}>
+                    <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-md flex flex-col justify-between hover:-translate-y-1.5 hover:shadow-xl hover:border-green/20 transition-all duration-300 group">
+                      <div>
+                        <div className="h-52 relative bg-primary-dark overflow-hidden">
+                          <ImageWithLoader 
+                            src={space.image} 
+                            alt={space.number} 
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                          />
+                          <div className="absolute top-4 left-4 bg-primary/90 backdrop-blur-sm px-3 py-1 rounded text-[10px] text-green font-bold uppercase tracking-wider">
+                            Piso {space.floor}
+                          </div>
+                          <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-white shadow-md ${
+                            space.status === 'disponivel' ? 'bg-emerald-500' : 'bg-amber-500'
+                          }`}>
+                            {space.status}
+                          </div>
+                        </div>
+                        <div className="p-6">
+                          <div className="flex justify-between items-start mb-3">
+                            <h3 className="font-serif text-lg font-bold text-primary">Loja {space.number}</h3>
+                            <span className="text-green font-bold text-sm">{space.price}</span>
+                          </div>
+                          <div className="flex items-center gap-4 text-xs text-primary/60 mb-4">
+                            <span className="flex items-center gap-1">
+                              <Layers className="w-3 h-3" /> {space.area}m²
+                            </span>
+                          </div>
+                          <p className="text-primary/70 text-xs leading-relaxed mb-4 line-clamp-2">
+                            {space.description}
+                          </p>
+                        </div>
                       </div>
-                      <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-white shadow-md ${
-                        space.status === 'disponivel' ? 'bg-emerald-500' : 'bg-amber-500'
-                      }`}>
-                        {space.status}
+                      <div className="p-6 pt-0">
+                        <Link
+                          href="/arrendamentos"
+                          className="w-full block text-center bg-green hover:bg-green-dark text-white font-semibold text-xs uppercase tracking-wider py-3 rounded-xl transition-all duration-300 shadow-lg shadow-green/20 hover:shadow-green/30"
+                        >
+                          Ver Detalhes
+                        </Link>
                       </div>
                     </div>
-                    <div className="p-6">
-                      <div className="flex justify-between items-center mb-3">
-                        <h3 className="font-serif text-xl font-bold text-primary">{space.number}</h3>
-                        <span className="text-xs font-bold text-green bg-green/5 px-2 py-1 rounded">{space.area} m²</span>
-                      </div>
-                      <p className="text-primary/70 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">
-                        {space.description}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="px-6 pb-6 pt-2 flex gap-4">
-                    <Link
-                      href={`/espacos/${space.id}`}
-                      className="flex-1 text-center bg-primary hover:bg-primary-light text-white text-xs font-bold uppercase tracking-wider py-3 rounded-lg transition-all duration-300 shadow-sm"
-                    >
-                      Detalhes
-                    </Link>
-                    <Link
-                      href={`/contato?espaco=${space.number}`}
-                      className="flex-1 text-center bg-green hover:bg-green-light text-primary text-xs font-bold uppercase tracking-wider py-3 rounded-lg transition-all duration-300 shadow-sm hover:shadow-green/15"
-                    >
-                      Arrendar
-                    </Link>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  </ScrollReveal>
+                ))}
+              </div>
 
             <div className="text-center mt-12">
               <Link
@@ -473,6 +494,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
+        </ScrollReveal>
         </section>
 
         {/* STORES PREVIEW SECTION */}
@@ -976,77 +998,83 @@ export default function Home() {
 
         {/* CONTACT & LOCALIZATION */}
         <section id="contacto" className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Information & Form */}
-              <div>
-                <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block">Dúvidas ou Propostas</span>
-                <h2 className="text-3xl font-serif font-bold text-primary mb-6">Fale Connosco</h2>
-                
-                <p className="text-primary/70 text-sm sm:text-base leading-relaxed mb-8">
-                  Quer abrir a sua franquia, arrendar uma loja ou obter informações sobre o shopping? 
-                  A nossa equipa comercial está pronta para o ajudar a encontrar a melhor solução.
-                </p>
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                {/* Information & Form */}
+                <ScrollReveal direction="left" delay={0.2}>
+                  <div>
+                    <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block">Dúvidas ou Propostas</span>
+                    <h2 className="text-3xl font-serif font-bold text-primary mb-6">Fale Connosco</h2>
+                    
+                    <p className="text-primary/70 text-sm sm:text-base leading-relaxed mb-8">
+                      Quer abrir a sua franquia, arrendar uma loja ou obter informações sobre o shopping? 
+                      A nossa equipa comercial está pronta para o ajudar a encontrar a melhor solução.
+                    </p>
 
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-light-gray border border-primary/5">
-                    <MapPin className="w-6 h-6 text-green" />
-                    <div>
-                      <h4 className="font-bold text-primary text-sm">Endereço</h4>
-                      <p className="text-xs text-primary/60">Miriam Mall, Homoíne, Província de Inhambane, Moçambique</p>
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center gap-4 p-4 rounded-lg bg-light-gray border border-primary/5">
+                        <MapPin className="w-6 h-6 text-green" />
+                        <div>
+                          <h4 className="font-bold text-primary text-sm">Endereço</h4>
+                          <p className="text-xs text-primary/60">Miriam Mall, Homoíne, Província de Inhambane, Moçambique</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4 p-4 rounded-lg bg-light-gray border border-primary/5">
+                        <Phone className="w-6 h-6 text-green" />
+                        <div>
+                          <h4 className="font-bold text-primary text-sm">Telefone e WhatsApp</h4>
+                          <p className="text-xs text-primary/60">+258 86 554 3026</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4 p-4 rounded-lg bg-light-gray border border-primary/5">
+                        <Mail className="w-6 h-6 text-green" />
+                        <div>
+                          <h4 className="font-bold text-primary text-sm">E-mail Oficial</h4>
+                          <p className="text-xs text-primary/60">info@miriammall.co.mz</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <a
+                        href="https://wa.me/258865543026"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 text-center bg-[#25D366] hover:bg-[#20ba56] text-white text-xs font-bold uppercase tracking-wider py-3 rounded flex items-center justify-center gap-2"
+                      >
+                        <MessageCircle className="w-4 h-4" /> Falar no WhatsApp
+                      </a>
+                      <Link
+                        href="/contato"
+                        className="flex-1 text-center bg-primary hover:bg-primary-light text-white text-xs font-bold uppercase tracking-wider py-3 rounded flex items-center justify-center gap-2"
+                      >
+                        Formulário de Contacto <ArrowRight className="w-4 h-4" />
+                      </Link>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-light-gray border border-primary/5">
-                    <Phone className="w-6 h-6 text-green" />
-                    <div>
-                      <h4 className="font-bold text-primary text-sm">Telefone e WhatsApp</h4>
-                      <p className="text-xs text-primary/60">+258 86 554 3026</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-light-gray border border-primary/5">
-                    <Mail className="w-6 h-6 text-green" />
-                    <div>
-                      <h4 className="font-bold text-primary text-sm">E-mail Oficial</h4>
-                      <p className="text-xs text-primary/60">info@miriammall.co.mz</p>
-                    </div>
-                  </div>
-                </div>
+                </ScrollReveal>
 
-                <div className="flex gap-4">
-                  <a
-                    href="https://wa.me/258865543026"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 text-center bg-[#25D366] hover:bg-[#20ba56] text-white text-xs font-bold uppercase tracking-wider py-3 rounded flex items-center justify-center gap-2"
-                  >
-                    <MessageCircle className="w-4 h-4" /> Falar no WhatsApp
-                  </a>
-                  <Link
-                    href="/contato"
-                    className="flex-1 text-center bg-primary hover:bg-primary-light text-white text-xs font-bold uppercase tracking-wider py-3 rounded flex items-center justify-center gap-2"
-                  >
-                    Formulário de Contacto <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Map Iframe */}
-              <div className="rounded-lg overflow-hidden border border-green/10 green-glow h-[450px] relative">
-                {/* Custom Styled Leaflet/Google Map Mockup with high visual quality or standard map embedding */}
-                <iframe
-                  title="Miriam Mall Location Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14541.776092004245!2d35.10903333333333!3d-24.16875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1edd376e1a067a21%3A0xe5a3c2de30f5a3bd!2zSG9tb8OObmUsIE1vY2FtYmlxdWU!5e0!3m2!1spt!2spt!4v1700000000000!5m2!1spt!2spt"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="grayscale hover:grayscale-0 transition-all duration-500"
-                ></iframe>
+                {/* Map Iframe */}
+                <ScrollReveal direction="right" delay={0.3}>
+                  <div className="rounded-lg overflow-hidden border border-green/10 green-glow h-[450px] relative">
+                    {/* Custom Styled Leaflet/Google Map Mockup with high visual quality or standard map embedding */}
+                    <iframe
+                      title="Miriam Mall Location Map"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14541.776092004245!2d35.10903333333333!3d-24.16875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1edd376e1a067a21%3A0xe5a3c2de30f5a3bd!2zSG9tb8OObmUsIE1vY2FtYmlxdWU!5e0!3m2!1spt!2spt!4v1700000000000!5m2!1spt!2spt"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="grayscale hover:grayscale-0 transition-all duration-500"
+                    ></iframe>
+                  </div>
+                </ScrollReveal>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </section>
       </main>
 
@@ -1074,6 +1102,23 @@ export default function Home() {
               aria-label="Fechar"
             >×</button>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Back to Top Button */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 z-40 bg-green hover:bg-green-dark text-primary p-4 rounded-full shadow-lg shadow-green/30 transition-all duration-300 hover:scale-110 focus:outline-none"
+            aria-label="Voltar ao topo"
+          >
+            <ArrowUp className="w-6 h-6" />
+          </motion.button>
         )}
       </AnimatePresence>
 
