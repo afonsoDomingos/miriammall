@@ -40,10 +40,8 @@ export async function GET() {
     ]);
 
     // Fetch buildings from MongoDB directly (no model yet)
-    const buildingsRaw = await dbConnect().then(async () => {
-      const db = (await import('../../../utils/db')).default;
-      return db.default.connection.db.collection('buildings').find({}).sort({ order: 1 }).toArray();
-    });
+    const mongoose = await dbConnect();
+    const buildingsRaw = await mongoose.connection.db.collection('buildings').find({}).sort({ order: 1 }).toArray();
 
     // Serialize documents
     const spaces = spacesRaw.map(serializeDoc);
