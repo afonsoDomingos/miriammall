@@ -19,20 +19,11 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
       updatedAt: new Date()
     };
     
-    // Try to find by string id first (for mock data), then by ObjectId
-    let result;
-    try {
-      result = await mongoose.connection.db.collection('buildings').updateOne(
-        { _id: new (await import('mongodb')).ObjectId(id) },
-        { $set: updatedBuilding }
-      );
-    } catch {
-      // If ObjectId fails, try with string id
-      result = await mongoose.connection.db.collection('buildings').updateOne(
-        { id: id },
-        { $set: updatedBuilding }
-      );
-    }
+    // Always use string id field for buildings (not _id ObjectId)
+    const result = await mongoose.connection.db.collection('buildings').updateOne(
+      { id: id },
+      { $set: updatedBuilding }
+    );
     
     if (result.matchedCount === 0) {
       return NextResponse.json({ success: false, error: 'Building not found' }, { status: 404 });
@@ -54,18 +45,10 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     const mongoose = await dbConnect();
     const { id } = await params;
     
-    // Try to find by string id first (for mock data), then by ObjectId
-    let result;
-    try {
-      result = await mongoose.connection.db.collection('buildings').deleteOne(
-        { _id: new (await import('mongodb')).ObjectId(id) }
-      );
-    } catch {
-      // If ObjectId fails, try with string id
-      result = await mongoose.connection.db.collection('buildings').deleteOne(
-        { id: id }
-      );
-    }
+    // Always use string id field for buildings (not _id ObjectId)
+    const result = await mongoose.connection.db.collection('buildings').deleteOne(
+      { id: id }
+    );
     
     if (result.deletedCount === 0) {
       return NextResponse.json({ success: false, error: 'Building not found' }, { status: 404 });
