@@ -339,6 +339,176 @@ export default function Home() {
           </div>
         </section>
 
+        {/* COMPLEXO MULTIFUNCIONAL SECTION */}
+        <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+          <Palmtree className="absolute -left-24 top-1/4 w-96 h-96 text-primary/5 pointer-events-none transform -rotate-12" />
+          <Palmtree className="absolute -right-24 bottom-1/4 w-96 h-96 text-green/5 pointer-events-none transform rotate-45" />
+
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="text-center max-w-3xl mx-auto mb-16">
+                <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
+                  <Building className="w-3.5 h-3.5" /> Complexo Multifuncional
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-6">
+                  Três Edifícios, Um Destino
+                </h2>
+                <p className="text-primary/70 text-base leading-relaxed">
+                  O Miriam Mall foi concebido como um complexo comercial multifuncional destinado a responder às necessidades de empresas, empreendedores e da comunidade local, reunindo num único espaço serviços comerciais, empresariais, de lazer, de alojamento e de eventos.
+                </p>
+                <p className="text-primary/70 text-base leading-relaxed mt-4">
+                  O empreendimento é composto por três edifícios principais e diversas infraestruturas complementares, planeadas para garantir conforto, funcionalidade, segurança e uma experiência diferenciada para clientes e visitantes.
+                </p>
+              </div>
+
+              {/* Three Buildings Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <ScrollReveal direction="up" delay={0.2}>
+                  <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-xl hover:border-green/20 transition-all duration-300 group">
+                    <div className="h-64 relative bg-primary-dark overflow-hidden">
+                      <ImageWithLoader
+                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
+                        alt="Edifício Comercial"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        parallax={true}
+                        parallaxSpeed={0.2}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="text-white font-serif text-xl font-bold">Edifício Comercial</h3>
+                        <p className="text-white/80 text-xs mt-1">Lojas, Serviços e Lazer</p>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <ul className="space-y-3 text-sm text-primary/70">
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <span>50+ lojas comerciais</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <span>Praça de alimentação</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <span>Áreas de lazer e entretenimento</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </ScrollReveal>
+
+                <ScrollReveal direction="up" delay={0.3}>
+                  <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-xl hover:border-green/20 transition-all duration-300 group">
+                    <div className="h-64 relative bg-primary-dark overflow-hidden">
+                      <ImageWithLoader
+                        src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+                        alt="Edifício Empresarial"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        parallax={true}
+                        parallaxSpeed={0.2}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="text-white font-serif text-xl font-bold">Edifício Empresarial</h3>
+                        <p className="text-white/80 text-xs mt-1">Escritórios e Serviços</p>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <ul className="space-y-3 text-sm text-primary/70">
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <span>Escritórios modulares</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <span>Sala de reuniões e conferências</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <span>Centro de negócios</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </ScrollReveal>
+
+                <ScrollReveal direction="up" delay={0.4}>
+                  <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-xl hover:border-green/20 transition-all duration-300 group">
+                    <div className="h-64 relative bg-primary-dark overflow-hidden">
+                      <ImageWithLoader
+                        src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80"
+                        alt="Edifício de Eventos"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        parallax={true}
+                        parallaxSpeed={0.2}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="text-white font-serif text-xl font-bold">Edifício de Eventos</h3>
+                        <p className="text-white/80 text-xs mt-1">Eventos e Alojamento</p>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <ul className="space-y-3 text-sm text-primary/70">
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <span>Centro de eventos</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <span>Alojamento hoteleiro</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                          <span>Espaços para casamentos e eventos</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              </div>
+
+              {/* Infraestruturas Complementares */}
+              <ScrollReveal direction="up" delay={0.5}>
+                <div className="bg-gradient-to-br from-primary/5 to-green/5 rounded-2xl p-8 border border-green/10">
+                  <h3 className="text-2xl font-serif font-bold text-primary mb-6 text-center">Infraestruturas Complementares</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-green/10 flex items-center justify-center">
+                        <Compass className="w-8 h-8 text-green" />
+                      </div>
+                      <h4 className="font-semibold text-primary text-sm">Estacionamento</h4>
+                      <p className="text-xs text-primary/60 mt-1">500+ vagas</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-green/10 flex items-center justify-center">
+                        <Shield className="w-8 h-8 text-green" />
+                      </div>
+                      <h4 className="font-semibold text-primary text-sm">Segurança</h4>
+                      <p className="text-xs text-primary/60 mt-1">24/7 CCTV</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-green/10 flex items-center justify-center">
+                        <Layers className="w-8 h-8 text-green" />
+                      </div>
+                      <h4 className="font-semibold text-primary text-sm">Acessibilidade</h4>
+                      <p className="text-xs text-primary/60 mt-1">Total</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-green/10 flex items-center justify-center">
+                        <Sparkles className="w-8 h-8 text-green" />
+                      </div>
+                      <h4 className="font-semibold text-primary text-sm">Sustentabilidade</h4>
+                      <p className="text-xs text-primary/60 mt-1">Design Eco</p>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+          </ScrollReveal>
+        </section>
+
         {/* STATISTICS SECTION */}
         <section className="py-20 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
