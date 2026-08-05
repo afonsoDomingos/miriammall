@@ -25,6 +25,7 @@ export async function POST(req: Request) {
     const mongoose = await dbConnect();
     
     const newNote = {
+      id: `note-${Date.now()}`,
       title: body.title,
       content: body.content,
       category: body.category || 'geral',
@@ -36,7 +37,7 @@ export async function POST(req: Request) {
     
     return NextResponse.json({
       success: true,
-      data: { ...newNote, id: result.insertedId.toString() }
+      data: newNote
     });
   } catch (error: any) {
     console.error('Error creating note:', error);

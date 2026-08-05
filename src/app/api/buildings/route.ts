@@ -28,6 +28,7 @@ export async function POST(req: Request) {
     const mongoose = await dbConnect();
     
     const newBuilding = {
+      id: `building-${Date.now()}`,
       name: body.name,
       subtitle: body.subtitle,
       description: body.description,
@@ -42,7 +43,7 @@ export async function POST(req: Request) {
     
     return NextResponse.json({
       success: true,
-      data: { ...newBuilding, id: result.insertedId.toString() }
+      data: newBuilding
     });
   } catch (error: any) {
     console.error('Error creating building:', error);
