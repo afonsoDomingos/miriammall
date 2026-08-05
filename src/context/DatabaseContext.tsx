@@ -10,6 +10,7 @@ import {
   RentalRequest,
   Banner,
   BlogPost,
+  Building,
   initialSpaces,
   initialBanners,
   initialStores,
@@ -17,7 +18,8 @@ import {
   initialEvents,
   initialPromotions,
   initialRentalRequests,
-  initialBlogPosts
+  initialBlogPosts,
+  initialBuildings
 } from '../utils/mockData';
 
 interface DatabaseContextType {
@@ -29,6 +31,7 @@ interface DatabaseContextType {
   rentalRequests: RentalRequest[];
   banners: Banner[];
   blogPosts: BlogPost[];
+  buildings: Building[];
   isLoaded: boolean;
   
   // Banners CRUD
@@ -71,6 +74,11 @@ interface DatabaseContextType {
   addBlogPost: (post: Omit<BlogPost, 'id'>) => Promise<void>;
   updateBlogPost: (post: BlogPost) => Promise<void>;
   deleteBlogPost: (id: string) => Promise<void>;
+
+  // Buildings CRUD
+  addBuilding: (building: Omit<Building, 'id'>) => Promise<void>;
+  updateBuilding: (building: Building) => Promise<void>;
+  deleteBuilding: (id: string) => Promise<void>;
 }
 
 const DatabaseContext = createContext<DatabaseContextType | undefined>(undefined);
@@ -84,6 +92,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
   const [rentalRequests, setRentalRequests] = useState<RentalRequest[]>([]);
   const [banners, setBanners] = useState<Banner[]>([]);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [buildings, setBuildings] = useState<Building[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -104,7 +113,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
         const payload = await res.json();
         
         if (payload.success && payload.data) {
-          const { spaces, stores, restaurants, events, promotions, rentalRequests, banners, blogPosts } = payload.data;
+          const { spaces, stores, restaurants, events, promotions, rentalRequests, banners, blogPosts, buildings } = payload.data;
           setSpaces(spaces && spaces.length > 0 ? spaces : initialSpaces);
           setStores(stores && stores.length > 0 ? stores : initialStores);
           setRestaurants(restaurants && restaurants.length > 0 ? restaurants : initialRestaurants);
@@ -113,6 +122,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
           setRentalRequests(rentalRequests && rentalRequests.length > 0 ? rentalRequests : initialRentalRequests);
           setBanners(banners && banners.length > 0 ? banners : initialBanners);
           setBlogPosts(blogPosts && blogPosts.length > 0 ? blogPosts : initialBlogPosts);
+          setBuildings(buildings && buildings.length > 0 ? buildings : initialBuildings);
         } else {
           throw new Error(payload.error || 'API response was unsuccessful');
         }
@@ -127,6 +137,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
         setRentalRequests(initialRentalRequests);
         setBanners(initialBanners);
         setBlogPosts(initialBlogPosts);
+        setBuildings(initialBuildings);
       } finally {
         setIsLoaded(true);
       }
@@ -532,6 +543,53 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // Buildings CRUD Implementation
+  const addBuilding = async (building: Omit<Building, 'id'>) => {
+    try {
+      const res = await fetch('/api/buildings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(building),
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        setBuildings(prev => [data.data, ...prev]);
+      }
+    } catch (e) {
+      console.error('Failed to add building', e);
+    }
+  };
+
+  const updateBuilding = async (updatedBuilding: Building) => {
+    try {
+      const res = await fetch(`/api/buildings/${updatedBuilding.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedBuilding),
+      });
+      const data = await res.json();
+      if (data.success && data.data) {
+        setBuildings(prev => prev.map(b => b.id === updatedBuilding.id ? data.data : b));
+      }
+    } catch (e) {
+      console.error('Failed to update building', e);
+    }
+  };
+
+  const deleteBuilding = async (id: string) => {
+    try {
+      const res = await fetch(`/api/buildings/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success) {
+        setBuildings(prev => prev.filter(b => b.id !== id));
+      }
+    } catch (e) {
+      console.error('Failed to delete building', e);
+    }
+  };
+
   return (
     <DatabaseContext.Provider value={{
       spaces,
@@ -541,8 +599,9 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
       promotions,
       rentalRequests,
       banners,
-      isLoaded,
       blogPosts,
+      buildings,
+      isLoaded,
       addBanner,
       updateBanner,
       deleteBanner,
@@ -567,7 +626,10 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
       deleteRentalRequest,
       addBlogPost,
       updateBlogPost,
-      deleteBlogPost
+      deleteBlogPost,
+      addBuilding,
+      updateBuilding,
+      deleteBuilding
     }}>
       {children}
     </DatabaseContext.Provider>

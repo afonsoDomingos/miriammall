@@ -117,7 +117,7 @@ function AnimatedStatCard({
 }
 
 export default function Home() {
-  const { spaces, stores, restaurants, events, promotions, banners } = useDatabase();
+  const { spaces, stores, restaurants, events, promotions, banners, buildings } = useDatabase();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -363,110 +363,36 @@ export default function Home() {
 
               {/* Three Buildings Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                <ScrollReveal direction="up" delay={0.2}>
-                  <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-xl hover:border-green/20 transition-all duration-300 group">
-                    <div className="h-64 relative bg-primary-dark overflow-hidden">
-                      <ImageWithLoader
-                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
-                        alt="Edifício Comercial"
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        parallax={true}
-                        parallaxSpeed={0.2}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <h3 className="text-white font-serif text-xl font-bold">Edifício Comercial</h3>
-                        <p className="text-white/80 text-xs mt-1">Lojas, Serviços e Lazer</p>
+                {buildings.sort((a, b) => a.order - b.order).map((building, index) => (
+                  <ScrollReveal key={building.id} direction="up" delay={0.2 + index * 0.1}>
+                    <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-xl hover:border-green/20 transition-all duration-300 group">
+                      <div className="h-64 relative bg-primary-dark overflow-hidden">
+                        <ImageWithLoader
+                          src={building.image}
+                          alt={building.name}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          parallax={true}
+                          parallaxSpeed={0.2}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <h3 className="text-white font-serif text-xl font-bold">{building.name}</h3>
+                          <p className="text-white/80 text-xs mt-1">{building.subtitle}</p>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-3 text-sm text-primary/70">
+                          {building.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
-                    <div className="p-6">
-                      <ul className="space-y-3 text-sm text-primary/70">
-                        <li className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
-                          <span>50+ lojas comerciais</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
-                          <span>Praça de alimentação</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
-                          <span>Áreas de lazer e entretenimento</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </ScrollReveal>
-
-                <ScrollReveal direction="up" delay={0.3}>
-                  <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-xl hover:border-green/20 transition-all duration-300 group">
-                    <div className="h-64 relative bg-primary-dark overflow-hidden">
-                      <ImageWithLoader
-                        src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
-                        alt="Edifício Empresarial"
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        parallax={true}
-                        parallaxSpeed={0.2}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <h3 className="text-white font-serif text-xl font-bold">Edifício Empresarial</h3>
-                        <p className="text-white/80 text-xs mt-1">Escritórios e Serviços</p>
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <ul className="space-y-3 text-sm text-primary/70">
-                        <li className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
-                          <span>Escritórios modulares</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
-                          <span>Sala de reuniões e conferências</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
-                          <span>Centro de negócios</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </ScrollReveal>
-
-                <ScrollReveal direction="up" delay={0.4}>
-                  <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-xl hover:border-green/20 transition-all duration-300 group">
-                    <div className="h-64 relative bg-primary-dark overflow-hidden">
-                      <ImageWithLoader
-                        src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80"
-                        alt="Edifício de Eventos"
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        parallax={true}
-                        parallaxSpeed={0.2}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <h3 className="text-white font-serif text-xl font-bold">Edifício de Eventos</h3>
-                        <p className="text-white/80 text-xs mt-1">Eventos e Alojamento</p>
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <ul className="space-y-3 text-sm text-primary/70">
-                        <li className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
-                          <span>Centro de eventos</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
-                          <span>Alojamento hoteleiro</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
-                          <span>Espaços para casamentos e eventos</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </ScrollReveal>
+                  </ScrollReveal>
+                ))}
               </div>
 
               {/* Infraestruturas Complementares */}

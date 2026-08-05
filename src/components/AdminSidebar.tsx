@@ -17,7 +17,8 @@ import {
   BookOpen,
   ChevronLeft,
   ChevronRight,
-  Menu
+  Menu,
+  Building2
 } from 'lucide-react';
 
 export default function AdminSidebar() {
@@ -28,6 +29,7 @@ export default function AdminSidebar() {
   const menuItems = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
     { name: 'Banners', href: '/admin/banners', icon: Sliders },
+    { name: 'Edifícios', href: '/admin/edificios', icon: Building2 },
     { name: 'Espaços', href: '/admin/espacos', icon: Building },
     { name: 'Lojas', href: '/admin/lojas', icon: Store },
     { name: 'Restaurantes', href: '/admin/restaurantes', icon: UtensilsCrossed },

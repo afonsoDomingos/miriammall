@@ -11,6 +11,16 @@ export interface Space {
   blueprint: string;
 }
 
+export interface Building {
+  id: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  features: string[];
+  order: number;
+}
+
 export interface Banner {
   id: string;
   title: string;
@@ -440,5 +450,50 @@ export const initialBlogPosts: BlogPost[] = [
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
     date: '10 de Julho de 2026',
     author: 'Equipa de Engenharia Miriam Mall'
+  }
+];
+
+export const initialBuildings: Building[] = [
+  {
+    id: 'building-1',
+    name: 'Edifício Comercial',
+    subtitle: 'Lojas, Serviços e Lazer',
+    description: 'O coração do Miriam Mall, onde se encontram mais de 50 lojas comerciais, serviços diversos e áreas de lazer para toda a família.',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
+    features: [
+      '50+ lojas comerciais',
+      'Praça de alimentação',
+      'Áreas de lazer e entretenimento',
+      'Cinemas e espaços culturais'
+    ],
+    order: 1
+  },
+  {
+    id: 'building-2',
+    name: 'Edifício Empresarial',
+    subtitle: 'Escritórios e Serviços',
+    description: 'Espaços modernos para empresas e profissionais, com infraestrutura completa para o desenvolvimento de negócios.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+    features: [
+      'Escritórios modulares',
+      'Sala de reuniões e conferências',
+      'Centro de negócios',
+      'Coworking spaces'
+    ],
+    order: 2
+  },
+  {
+    id: 'building-3',
+    name: 'Edifício de Eventos',
+    subtitle: 'Eventos e Alojamento',
+    description: 'Um espaço versátil para eventos de todos os tipos, com alojamento hoteleiro de qualidade superior.',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+    features: [
+      'Centro de eventos',
+      'Alojamento hoteleiro',
+      'Espaços para casamentos',
+      'Salas de conferências'
+    ],
+    order: 3
   }
 ];
