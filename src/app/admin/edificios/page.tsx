@@ -44,10 +44,13 @@ export default function BuildingsAdminPage() {
     }
 
     try {
+      console.log('Saving building:', { isCreating, editingBuilding, formData });
       if (isCreating) {
         await addBuilding(formData as Omit<BuildingType, 'id'>);
       } else if (editingBuilding) {
-        await updateBuilding({ ...formData, id: editingBuilding.id } as BuildingType);
+        const buildingToUpdate = { ...formData, id: editingBuilding.id } as BuildingType;
+        console.log('Updating building with ID:', buildingToUpdate.id);
+        await updateBuilding(buildingToUpdate);
       }
       handleCancel();
     } catch (error) {

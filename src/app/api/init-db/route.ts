@@ -115,7 +115,7 @@ export async function GET(req: Request) {
     const mongoose = await dbConnect();
     const buildingsCount = await mongoose.connection.db.collection('buildings').countDocuments();
     if (buildingsCount === 0) {
-      const mapped = initialBuildings.map(item => ({ ...item, _id: item.id }));
+      const mapped = initialBuildings.map(item => item);
       await mongoose.connection.db.collection('buildings').insertMany(mapped);
       seeded = true;
     }
