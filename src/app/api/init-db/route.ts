@@ -120,6 +120,14 @@ export async function GET(req: Request) {
       const mapped = initialBuildings.map(item => item);
       await mongoose.connection.db.collection('buildings').insertMany(mapped);
       seeded = true;
+    } else {
+      // Update existing buildings with initial data if reset is true
+      if (reset) {
+        await mongoose.connection.db.collection('buildings').deleteMany({});
+        const mapped = initialBuildings.map(item => item);
+        await mongoose.connection.db.collection('buildings').insertMany(mapped);
+        seeded = true;
+      }
     }
 
     // 10. Seed Notes

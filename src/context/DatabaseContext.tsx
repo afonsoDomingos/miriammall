@@ -107,12 +107,13 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     async function initAndFetchData() {
       try {
-        // 1. Initialize DB (seeds mock data if MongoDB is empty)
-        try {
-          await fetch('/api/init-db');
-        } catch (initErr) {
-          console.warn('Could not initialize database, using fallback data.', initErr);
-        }
+        // 1. Initialize DB (seeds mock data if MongoDB is empty) - only on first load
+        // Commented out to prevent overwriting data on refresh
+        // try {
+        //   await fetch('/api/init-db');
+        // } catch (initErr) {
+        //   console.warn('Could not initialize database, using fallback data.', initErr);
+        // }
         
         // 2. Fetch all collections
         const res = await fetch('/api/all-data');
@@ -120,6 +121,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const payload = await res.json();
+        console.log('Full API response:', payload);
         
         if (payload.success && payload.data) {
           const { spaces, stores, restaurants, events, promotions, rentalRequests, banners, blogPosts, buildings, notes } = payload.data;
@@ -133,6 +135,8 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
           setBlogPosts(blogPosts && blogPosts.length > 0 ? blogPosts : initialBlogPosts);
           setBuildings(buildings && buildings.length > 0 ? buildings : initialBuildings);
           setNotes(notes && notes.length > 0 ? notes : initialNotes);
+          
+          console.log('Loaded buildings from API:', buildings);
         } else {
           throw new Error(payload.error || 'API response was unsuccessful');
         }
@@ -579,8 +583,11 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
         body: JSON.stringify(updatedBuilding),
       });
       const data = await res.json();
+      console.log('Update building response:', data);
       if (data.success && data.data) {
         setBuildings(prev => prev.map(b => b.id === updatedBuilding.id ? data.data : b));
+      } else {
+        console.error('Update building failed:', data);
       }
     } catch (e) {
       console.error('Failed to update building', e);
