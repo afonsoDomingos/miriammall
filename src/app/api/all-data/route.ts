@@ -39,6 +39,12 @@ export async function GET() {
       BlogPost.find({}).sort({ createdAt: -1 }) // Sort requests to show newest first
     ]);
 
+    // Fetch buildings from MongoDB directly (no model yet)
+    const buildingsRaw = await dbConnect().then(async () => {
+      const db = (await import('../../../utils/db')).default;
+      return db.default.connection.db.collection('buildings').find({}).sort({ order: 1 }).toArray();
+    });
+
     // Serialize documents
     const spaces = spacesRaw.map(serializeDoc);
     const banners = bannersRaw.map(serializeDoc);
@@ -48,6 +54,7 @@ export async function GET() {
     const promotions = promotionsRaw.map(serializeDoc);
     const rentalRequests = rentalRequestsRaw.map(serializeDoc);
     const blogPosts = blogPostsRaw.map(serializeDoc);
+    const buildings = buildingsRaw.map(serializeDoc);
 
     return NextResponse.json({
       success: true,
@@ -59,7 +66,8 @@ export async function GET() {
         events,
         promotions,
         rentalRequests,
-        blogPosts
+        blogPosts,
+        buildings
       }
     });
   } catch (error: any) {
