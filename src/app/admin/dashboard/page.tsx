@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDatabase } from '../../../context/DatabaseContext';
 import {
   Building,
@@ -16,6 +16,19 @@ import Link from 'next/link';
 
 export default function AdminDashboard() {
   const { spaces, stores, rentalRequests, restaurants } = useDatabase();
+  const [greeting, setGreeting] = useState('');
+
+  // Dynamic greeting based on time
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour >= 6 && hour < 12) {
+      setGreeting('Bom dia');
+    } else if (hour >= 12 && hour < 18) {
+      setGreeting('Boa tarde');
+    } else {
+      setGreeting('Boa noite');
+    }
+  }, []);
 
   // Calculations
   const totalSpaces = spaces.length;
@@ -71,7 +84,7 @@ export default function AdminDashboard() {
       {/* Welcome Banner */}
       <div className="bg-gradient-to-r from-primary to-primary-light text-white p-6 rounded-xl border border-green/20 flex flex-col sm:flex-row justify-between sm:items-center gap-4 green-glow">
         <div>
-          <h1 className="font-serif text-2xl font-bold">Olá, Administrador!</h1>
+          <h1 className="font-serif text-2xl font-bold">{greeting}, Administrador!</h1>
           <p className="text-xs text-white/70 mt-1">
             Aqui está o resumo geral das operações, arrendamentos e contactos do Miriam Mall de hoje.
           </p>
