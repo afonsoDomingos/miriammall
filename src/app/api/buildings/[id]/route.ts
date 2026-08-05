@@ -2,11 +2,12 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../../../../utils/db';
 import { serializeDoc } from '../../../../utils/models';
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     await dbConnect();
     const body = await req.json();
     const mongoose = await dbConnect();
+    const { id } = await params;
     
     const updatedBuilding = {
       name: body.name,
@@ -19,7 +20,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     };
     
     const result = await mongoose.connection.db.collection('buildings').updateOne(
-      { _id: new (await import('mongodb')).ObjectId(params.id) },
+      { _id: new (await import('mongodb')).ObjectId(id) },
       { $set: updatedBuilding }
     );
     
@@ -29,7 +30,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     
     return NextResponse.json({
       success: true,
-      data: { ...updatedBuilding, id: params.id }
+      data: { ...updatedBuilding, id }
     });
   } catch (error: any) {
     console.error('Error updating building:', error);
@@ -37,13 +38,14 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     await dbConnect();
     const mongoose = await dbConnect();
+    const { id } = await params;
     
     const result = await mongoose.connection.db.collection('buildings').deleteOne(
-      { _id: new (await import('mongodb')).ObjectId(params.id) }
+      { _id: new (await import('mongodb')).ObjectId(id) }
     );
     
     if (result.deletedCount === 0) {
