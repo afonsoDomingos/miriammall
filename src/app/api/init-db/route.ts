@@ -20,7 +20,8 @@ import {
   initialEvents,
   initialPromotions,
   initialRentalRequests,
-  initialBlogPosts
+  initialBlogPosts,
+  initialBuildings
 } from '../../../utils/mockData';
 
 export async function GET(req: Request) {
@@ -42,6 +43,8 @@ export async function GET(req: Request) {
       await RentalRequest.deleteMany({});
       await AdminUser.deleteMany({});
       await BlogPost.deleteMany({});
+      const mongoose = await dbConnect();
+      await mongoose.connection.db.collection('buildings').deleteMany({});
     }
 
     // 1. Seed Banners
@@ -108,7 +111,16 @@ export async function GET(req: Request) {
       seeded = true;
     }
 
-    // 8. Seed Admin User
+    // 9. Seed Buildings
+    const mongoose = await dbConnect();
+    const buildingsCount = await mongoose.connection.db.collection('buildings').countDocuments();
+    if (buildingsCount === 0) {
+      const mapped = initialBuildings.map(item => ({ ...item, _id: item.id }));
+      await mongoose.connection.db.collection('buildings').insertMany(mapped);
+      seeded = true;
+    }
+
+    // 10. Seed Admin User
     const adminExists = await AdminUser.findOne({ email: 'admin@miriammall.com' });
     if (!adminExists) {
       const hashedPassword = await bcrypt.hash('@Admin123@', 10);
