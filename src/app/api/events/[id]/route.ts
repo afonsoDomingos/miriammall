@@ -7,7 +7,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     await dbConnect();
     const { id } = await params;
     const body = await req.json();
-    const doc = await MallEvent.findByIdAndUpdate(id, body, { new: true });
+    const doc = await MallEvent.findOneAndUpdate({ _id: id }, body, { new: true });
     if (!doc) {
       return NextResponse.json({ success: false, error: 'Event not found' }, { status: 404 });
     }
@@ -21,7 +21,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
   try {
     await dbConnect();
     const { id } = await params;
-    const doc = await MallEvent.findByIdAndDelete(id);
+    const doc = await MallEvent.findOneAndDelete({ _id: id });
     if (!doc) {
       return NextResponse.json({ success: false, error: 'Event not found' }, { status: 404 });
     }

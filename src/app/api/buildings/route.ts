@@ -1,15 +1,11 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '../../../utils/db';
-import { serializeDoc } from '../../../utils/models';
-
-// Define Building model inline since it's not in models yet
-const Building: any = null; // Will use MongoDB directly
+import { Building, serializeDoc } from '../../../utils/models';
 
 export async function GET() {
   try {
     await dbConnect();
-    const mongoose = await dbConnect();
-    const buildings = await mongoose.connection.db.collection('buildings').find({}).sort({ order: 1 }).toArray();
+    const buildings = await Building.find({}).sort({ order: 1 });
     
     return NextResponse.json({
       success: true,
@@ -25,25 +21,22 @@ export async function POST(req: Request) {
   try {
     await dbConnect();
     const body = await req.json();
-    const mongoose = await dbConnect();
     
-    const newBuilding = {
-      id: `building-${Date.now()}`,
+    const newBuilding = new Building({
+      _id: `building-${Date.now()}`,
       name: body.name,
       subtitle: body.subtitle,
       description: body.description,
       image: body.image,
       features: body.features || [],
-      order: body.order || 0,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
+      order: body.order || 0
+    });
     
-    const result = await mongoose.connection.db.collection('buildings').insertOne(newBuilding);
+    await newBuilding.save();
     
     return NextResponse.json({
       success: true,
-      data: newBuilding
+      data: serializeDoc(newBuilding)
     });
   } catch (error: any) {
     console.error('Error creating building:', error);

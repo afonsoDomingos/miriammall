@@ -108,12 +108,11 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
     async function initAndFetchData() {
       try {
         // 1. Initialize DB (seeds mock data if MongoDB is empty) - only on first load
-        // Commented out to prevent overwriting data on refresh
-        // try {
-        //   await fetch('/api/init-db');
-        // } catch (initErr) {
-        //   console.warn('Could not initialize database, using fallback data.', initErr);
-        // }
+        try {
+          await fetch('/api/init-db');
+        } catch (initErr) {
+          console.warn('Could not initialize database, but proceeding to fetch.', initErr);
+        }
         
         // 2. Fetch all collections
         const res = await fetch('/api/all-data');
@@ -141,18 +140,9 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
           throw new Error(payload.error || 'API response was unsuccessful');
         }
       } catch (e) {
-        console.error('Failed to load data from API, falling back to mock data:', e);
-        // Fallback to local mock data
-        setSpaces(initialSpaces);
-        setStores(initialStores);
-        setRestaurants(initialRestaurants);
-        setEvents(initialEvents);
-        setPromotions(initialPromotions);
-        setRentalRequests(initialRentalRequests);
-        setBanners(initialBanners);
-        setBlogPosts(initialBlogPosts);
-        setBuildings(initialBuildings);
-        setNotes(initialNotes);
+        console.error('Failed to load data from API, make sure MongoDB is running:', e);
+        // We no longer fallback to mock data, so the user knows if the DB is down
+        // It will just be empty arrays if it fails.
       } finally {
         setIsLoaded(true);
       }

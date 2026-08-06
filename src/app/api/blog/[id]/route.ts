@@ -6,7 +6,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   try {
     await dbConnect();
     const { id } = await params;
-    const doc = await BlogPost.findById(id);
+    const doc = await BlogPost.findOne({ _id: id });
     if (!doc) {
       return NextResponse.json({ success: false, error: 'Artigo não encontrado.' }, { status: 404 });
     }
@@ -21,7 +21,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     await dbConnect();
     const { id } = await params;
     const body = await req.json();
-    const doc = await BlogPost.findByIdAndUpdate(id, body, { new: true });
+    const doc = await BlogPost.findOneAndUpdate({ _id: id }, body, { new: true });
     if (!doc) {
       return NextResponse.json({ success: false, error: 'Artigo não encontrado.' }, { status: 404 });
     }
@@ -35,7 +35,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
   try {
     await dbConnect();
     const { id } = await params;
-    const doc = await BlogPost.findByIdAndDelete(id);
+    const doc = await BlogPost.findOneAndDelete({ _id: id });
     if (!doc) {
       return NextResponse.json({ success: false, error: 'Artigo não encontrado.' }, { status: 404 });
     }

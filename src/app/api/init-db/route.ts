@@ -10,7 +10,9 @@ import {
   Promotion,
   RentalRequest,
   AdminUser,
-  BlogPost
+  BlogPost,
+  Building,
+  Note
 } from '../../../utils/models';
 import {
   initialSpaces,
@@ -44,9 +46,8 @@ export async function GET(req: Request) {
       await RentalRequest.deleteMany({});
       await AdminUser.deleteMany({});
       await BlogPost.deleteMany({});
-      const mongoose = await dbConnect();
-      await mongoose.connection.db.collection('buildings').deleteMany({});
-      await mongoose.connection.db.collection('notes').deleteMany({});
+      await Building.deleteMany({});
+      await Note.deleteMany({});
     }
 
     // 1. Seed Banners
@@ -114,27 +115,18 @@ export async function GET(req: Request) {
     }
 
     // 9. Seed Buildings
-    const mongoose = await dbConnect();
-    const buildingsCount = await mongoose.connection.db.collection('buildings').countDocuments();
+    const buildingsCount = await Building.countDocuments();
     if (buildingsCount === 0) {
-      const mapped = initialBuildings.map(item => item);
-      await mongoose.connection.db.collection('buildings').insertMany(mapped);
+      const mapped = initialBuildings.map(item => ({ ...item, _id: item.id }));
+      await Building.insertMany(mapped);
       seeded = true;
-    } else {
-      // Update existing buildings with initial data if reset is true
-      if (reset) {
-        await mongoose.connection.db.collection('buildings').deleteMany({});
-        const mapped = initialBuildings.map(item => item);
-        await mongoose.connection.db.collection('buildings').insertMany(mapped);
-        seeded = true;
-      }
     }
 
     // 10. Seed Notes
-    const notesCount = await mongoose.connection.db.collection('notes').countDocuments();
+    const notesCount = await Note.countDocuments();
     if (notesCount === 0) {
-      const mapped = initialNotes.map(item => item);
-      await mongoose.connection.db.collection('notes').insertMany(mapped);
+      const mapped = initialNotes.map(item => ({ ...item, _id: item.id }));
+      await Note.insertMany(mapped);
       seeded = true;
     }
 

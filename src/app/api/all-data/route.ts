@@ -9,7 +9,9 @@ import {
   Promotion,
   RentalRequest,
   serializeDoc,
-  BlogPost
+  BlogPost,
+  Building,
+  Note
 } from '../../../utils/models';
 
 export const dynamic = 'force-dynamic';
@@ -27,7 +29,9 @@ export async function GET() {
       eventsRaw,
       promotionsRaw,
       rentalRequestsRaw,
-      blogPostsRaw
+      blogPostsRaw,
+      buildingsRaw,
+      notesRaw
     ] = await Promise.all([
       Space.find({}),
       Banner.find({}),
@@ -36,15 +40,10 @@ export async function GET() {
       MallEvent.find({}),
       Promotion.find({}),
       RentalRequest.find({}).sort({ date: -1 }),
-      BlogPost.find({}).sort({ createdAt: -1 }) // Sort requests to show newest first
+      BlogPost.find({}).sort({ createdAt: -1 }),
+      Building.find({}).sort({ order: 1 }),
+      Note.find({}).sort({ createdAt: -1 })
     ]);
-
-    // Fetch buildings from MongoDB directly (no model yet)
-    const mongoose = await dbConnect();
-    const buildingsRaw = await mongoose.connection.db.collection('buildings').find({}).sort({ order: 1 }).toArray();
-    
-    // Fetch notes from MongoDB directly (no model yet)
-    const notesRaw = await mongoose.connection.db.collection('notes').find({}).sort({ createdAt: -1 }).toArray();
 
     // Serialize documents
     const spaces = spacesRaw.map(serializeDoc);

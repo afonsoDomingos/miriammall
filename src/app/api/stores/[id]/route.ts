@@ -7,7 +7,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     await dbConnect();
     const { id } = await params;
     const body = await req.json();
-    const doc = await Store.findByIdAndUpdate(id, body, { new: true });
+    const doc = await Store.findOneAndUpdate({ _id: id }, body, { new: true });
     if (!doc) {
       return NextResponse.json({ success: false, error: 'Store not found' }, { status: 404 });
     }
@@ -21,7 +21,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
   try {
     await dbConnect();
     const { id } = await params;
-    const doc = await Store.findByIdAndDelete(id);
+    const doc = await Store.findOneAndDelete({ _id: id });
     if (!doc) {
       return NextResponse.json({ success: false, error: 'Store not found' }, { status: 404 });
     }

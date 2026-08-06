@@ -94,12 +94,12 @@ const RentalRequestSchema = new Schema({
 // Define helper to serialize Mongoose models to matching frontend structures
 export function serializeDoc(doc: any) {
   if (!doc) return doc;
-  const obj = doc.toObject ? doc.toObject() : doc;
-  obj.id = obj._id;
+  const obj = doc.toObject ? doc.toObject() : { ...doc };
+  obj.id = String(obj._id);
   delete obj._id;
   delete obj.__v;
-  if (obj.createdAt) obj.createdAt = obj.createdAt.toISOString();
-  if (obj.updatedAt) obj.updatedAt = obj.updatedAt.toISOString();
+  if (obj.createdAt instanceof Date) obj.createdAt = obj.createdAt.toISOString();
+  if (obj.updatedAt instanceof Date) obj.updatedAt = obj.updatedAt.toISOString();
   return obj;
 }
 
@@ -126,6 +126,25 @@ const BlogPostSchema = new Schema({
   author: { type: String, required: true },
 }, { timestamps: true });
 
+// 11. Building Schema
+const BuildingSchema = new Schema({
+  _id: { type: String, required: true },
+  name: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  image: { type: String, required: true },
+  features: { type: [String], default: [] },
+  order: { type: Number, required: true },
+}, { timestamps: true });
+
+// 12. Note Schema
+const NoteSchema = new Schema({
+  _id: { type: String, required: true },
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  category: { type: String, enum: ['geral', 'importante', 'urgente', 'lembrete'], required: true },
+}, { timestamps: true });
+
 // Compile or reuse Mongoose models
 export const Space = mongoose.models.Space || mongoose.model('Space', SpaceSchema);
 export const Banner = mongoose.models.Banner || mongoose.model('Banner', BannerSchema);
@@ -137,4 +156,5 @@ export const RentalRequest = mongoose.models.RentalRequest || mongoose.model('Re
 export const AdminUser = mongoose.models.AdminUser || mongoose.model('AdminUser', AdminUserSchema);
 export const NewsletterEmail = mongoose.models.NewsletterEmail || mongoose.model('NewsletterEmail', NewsletterEmailSchema);
 export const BlogPost = mongoose.models.BlogPost || mongoose.model('BlogPost', BlogPostSchema);
-
+export const Building = mongoose.models.Building || mongoose.model('Building', BuildingSchema);
+export const Note = mongoose.models.Note || mongoose.model('Note', NoteSchema);
