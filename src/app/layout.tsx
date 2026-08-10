@@ -7,6 +7,7 @@ import ScrollToTop from '../components/ScrollToTop';
 import WhatsAppWidget from '../components/WhatsAppWidget';
 import WelcomePopup from '../components/WelcomePopup';
 import CookieBanner from '../components/CookieBanner';
+import GoogleAdScript from '../components/GoogleAdScript';
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -54,6 +55,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-primary">
+        <GoogleAdScript />
         <ToastProvider>
           <DatabaseProvider>
             {children}
