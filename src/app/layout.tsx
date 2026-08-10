@@ -6,6 +6,7 @@ import { ToastProvider } from '../context/ToastContext';
 import ScrollToTop from '../components/ScrollToTop';
 import WhatsAppWidget from '../components/WhatsAppWidget';
 import WelcomePopup from '../components/WelcomePopup';
+import CookieBanner from '../components/CookieBanner';
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -59,6 +60,7 @@ export default function RootLayout({
             <ScrollToTop />
             <WhatsAppWidget />
             <WelcomePopup />
+            <CookieBanner />
           </DatabaseProvider>
         </ToastProvider>
       </body>
