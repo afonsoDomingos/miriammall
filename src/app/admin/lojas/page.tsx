@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import { useDatabase } from '../../../context/DatabaseContext';
+import { useToast } from '../../../context/ToastContext';
 import { Store } from '../../../utils/mockData';
 import { Plus, Edit, Trash2, X } from 'lucide-react';
 import ImageUpload from '../../../components/ImageUpload';
 
 export default function AdminLojas() {
   const { stores, addStore, updateStore, deleteStore, isLoaded } = useDatabase();
+  const { showSuccess, showError } = useToast();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingStore, setEditingStore] = useState<Store | null>(null);
 
@@ -46,8 +48,13 @@ export default function AdminLojas() {
     setIsModalOpen(true);
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!name.trim()) {
+      showError('O nome da loja é obrigatório.', 'Campo Obrigatório');
+      return;
+    }
+
     const storeData = {
       name,
       category,
@@ -58,12 +65,18 @@ export default function AdminLojas() {
       logo
     };
 
-    if (editingStore) {
-      updateStore({ ...storeData, id: editingStore.id });
-    } else {
-      addStore(storeData);
+    try {
+      if (editingStore) {
+        await updateStore({ ...storeData, id: editingStore.id });
+        showSuccess('Loja atualizada com sucesso!');
+      } else {
+        await addStore(storeData);
+        showSuccess('Loja criada com sucesso!');
+      }
+      setIsModalOpen(false);
+    } catch (err: any) {
+      showError(err?.message || 'Erro ao guardar loja.', 'Falha na Operação');
     }
-    setIsModalOpen(false);
   };
 
   return (
@@ -127,9 +140,14 @@ export default function AdminLojas() {
                           <Edit className="w-4 h-4" />
                         </button>
                         <button
-                          onClick={() => {
+                          onClick={async () => {
                             if (confirm(`Deseja realmente eliminar a loja ${store.name}?`)) {
-                              deleteStore(store.id);
+                              try {
+                                await deleteStore(store.id);
+                                showSuccess('Loja eliminada com sucesso!');
+                              } catch (err: any) {
+                                showError(err?.message || 'Erro ao eliminar loja.');
+                              }
                             }
                           }}
                           title="Eliminar Loja"

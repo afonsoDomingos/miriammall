@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Playfair_Display, Outfit } from 'next/font/google';
 import './globals.css';
 import { DatabaseProvider } from '../context/DatabaseContext';
+import { ToastProvider } from '../context/ToastContext';
 import ScrollToTop from '../components/ScrollToTop';
 import WhatsAppWidget from '../components/WhatsAppWidget';
 import WelcomePopup from '../components/WelcomePopup';
@@ -52,12 +53,14 @@ export default function RootLayout({
       className={`${playfair.variable} ${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-primary">
-        <DatabaseProvider>
-          {children}
-          <ScrollToTop />
-          <WhatsAppWidget />
-          <WelcomePopup />
-        </DatabaseProvider>
+        <ToastProvider>
+          <DatabaseProvider>
+            {children}
+            <ScrollToTop />
+            <WhatsAppWidget />
+            <WelcomePopup />
+          </DatabaseProvider>
+        </ToastProvider>
       </body>
     </html>
   );

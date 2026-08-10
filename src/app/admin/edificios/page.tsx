@@ -4,10 +4,12 @@ import React, { useState } from 'react';
 import { Building, Edit2, Trash2, Plus, Image as ImageIcon, Save, X } from 'lucide-react';
 import ImageUpload from '../../../components/ImageUpload';
 import { useDatabase } from '../../../context/DatabaseContext';
+import { useToast } from '../../../context/ToastContext';
 import { Building as BuildingType } from '../../../utils/mockData';
 
 export default function BuildingsAdminPage() {
   const { buildings, addBuilding, updateBuilding, deleteBuilding } = useDatabase();
+  const { showSuccess, showError } = useToast();
   const [editingBuilding, setEditingBuilding] = useState<BuildingType | null>(null);
   const [isCreating, setIsCreating] = useState(false);
   const [formData, setFormData] = useState<Partial<BuildingType>>({});
@@ -39,7 +41,7 @@ export default function BuildingsAdminPage() {
 
   const handleSave = async () => {
     if (!formData.name || !formData.image) {
-      alert('Por favor, preencha o nome e a imagem do edifício.');
+      showError('Por favor, preencha o nome e a imagem do edifício.', 'Formulário Incompleto');
       return;
     }
 
@@ -47,15 +49,17 @@ export default function BuildingsAdminPage() {
       console.log('Saving building:', { isCreating, editingBuilding, formData });
       if (isCreating) {
         await addBuilding(formData as Omit<BuildingType, 'id'>);
+        showSuccess('Edifício criado com sucesso!');
       } else if (editingBuilding) {
         const buildingToUpdate = { ...formData, id: editingBuilding.id } as BuildingType;
         console.log('Updating building with ID:', buildingToUpdate.id);
         await updateBuilding(buildingToUpdate);
+        showSuccess('Edifício atualizado com sucesso!');
       }
       handleCancel();
     } catch (error: any) {
       console.error('Error saving building:', error);
-      alert(error?.message || 'Erro ao salvar edifício.');
+      showError(error?.message || 'Erro ao salvar edifício.', 'Falha na Operação');
     }
   };
 
@@ -63,9 +67,10 @@ export default function BuildingsAdminPage() {
     if (confirm('Tem certeza que deseja eliminar este edifício?')) {
       try {
         await deleteBuilding(id);
-      } catch (error) {
+        showSuccess('Edifício eliminado com sucesso!');
+      } catch (error: any) {
         console.error('Error deleting building:', error);
-        alert('Erro ao eliminar edifício.');
+        showError(error?.message || 'Erro ao eliminar edifício.', 'Falha na Eliminação');
       }
     }
   };
