@@ -32,51 +32,51 @@ export default function CookieBanner() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0, y: 40, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 40, scale: 0.98 }}
-          transition={{ duration: 0.35, ease: 'easeOut' }}
-          className="fixed bottom-22 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-[200] bg-primary-dark/95 border border-green/30 backdrop-blur-md text-white p-5 rounded-2xl shadow-2xl"
+          initial={{ opacity: 0, y: 30, x: '-50%', scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, x: '-50%', scale: 1 }}
+          exit={{ opacity: 0, y: 30, x: '-50%', scale: 0.95 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[290px] sm:max-w-sm sm:left-6 sm:translate-x-0 sm:bottom-20 z-[200] bg-primary-dark/95 border border-green/30 backdrop-blur-md text-white p-3.5 sm:p-4 rounded-xl shadow-2xl"
         >
-          <div className="flex items-start gap-3.5">
-            <div className="w-9 h-9 rounded-full bg-green/10 flex items-center justify-center shrink-0 mt-0.5 border border-green/20">
-              <Cookie className="w-5 h-5 text-green animate-pulse" />
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-2.5 sm:gap-3 text-center sm:text-left">
+            <div className="w-7 h-7 rounded-full bg-green/10 flex items-center justify-center shrink-0 border border-green/20">
+              <Cookie className="w-4 h-4 text-green animate-pulse" />
             </div>
 
-            <div className="flex-grow space-y-2">
+            <div className="flex-grow space-y-1.5 w-full">
               <div className="flex items-center justify-between">
-                <h4 className="font-serif text-sm font-bold text-white flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-green" /> Política de Privacidade & Cookies
+                <h4 className="font-serif text-xs font-bold text-white flex items-center justify-center sm:justify-start gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-green" /> Cookies & Privacidade
                 </h4>
                 <button
                   onClick={handleAcceptEssential}
-                  className="text-white/40 hover:text-white transition-colors p-1"
+                  className="text-white/40 hover:text-white transition-colors p-0.5"
                   aria-label="Fechar"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3.5 h-3.5" />
                 </button>
               </div>
 
-              <p className="text-xs text-white/80 leading-relaxed">
-                Utilizamos cookies essenciais para garantir o funcionamento seguro e eficiente do site, e cookies analíticos para melhorar a sua experiência. Saiba mais na nossa{' '}
+              <p className="text-[10px] sm:text-xs text-white/80 leading-relaxed">
+                Utilizamos cookies essenciais para garantir o correto funcionamento do site. Saiba mais na{' '}
                 <Link href="/politica-de-cookies" className="text-green underline hover:text-green-light font-medium">
                   Política de Cookies
                 </Link>.
               </p>
 
-              <div className="pt-2 flex flex-wrap items-center gap-2">
+              <div className="pt-1 flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
                 <button
                   onClick={handleAcceptAll}
-                  className="bg-green hover:bg-green-light text-primary text-[11px] font-bold uppercase tracking-wider py-2 px-4 rounded-lg transition-all duration-300 shadow-md shadow-emerald-500/10 cursor-pointer flex items-center gap-1"
+                  className="bg-green hover:bg-green-light text-primary text-[10px] font-bold uppercase tracking-wider py-1.5 px-3 rounded-md transition-all duration-300 shadow-md shadow-emerald-500/10 cursor-pointer flex items-center gap-1"
                 >
-                  <Check className="w-3.5 h-3.5" /> Aceitar Todos
+                  <Check className="w-3 h-3" /> Aceitar Todos
                 </button>
 
                 <button
                   onClick={handleAcceptEssential}
-                  className="border border-white/20 hover:border-white/50 text-white/80 hover:text-white text-[11px] font-bold uppercase tracking-wider py-2 px-4 rounded-lg transition-all duration-300 cursor-pointer"
+                  className="border border-white/20 hover:border-white/50 text-white/80 hover:text-white text-[10px] font-bold uppercase tracking-wider py-1.5 px-3 rounded-md transition-all duration-300 cursor-pointer"
                 >
-                  Apenas Essenciais
+                  Essenciais
                 </button>
               </div>
             </div>
