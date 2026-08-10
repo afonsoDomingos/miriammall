@@ -36,7 +36,7 @@ export default function CookieBanner() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 40, scale: 0.98 }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
-          className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-lg z-[250] bg-primary-dark/95 border border-green/30 backdrop-blur-md text-white p-5 rounded-2xl shadow-2xl"
+          className="fixed bottom-22 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-[200] bg-primary-dark/95 border border-green/30 backdrop-blur-md text-white p-5 rounded-2xl shadow-2xl"
         >
           <div className="flex items-start gap-3.5">
             <div className="w-9 h-9 rounded-full bg-green/10 flex items-center justify-center shrink-0 mt-0.5 border border-green/20">
