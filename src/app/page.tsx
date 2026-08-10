@@ -371,11 +371,9 @@ export default function Home() {
                           src={building.image}
                           alt={building.name}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          parallax={true}
-                          parallaxSpeed={0.2}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
-                        <div className="absolute bottom-4 left-4 right-4">
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent pointer-events-none" />
+                        <div className="absolute bottom-4 left-4 right-4 pointer-events-none">
                           <h3 className="text-white font-serif text-xl font-bold">{building.name}</h3>
                           <p className="text-white/80 text-xs mt-1">{building.subtitle}</p>
                         </div>
