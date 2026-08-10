@@ -27,6 +27,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://miriammall.com'),
   title: 'Miriam Mall | O Novo Centro de Compras e Negócios de Homoíne',
   description:
     'Seja bem-vindo ao Miriam Mall no Distrito de Homoíne, Inhambane. O destino de compras, lazer e a melhor oportunidade de investimento e arrendamento de espaços comerciais da região.',
@@ -42,6 +43,18 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Miriam Mall' }],
   robots: 'index, follow',
+  alternates: {
+    canonical: 'https://miriammall.com',
+  },
+  openGraph: {
+    title: 'Miriam Mall | O Novo Centro de Compras e Negócios de Homoíne',
+    description:
+      'Seja bem-vindo ao Miriam Mall no Distrito de Homoíne, Inhambane. O destino de compras, lazer e a melhor oportunidade de investimento e arrendamento de espaços comerciais da região.',
+    url: 'https://miriammall.com',
+    siteName: 'Miriam Mall',
+    locale: 'pt_MZ',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
