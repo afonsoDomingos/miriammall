@@ -25,6 +25,8 @@ import {
   UtensilsCrossed,
   Star,
   CheckCircle,
+  CheckCircle2,
+  Target,
   XCircle,
   ChevronDown,
   HelpCircle,
@@ -330,6 +332,64 @@ export default function Home() {
                       parallaxSpeed={0.3}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none" />
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+
+            {/* Mission, Vision & Values Cards */}
+            <div className="mt-20 pt-16 border-t border-slate-100 grid grid-cols-1 md:grid-cols-3 gap-8">
+              <ScrollReveal direction="up" delay={0.1}>
+                <div className="bg-slate-50/80 p-8 rounded-2xl border border-slate-200/60 hover:-translate-y-1 hover:shadow-lg hover:border-green/30 transition-all duration-300 h-full flex flex-col justify-between group">
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-green/10 flex items-center justify-center mb-6 group-hover:bg-green transition-all duration-300">
+                      <Target className="w-6 h-6 text-green group-hover:text-primary transition-colors" />
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-primary mb-3">Missão</h3>
+                    <p className="text-primary/70 text-xs sm:text-sm leading-relaxed">
+                      Prestar serviços de excelência e qualidade, garantindo a total segurança e satisfação dos nossos clientes.
+                    </p>
+                  </div>
+                  <div className="w-full h-1 bg-green/10 rounded-full mt-6 overflow-hidden">
+                    <div className="w-full h-full bg-green transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+                  </div>
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal direction="up" delay={0.2}>
+                <div className="bg-slate-50/80 p-8 rounded-2xl border border-slate-200/60 hover:-translate-y-1 hover:shadow-lg hover:border-green/30 transition-all duration-300 h-full flex flex-col justify-between group">
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-green/10 flex items-center justify-center mb-6 group-hover:bg-green transition-all duration-300">
+                      <Compass className="w-6 h-6 text-green group-hover:text-primary transition-colors" />
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-primary mb-3">Visão</h3>
+                    <p className="text-primary/70 text-xs sm:text-sm leading-relaxed">
+                      Transformar empreendimentos em ativos que impulsionam o desenvolvimento económico e social a nível territorial.
+                    </p>
+                  </div>
+                  <div className="w-full h-1 bg-green/10 rounded-full mt-6 overflow-hidden">
+                    <div className="w-full h-full bg-green transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+                  </div>
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal direction="up" delay={0.3}>
+                <div className="bg-slate-50/80 p-8 rounded-2xl border border-slate-200/60 hover:-translate-y-1 hover:shadow-lg hover:border-green/30 transition-all duration-300 h-full flex flex-col justify-between group">
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-green/10 flex items-center justify-center mb-6 group-hover:bg-green transition-all duration-300">
+                      <Shield className="w-6 h-6 text-green group-hover:text-primary transition-colors" />
+                    </div>
+                    <h3 className="font-serif text-xl font-bold text-primary mb-3">Valores</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {['Solidez', 'Qualidade', 'Transparência', 'Integridade', 'Segurança'].map((val, i) => (
+                        <span key={i} className="inline-flex items-center gap-1 bg-white border border-primary/10 text-primary text-xs font-semibold px-2.5 py-1 rounded-full">
+                          <CheckCircle2 className="w-3 h-3 text-green" /> {val}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="w-full h-1 bg-green/10 rounded-full mt-6 overflow-hidden">
+                    <div className="w-full h-full bg-green transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
                   </div>
                 </div>
               </ScrollReveal>
