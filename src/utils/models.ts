@@ -130,11 +130,11 @@ const BlogPostSchema = new Schema({
 const BuildingSchema = new Schema({
   _id: { type: String, required: true },
   name: { type: String, required: true },
-  subtitle: { type: String, required: true },
-  description: { type: String, required: true },
-  image: { type: String, required: true },
+  subtitle: { type: String, default: '' },
+  description: { type: String, default: '' },
+  image: { type: String, default: '' },
   features: { type: [String], default: [] },
-  order: { type: Number, required: true },
+  order: { type: Number, default: 0 },
 }, { timestamps: true });
 
 // 12. Note Schema

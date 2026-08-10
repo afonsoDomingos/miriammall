@@ -22,14 +22,19 @@ export async function POST(req: Request) {
     await dbConnect();
     const body = await req.json();
     
+    if (!body.name) {
+      return NextResponse.json({ success: false, error: 'O nome do edifício é obrigatório.' }, { status: 400 });
+    }
+
+    const buildingId = body.id || `building-${Date.now()}`;
     const newBuilding = new Building({
-      _id: `building-${Date.now()}`,
+      _id: buildingId,
       name: body.name,
-      subtitle: body.subtitle,
-      description: body.description,
-      image: body.image,
-      features: body.features || [],
-      order: body.order || 0
+      subtitle: body.subtitle || '',
+      description: body.description || '',
+      image: body.image || '',
+      features: Array.isArray(body.features) ? body.features : [],
+      order: typeof body.order === 'number' ? body.order : 0
     });
     
     await newBuilding.save();
@@ -40,7 +45,7 @@ export async function POST(req: Request) {
     });
   } catch (error: any) {
     console.error('Error creating building:', error);
-    return NextResponse.json({ success: false, error: 'Failed to create building' }, { status: 500 });
+    return NextResponse.json({ success: false, error: error.message || 'Failed to create building' }, { status: 500 });
   }
 }
 

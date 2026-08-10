@@ -53,9 +53,9 @@ export default function BuildingsAdminPage() {
         await updateBuilding(buildingToUpdate);
       }
       handleCancel();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving building:', error);
-      alert('Erro ao salvar edifício.');
+      alert(error?.message || 'Erro ao salvar edifício.');
     }
   };
 

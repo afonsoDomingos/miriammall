@@ -124,16 +124,16 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
         
         if (payload.success && payload.data) {
           const { spaces, stores, restaurants, events, promotions, rentalRequests, banners, blogPosts, buildings, notes } = payload.data;
-          setSpaces(spaces && spaces.length > 0 ? spaces : initialSpaces);
-          setStores(stores && stores.length > 0 ? stores : initialStores);
-          setRestaurants(restaurants && restaurants.length > 0 ? restaurants : initialRestaurants);
-          setEvents(events && events.length > 0 ? events : initialEvents);
-          setPromotions(promotions && promotions.length > 0 ? promotions : initialPromotions);
-          setRentalRequests(rentalRequests && rentalRequests.length > 0 ? rentalRequests : initialRentalRequests);
-          setBanners(banners && banners.length > 0 ? banners : initialBanners);
-          setBlogPosts(blogPosts && blogPosts.length > 0 ? blogPosts : initialBlogPosts);
-          setBuildings(buildings && buildings.length > 0 ? buildings : initialBuildings);
-          setNotes(notes && notes.length > 0 ? notes : initialNotes);
+          setSpaces(Array.isArray(spaces) ? spaces : []);
+          setStores(Array.isArray(stores) ? stores : []);
+          setRestaurants(Array.isArray(restaurants) ? restaurants : []);
+          setEvents(Array.isArray(events) ? events : []);
+          setPromotions(Array.isArray(promotions) ? promotions : []);
+          setRentalRequests(Array.isArray(rentalRequests) ? rentalRequests : []);
+          setBanners(Array.isArray(banners) ? banners : []);
+          setBlogPosts(Array.isArray(blogPosts) ? blogPosts : []);
+          setBuildings(Array.isArray(buildings) ? buildings : []);
+          setNotes(Array.isArray(notes) ? notes : []);
           
           console.log('Loaded buildings from API:', buildings);
         } else {
@@ -559,9 +559,12 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
       const data = await res.json();
       if (data.success && data.data) {
         setBuildings(prev => [data.data, ...prev]);
+      } else {
+        throw new Error(data.error || 'Falha ao adicionar edifício.');
       }
     } catch (e) {
       console.error('Failed to add building', e);
+      throw e;
     }
   };
 

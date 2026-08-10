@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
 
 /**
  * Global is used here to maintain a cached connection across hot reloads
@@ -19,7 +19,7 @@ async function dbConnect() {
   }
 
   if (!MONGO_URI) {
-    throw new Error('Please define the MONGO_URI environment variable inside .env.local');
+    throw new Error('Please define the MONGO_URI or MONGODB_URI environment variable inside environment settings');
   }
 
   if (!cached.promise) {

@@ -48,6 +48,12 @@ export async function GET(req: Request) {
       await BlogPost.deleteMany({});
       await Building.deleteMany({});
       await Note.deleteMany({});
+    } else {
+      // Check if DB is already initialized (e.g., admin exists)
+      const adminExists = await AdminUser.findOne({ email: 'admin@miriammall.com' });
+      if (adminExists) {
+        return NextResponse.json({ success: true, message: 'Database already initialized', seeded: false });
+      }
     }
 
     // 1. Seed Banners
