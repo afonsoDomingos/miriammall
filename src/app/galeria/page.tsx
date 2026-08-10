@@ -6,6 +6,8 @@ import Footer from '../../components/Footer';
 import { Camera, Layers, X } from 'lucide-react';
 import ImageWithLoader from '../../components/ImageWithLoader';
 
+import { useDatabase } from '../../context/DatabaseContext';
+
 interface GalleryItem {
   id: string;
   title: string;
@@ -14,6 +16,7 @@ interface GalleryItem {
 }
 
 export default function Galeria() {
+  const { buildings, spaces, stores, restaurants, events } = useDatabase();
   const [selectedFilter, setSelectedFilter] = useState<string>('todos');
   const [lightboxImage, setLightboxImage] = useState<GalleryItem | null>(null);
 
@@ -25,55 +28,13 @@ export default function Galeria() {
     { id: 'eventos', label: 'Eventos' }
   ];
 
+  // Dynamically assemble real gallery items from database entities
   const galleryItems: GalleryItem[] = [
-    {
-      id: 'gal-1',
-      title: 'Fachada Principal do Shopping',
-      category: 'exterior',
-      image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 'gal-2',
-      title: 'Corredores Comerciais Piso 0',
-      category: 'interior',
-      image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 'gal-3',
-      title: 'Restaurante Sabores de Inhambane',
-      category: 'restauracao',
-      image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 'gal-4',
-      title: 'Inauguração Oficial do Shopping',
-      category: 'eventos',
-      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 'gal-5',
-      title: 'Parque de Estacionamento Amplo',
-      category: 'exterior',
-      image: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 'gal-6',
-      title: 'Interior das Lojas de Moda',
-      category: 'interior',
-      image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 'gal-7',
-      title: 'Praça de Alimentação Central',
-      category: 'restauracao',
-      image: 'https://images.unsplash.com/photo-1567401893930-7cb7138e319d?auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 'gal-8',
-      title: 'Atividades Infantis no Piso 1',
-      category: 'eventos',
-      image: 'https://images.unsplash.com/photo-1544928147-79a2bec1638f?auto=format&fit=crop&w=800&q=80'
-    }
+    ...buildings.filter(b => b.image).map(b => ({ id: `building-${b.id}`, title: b.name, category: 'exterior' as const, image: b.image })),
+    ...spaces.filter(s => s.image).map(s => ({ id: `space-${s.id}`, title: `${s.number} (Piso ${s.floor})`, category: 'interior' as const, image: s.image })),
+    ...stores.filter(s => s.logo).map(s => ({ id: `store-${s.id}`, title: s.name, category: 'interior' as const, image: s.logo })),
+    ...restaurants.filter(r => r.image).map(r => ({ id: `restaurant-${r.id}`, title: r.name, category: 'restauracao' as const, image: r.image })),
+    ...events.filter(e => e.image).map(e => ({ id: `event-${e.id}`, title: e.title, category: 'eventos' as const, image: e.image })),
   ];
 
   const filteredItems = galleryItems.filter((item) => {

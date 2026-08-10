@@ -24,7 +24,7 @@ export default function AdminBanners() {
     setEditingBanner(null);
     setTitle('');
     setSubtitle('');
-    setImage('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80');
+    setImage('');
     setButtonText1('Explorar o Shopping');
     setButtonLink1('/lojas');
     setButtonText2('Arrendar um Espaço');

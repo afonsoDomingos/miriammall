@@ -31,7 +31,7 @@ export default function AdminBlog() {
     setTitle('');
     setSummary('');
     setContent('');
-    setImage('https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80');
+    setImage('');
     setDate(formattedDate);
     setAuthor('Miriam Mall Editorial');
     setIsModalOpen(true);

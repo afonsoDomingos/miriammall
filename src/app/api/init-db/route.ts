@@ -48,95 +48,9 @@ export async function GET(req: Request) {
       await BlogPost.deleteMany({});
       await Building.deleteMany({});
       await Note.deleteMany({});
-    } else {
-      // Check if DB is already initialized (e.g., admin exists)
-      const adminExists = await AdminUser.findOne({ email: 'admin@miriammall.com' });
-      if (adminExists) {
-        return NextResponse.json({ success: true, message: 'Database already initialized', seeded: false });
-      }
     }
 
-    // 1. Seed Banners
-    const bannerCount = await Banner.countDocuments();
-    if (bannerCount === 0) {
-      const mapped = initialBanners.map(item => ({ ...item, _id: item.id }));
-      await Banner.insertMany(mapped);
-      seeded = true;
-    }
-
-    // 2. Seed Spaces
-    const spaceCount = await Space.countDocuments();
-    if (spaceCount === 0) {
-      const mapped = initialSpaces.map(item => ({ ...item, _id: item.id }));
-      await Space.insertMany(mapped);
-      seeded = true;
-    }
-
-    // 3. Seed Stores
-    const storeCount = await Store.countDocuments();
-    if (storeCount === 0) {
-      const mapped = initialStores.map(item => ({ ...item, _id: item.id }));
-      await Store.insertMany(mapped);
-      seeded = true;
-    }
-
-    // 4. Seed Restaurants
-    const restaurantCount = await Restaurant.countDocuments();
-    if (restaurantCount === 0) {
-      const mapped = initialRestaurants.map(item => ({ ...item, _id: item.id }));
-      await Restaurant.insertMany(mapped);
-      seeded = true;
-    }
-
-    // 5. Seed Events
-    const eventCount = await MallEvent.countDocuments();
-    if (eventCount === 0) {
-      const mapped = initialEvents.map(item => ({ ...item, _id: item.id }));
-      await MallEvent.insertMany(mapped);
-      seeded = true;
-    }
-
-    // 6. Seed Promotions
-    const promoCount = await Promotion.countDocuments();
-    if (promoCount === 0) {
-      const mapped = initialPromotions.map(item => ({ ...item, _id: item.id }));
-      await Promotion.insertMany(mapped);
-      seeded = true;
-    }
-
-    // 7. Seed Rental Requests
-    const reqCount = await RentalRequest.countDocuments();
-    if (reqCount === 0) {
-      const mapped = initialRentalRequests.map(item => ({ ...item, _id: item.id }));
-      await RentalRequest.insertMany(mapped);
-      seeded = true;
-    }
-
-    // 8. Seed Blog Posts
-    const blogCount = await BlogPost.countDocuments();
-    if (blogCount === 0) {
-      const mapped = initialBlogPosts.map(item => ({ ...item, _id: item.id }));
-      await BlogPost.insertMany(mapped);
-      seeded = true;
-    }
-
-    // 9. Seed Buildings
-    const buildingsCount = await Building.countDocuments();
-    if (buildingsCount === 0) {
-      const mapped = initialBuildings.map(item => ({ ...item, _id: item.id }));
-      await Building.insertMany(mapped);
-      seeded = true;
-    }
-
-    // 10. Seed Notes
-    const notesCount = await Note.countDocuments();
-    if (notesCount === 0) {
-      const mapped = initialNotes.map(item => ({ ...item, _id: item.id }));
-      await Note.insertMany(mapped);
-      seeded = true;
-    }
-
-    // 11. Seed Admin User
+    // Seed Admin User if not existing
     const adminExists = await AdminUser.findOne({ email: 'admin@miriammall.com' });
     if (!adminExists) {
       const hashedPassword = await bcrypt.hash('@Admin123@', 10);
@@ -151,13 +65,11 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       success: true,
-      message: seeded ? 'Database initialized and seeded successfully.' : 'Database already initialized.',
+      message: seeded ? 'Database initialized with Admin user.' : 'Database already initialized.',
+      seeded
     });
   } catch (error: any) {
-    console.error('Error seeding database:', error);
-    return NextResponse.json({
-      success: false,
-      error: error.message || 'Failed to seed database'
-    }, { status: 500 });
+    console.error('Database init error:', error);
+    return NextResponse.json({ success: false, error: error.message || 'Database init failed' }, { status: 500 });
   }
 }

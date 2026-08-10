@@ -21,10 +21,10 @@ export default function AdminEventos() {
   const openAddModal = () => {
     setEditingEvent(null);
     setTitle('');
-    setDate('10 de Outubro de 2026');
+    setDate('');
     setDescription('');
-    setLocation('Praça Central');
-    setImage('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80');
+    setLocation('');
+    setImage('');
     setIsModalOpen(true);
   };
 

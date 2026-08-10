@@ -23,8 +23,8 @@ export default function AdminRestaurantes() {
     setName('');
     setCategory('Cafetaria');
     setSchedule('08:00 - 21:00');
-    setImage('https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=800&q=80');
-    setMenuItemsText('Café Expresso - 60 MT | Café torrado local.\nSamosa de Carne - 70 MT | Chamuça frita.');
+    setImage('');
+    setMenuItemsText('');
     setIsModalOpen(true);
   };
 

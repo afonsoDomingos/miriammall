@@ -29,8 +29,8 @@ export default function AdminEspacos() {
     setStatus('disponivel');
     setPrice('Sob Consulta');
     setDescription('');
-    setAmenitiesText('Segurança 24h, Climatização pré-instalada, Pontos de água');
-    setImage('https://images.unsplash.com/photo-1567401893930-7cb7138e319d?auto=format&fit=crop&w=800&q=80');
+    setAmenitiesText('');
+    setImage('');
     setIsModalOpen(true);
   };
 

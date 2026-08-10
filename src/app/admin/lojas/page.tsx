@@ -31,8 +31,8 @@ export default function AdminLojas() {
     setFloor(0);
     setSchedule('09:00 - 19:00');
     setDescription('');
-    setContact('+258 84 000 0000');
-    setLogo('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=150&h=150&q=80');
+    setContact('');
+    setLogo('');
     setIsModalOpen(true);
   };
 
