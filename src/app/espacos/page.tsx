@@ -35,7 +35,7 @@ export default function Espacos() {
           <div className="absolute inset-0 z-0 bg-cover bg-center opacity-25" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1582037928769-181f2644ecb7?auto=format&fit=crop&w=1200&q=80')" }} />
           <div className="relative z-10 max-w-4xl mx-auto px-4">
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Investimento</span>
-            <h1 className="text-4xl font-serif font-bold mb-4">Espaços Disponíveis para Arrendamento</h1>
+            <h1 className="text-2xl sm:text-4xl font-serif font-bold mb-4">Espaços Disponíveis para Arrendamento</h1>
             <p className="text-white/70 text-sm max-w-2xl mx-auto leading-relaxed">
               Descubra o local ideal para o seu negócio no Miriam Mall. Navegue pela planta interativa ou explore a listagem detalhada de lojas abaixo.
             </p>
@@ -59,8 +59,8 @@ export default function Espacos() {
             <h2 className="text-2xl font-serif font-bold text-primary mb-8">Catálogo de Espaços Comerciais</h2>
 
             {/* Filter controls */}
-            <div className="bg-light-gray p-6 rounded-xl border border-primary/5 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="flex flex-wrap items-center gap-4">
+            <div className="bg-light-gray p-4 sm:p-6 rounded-xl border border-primary/5 mb-8 flex flex-col gap-4">
+              <div className="flex flex-wrap items-center gap-3">
                 <div className="flex items-center gap-2 text-xs font-bold text-primary/70 uppercase">
                   <Filter className="w-4 h-4 text-green" /> Filtrar Por:
                 </div>

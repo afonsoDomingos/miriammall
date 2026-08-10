@@ -200,7 +200,7 @@ export default function Home() {
 
       <main className="flex-grow pt-16">
         {/* HERO SECTION */}
-        <section className="relative h-[90vh] bg-primary-dark overflow-hidden hero-swiper-section">
+        <section className="relative h-[85vh] sm:h-[90vh] bg-primary-dark overflow-hidden hero-swiper-section">
           <Swiper
             modules={[Autoplay, EffectFade, Pagination]}
             effect={'fade'}
@@ -241,7 +241,7 @@ export default function Home() {
                     <span className="text-green font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center gap-2 mb-3">
                       <Palmtree className="w-4.5 h-4.5 text-green animate-pulse" /> Terra de Boa Gente • Homoíne, Inhambane
                     </span>
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold tracking-tight mb-4">
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold tracking-tight mb-4">
                       {banner.title}
                     </h1>
                     <p className="text-base sm:text-lg md:text-xl text-white/80 font-light mb-8 leading-relaxed">
@@ -1179,7 +1179,7 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <div className="flex gap-4">
+                    <div className="flex flex-col xs:flex-row gap-3">
                       <a
                         href="https://wa.me/258865543026"
                         target="_blank"
@@ -1200,7 +1200,7 @@ export default function Home() {
 
                 {/* Map Iframe */}
                 <ScrollReveal direction="right" delay={0.3}>
-                  <div className="rounded-lg overflow-hidden border border-green/10 green-glow h-[450px] relative">
+                  <div className="rounded-lg overflow-hidden border border-green/10 green-glow h-[300px] sm:h-[380px] lg:h-[450px] relative">
                     {/* Custom Styled Leaflet/Google Map Mockup with high visual quality or standard map embedding */}
                     <iframe
                       title="Miriam Mall Location Map"
@@ -1229,7 +1229,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
-            className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl text-sm font-semibold backdrop-blur-sm border ${
+            className={`fixed bottom-6 left-4 right-4 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 w-auto sm:w-auto max-w-sm sm:max-w-none z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl text-sm font-semibold backdrop-blur-sm border ${
               toast.type === 'success'
                 ? 'bg-emerald-50/95 border-emerald-200 text-emerald-800'
                 : 'bg-red-50/95 border-red-200 text-red-800'

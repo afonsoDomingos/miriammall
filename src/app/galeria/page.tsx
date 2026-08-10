@@ -51,7 +51,7 @@ export default function Galeria() {
           <div className="absolute inset-0 z-0 bg-cover bg-center opacity-25" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1200&q=80')" }} />
           <div className="relative z-10 max-w-4xl mx-auto px-4">
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Imagens</span>
-            <h1 className="text-4xl font-serif font-bold mb-4">Galeria de Fotos</h1>
+            <h1 className="text-3xl sm:text-4xl font-serif font-bold mb-4">Galeria de Fotos</h1>
             <p className="text-white/70 text-sm max-w-2xl mx-auto leading-relaxed">
               Explore o Miriam Mall através da nossa lente. Imagens em alta resolução do exterior, interiores modernos e momentos vibrantes.
             </p>

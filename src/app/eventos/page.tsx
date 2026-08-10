@@ -19,7 +19,7 @@ export default function Eventos() {
           <div className="absolute inset-0 z-0 bg-cover bg-center opacity-25" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80')" }} />
           <div className="relative z-10 max-w-4xl mx-auto px-4">
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Agenda Cultural</span>
-            <h1 className="text-4xl font-serif font-bold mb-4">Agenda de Eventos</h1>
+            <h1 className="text-3xl sm:text-4xl font-serif font-bold mb-4">Agenda de Eventos</h1>
             <p className="text-white/70 text-sm max-w-2xl mx-auto leading-relaxed">
               Descubra os concertos, feiras gastronómicas, atividades infantis e eventos sazonais agendados no Miriam Mall.
             </p>
@@ -49,7 +49,7 @@ export default function Eventos() {
                   </div>
 
                   {/* Event Content */}
-                  <div className="lg:w-1/2 p-8 sm:p-10 flex flex-col justify-between">
+                  <div className="lg:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
                     <div>
                       {/* Date Badge */}
                       <span className="inline-flex items-center gap-1 bg-green/10 text-green text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-4">

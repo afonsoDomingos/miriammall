@@ -53,19 +53,19 @@ export default function AdminLayout({
   // If authenticated, render with sidebar layout
   if (isAuthenticated) {
     return (
-      <div className="min-h-screen flex bg-slate-50 text-slate-800">
+      <div className="min-h-screen flex flex-col md:flex-row bg-slate-50 text-slate-800 overflow-x-hidden">
         <AdminSidebar />
-        <div className="flex-grow flex flex-col max-h-screen overflow-y-auto">
+        <div className="flex-grow flex flex-col min-h-screen md:max-h-screen overflow-y-auto">
           {/* Header */}
-          <header className="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between shrink-0">
-            <h2 className="font-serif text-lg font-semibold text-primary">Painel de Controlo Administrativo</h2>
-            <div className="flex items-center gap-2 text-xs font-semibold bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded border border-emerald-200">
-              <ShieldCheck className="w-4 h-4" /> Sessão de Administrador Ativa
+          <header className="bg-white border-b border-slate-200 px-4 sm:px-8 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-2 shrink-0">
+            <h2 className="font-serif text-sm sm:text-lg font-semibold text-primary">Painel de Controlo Administrativo</h2>
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-semibold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded border border-emerald-200">
+              <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Sessão de Administrador Ativa
             </div>
           </header>
 
           {/* Page Contents */}
-          <div className="flex-grow p-8 overflow-y-auto">
+          <div className="flex-grow p-4 sm:p-8 overflow-y-auto">
             {children}
           </div>
         </div>

@@ -20,7 +20,7 @@ export default function Promocoes() {
           <div className="absolute inset-0 z-0 bg-cover bg-center opacity-20" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80')" }} />
           <div className="relative z-10 max-w-4xl mx-auto px-4">
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Campanhas</span>
-            <h1 className="text-4xl font-serif font-bold mb-4">Campanhas e Promoções Ativas</h1>
+            <h1 className="text-3xl sm:text-4xl font-serif font-bold mb-4">Campanhas e Promoções Ativas</h1>
             <p className="text-white/70 text-sm max-w-2xl mx-auto leading-relaxed">
               Economize nas suas compras. Fique atento às ofertas exclusivas das lojas e restaurantes parceiros do Miriam Mall.
             </p>

@@ -8,7 +8,7 @@ export default function TermsOfUse() {
       <Navbar />
       <main className="flex-grow pt-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h1 className="text-4xl font-serif font-bold text-primary mb-8">Termos de Uso</h1>
+          <h1 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-8">Termos de Uso</h1>
           
           <div className="prose prose-lg max-w-none text-primary/80">
             <p className="text-sm text-primary/60 mb-8">Última atualização: {new Date().toLocaleDateString('pt-PT')}</p>

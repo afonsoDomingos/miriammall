@@ -117,7 +117,7 @@ function ContactFormContent() {
       </div>
 
       {/* Form Card */}
-      <div className="bg-light-gray p-8 rounded-xl border border-green/15 shadow-md">
+      <div className="bg-light-gray p-5 sm:p-8 rounded-xl border border-green/15 shadow-md">
         <h3 className="font-serif text-2xl text-primary font-bold mb-2">Solicitação de Informação / Espaço</h3>
         <p className="text-xs text-primary/60 mb-6">
           Preencha os campos abaixo. Responderemos nas próximas 24 horas úteis.
@@ -281,7 +281,7 @@ export default function Contato() {
           <div className="absolute inset-0 z-0 bg-cover bg-center opacity-25" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1200&q=80')" }} />
           <div className="relative z-10 max-w-4xl mx-auto px-4">
             <span className="text-green uppercase tracking-widest text-xs font-semibold block mb-2">Fale Connosco</span>
-            <h1 className="text-4xl font-serif font-bold mb-4">Contactos</h1>
+            <h1 className="text-3xl sm:text-4xl font-serif font-bold mb-4">Contactos</h1>
             <p className="text-white/70 text-sm max-w-2xl mx-auto leading-relaxed">
               Tem alguma dúvida, proposta comercial ou candidatura de arrendamento? Envie-nos uma mensagem diretamente por aqui.
             </p>

@@ -80,7 +80,7 @@ export default function Sobre() {
             <span className="text-green uppercase tracking-widest text-xs font-bold block mb-3 flex items-center justify-center gap-1.5">
               <Sparkles className="w-4.5 h-4.5 text-green animate-pulse" /> Conheça a Nossa História
             </span>
-            <h1 className="text-4xl sm:text-5xl font-serif font-bold mb-4 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl sm:text-5xl font-serif font-bold mb-4 tracking-tight">
               Quem Somos
             </h1>
             <div className="w-16 h-1 bg-green mx-auto mb-6 rounded-full" />

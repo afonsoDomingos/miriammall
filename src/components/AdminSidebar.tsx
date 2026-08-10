@@ -48,57 +48,58 @@ export default function AdminSidebar() {
 
   return (
     <aside 
-      className={`bg-primary text-white flex flex-col justify-between border-r border-green/15 min-h-screen transition-all duration-300 ${
-        isCollapsed ? 'w-16' : 'w-64'
+      className={`bg-primary text-white flex flex-col justify-between border-b md:border-b-0 md:border-r border-green/15 md:min-h-screen transition-all duration-300 ${
+        isCollapsed ? 'w-full md:w-16' : 'w-full md:w-64'
       }`}
     >
       <div>
         {/* Sidebar Header */}
-        <div className="p-4 border-b border-green/10 flex items-center justify-between">
-          {!isCollapsed && (
-            <Link href="/admin/dashboard" className="block flex-1">
-              <div className="flex items-center gap-2">
-                <img
-                  src="/miriam-logo.png"
-                  alt="Miriam Mall"
-                  className="h-8 w-auto object-contain brightness-0 invert"
-                />
-                <span className="text-[9px] bg-green/10 text-green px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
-                  Admin
-                </span>
-              </div>
-            </Link>
-          )}
+        <div className="p-3 sm:p-4 border-b border-green/10 flex items-center justify-between">
+          <Link href="/admin/dashboard" className="block flex-1">
+            <div className="flex items-center gap-2">
+              <img
+                src="/miriam-logo.png"
+                alt="Miriam Mall"
+                className="h-7 sm:h-8 w-auto object-contain brightness-0 invert"
+              />
+              <span className="text-[9px] bg-green/10 text-green px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
+                Admin
+              </span>
+            </div>
+          </Link>
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="p-1.5 rounded hover:bg-white/10 transition-colors text-white/70 hover:text-green"
             aria-label={isCollapsed ? 'Expandir sidebar' : 'Colapsar sidebar'}
           >
-            {isCollapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
+            {isCollapsed ? <ChevronRight className="w-5 h-5 hidden md:block" /> : <ChevronLeft className="w-5 h-5 hidden md:block" />}
+            <Menu className="w-5 h-5 md:hidden" />
           </button>
         </div>
 
         {/* Navigation Menu */}
-        <nav className="p-3 space-y-1.5 flex-grow">
-          {menuItems.map((item) => {
-            const isActive = pathname === item.href;
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded text-xs font-semibold uppercase tracking-wider transition-colors ${
-                  isActive
-                    ? 'bg-green text-primary font-bold'
-                    : 'text-white/80 hover:bg-white/5 hover:text-green'
-                }`}
-                title={isCollapsed ? item.name : ''}
-              >
-                <Icon className="w-4 h-4 shrink-0" />
-                {!isCollapsed && <span>{item.name}</span>}
-              </Link>
-            );
-          })}
+        <nav className={`p-2 sm:p-3 space-y-1 md:space-y-1.5 flex-grow ${isCollapsed ? 'hidden md:block' : 'block'}`}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-1 gap-1 md:gap-0">
+            {menuItems.map((item) => {
+              const isActive = pathname === item.href;
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`w-full flex items-center gap-2.5 sm:gap-3 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-colors ${
+                    isActive
+                      ? 'bg-green text-primary font-bold'
+                      : 'text-white/80 hover:bg-white/5 hover:text-green'
+                  }`}
+                  title={isCollapsed ? item.name : ''}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  {(!isCollapsed || true) && <span className="truncate">{item.name}</span>}
+                </Link>
+              );
+            })}
+          </div>
         </nav>
       </div>
 
