@@ -59,7 +59,7 @@ export default function AdminSidebar() {
             <Link href="/admin/dashboard" className="block flex-1">
               <div className="flex items-center gap-2">
                 <img
-                  src="/MIRIAM LOGO.png"
+                  src="/miriam-logo.png"
                   alt="Miriam Mall"
                   className="h-8 w-auto object-contain brightness-0 invert"
                 />

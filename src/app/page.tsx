@@ -29,8 +29,7 @@ import {
   Target,
   XCircle,
   ChevronDown,
-  HelpCircle,
-  ArrowUp
+  HelpCircle
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -122,7 +121,6 @@ export default function Home() {
   const { spaces, stores, restaurants, events, promotions, banners, buildings } = useDatabase();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [showBackToTop, setShowBackToTop] = useState(false);
 
   // Scroll progress indicator
   useEffect(() => {
@@ -131,18 +129,11 @@ export default function Home() {
       const documentHeight = document.documentElement.scrollHeight - windowHeight;
       const scrolled = (window.scrollY / documentHeight) * 100;
       setScrollProgress(scrolled);
-      
-      // Show back to top button after scrolling 300px
-      setShowBackToTop(window.scrollY > 300);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   // ── Newsletter toast state ─────────────────────────────────────────────────
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -1257,22 +1248,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Back to Top Button */}
-      <AnimatePresence>
-        {showBackToTop && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-40 bg-green hover:bg-green-dark text-primary p-4 rounded-full shadow-lg shadow-green/30 transition-all duration-300 hover:scale-110 focus:outline-none"
-            aria-label="Voltar ao topo"
-          >
-            <ArrowUp className="w-6 h-6" />
-          </motion.button>
-        )}
-      </AnimatePresence>
+
 
       <Footer />
     </>
