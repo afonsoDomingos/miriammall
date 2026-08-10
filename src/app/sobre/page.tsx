@@ -106,10 +106,10 @@ export default function Sobre() {
               </h2>
               <div className="space-y-4 text-primary/70 leading-relaxed text-sm sm:text-base">
                 <p>
-                  A <strong>Mirriam</strong> é uma empresa especializada no setor imobiliário, dedicada concretamente ao arrendamento de imóveis e apartamentos comerciais. Contamos com uma equipa altamente qualificada e apaixonada pela gestão imobiliária.
+                  A <strong>Miriam Mall – Sociedade Unipessoal, Lda.</strong> é uma empresa moçambicana especializada no arrendamento de imóveis destinados a atividades comerciais. Constituída de acordo com a legislação da República de Moçambique, a empresa nasceu com o objetivo de responder à crescente necessidade de espaços comerciais seguros, funcionais e estrategicamente localizados para empresas, empreendedores e instituições.
                 </p>
                 <p>
-                  Estamos comprometidos em proporcionar uma experiência excecional aos nossos clientes. O nosso objetivo é garantir soluções funcionais, bem localizadas e alinhadas às exigências do mercado, contribuindo para o crescimento e eficiência das organizações que confiam nos nossos ativos.
+                  A <strong>Miriam Mall</strong> dedica-se ao arrendamento de escritórios, lojas, restaurantes e outros espaços comerciais, oferecendo soluções que contribuem para o crescimento dos negócios dos seus clientes. A empresa pauta a sua atuação pelo profissionalismo, transparência e compromisso com a excelência, procurando garantir que cada imóvel disponibilizado reúna as condições adequadas para o desenvolvimento das atividades comerciais.
                 </p>
               </div>
               

@@ -296,12 +296,10 @@ export default function Home() {
                 </h2>
                 <div className="space-y-4 text-primary/70 leading-relaxed text-sm sm:text-base">
                   <p>
-                    O <strong className="text-primary font-semibold">Miriam Mall</strong> surge com a missão de transformar o cenário económico e social do Distrito de Homoíne, na célebre Província de Inhambane.
-                    Pensado detalhadamente para fundir a sofisticação de um centro comercial moderno com o charme natural da Terra de Boa Gente, o shopping reúne o melhor em marcas, conveniência e bem-estar.
+                    A <strong className="text-primary font-semibold">Miriam Mall – Sociedade Unipessoal, Lda.</strong> é uma empresa moçambicana especializada no arrendamento de imóveis destinados a atividades comerciais. Constituída de acordo com a legislação da República de Moçambique, a empresa nasceu com o objetivo de responder à crescente necessidade de espaços comerciais seguros, funcionais e estrategicamente localizados.
                   </p>
                   <p>
-                    Mais do que uma estrutura comercial, oferecemos um ambiente de negócios vibrante e refrescante.
-                    Lojas climatizadas, segurança permanente, estacionamento organizado e uma praça de alimentação ampla, rodeada de ventilação natural e da beleza da nossa flora local.
+                    Dedicamo-nos ao arrendamento de escritórios, lojas, restaurantes e outros espaços comerciais, oferecendo soluções que contribuem para o crescimento dos negócios dos nossos clientes, pautando a nossa atuação pelo profissionalismo, transparência e compromisso com a excelência.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
