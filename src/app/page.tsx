@@ -37,6 +37,8 @@ import InteractiveMap from '../components/InteractiveMap';
 import ScrollReveal from '../components/ScrollReveal';
 import { useDatabase } from '../context/DatabaseContext';
 import ImageWithLoader from '../components/ImageWithLoader';
+import BuildingDetailModal from '../components/BuildingDetailModal';
+import { Building as BuildingType } from '../utils/mockData';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 
@@ -120,6 +122,7 @@ function AnimatedStatCard({
 export default function Home() {
   const { spaces, stores, restaurants, events, promotions, banners, buildings } = useDatabase();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [selectedBuilding, setSelectedBuilding] = useState<BuildingType | null>(null);
 
   // ── Newsletter toast state ─────────────────────────────────────────────────
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -392,21 +395,31 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 {buildings.sort((a, b) => a.order - b.order).map((building, index) => (
                   <ScrollReveal key={building.id} direction="up" delay={0.2 + index * 0.1}>
-                    <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-xl hover:border-green/20 transition-all duration-300 group">
+                    <div 
+                      onClick={() => setSelectedBuilding(building)}
+                      className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-2xl hover:border-green/50 transition-all duration-300 group cursor-pointer transform hover:-translate-y-1 relative"
+                    >
                       <div className="h-64 relative bg-primary-dark overflow-hidden">
                         <ImageWithLoader
                           src={building.image}
                           alt={building.name}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent pointer-events-none" />
-                        <div className="absolute bottom-4 left-4 right-4 pointer-events-none">
-                          <h3 className="text-white font-serif text-xl font-bold">{building.name}</h3>
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent" />
+                        
+                        {/* Hover hint badge */}
+                        <div className="absolute top-4 right-4 bg-slate-900/60 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-green group-hover:text-primary transition-all duration-300 shadow-md">
+                          <span>Ver Informação</span>
+                          <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                        </div>
+
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <h3 className="text-white font-serif text-xl font-bold group-hover:text-green-light transition-colors duration-300">{building.name}</h3>
                           <p className="text-white/80 text-xs mt-1">{building.subtitle}</p>
                         </div>
                       </div>
                       <div className="p-6">
-                        <ul className="space-y-3 text-sm text-primary/70">
+                        <ul className="space-y-3 text-sm text-primary/70 mb-4">
                           {building.features.map((feature, idx) => (
                             <li key={idx} className="flex items-start gap-2">
                               <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
@@ -414,6 +427,11 @@ export default function Home() {
                             </li>
                           ))}
                         </ul>
+                        
+                        <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-green group-hover:text-green-dark">
+                          <span>Clique para ver detalhes do edifício</span>
+                          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                        </div>
                       </div>
                     </div>
                   </ScrollReveal>
@@ -1227,6 +1245,8 @@ export default function Home() {
       </AnimatePresence>
 
 
+
+      <BuildingDetailModal building={selectedBuilding} onClose={() => setSelectedBuilding(null)} />
 
       <Footer />
     </>
