@@ -120,20 +120,6 @@ function AnimatedStatCard({
 export default function Home() {
   const { spaces, stores, restaurants, events, promotions, banners, buildings } = useDatabase();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  // Scroll progress indicator
-  useEffect(() => {
-    const handleScroll = () => {
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight - windowHeight;
-      const scrolled = (window.scrollY / documentHeight) * 100;
-      setScrollProgress(scrolled);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // ── Newsletter toast state ─────────────────────────────────────────────────
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -189,14 +175,6 @@ export default function Home() {
   return (
     <>
       <Navbar />
-
-      {/* Scroll Progress Bar */}
-      <div className="fixed top-16 left-0 right-0 h-1 bg-slate-100 z-50">
-        <div 
-          className="h-full bg-green transition-all duration-150 ease-out"
-          style={{ width: `${Math.min(scrollProgress, 100)}%` }}
-        />
-      </div>
 
       <main className="flex-grow pt-16">
         {/* HERO SECTION */}

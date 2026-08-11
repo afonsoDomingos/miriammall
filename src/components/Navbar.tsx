@@ -10,6 +10,7 @@ import { useDatabase } from '../context/DatabaseContext';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -65,6 +66,14 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      if (documentHeight > 0) {
+        setScrollProgress((window.scrollY / documentHeight) * 100);
+      } else {
+        setScrollProgress(0);
+      }
+
       if (window.scrollY > 20) {
         setIsScrolled(true);
       } else {
@@ -72,7 +81,8 @@ export default function Navbar() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -427,6 +437,11 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* Scroll Progress Line at bottom border of header */}
+      <div 
+        className="absolute bottom-0 left-0 h-[2px] bg-green transition-all duration-150 ease-out pointer-events-none"
+        style={{ width: `${Math.min(scrollProgress, 100)}%` }}
+      />
     </header>
   );
 }
