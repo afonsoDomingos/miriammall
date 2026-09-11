@@ -240,20 +240,27 @@ export default function Home() {
                     transition={{ duration: 0.8 }}
                     className="max-w-2xl text-white"
                   >
-                    <span className="text-slate-400 font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center gap-2 mb-3">
-                      <Palmtree className="w-4.5 h-4.5 text-slate-400 animate-pulse" /> Moçambique / Homoíne / Município da Vila de Homoíne
+                    <span className="text-slate-400 font-semibold uppercase tracking-widest text-[10px] sm:text-xs md:text-sm flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                      <Palmtree className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-slate-400 animate-pulse shrink-0" /> Moçambique / Homoíne / Município da Vila de Homoíne
                     </span>
-                    <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold tracking-tight mb-4">
-                      {banner.title}
+                    <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight mb-3 sm:mb-4 leading-tight">
+                      {banner.title.startsWith('Shopping ') ? (
+                        <>
+                          <span className="text-red-500 font-serif">Shopping</span>{' '}
+                          <span>{banner.title.slice(9)}</span>
+                        </>
+                      ) : (
+                        banner.title
+                      )}
                     </h1>
-                    <p className="text-base sm:text-lg md:text-xl text-green font-medium mb-8 leading-relaxed">
+                    <p className="text-xs sm:text-base md:text-lg lg:text-xl text-green font-medium mb-5 sm:mb-8 leading-relaxed">
                       {banner.subtitle}
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 w-full sm:w-auto">
                       {banner.buttonText1 && (
                         <Link
                           href={banner.buttonLink1}
-                          className="border border-white/80 hover:border-white hover:bg-white hover:text-primary text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-4 px-8 rounded transition-all duration-300 text-center hover:-translate-y-0.5 active:translate-y-0"
+                          className="border border-white/80 hover:border-white hover:bg-white hover:text-primary text-white text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wider py-2.5 px-5 sm:py-3.5 sm:px-7 rounded transition-all duration-300 text-center hover:-translate-y-0.5 active:translate-y-0"
                         >
                           {banner.buttonText1}
                         </Link>
@@ -261,7 +268,7 @@ export default function Home() {
                       {banner.buttonText2 && (
                         <Link
                           href={banner.buttonLink2}
-                          className="border border-white/80 hover:border-white hover:bg-white hover:text-primary text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-4 px-8 rounded transition-all duration-300 text-center hover:-translate-y-0.5 active:translate-y-0"
+                          className="border border-white/80 hover:border-white hover:bg-white hover:text-primary text-white text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wider py-2.5 px-5 sm:py-3.5 sm:px-7 rounded transition-all duration-300 text-center hover:-translate-y-0.5 active:translate-y-0"
                         >
                           {banner.buttonText2}
                         </Link>
@@ -926,16 +933,16 @@ export default function Home() {
             <p className="text-base sm:text-lg text-white/80 font-light max-w-3xl mx-auto mb-10 leading-relaxed">
               Leve a sua marca para um espaço moderno, seguro e estrategicamente localizado. Sob a brisa dos coqueiros e o dinamismo de Inhambane, o Miriam Mall oferece as melhores oportunidades para marcas e investidores que procuram crescer na região.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
               <Link
                 href="/contato"
-                className="bg-green hover:bg-green-light text-primary text-xs sm:text-sm font-bold uppercase tracking-wider py-4 px-8 rounded transition-all duration-300"
+                className="bg-green hover:bg-green-light text-primary text-xs sm:text-sm font-bold uppercase tracking-wider py-3 px-6 sm:py-4 sm:px-8 rounded transition-all duration-300 text-center"
               >
                 Quero Arrendar um Espaço
               </Link>
               <Link
                 href="/sobre"
-                className="border border-white/30 hover:border-white text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-4 px-8 rounded transition-all duration-300"
+                className="border border-white/30 hover:border-white text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-3 px-6 sm:py-4 sm:px-8 rounded transition-all duration-300 text-center"
               >
                 Saber Mais Sobre Nós
               </Link>
@@ -980,18 +987,18 @@ export default function Home() {
                     showToast('error', 'Erro de ligação. Tente novamente.');
                   }
                 }}
-                className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto"
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-xl mx-auto"
               >
                 <input
                   type="email"
                   name="email"
                   required
                   placeholder="Seu melhor e-mail"
-                  className="flex-1 px-6 py-4 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-green focus:ring-2 focus:ring-green/10 transition-all duration-300"
+                  className="flex-1 px-4 py-3 sm:px-6 sm:py-4 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-green focus:ring-2 focus:ring-green/10 transition-all duration-300"
                 />
                 <button
                   type="submit"
-                  className="bg-green hover:bg-green-dark text-white font-semibold text-sm uppercase tracking-wider py-4 px-8 rounded-xl transition-all duration-300 shadow-lg shadow-green/20 hover:shadow-green/30 flex items-center justify-center gap-2"
+                  className="bg-green hover:bg-green-dark text-white font-semibold text-xs sm:text-sm uppercase tracking-wider py-3 px-6 sm:py-4 sm:px-8 rounded-xl transition-all duration-300 shadow-lg shadow-green/20 hover:shadow-green/30 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Mail className="w-4 h-4" /> Subscrever
                 </button>
