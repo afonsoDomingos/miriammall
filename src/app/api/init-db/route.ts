@@ -63,9 +63,40 @@ export async function GET(req: Request) {
       seeded = true;
     }
 
+    // Seed or update Banners
+    const bannerCount = await Banner.countDocuments({});
+    if (bannerCount === 0 && initialBanners.length > 0) {
+      for (const b of initialBanners) {
+        const newBanner = new Banner({
+          ...b,
+          _id: b.id || `banner-${Date.now()}`
+        });
+        await newBanner.save();
+      }
+      seeded = true;
+    } else {
+      // Update any previous placeholder values in DB to the newly specified values
+      await Banner.updateMany(
+        {
+          $or: [
+            { title: 'Miriam Mall' },
+            { subtitle: { $regex: /novo destino/i } },
+            { buttonText1: { $regex: /explorar/i } }
+          ]
+        },
+        {
+          $set: {
+            title: 'Shopping Miriam Mall',
+            subtitle: 'A abrir em breve',
+            buttonText1: 'Apreciar'
+          }
+        }
+      );
+    }
+
     return NextResponse.json({
       success: true,
-      message: seeded ? 'Database initialized with Admin user.' : 'Database already initialized.',
+      message: seeded ? 'Database initialized with Admin user and banners.' : 'Database already initialized.',
       seeded
     });
   } catch (error: any) {

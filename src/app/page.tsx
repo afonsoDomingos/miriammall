@@ -38,7 +38,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import { useDatabase } from '../context/DatabaseContext';
 import ImageWithLoader from '../components/ImageWithLoader';
 import BuildingDetailModal from '../components/BuildingDetailModal';
-import { Building as BuildingType } from '../utils/mockData';
+import { Banner, Building as BuildingType } from '../utils/mockData';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 
@@ -149,9 +149,30 @@ export default function Home() {
     }
   };
 
+  // Default fallback banner
+  const defaultBanners: Banner[] = [
+    {
+      id: 'default-banner',
+      title: 'Shopping Miriam Mall',
+      subtitle: 'A abrir em breve',
+      image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80',
+      buttonText1: 'Apreciar',
+      buttonLink1: '/lojas',
+      buttonText2: 'Arrendar um Espaço',
+      buttonLink2: '/espacos',
+      isActive: true
+    }
+  ];
+
   // Get active banners for carousel
   const activeBanners = banners.filter((b) => b.isActive);
-  const displayBanners = activeBanners.length > 0 ? activeBanners : banners;
+  const bannersToUse = activeBanners.length > 0 ? activeBanners : (banners.length > 0 ? banners : defaultBanners);
+  const displayBanners = bannersToUse.map((b) => ({
+    ...b,
+    title: b.title === 'Miriam Mall' ? 'Shopping Miriam Mall' : b.title,
+    subtitle: (b.subtitle.toLowerCase().includes('novo destino') || b.subtitle.toLowerCase().includes('shopping em breve') || b.subtitle.toLowerCase().includes('abrir em breve')) ? 'A abrir em breve' : b.subtitle,
+    buttonText1: b.buttonText1.toLowerCase().includes('explorar') ? 'Apreciar' : b.buttonText1,
+  }));
 
   // Get available/reserved spaces for display (limit to 3 for preview)
   const previewSpaces = spaces
@@ -219,20 +240,20 @@ export default function Home() {
                     transition={{ duration: 0.8 }}
                     className="max-w-2xl text-white"
                   >
-                    <span className="text-green font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center gap-2 mb-3">
-                      <Palmtree className="w-4.5 h-4.5 text-green animate-pulse" /> Terra de Boa Gente • Homoíne, Inhambane
+                    <span className="text-slate-400 font-semibold uppercase tracking-widest text-xs sm:text-sm flex items-center gap-2 mb-3">
+                      <Palmtree className="w-4.5 h-4.5 text-slate-400 animate-pulse" /> Moçambique / Homoíne / Município da Vila de Homoíne
                     </span>
                     <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-bold tracking-tight mb-4">
                       {banner.title}
                     </h1>
-                    <p className="text-base sm:text-lg md:text-xl text-white/80 font-light mb-8 leading-relaxed">
+                    <p className="text-base sm:text-lg md:text-xl text-green font-medium mb-8 leading-relaxed">
                       {banner.subtitle}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
                       {banner.buttonText1 && (
                         <Link
                           href={banner.buttonLink1}
-                          className="bg-green hover:bg-green-light text-primary text-xs sm:text-sm font-bold uppercase tracking-wider py-4 px-8 rounded transition-all duration-300 text-center shadow-lg hover:shadow-green/25 hover:-translate-y-0.5 active:translate-y-0"
+                          className="border border-white/80 hover:border-white hover:bg-white hover:text-primary text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-4 px-8 rounded transition-all duration-300 text-center hover:-translate-y-0.5 active:translate-y-0"
                         >
                           {banner.buttonText1}
                         </Link>

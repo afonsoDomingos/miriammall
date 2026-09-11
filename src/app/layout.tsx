@@ -5,7 +5,6 @@ import { DatabaseProvider } from '../context/DatabaseContext';
 import { ToastProvider } from '../context/ToastContext';
 import ScrollToTop from '../components/ScrollToTop';
 import WhatsAppWidget from '../components/WhatsAppWidget';
-import WelcomePopup from '../components/WelcomePopup';
 import CookieBanner from '../components/CookieBanner';
 import GoogleAdScript from '../components/GoogleAdScript';
 
@@ -74,7 +73,6 @@ export default function RootLayout({
             {children}
             <ScrollToTop />
             <WhatsAppWidget />
-            <WelcomePopup />
             <CookieBanner />
           </DatabaseProvider>
         </ToastProvider>

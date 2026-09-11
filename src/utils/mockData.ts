@@ -112,7 +112,19 @@ export const initialRestaurants: Restaurant[] = [];
 export const initialEvents: MallEvent[] = [];
 export const initialPromotions: Promotion[] = [];
 export const initialRentalRequests: RentalRequest[] = [];
-export const initialBanners: Banner[] = [];
+export const initialBanners: Banner[] = [
+  {
+    id: 'banner-1',
+    title: 'Shopping Miriam Mall',
+    subtitle: 'A abrir em breve',
+    image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80',
+    buttonText1: 'Apreciar',
+    buttonLink1: '/lojas',
+    buttonText2: 'Arrendar um Espaço',
+    buttonLink2: '/espacos',
+    isActive: true
+  }
+];
 export const initialBlogPosts: BlogPost[] = [];
 export const initialBuildings: Building[] = [];
 export const initialNotes: Note[] = [];

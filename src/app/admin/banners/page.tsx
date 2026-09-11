@@ -15,7 +15,7 @@ export default function AdminBanners() {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [image, setImage] = useState('');
-  const [buttonText1, setButtonText1] = useState('Explorar');
+  const [buttonText1, setButtonText1] = useState('Apreciar');
   const [buttonLink1, setButtonLink1] = useState('/');
   const [buttonText2, setButtonText2] = useState('Contacto');
   const [buttonLink2, setButtonLink2] = useState('/contato');
@@ -25,7 +25,7 @@ export default function AdminBanners() {
     setTitle('');
     setSubtitle('');
     setImage('');
-    setButtonText1('Explorar o Shopping');
+    setButtonText1('Apreciar');
     setButtonLink1('/lojas');
     setButtonText2('Arrendar um Espaço');
     setButtonLink2('/espacos');
@@ -187,7 +187,7 @@ export default function AdminBanners() {
                 <input
                   type="text"
                   required
-                  placeholder="Ex: Miriam Mall"
+                  placeholder="Ex: Shopping Miriam Mall"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-green"
@@ -208,7 +208,7 @@ export default function AdminBanners() {
                 <textarea
                   required
                   rows={3}
-                  placeholder="Ex: O novo destino de compras, negócios e lazer..."
+                  placeholder="Ex: A abrir em breve..."
                   value={subtitle}
                   onChange={(e) => setSubtitle(e.target.value)}
                   className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-green resize-none"
