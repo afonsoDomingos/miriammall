@@ -84,7 +84,7 @@ export default function ImageWithLoader({
         <img
           src={currentSrc}
           alt={alt}
-          className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500 ${
+          className={`w-full h-full min-w-full min-h-full object-cover object-center ${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500 ${
             parallax ? 'will-change-transform' : ''
           }`}
           style={{

@@ -420,34 +420,35 @@ export default function Home() {
               </div>
 
               {/* Three Buildings Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 items-stretch">
                 {buildings.sort((a, b) => a.order - b.order).map((building, index) => (
-                  <ScrollReveal key={building.id} direction="up" delay={0.2 + index * 0.1}>
+                  <ScrollReveal key={building.id} direction="up" delay={0.2 + index * 0.1} className="h-full">
                     <div 
                       onClick={() => setSelectedBuilding(building)}
-                      className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-2xl hover:border-green/50 transition-all duration-300 group cursor-pointer transform hover:-translate-y-1 relative"
+                      className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-2xl hover:border-green/50 transition-all duration-300 group cursor-pointer transform hover:-translate-y-1 relative h-full flex flex-col justify-between"
                     >
-                      <div className="h-64 relative bg-primary-dark overflow-hidden">
+                      <div className="h-60 sm:h-64 relative bg-slate-900 overflow-hidden shrink-0">
                         <ImageWithLoader
                           src={building.image}
                           alt={building.name}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                          containerClassName="w-full h-full"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
                         
                         {/* Hover hint badge */}
-                        <div className="absolute top-4 right-4 bg-slate-900/60 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-green group-hover:text-primary transition-all duration-300 shadow-md">
+                        <div className="absolute top-4 right-4 bg-slate-900/70 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-green group-hover:text-primary transition-all duration-300 shadow-md">
                           <span>Ver Informação</span>
                           <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
                         </div>
 
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <h3 className="text-white font-serif text-xl font-bold group-hover:text-green-light transition-colors duration-300">{building.name}</h3>
+                        <div className="absolute bottom-4 left-4 right-4 z-10">
+                          <h3 className="text-white font-serif text-lg sm:text-xl font-bold group-hover:text-green-light transition-colors duration-300 leading-snug">{building.name}</h3>
                           <p className="text-white/80 text-xs mt-1">{building.subtitle}</p>
                         </div>
                       </div>
-                      <div className="p-6">
-                        <ul className="space-y-3 text-sm text-primary/70 mb-4">
+                      <div className="p-6 flex flex-col justify-between flex-grow">
+                        <ul className="space-y-3 text-sm text-primary/70 mb-4 flex-grow">
                           {building.features.map((feature, idx) => (
                             <li key={idx} className="flex items-start gap-2">
                               <div className="w-1.5 h-1.5 rounded-full bg-green mt-2 shrink-0" />
@@ -456,7 +457,7 @@ export default function Home() {
                           ))}
                         </ul>
                         
-                        <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-green group-hover:text-green-dark">
+                        <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-green group-hover:text-green-dark mt-auto">
                           <span>Clique para ver detalhes do edifício</span>
                           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
