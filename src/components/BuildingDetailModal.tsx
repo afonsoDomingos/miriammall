@@ -103,13 +103,40 @@ export default function BuildingDetailModal({ building, onClose }: BuildingDetai
           <div className="p-6 sm:p-8 space-y-6 max-h-[calc(85vh-20rem)] overflow-y-auto">
             {/* Description */}
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-green mb-2 flex items-center gap-1.5">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-green mb-3 flex items-center gap-1.5">
                 <Sparkles className="w-4 h-4 text-green" /> Sobre este Edifício
               </h3>
-              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                {building.description ||
-                  `O ${building.name} foi concebido com os mais elevados padrões arquitetónicos para oferecer um espaço comercial de excelência no Miriam Mall, garantindo visibilidade, comodidade e fluxos otimizados para clientes e comerciantes.`}
-              </p>
+              {(() => {
+                const text = building.description ||
+                  `O ${building.name} foi concebido com os mais elevados padrões arquitetónicos para oferecer um espaço comercial de excelência no Miriam Mall, garantindo visibilidade, comodidade e fluxos otimizados para clientes e comerciantes.`;
+                
+                const lineBreakItems = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+                const pisoSplits = lineBreakItems.length > 1 ? lineBreakItems : text.split(/(?=[1-9]\s*[.º°]*\s*Piso|Piso\s*[0-9])/i).map(s => s.trim()).filter(Boolean);
+                const items = pisoSplits.length > 1 ? pisoSplits : text.split(/(?=(?:2 quartos|1 suite|suite|WC|Closet|Cozinha|Sala de estar|Varanda|Ferragem|Armazém|Salão de cabeleireiro|Salão|Padaria|Restaurante))/i).map(s => s.trim()).filter(Boolean);
+
+                if (items.length > 1) {
+                  return (
+                    <div className="space-y-2">
+                      {items.map((it, idx) => (
+                        <div key={idx} className="flex items-start gap-2.5 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50">
+                          <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green/10 text-green font-bold text-[10px] shrink-0 mt-0.5">
+                            {idx + 1}
+                          </span>
+                          <span className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 leading-relaxed">
+                            {it}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                }
+
+                return (
+                  <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                    {text}
+                  </p>
+                );
+              })()}
             </div>
 
             {/* Features & Floor Structure */}

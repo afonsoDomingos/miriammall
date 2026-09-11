@@ -94,6 +94,45 @@ export default function Sobre() {
     return true;
   });
 
+  const parseEnumeratedItems = (text: string): string[] => {
+    if (!text) return [];
+
+    // 1. If text has line breaks, use them
+    const lineBreakItems = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+    if (lineBreakItems.length > 1) {
+      return lineBreakItems;
+    }
+
+    // 2. Check for Piso markers (e.g. 1.º Piso, 2.º Piso, 3.º Piso, 1º Piso, Piso 1)
+    const pisoSplits = text.split(/(?=[1-9]\s*[.º°]*\s*Piso|Piso\s*[0-9])/i).map(s => s.trim()).filter(Boolean);
+    if (pisoSplits.length > 1) {
+      return pisoSplits;
+    }
+
+    // 3. Check for semicolons or bullet points
+    const bulletSplits = text.split(/(?:[;•\-]|\b\d+[.)]\s*)/).map(s => s.trim()).filter(Boolean);
+    if (bulletSplits.length > 1) {
+      return bulletSplits;
+    }
+
+    // 4. Check for room/area compartments
+    const roomSplits = text
+      .split(/(?=(?:2 quartos|1 suite|suite|WC|Closet|Cozinha|Sala de estar|Varanda|Ferragem|Armazém|Salão de cabeleireiro|Salão|Padaria|Restaurante))/i)
+      .map(s => s.trim())
+      .filter(Boolean);
+    if (roomSplits.length >= 2) {
+      return roomSplits;
+    }
+
+    // 5. Check for periods separating full sentences
+    const periodSplits = text.split(/\.\s+/).map(s => s.trim().replace(/\.$/, '')).filter(s => s.length > 4);
+    if (periodSplits.length > 1) {
+      return periodSplits;
+    }
+
+    return [text];
+  };
+
   const containerVariants = {
     hidden: {},
     visible: {
@@ -392,10 +431,22 @@ export default function Sobre() {
                       {building.name}
                     </h3>
 
-                    {/* Description */}
-                    <p className="text-primary/70 text-xs sm:text-sm line-clamp-3 leading-relaxed mb-6">
-                      {building.description}
-                    </p>
+                    {/* Enumerated Description */}
+                    <div className="w-full text-left my-3 space-y-1.5 flex-grow">
+                      {parseEnumeratedItems(building.description).map((item, itemIdx) => (
+                        <div
+                          key={itemIdx}
+                          className="flex items-start gap-2 bg-slate-50/90 hover:bg-green/5 p-2 rounded-lg border border-slate-100/90 transition-colors"
+                        >
+                          <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green/10 text-green font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
+                            {itemIdx + 1}
+                          </span>
+                          <span className="text-xs text-primary/85 font-medium leading-snug">
+                            {item}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
 
                     {/* Features List */}
                     <div className="w-full text-left bg-slate-50 p-3 rounded-lg border border-slate-100 mb-4 space-y-1.5">

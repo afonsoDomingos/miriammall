@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Phone, Mail, MapPin, MessageCircle, Loader2 } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
 
 const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -31,111 +31,35 @@ export default function Footer() {
   const pathname = usePathname();
   const isAdminRoute = pathname?.startsWith('/admin');
 
-  if (isAdminRoute) return null; // Admin dashboard does not show the public footer
+  if (isAdminRoute) return null;
 
   const currentYear = new Date().getFullYear();
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [message, setMessage] = useState('');
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('loading');
-    setMessage('');
-    
-    try {
-      const res = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-      
-      if (res.ok && data.success) {
-        setStatus('success');
-        setMessage(data.message);
-        setEmail('');
-      } else {
-        setStatus('error');
-        setMessage(data.error || 'Erro ao subscrever. Tente novamente.');
-      }
-    } catch (err) {
-      console.error(err);
-      setStatus('error');
-      setMessage('Erro de conexão. Verifique a rede.');
-    }
-  };
 
   return (
-    <footer className="bg-primary-dark text-white border-t border-green/10 pt-16 pb-8">
+    <footer className="bg-primary-dark text-white border-t border-green/15 py-10 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Newsletter Row */}
-        <div className="border-b border-white/10 pb-10 mb-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-          <div className="max-w-md">
-            <h3 className="text-lg font-serif font-bold text-white flex items-center gap-2">
-              <Mail className="w-5 h-5 text-green" /> Subscreva a Nossa Newsletter
-            </h3>
-            <p className="text-white/60 text-xs mt-1">
-              Fique a par de todas as novidades, eventos e promoções exclusivas do Miriam Mall diretamente no seu e-mail.
-            </p>
-          </div>
-          <div className="w-full lg:w-auto">
-            <form onSubmit={handleSubscribe} className="w-full flex flex-col sm:flex-row gap-2 shrink-0">
-              <input
-                type="email"
-                required
-                placeholder="Introduza o seu e-mail"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={status === 'loading'}
-                className="w-full sm:w-64 bg-white/5 border border-white/10 rounded px-4 py-2.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-green focus:bg-white/10 disabled:opacity-50 transition-all"
-              />
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className="bg-green hover:bg-green-light text-primary text-xs font-bold uppercase tracking-wider py-2.5 px-6 rounded transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed flex items-center justify-center gap-1.5 shrink-0"
-              >
-                {status === 'loading' ? (
-                  <>
-                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                    <span>A subscrever...</span>
-                  </>
-                ) : (
-                  'Subscrever'
-                )}
-              </button>
-            </form>
-            {message && (
-              <p className={`text-[10px] mt-1.5 font-semibold ${status === 'success' ? 'text-emerald-400' : 'text-rose-400'}`}>
-                {message}
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* Brand Column */}
-          <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 items-center text-center md:text-left">
+          {/* 1. Logo & Redes Sociais */}
+          <div className="flex flex-col items-center md:items-start gap-4">
             <Link href="/" className="inline-block">
               <img
                 src="/miriam-logo.png"
                 alt="Miriam Mall"
+                style={{ maxHeight: '36px' }}
                 className="h-8 sm:h-9 w-auto object-contain brightness-0 invert"
-                style={{ maxHeight: '36px', width: 'auto' }}
               />
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed">
-              O novo centro de compras, negócios, lazer e investimento no Distrito de Homoíne, 
-              Província de Inhambane. Um empreendimento moderno focado no desenvolvimento regional.
+            <p className="text-white/70 text-xs max-w-xs leading-relaxed">
+              O novo centro de compras, negócios, lazer e investimento no Distrito de Homoíne, Inhambane.
             </p>
-            {/* Social Links */}
-            <div className="flex gap-4 pt-2">
+            {/* Redes Sociais */}
+            <div className="flex items-center gap-3 pt-1">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/70 hover:text-green hover:border-green transition-colors"
                 aria-label="Facebook"
+                className="w-9 h-9 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
               >
                 <FacebookIcon className="w-4 h-4" />
               </a>
@@ -143,8 +67,8 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/70 hover:text-green hover:border-green transition-colors"
                 aria-label="Instagram"
+                className="w-9 h-9 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
               >
                 <InstagramIcon className="w-4 h-4" />
               </a>
@@ -152,134 +76,81 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/70 hover:text-green hover:border-green transition-colors"
                 aria-label="LinkedIn"
+                className="w-9 h-9 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
               >
                 <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a
+                href="https://wa.me/258865543026"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="w-9 h-9 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
+              >
+                <MessageCircle className="w-4 h-4" />
               </a>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-green font-semibold uppercase tracking-wider text-xs mb-4">Links Rápidos</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/sobre" className="text-white/70 hover:text-green transition-colors">
-                  Sobre o Shopping
-                </Link>
-              </li>
-              <li>
-                <Link href="/espacos" className="text-white/70 hover:text-green transition-colors">
-                  Espaços para Arrendar
-                </Link>
-              </li>
-              <li>
-                <Link href="/lojas" className="text-white/70 hover:text-green transition-colors">
-                  Diretório de Lojas
-                </Link>
-              </li>
-              <li>
-                <Link href="/restaurantes" className="text-white/70 hover:text-green transition-colors">
-                  Restauração
-                </Link>
-              </li>
-              <li>
-                <Link href="/promocoes" className="text-white/70 hover:text-green transition-colors">
-                  Promoções Ativas
-                </Link>
-              </li>
-            </ul>
+          {/* 2. Informações de Contacto */}
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <h4 className="text-xs uppercase font-bold tracking-widest text-green mb-1">
+              Contacto
+            </h4>
+            <a
+              href="tel:+258865543026"
+              className="flex items-center gap-2.5 text-xs text-white/80 hover:text-green transition-colors"
+            >
+              <Phone className="w-4 h-4 text-green shrink-0" />
+              <span>+258 86 554 3026 / +258 84 000 0000</span>
+            </a>
+            <a
+              href="mailto:info@miriammall.com"
+              className="flex items-center gap-2.5 text-xs text-white/80 hover:text-green transition-colors"
+            >
+              <Mail className="w-4 h-4 text-green shrink-0" />
+              <span>info@miriammall.com</span>
+            </a>
+            <a
+              href="https://wa.me/258865543026"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 text-xs text-white/80 hover:text-green transition-colors"
+            >
+              <MessageCircle className="w-4 h-4 text-green shrink-0" />
+              <span>Atendimento via WhatsApp</span>
+            </a>
           </div>
 
-          {/* Business & Opportunities */}
-          <div>
-            <h3 className="text-green font-semibold uppercase tracking-wider text-xs mb-4">Investidores</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/espacos" className="text-white/70 hover:text-green transition-colors">
-                  Porquê Investir
-                </Link>
-              </li>
-              <li>
-                <Link href="/espacos" className="text-white/70 hover:text-green transition-colors">
-                  Plantas dos Espaços
-                </Link>
-              </li>
-              <li>
-                <Link href="/contato" className="text-white/70 hover:text-green transition-colors">
-                  Formulário de Candidatura
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin" className="text-white/70 hover:text-green transition-colors">
-                  Acesso Administrativo
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Details */}
-          <div>
-            <h3 className="text-green font-semibold uppercase tracking-wider text-xs mb-4">Contacto</h3>
-            <ul className="space-y-3 text-sm text-white/70">
-              <li className="flex gap-2 items-start">
-                <MapPin className="w-5 h-5 text-green shrink-0 mt-0.5" />
-                <span>
-                  Miriam Mall, Distrito de Homoíne,
-                  <br />
-                  Província de Inhambane, Moçambique
-                </span>
-              </li>
-              <li className="flex gap-2 items-center">
-                <Phone className="w-4 h-4 text-green" />
-                <a href="tel:+258865543026" className="hover:text-green transition-colors">
-                  +258 86 554 3026
-                </a>
-              </li>
-              <li className="flex gap-2 items-center">
-                <MessageCircle className="w-4 h-4 text-green" />
-                <a
-                  href="https://wa.me/258865543026"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-green transition-colors flex items-center gap-1"
-                >
-                  WhatsApp
-                </a>
-              </li>
-              <li className="flex gap-2 items-center">
-                <Mail className="w-4 h-4 text-green" />
-                <a href="mailto:info@miriammall.co.mz" className="hover:text-green transition-colors">
-                  info@miriammall.co.mz
-                </a>
-              </li>
-            </ul>
+          {/* 3. Localização */}
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <h4 className="text-xs uppercase font-bold tracking-widest text-green mb-1">
+              Localização
+            </h4>
+            <div className="flex items-start gap-2.5 text-xs text-white/80">
+              <MapPin className="w-4 h-4 text-green shrink-0 mt-0.5" />
+              <p className="leading-relaxed">
+                Miriam Mall, Distrito de Homoíne,<br />
+                Município da Vila de Homoíne,<br />
+                Província de Inhambane, Moçambique
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/50 gap-4">
-          <p>
-            &copy; {currentYear} Miriam Mall. Todos os direitos reservados. | Powered by{' '}
-            <a
-              href="http://isvibe.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-green hover:text-green-light hover:underline transition-all font-medium"
-            >
-              Vibe
-            </a>
-          </p>
-          <div className="flex gap-6">
-            <Link href="/politica-de-privacidade" className="hover:text-green transition-colors">
-              Política de Privacidade
+        {/* Linha de Copyright Simples */}
+        <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center text-[11px] text-white/50">
+          <p>© {currentYear} Shopping Miriam Mall. Todos os direitos reservados.</p>
+          <div className="flex items-center gap-4">
+            <Link href="/sobre" className="hover:text-green transition-colors">
+              Sobre Nós
             </Link>
-            <Link href="/termos-de-uso" className="hover:text-green transition-colors">
-              Termos de Uso
+            <Link href="/espacos" className="hover:text-green transition-colors">
+              Espaços
             </Link>
-            <Link href="/politica-de-cookies" className="hover:text-green transition-colors">
-              Política de Cookies
+            <Link href="/contato" className="hover:text-green transition-colors">
+              Contacto
             </Link>
           </div>
         </div>
