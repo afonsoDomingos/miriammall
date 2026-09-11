@@ -27,7 +27,7 @@ export default function AdminBanners() {
     setImage('');
     setButtonText1('Apreciar');
     setButtonLink1('/lojas');
-    setButtonText2('Arrendar um Espaço');
+    setButtonText2('Arrendar');
     setButtonLink2('/espacos');
     setIsModalOpen(true);
   };

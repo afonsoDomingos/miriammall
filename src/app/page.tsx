@@ -158,7 +158,7 @@ export default function Home() {
       image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80',
       buttonText1: 'Apreciar',
       buttonLink1: '/lojas',
-      buttonText2: 'Arrendar um Espaço',
+      buttonText2: 'Arrendar',
       buttonLink2: '/espacos',
       isActive: true
     }
@@ -172,6 +172,7 @@ export default function Home() {
     title: (b.title === 'Miriam Mall' || b.title === 'Shopping Miriam Mall Lda') ? 'Shopping Miriam Mall' : b.title,
     subtitle: (b.subtitle.toLowerCase().includes('novo destino') || b.subtitle.toLowerCase().includes('shopping em breve') || b.subtitle.toLowerCase().includes('abrir em breve')) ? 'A abrir em breve' : b.subtitle,
     buttonText1: b.buttonText1.toLowerCase().includes('explorar') ? 'Apreciar' : b.buttonText1,
+    buttonText2: b.buttonText2.toLowerCase().includes('arrendar') ? 'Arrendar' : b.buttonText2,
   }));
 
   // Get available/reserved spaces for display (limit to 3 for preview)

@@ -168,7 +168,7 @@ export default function Navbar() {
               href="/espacos"
               className="text-[11px] uppercase tracking-wider text-green border border-green hover:bg-green hover:text-primary transition-all duration-300 font-semibold px-2.5 py-1.5 rounded whitespace-nowrap"
             >
-              Arrendar Espaço
+              Arrendar
             </Link>
             <Link
               href="/admin"
@@ -237,7 +237,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="w-full text-center tracking-wider text-green border border-green hover:bg-green hover:text-primary transition-all duration-300 font-semibold py-2.5 rounded text-sm uppercase"
                 >
-                  Arrendar Espaço
+                  Arrendar
                 </Link>
                 <Link
                   href="/admin"
