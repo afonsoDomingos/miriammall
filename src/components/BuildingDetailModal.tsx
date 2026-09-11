@@ -144,7 +144,7 @@ export default function BuildingDetailModal({ building, onClose }: BuildingDetai
               <div className="p-3 sm:p-4 rounded-xl bg-green/5 dark:bg-green/10 border border-green/15 text-center">
                 <MapPin className="w-5 h-5 text-green mx-auto mb-1.5" />
                 <span className="block text-xs font-bold text-slate-800 dark:text-white">Localização</span>
-                <span className="text-[11px] text-slate-500 dark:text-slate-400">Homoíne Central</span>
+                <span className="text-[11px] text-black font-medium">Homoíne Central</span>
               </div>
               <div className="p-3 sm:p-4 rounded-xl bg-green/5 dark:bg-green/10 border border-green/15 text-center">
                 <Sparkles className="w-5 h-5 text-green mx-auto mb-1.5" />
