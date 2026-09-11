@@ -86,7 +86,7 @@ export async function GET(req: Request) {
         },
         {
           $set: {
-            title: 'Shopping Miriam Mall',
+            title: 'Shopping Miriam Mall Lda',
             subtitle: 'A abrir em breve',
             buttonText1: 'Apreciar'
           }
