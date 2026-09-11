@@ -5,7 +5,6 @@ import { DatabaseProvider } from '../context/DatabaseContext';
 import { ToastProvider } from '../context/ToastContext';
 import ScrollToTop from '../components/ScrollToTop';
 import WhatsAppWidget from '../components/WhatsAppWidget';
-import CookieBanner from '../components/CookieBanner';
 import GoogleAdScript from '../components/GoogleAdScript';
 
 const playfair = Playfair_Display({
@@ -73,7 +72,6 @@ export default function RootLayout({
             {children}
             <ScrollToTop />
             <WhatsAppWidget />
-            <CookieBanner />
           </DatabaseProvider>
         </ToastProvider>
       </body>

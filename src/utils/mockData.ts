@@ -115,7 +115,7 @@ export const initialRentalRequests: RentalRequest[] = [];
 export const initialBanners: Banner[] = [
   {
     id: 'banner-1',
-    title: 'Shopping Miriam Mall Lda',
+    title: 'Shopping Miriam Mall',
     subtitle: 'A abrir em breve',
     image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80',
     buttonText1: 'Apreciar',

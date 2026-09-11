@@ -153,7 +153,7 @@ export default function Home() {
   const defaultBanners: Banner[] = [
     {
       id: 'default-banner',
-      title: 'Shopping Miriam Mall Lda',
+      title: 'Shopping Miriam Mall',
       subtitle: 'A abrir em breve',
       image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80',
       buttonText1: 'Apreciar',
@@ -169,7 +169,7 @@ export default function Home() {
   const bannersToUse = activeBanners.length > 0 ? activeBanners : (banners.length > 0 ? banners : defaultBanners);
   const displayBanners = bannersToUse.map((b) => ({
     ...b,
-    title: (b.title === 'Miriam Mall' || b.title === 'Shopping Miriam Mall') ? 'Shopping Miriam Mall Lda' : b.title,
+    title: (b.title === 'Miriam Mall' || b.title === 'Shopping Miriam Mall Lda') ? 'Shopping Miriam Mall' : b.title,
     subtitle: (b.subtitle.toLowerCase().includes('novo destino') || b.subtitle.toLowerCase().includes('shopping em breve') || b.subtitle.toLowerCase().includes('abrir em breve')) ? 'A abrir em breve' : b.subtitle,
     buttonText1: b.buttonText1.toLowerCase().includes('explorar') ? 'Apreciar' : b.buttonText1,
   }));
