@@ -241,8 +241,8 @@ export default function Home() {
                     transition={{ duration: 0.8 }}
                     className="max-w-2xl text-white"
                   >
-                    <span className="text-black font-semibold uppercase tracking-widest text-[10px] sm:text-xs md:text-sm flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
-                      <Palmtree className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-black animate-pulse shrink-0" /> Moçambique / Homoíne / Município da Vila de Homoíne
+                    <span style={{ color: '#000000' }} className="text-black font-semibold uppercase tracking-widest text-[10px] sm:text-xs md:text-sm flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                      <Palmtree style={{ color: '#000000' }} className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-black animate-pulse shrink-0" /> Moçambique / Homoíne / Município da Vila de Homoíne
                     </span>
                     <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight mb-3 sm:mb-4 leading-tight">
                       {banner.title.startsWith('Shopping ') ? (
