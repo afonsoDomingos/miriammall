@@ -120,7 +120,8 @@ export default function Footer() {
               <img
                 src="/miriam-logo.png"
                 alt="Miriam Mall"
-                className="h-12 w-auto object-contain brightness-0 invert"
+                className="h-8 sm:h-9 w-auto object-contain brightness-0 invert"
+                style={{ maxHeight: '36px', width: 'auto' }}
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed">

@@ -116,7 +116,8 @@ export default function Navbar() {
             <img
               src="/miriam-logo.png"
               alt="Miriam Mall"
-              className="h-7 sm:h-8 md:h-8.5 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              className="h-6 sm:h-7 md:h-8 max-h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              style={{ maxHeight: '32px', width: 'auto' }}
             />
           </Link>
 
