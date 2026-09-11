@@ -159,18 +159,18 @@ export default function BuildingDetailModal({ building, onClose }: BuildingDetai
             <Link
               href="/espacos"
               onClick={onClose}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold text-xs uppercase tracking-wider transition-all text-center flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-green hover:bg-green-light text-primary font-bold text-xs uppercase tracking-wider transition-all duration-300 text-center flex items-center justify-center gap-2 shadow-lg shadow-green/20"
             >
-              Ver Catálogo de Espaços
+              Arrendar um Espaço <ArrowRight className="w-4 h-4" />
             </Link>
 
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-green hover:bg-green-light text-primary font-bold text-xs uppercase tracking-wider transition-all duration-300 text-center flex items-center justify-center gap-2 shadow-lg shadow-green/20"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold text-xs uppercase tracking-wider transition-all text-center flex items-center justify-center gap-2"
             >
-              <MessageSquare className="w-4 h-4" /> Consultar Arrendamento <ArrowRight className="w-4 h-4" />
+              <MessageSquare className="w-4 h-4" /> Falar no WhatsApp
             </a>
           </div>
         </motion.div>

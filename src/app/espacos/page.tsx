@@ -8,13 +8,92 @@ import { useDatabase } from '../../context/DatabaseContext';
 import { Filter, Eye, CheckCircle, Clock, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
 
+import { Space } from '../../utils/mockData';
+
+const defaultSpaces: Space[] = [
+  {
+    id: 'space-1',
+    number: 'Loja 101 (Âncora Principal)',
+    floor: 0,
+    area: 120,
+    status: 'disponivel',
+    price: 'Sob Consulta',
+    description: 'Espaço premium com montra panorâmica no piso térreo, ideal para supermercado, loja âncora ou grande marca de moda.',
+    amenities: ['Montra de Alta Visibilidade', 'Climatização Central', 'Ponto de Água e Esgoto', 'Acesso Facilitado para Cargas'],
+    image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80',
+    blueprint: '/blueprints/default.png'
+  },
+  {
+    id: 'space-2',
+    number: 'Loja 102 (Comércio & Retalho)',
+    floor: 0,
+    area: 55,
+    status: 'disponivel',
+    price: 'Sob Consulta',
+    description: 'Excelente loja para boutique de vestuário, calçado, perfumaria ou ótica localizada no corredor principal de alto fluxo pedonal.',
+    amenities: ['Iluminação LED Moderna', 'Segurança 24h', 'Ligação Fibra Ótica'],
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80',
+    blueprint: '/blueprints/default.png'
+  },
+  {
+    id: 'space-3',
+    number: 'Loja 201 (Escritórios & Serviços)',
+    floor: 1,
+    area: 75,
+    status: 'disponivel',
+    price: 'Sob Consulta',
+    description: 'Espaço corporativo modular no 1º andar, perfeito para agência de seguros, consultoria, advocacia ou serviços de saúde.',
+    amenities: ['Ambiente Executivo Silencioso', 'Piso Técnico', 'Portaria Executiva', 'Elevador Panorâmico'],
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+    blueprint: '/blueprints/default.png'
+  },
+  {
+    id: 'space-4',
+    number: 'Loja 202 (Praça de Restauração)',
+    floor: 1,
+    area: 85,
+    status: 'disponivel',
+    price: 'Sob Consulta',
+    description: 'Unidade com conduta de extração de fumos e água, preparada para restaurante, pizzaria, hamburgueria ou café.',
+    amenities: ['Extração de Fumos', 'Gás Canalizado', 'Área de Mesas Partilhada', 'Ponto de Água'],
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
+    blueprint: '/blueprints/default.png'
+  },
+  {
+    id: 'space-5',
+    number: 'Loja 103 (Farmácia / Bem-Estar)',
+    floor: 0,
+    area: 60,
+    status: 'reservado',
+    price: 'Sob Consulta',
+    description: 'Posicionada junto à entrada principal com fácil acessibilidade para clientes e estacionamento.',
+    amenities: ['Acesso Térreo Direto', 'Montra Envidraçada', 'Climatização'],
+    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80',
+    blueprint: '/blueprints/default.png'
+  },
+  {
+    id: 'space-6',
+    number: 'Loja 203 (Tecnologia & Telecom)',
+    floor: 1,
+    area: 45,
+    status: 'disponivel',
+    price: 'Sob Consulta',
+    description: 'Espaço compacto e eficiente para atendimento ao público, loja de telecomunicações, acessórios ou eletrónica.',
+    amenities: ['Fibra Ótica', 'Segurança 24h', 'Sistema Anti-incêndio'],
+    image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=800&q=80',
+    blueprint: '/blueprints/default.png'
+  }
+];
+
 export default function Espacos() {
   const { spaces, isLoaded } = useDatabase();
   const [filterFloor, setFilterFloor] = useState<string>('todos');
   const [filterStatus, setFilterStatus] = useState<string>('todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const filteredSpaces = spaces.filter((space) => {
+  const allSpaces = spaces && spaces.length > 0 ? spaces : defaultSpaces;
+
+  const filteredSpaces = allSpaces.filter((space) => {
     const matchesFloor =
       filterFloor === 'todos' || space.floor.toString() === filterFloor;
     const matchesStatus =

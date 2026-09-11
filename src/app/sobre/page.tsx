@@ -25,7 +25,8 @@ import {
   Car,
   Phone,
   Store,
-  UtensilsCrossed
+  UtensilsCrossed,
+  Eye
 } from 'lucide-react';
 import Link from 'next/link';
 import ImageWithLoader from '../../components/ImageWithLoader';
@@ -417,12 +418,21 @@ export default function Sobre() {
                       <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-green" /> Homoíne Central</span>
                     </div>
 
-                    <button
-                      onClick={() => setSelectedBuilding(building)}
-                      className="w-full text-center bg-primary hover:bg-primary-light text-white text-[11px] font-bold uppercase tracking-wider py-2.5 rounded transition-all duration-300 mt-2 flex items-center justify-center gap-1.5 group-hover:bg-green group-hover:text-primary cursor-pointer shadow-sm"
-                    >
-                      <Sparkles className="w-3.5 h-3.5" /> Apreciar Edifício & Espaços
-                    </button>
+                    <div className="flex items-center gap-2 mt-2">
+                      <button
+                        onClick={() => setSelectedBuilding(building)}
+                        className="flex-1 text-center bg-slate-100 hover:bg-slate-200 text-primary text-[11px] font-bold uppercase tracking-wider py-2.5 rounded transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer"
+                        title="Ver fotos e detalhes do edifício"
+                      >
+                        <Eye className="w-3.5 h-3.5" /> Fotos
+                      </button>
+                      <Link
+                        href="/espacos"
+                        className="flex-1 text-center bg-green hover:bg-green-light text-primary text-[11px] font-bold uppercase tracking-wider py-2.5 rounded transition-all duration-300 flex items-center justify-center gap-1 shadow-sm hover:-translate-y-0.5 active:translate-y-0"
+                      >
+                        Arrendar
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}
