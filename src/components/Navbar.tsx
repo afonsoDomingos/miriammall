@@ -106,29 +106,29 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm ${
-        isScrolled ? 'py-2 sm:py-3' : 'py-2.5 sm:py-4'
+        isScrolled ? 'py-1.5 sm:py-2' : 'py-2 sm:py-2.5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group shrink-0">
             <img
               src="/miriam-logo.png"
               alt="Miriam Mall"
-              className="h-7 sm:h-8 md:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              className="h-7 sm:h-8 md:h-8.5 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-2.5 xl:gap-4 2xl:gap-5">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm tracking-wide font-medium transition-colors hover:text-green relative py-1 ${
+                  className={`text-xs xl:text-[13px] tracking-normal font-medium transition-colors hover:text-green relative py-1 whitespace-nowrap ${
                     isActive ? 'text-green' : 'text-primary/80'
                   }`}
                 >
@@ -146,34 +146,34 @@ export default function Navbar() {
           </nav>
 
           {/* CTA Buttons & Theme Toggle */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-2.5 shrink-0">
             <button
               onClick={() => { setIsSearchOpen(true); setSearchQuery(''); }}
-              className="p-2 rounded-lg bg-slate-50 border border-slate-200/60 text-primary hover:text-green hover:border-green hover:bg-white transition-all duration-300 dark:bg-slate-800/20 dark:border-green/10"
+              className="p-1.5 rounded-md bg-slate-50 border border-slate-200/60 text-primary hover:text-green hover:border-green hover:bg-white transition-all duration-300 dark:bg-slate-800/20 dark:border-green/10 cursor-pointer"
               title="Pesquisar no Site"
               aria-label="Search"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-3.5 h-3.5" />
             </button>
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-slate-50 border border-slate-200/60 text-primary hover:text-green hover:border-green hover:bg-white transition-all duration-300 dark:bg-slate-800/20 dark:border-green/10"
+              className="p-1.5 rounded-md bg-slate-50 border border-slate-200/60 text-primary hover:text-green hover:border-green hover:bg-white transition-all duration-300 dark:bg-slate-800/20 dark:border-green/10 cursor-pointer"
               title={theme === 'light' ? 'Ativar Modo Escuro' : 'Ativar Modo Claro'}
               aria-label="Toggle Theme"
             >
-              {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4 text-green" />}
+              {theme === 'light' ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5 text-green" />}
             </button>
             <Link
               href="/espacos"
-              className="text-xs uppercase tracking-wider text-green border border-green hover:bg-green hover:text-primary transition-all duration-300 font-semibold px-4 py-2 rounded"
+              className="text-[11px] uppercase tracking-wider text-green border border-green hover:bg-green hover:text-primary transition-all duration-300 font-semibold px-2.5 py-1.5 rounded whitespace-nowrap"
             >
               Arrendar Espaço
             </Link>
             <Link
               href="/admin"
-              className="text-xs uppercase tracking-wider bg-green hover:bg-green-light text-primary font-semibold px-4 py-2 rounded transition-all duration-300 flex items-center gap-1"
+              className="text-[11px] uppercase tracking-wider bg-green hover:bg-green-light text-primary font-semibold px-2.5 py-1.5 rounded transition-all duration-300 flex items-center gap-1 whitespace-nowrap"
             >
-              Painel Admin <ArrowRight className="w-3.5 h-3.5" />
+              Painel Admin <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
 
