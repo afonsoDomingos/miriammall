@@ -89,6 +89,7 @@ export async function GET(req: Request) {
             title: 'Shopping Miriam Mall',
             subtitle: 'A abrir em breve',
             buttonText1: 'Apreciar',
+            buttonLink1: '/sobre',
             buttonText2: 'Arrendar'
           }
         }

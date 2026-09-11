@@ -119,7 +119,7 @@ export const initialBanners: Banner[] = [
     subtitle: 'A abrir em breve',
     image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80',
     buttonText1: 'Apreciar',
-    buttonLink1: '/lojas',
+    buttonLink1: '/sobre',
     buttonText2: 'Arrendar',
     buttonLink2: '/espacos',
     isActive: true
