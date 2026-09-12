@@ -169,13 +169,7 @@ export default function Sobre() {
               </h2>
               <div className="space-y-4 text-primary/75 leading-relaxed text-sm sm:text-base">
                 <p>
-                  A <strong className="text-primary font-semibold">Miriam Mall – Sociedade Unipessoal, Lda.</strong> é uma empresa moçambicana especializada na gestão e arrendamento de imóveis comerciais de excelência. Constituída para responder à crescente procura de espaços modernos, seguros e funcionais no Distrito de Homoíne, Província de Inhambane.
-                </p>
-                <p>
-                  O <strong>Miriam Mall</strong> foi idealizado como um ecossistema integrado que reúne, num único empreendimento, lojas de retalho, supermercado âncora, serviços bancários e corporativos, espaços gastronómicos, esplanadas ao ar livre e áreas de lazer familiar.
-                </p>
-                <p>
-                  A nossa missão é disponibilizar infraestruturas de padrão internacional com gestão profissional, segurança integral 24h e um ambiente confortável que atrai consumidores e investidores de toda a província.
+                  A <strong className="text-primary font-semibold">Miriam Mall – Soc. Unipessoal, Lda.</strong> é uma empresa moçambicana de gestão e arrendamento de imóveis comerciais, concebida para reunir num único complexo — em Homoíne, Inhambane — lojas de retalho, serviços bancários, espaços gastronómicos e áreas de lazer, com segurança 24h e infraestrutura de padrão internacional.
                 </p>
               </div>
 
