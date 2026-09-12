@@ -228,21 +228,6 @@ export default function Sobre() {
                 Situado no coração do <strong>Distrito de Homoíne</strong>, Província de Inhambane, o complexo está posicionado no centro nevrálgico da vila, garantindo visibilidade ímpar e fácil acesso.
               </p>
             </div>
-
-
-            <div className="bg-primary rounded-2xl p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-              <div className="space-y-1 text-center sm:text-left">
-                <span className="text-green uppercase tracking-wider text-xs font-bold">Venha Visitar-nos</span>
-                <h4 className="font-serif text-xl sm:text-2xl font-bold">Deseja conhecer o local ou agendar uma visita comercial?</h4>
-                <p className="text-white/70 text-xs sm:text-sm">A nossa equipa de atendimento está disponível para o receber em Homoíne.</p>
-              </div>
-              <Link
-                href="/contato"
-                className="bg-green hover:bg-green-light text-primary text-xs sm:text-sm font-bold uppercase tracking-wider py-3.5 px-7 rounded shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 whitespace-nowrap"
-              >
-                Fale Connosco
-              </Link>
-            </div>
           </div>
         </section>
 
