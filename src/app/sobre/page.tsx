@@ -311,10 +311,10 @@ export default function Sobre() {
                     className="bg-white rounded-xl border border-primary/5 p-6 shadow-sm flex flex-col justify-between hover:shadow-xl hover:border-green/30 transition-all duration-300 group"
                   >
                     <div className="flex flex-col items-center text-center">
-                      {/* Building Round Image Thumbnail */}
+                      {/* Building Square Image Thumbnail */}
                       <div 
                         onClick={() => setSelectedBuilding(building)}
-                        className="w-24 h-24 rounded-full overflow-hidden border border-primary/10 mb-4 bg-light-gray flex items-center justify-center relative shadow-sm group-hover:border-green transition-colors cursor-pointer"
+                        className="w-full h-40 rounded-xl overflow-hidden border border-primary/10 mb-4 bg-light-gray flex items-center justify-center relative shadow-sm group-hover:border-green transition-colors cursor-pointer"
                       >
                         <img
                           src={building.image}
