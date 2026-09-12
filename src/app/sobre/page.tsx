@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useDatabase } from '../../context/DatabaseContext';
-import { Building as BuildingType } from '../../utils/mockData';
+import { Building as BuildingType, Banner } from '../../utils/mockData';
 import BuildingDetailModal from '../../components/BuildingDetailModal';
 import { 
   Building, 
@@ -22,7 +22,12 @@ import ImageWithLoader from '../../components/ImageWithLoader';
 import { motion } from 'framer-motion';
 
 export default function Sobre() {
-  const { buildings, isLoaded } = useDatabase();
+  const { buildings, banners, isLoaded } = useDatabase();
+
+  // Use the same hero image as the homepage (first active banner)
+  const defaultHeroImage = 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80';
+  const activeBanners = banners?.filter((b: Banner) => b.isActive) ?? [];
+  const heroBgImage = activeBanners.length > 0 ? activeBanners[0].image : (banners?.length > 0 ? banners[0].image : defaultHeroImage);
   const [selectedBuilding, setSelectedBuilding] = useState<BuildingType | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -130,8 +135,8 @@ export default function Sobre() {
         {/* Banner Section */}
         <section className="relative bg-gradient-to-r from-primary-dark via-primary to-primary-dark py-20 sm:py-24 text-white text-center overflow-hidden">
           <div 
-            className="absolute inset-0 z-0 bg-cover bg-center opacity-20 mix-blend-overlay" 
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80')" }} 
+            className="absolute inset-0 z-0 bg-cover bg-center opacity-40" 
+            style={{ backgroundImage: `url('${heroBgImage}')` }} 
           />
           {/* Decorative watermarks */}
           <Palmtree className="absolute -left-16 -bottom-16 w-64 h-64 text-green/10 pointer-events-none transform rotate-45" />
