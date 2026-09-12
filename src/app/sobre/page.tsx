@@ -7,27 +7,19 @@ import { useDatabase } from '../../context/DatabaseContext';
 import { Building as BuildingType } from '../../utils/mockData';
 import BuildingDetailModal from '../../components/BuildingDetailModal';
 import { 
-  Shield, 
-  Users, 
-  Compass, 
-  Award, 
   Building, 
-  CheckCircle2, 
-  Target, 
-  ArrowRight,
-  Briefcase,
-  Palmtree,
-  Sparkles,
   MapPin,
   Search,
   Layers,
-  Clock,
   Car,
   Phone,
-  Store,
-  UtensilsCrossed,
-  Eye
+  Eye,
+  Sparkles,
+  Palmtree,
+  ArrowRight,
+  Compass
 } from 'lucide-react';
+
 import Link from 'next/link';
 import ImageWithLoader from '../../components/ImageWithLoader';
 import { motion } from 'framer-motion';
@@ -132,49 +124,6 @@ export default function Sobre() {
 
     return [text];
   };
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' as const }
-    }
-  };
-
-  const services = [
-    { 
-      icon: Store, 
-      title: 'Lojas & Espaços Comerciais', 
-      desc: 'Montras amplas e de alta visibilidade, localizadas nos pontos de maior circulação e fluxo pedonal de Homoíne.' 
-    },
-    { 
-      icon: Briefcase, 
-      title: 'Escritórios & Consultórios', 
-      desc: 'Espaços funcionais e modernos, ideais para agências bancárias, telecomunicações, escritórios corporativos e clínicas.' 
-    },
-    { 
-      icon: UtensilsCrossed, 
-      title: 'Praça de Restauração', 
-      desc: 'Áreas preparadas para albergar operações gastronómicas, com infraestrutura adequada para extração e atendimento de excelência.' 
-    },
-    { 
-      icon: Compass, 
-      title: 'Soluções Flexíveis', 
-      desc: 'Espaços adaptáveis para quiosques, caixas automáticos (ATMs), stands promocionais e eventos corporativos.' 
-    }
-  ];
-
-  const values = ['Solidez', 'Qualidade', 'Transparência', 'Integridade', 'Segurança'];
 
   return (
     <>
@@ -477,130 +426,6 @@ export default function Sobre() {
           )}
         </section>
 
-        {/* 4. MISSÃO, VISÃO & VALORES */}
-        <section className="py-20 bg-light-gray border-t border-slate-200/40 relative">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block">Cultura Organizacional</span>
-              <h2 className="text-3xl font-serif font-bold text-primary">Missão, Visão & Valores</h2>
-              <div className="w-12 h-1 bg-green mx-auto mt-4 rounded-full" />
-            </div>
-
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            >
-              {/* Mission Card */}
-              <motion.div
-                variants={cardVariants}
-                className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-green/10 flex items-center justify-center mb-6 group-hover:bg-green transition-all duration-300">
-                    <Target className="w-6 h-6 text-green group-hover:text-primary transition-colors" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-primary mb-4">Missão</h3>
-                  <p className="text-primary/70 text-sm leading-relaxed">
-                    Prestar serviços de excelência e qualidade no arrendamento imobiliário comercial, garantindo total segurança, valorização contínua e a satisfação dos nossos lojistas e visitantes.
-                  </p>
-                </div>
-                <div className="w-full h-1.5 bg-green/10 rounded-full mt-6 overflow-hidden">
-                  <div className="w-full h-full bg-green transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-                </div>
-              </motion.div>
-
-              {/* Vision Card */}
-              <motion.div
-                variants={cardVariants}
-                className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-green/10 flex items-center justify-center mb-6 group-hover:bg-green transition-all duration-300">
-                    <Compass className="w-6 h-6 text-green group-hover:text-primary transition-colors" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-primary mb-4">Visão</h3>
-                  <p className="text-primary/70 text-sm leading-relaxed">
-                    Ser a referência líder no setor imobiliário e comercial em Inhambane, transformando empreendimentos em ativos que aceleram o desenvolvimento económico, social e cultural.
-                  </p>
-                </div>
-                <div className="w-full h-1.5 bg-green/10 rounded-full mt-6 overflow-hidden">
-                  <div className="w-full h-full bg-green transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-                </div>
-              </motion.div>
-
-              {/* Values Card */}
-              <motion.div
-                variants={cardVariants}
-                className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-green/10 flex items-center justify-center mb-6 group-hover:bg-green transition-all duration-300">
-                    <Shield className="w-6 h-6 text-green group-hover:text-primary transition-colors" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-primary mb-4">Valores</h3>
-                  <ul className="space-y-2.5">
-                    {values.map((val, i) => (
-                      <li key={i} className="flex items-center gap-2 text-primary/85 text-sm font-medium">
-                        <CheckCircle2 className="w-4 h-4 text-green" />
-                        <span>{val}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="w-full h-1.5 bg-green/10 rounded-full mt-6 overflow-hidden">
-                  <div className="w-full h-full bg-green transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* 5. SERVICES & ARRENDAMENTO */}
-        <section className="py-20 bg-white relative">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 sm:gap-16 items-start">
-              <div>
-                <span className="text-green font-semibold uppercase tracking-wider text-xs block mb-2">Nossas Soluções</span>
-                <h2 className="text-3xl font-serif font-bold text-primary mb-6">Tipologias de Espaços Disponíveis</h2>
-                <div className="space-y-4 text-primary/75 text-sm sm:text-base leading-relaxed mb-8">
-                  <p>
-                    Disponibilizamos espaços comerciais perfeitamente adaptados para diversos segmentos, desde pequenas boutiques a grandes operações corporativas.
-                  </p>
-                  <p>
-                    Com assessoria completa na escolha do espaço, formalização contratual transparente e suporte contínuo na instalação.
-                  </p>
-                </div>
-                <Link
-                  href="/espacos"
-                  className="inline-flex items-center gap-2 text-green hover:text-green-dark font-bold uppercase text-xs sm:text-sm tracking-wider border-b-2 border-green pb-1 transition-colors"
-                >
-                  Ver Todos os Espaços Comerciais <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-
-              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {services.map((srv, i) => {
-                  const SrvIcon = srv.icon;
-                  return (
-                    <div 
-                      key={i} 
-                      className="p-6 rounded-2xl bg-light-gray border border-primary/5 hover:border-green/20 hover:bg-white hover:shadow-xl transition-all duration-300 group cursor-default"
-                    >
-                      <div className="w-10 h-10 rounded-xl bg-green/10 flex items-center justify-center mb-4 text-green group-hover:bg-green group-hover:text-primary transition-all duration-300">
-                        <SrvIcon className="w-5 h-5" />
-                      </div>
-                      <h4 className="font-serif text-lg font-bold text-primary mb-2 group-hover:text-green transition-colors">{srv.title}</h4>
-                      <p className="text-xs sm:text-sm text-primary/65 leading-relaxed">{srv.desc}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-r from-primary-dark via-primary to-primary-dark text-white text-center relative overflow-hidden">
