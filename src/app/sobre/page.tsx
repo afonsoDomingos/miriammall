@@ -212,24 +212,6 @@ export default function Sobre() {
           </div>
         </section>
 
-        {/* 2. ONDE ESTAMOS LOCALIZADOS */}
-        <section className="py-20 bg-light-gray border-y border-slate-200/40 relative overflow-hidden">
-          <Palmtree className="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 text-primary/5 pointer-events-none transform rotate-12" />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="text-green font-semibold uppercase tracking-wider text-xs mb-2 block flex items-center justify-center gap-1.5">
-                <MapPin className="w-4 h-4 text-green" /> Localização Estratégica
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
-                Onde Está Localizado o Miriam Mall?
-              </h2>
-              <div className="w-16 h-1 bg-green mx-auto mb-6 rounded-full" />
-              <p className="text-primary/75 text-sm sm:text-base leading-relaxed">
-                Situado no coração do <strong>Distrito de Homoíne</strong>, Província de Inhambane, o complexo está posicionado no centro nevrálgico da vila, garantindo visibilidade ímpar e fácil acesso.
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* 3. OS EDIFÍCIOS DA MIRIAM MALL (USANDO O MESMO DESIGN DE /lojas) */}
         <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
