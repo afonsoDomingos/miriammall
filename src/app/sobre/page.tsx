@@ -399,94 +399,80 @@ export default function Sobre() {
             </div>
           </div>
 
-          {/* Grid of Buildings - EXACT /lojas card design */}
+          {/* Grid of Buildings - EXACT /lojas clean card design */}
           {filteredBuildings.length === 0 ? (
             <div className="text-center py-16 text-primary/60 text-sm border border-dashed border-primary/10 rounded-lg">
               Nenhum edifício encontrado com a pesquisa indicada.
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredBuildings.map((building, index) => (
-                <div
-                  key={building.id}
-                  className="bg-white rounded-xl border border-primary/5 p-6 shadow-sm flex flex-col justify-between hover:shadow-xl hover:border-green/30 transition-all duration-300 group"
-                >
-                  <div className="flex flex-col items-center text-center">
-                    {/* Building Round Image Thumbnail (matching /lojas logo design) */}
-                    <div className="w-24 h-24 rounded-full overflow-hidden border border-primary/10 mb-4 bg-light-gray flex items-center justify-center relative shadow-sm group-hover:border-green transition-colors">
-                      <img
-                        src={building.image}
-                        alt={building.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                    </div>
+              {filteredBuildings.map((building, index) => {
+                // Get clean short summary for card
+                const shortSummary = 
+                  building.description.split(/(?=[1-9]\s*[.º°]*\s*Piso|Piso\s*[0-9]|\n|\.)/i)[0] || building.description;
 
-                    {/* Subtitle / Category Badge */}
-                    <span className="text-[10px] uppercase font-bold text-green bg-green/5 px-2.5 py-0.5 rounded-full mb-3 tracking-wider">
-                      {building.subtitle || 'Complexo Multifuncional'}
-                    </span>
-
-                    {/* Building Name */}
-                    <h3 className="text-lg font-bold font-serif text-primary mb-2 group-hover:text-green transition-colors">
-                      {building.name}
-                    </h3>
-
-                    {/* Enumerated Description */}
-                    <div className="w-full text-left my-3 space-y-1.5 flex-grow">
-                      {parseEnumeratedItems(building.description).map((item, itemIdx) => (
-                        <div
-                          key={itemIdx}
-                          className="flex items-start gap-2 bg-slate-50/90 hover:bg-green/5 p-2 rounded-lg border border-slate-100/90 transition-colors"
-                        >
-                          <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green/10 text-green font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
-                            {itemIdx + 1}
-                          </span>
-                          <span className="text-xs text-primary/85 font-medium leading-snug">
-                            {item}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Features List */}
-                    <div className="w-full text-left bg-slate-50 p-3 rounded-lg border border-slate-100 mb-4 space-y-1.5">
-                      <span className="text-[10px] uppercase tracking-wider font-bold text-primary/60 block mb-1">
-                        Destaques Construtivos:
-                      </span>
-                      {building.features.slice(0, 3).map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-center gap-1.5 text-xs text-primary/80">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-green shrink-0" />
-                          <span className="truncate">{feat}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Card Bottom Meta & Action */}
-                  <div className="border-t border-primary/5 pt-4 space-y-2">
-                    <div className="flex justify-between items-center text-[10px] text-primary/50 font-medium">
-                      <span className="flex items-center gap-1"><Layers className="w-3.5 h-3.5" /> Edifício {building.order || (index + 1)}</span>
-                      <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-green" /> Homoíne Central</span>
-                    </div>
-
-                    <div className="flex items-center gap-2 mt-2">
-                      <button
+                return (
+                  <div
+                    key={building.id}
+                    className="bg-white rounded-xl border border-primary/5 p-6 shadow-sm flex flex-col justify-between hover:shadow-xl hover:border-green/30 transition-all duration-300 group"
+                  >
+                    <div className="flex flex-col items-center text-center">
+                      {/* Building Round Image Thumbnail */}
+                      <div 
                         onClick={() => setSelectedBuilding(building)}
-                        className="flex-1 text-center bg-slate-100 hover:bg-slate-200 text-primary text-[11px] font-bold uppercase tracking-wider py-2.5 rounded transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer"
-                        title="Ver fotos e detalhes do edifício"
+                        className="w-24 h-24 rounded-full overflow-hidden border border-primary/10 mb-4 bg-light-gray flex items-center justify-center relative shadow-sm group-hover:border-green transition-colors cursor-pointer"
                       >
-                        <Eye className="w-3.5 h-3.5" /> Fotos
-                      </button>
-                      <Link
-                        href="/espacos"
-                        className="flex-1 text-center bg-green hover:bg-green-light text-primary text-[11px] font-bold uppercase tracking-wider py-2.5 rounded transition-all duration-300 flex items-center justify-center gap-1 shadow-sm hover:-translate-y-0.5 active:translate-y-0"
+                        <img
+                          src={building.image}
+                          alt={building.name}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                      </div>
+
+                      {/* Subtitle / Category Badge */}
+                      <span className="text-[10px] uppercase font-bold text-green bg-green/5 px-2.5 py-0.5 rounded-full mb-3 tracking-wider">
+                        {building.subtitle || 'Complexo Multifuncional'}
+                      </span>
+
+                      {/* Building Name */}
+                      <h3 
+                        onClick={() => setSelectedBuilding(building)}
+                        className="text-lg font-bold font-serif text-primary mb-2 group-hover:text-green transition-colors cursor-pointer"
                       >
-                        Arrendar
-                      </Link>
+                        {building.name}
+                      </h3>
+
+                      {/* Short Concise Summary */}
+                      <p className="text-primary/70 text-xs sm:text-sm line-clamp-2 leading-relaxed mb-6">
+                        {shortSummary}
+                      </p>
+                    </div>
+
+                    {/* Card Bottom Meta & Action */}
+                    <div className="border-t border-primary/5 pt-4 space-y-2">
+                      <div className="flex justify-between items-center text-[10px] text-primary/50 font-medium">
+                        <span className="flex items-center gap-1"><Layers className="w-3.5 h-3.5" /> Edifício {building.order || (index + 1)}</span>
+                        <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-green" /> Homoíne Central</span>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-1">
+                        <button
+                          onClick={() => setSelectedBuilding(building)}
+                          className="flex-1 text-center bg-primary hover:bg-primary-light text-white text-[11px] font-bold uppercase tracking-wider py-2.5 rounded transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer"
+                        >
+                          <Eye className="w-3.5 h-3.5" /> Ver Detalhes
+                        </button>
+                        <Link
+                          href="/espacos"
+                          className="flex-1 text-center bg-green hover:bg-green-light text-primary text-[11px] font-bold uppercase tracking-wider py-2.5 rounded transition-all duration-300 flex items-center justify-center gap-1 shadow-sm font-semibold hover:-translate-y-0.5 active:translate-y-0"
+                        >
+                          Arrendar
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </section>
