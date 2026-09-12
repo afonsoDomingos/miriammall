@@ -25,7 +25,7 @@ export default function Home() {
       id: 'default-banner',
       title: 'Shopping Miriam Mall',
       subtitle: 'A abrir em breve',
-      image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80',
+      image: 'https://res.cloudinary.com/dnvnftvky/image/upload/v1784284817/miriam_mall/ssakfoiyoj4sxvg26ce5.jpg',
       buttonText1: 'Apreciar',
       buttonLink1: '/sobre',
       buttonText2: 'Arrendar',

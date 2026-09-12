@@ -94,6 +94,16 @@ export async function GET(req: Request) {
           }
         }
       );
+
+      // Replace old generic unsplash hero image if present
+      await Banner.updateMany(
+        { image: { $regex: /photo-1519501025264/ } },
+        {
+          $set: {
+            image: 'https://res.cloudinary.com/dnvnftvky/image/upload/v1784284817/miriam_mall/ssakfoiyoj4sxvg26ce5.jpg'
+          }
+        }
+      );
     }
 
     return NextResponse.json({

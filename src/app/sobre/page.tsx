@@ -24,10 +24,11 @@ import { motion } from 'framer-motion';
 export default function Sobre() {
   const { buildings, banners, isLoaded } = useDatabase();
 
-  // Use the same hero image as the homepage (first active banner)
-  const defaultHeroImage = 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1920&q=80';
-  const activeBanners = banners?.filter((b: Banner) => b.isActive) ?? [];
-  const heroBgImage = activeBanners.length > 0 ? activeBanners[0].image : (banners?.length > 0 ? banners[0].image : defaultHeroImage);
+  // Use the same hero image as the homepage (first active banner or Miriam Mall facade)
+  const defaultHeroImage = 'https://res.cloudinary.com/dnvnftvky/image/upload/v1784284817/miriam_mall/ssakfoiyoj4sxvg26ce5.jpg';
+  const cleanBanners = banners?.filter((b: Banner) => b.image && !b.image.includes('unsplash.com/photo-1519501025264')) ?? [];
+  const activeBanners = cleanBanners.filter((b: Banner) => b.isActive);
+  const heroBgImage = activeBanners.length > 0 ? activeBanners[0].image : (cleanBanners.length > 0 ? cleanBanners[0].image : defaultHeroImage);
   const [selectedBuilding, setSelectedBuilding] = useState<BuildingType | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -200,8 +201,8 @@ export default function Sobre() {
             >
               <div className="relative h-[380px] sm:h-[440px] rounded-xl overflow-hidden group">
                 <ImageWithLoader
-                  src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80"
-                  alt="Interior do Miriam Mall"
+                  src="/MIRIAM_BUILDING.jpg"
+                  alt="Complexo Miriam Mall"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-primary-dark/20 to-transparent pointer-events-none" />
