@@ -372,32 +372,6 @@ export default function Sobre() {
         </section>
 
 
-        {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-primary-dark via-primary to-primary-dark text-white text-center relative overflow-hidden">
-          <Palmtree className="absolute -right-12 -bottom-12 w-48 h-48 text-white/5 pointer-events-none transform -rotate-12" />
-          <div className="max-w-4xl mx-auto px-4 relative z-10">
-            <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-              Faça Parte do Futuro Comercial de Homoíne
-            </h3>
-            <p className="text-white/80 text-sm sm:text-base max-w-xl mx-auto mb-8 font-light leading-relaxed">
-              Arrende o seu espaço no Miriam Mall e posicione a sua marca no centro comercial de maior potencial da região.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link
-                href="/espacos"
-                className="bg-green hover:bg-green-light text-primary text-xs sm:text-sm font-bold uppercase tracking-wider py-3.5 px-8 rounded shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-              >
-                Arrendar um Espaço
-              </Link>
-              <Link
-                href="/contato"
-                className="border border-white/40 hover:border-white text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-3.5 px-8 rounded hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-              >
-                Contactar a Administração
-              </Link>
-            </div>
-          </div>
-        </section>
       </main>
 
       {/* Building Detail Modal when user clicks to appreciate the building */}
