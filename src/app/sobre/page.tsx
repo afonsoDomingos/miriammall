@@ -321,6 +321,10 @@ export default function Sobre() {
                           alt={building.name}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
+                        {/* Number Badge */}
+                        <span className="absolute top-2.5 left-2.5 w-7 h-7 rounded-full bg-primary text-green text-xs font-bold flex items-center justify-center shadow-md z-10 font-serif">
+                          {building.order || (index + 1)}
+                        </span>
                       </div>
 
                       {/* Subtitle / Category Badge */}
