@@ -138,11 +138,8 @@ export default function Sobre() {
           <Palmtree className="absolute -right-16 -top-16 w-64 h-64 text-white/5 pointer-events-none transform -rotate-12" />
 
           <div className="relative z-10 max-w-4xl mx-auto px-4">
-            <span className="text-green uppercase tracking-widest text-xs font-bold block mb-3 flex items-center justify-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-green animate-pulse" /> Saiba Mais Sobre o Miriam Mall
-            </span>
             <h1 className="text-3xl sm:text-4xl sm:text-5xl font-serif font-bold mb-4 tracking-tight">
-              O Que É o Shopping Miriam Mall
+              Saiba Mais
             </h1>
             <div className="w-16 h-1 bg-green mx-auto mb-6 rounded-full" />
             <p className="text-white/80 text-sm sm:text-base md:text-lg font-light max-w-2xl mx-auto leading-relaxed">
