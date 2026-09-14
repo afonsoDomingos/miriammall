@@ -62,17 +62,22 @@ export default function Sobre() {
     }
   ];
 
-  const allBuildings = buildings && buildings.length > 0 ? buildings : defaultBuildings;
+  const getBuilding = (index: number) => {
+    if (buildings && buildings[index]) {
+      return buildings[index];
+    }
+    return defaultBuildings[index] || defaultBuildings[0];
+  };
 
-  const buildingA = allBuildings.find(b => b.order === 1 || b.name.includes('A') || b.id === 'building-1') || allBuildings[0] || defaultBuildings[0];
-  const buildingB = allBuildings.find(b => b.order === 2 || b.name.includes('B') || b.id === 'building-2') || allBuildings[1] || defaultBuildings[1];
-  const buildingC = allBuildings.find(b => b.order === 3 || b.name.includes('C') || b.id === 'building-3') || allBuildings[2] || defaultBuildings[2];
+  const buildingA = getBuilding(0);
+  const buildingB = getBuilding(1);
+  const buildingC = getBuilding(2);
 
   const actionButtons = [
     {
       id: 'btn-building-1',
-      badge: 'Edifício A',
-      title: buildingA.name.replace(/\s*\(A\)/i, ''),
+      badge: buildingA.name.includes('A') ? 'Edifício A' : (buildingA.order ? `Edifício ${buildingA.order}` : 'Edifício A'),
+      title: buildingA.name || 'Edifício Principal',
       subtitle: buildingA.subtitle || 'Comércio & Âncoras',
       actionText: 'Ver Detalhes',
       icon: Store,
@@ -81,9 +86,9 @@ export default function Sobre() {
     },
     {
       id: 'btn-building-2',
-      badge: 'Edifício B',
-      title: buildingB.name.replace(/\s*\(B\)/i, ''),
-      subtitle: buildingB.subtitle || 'Serviços & Escritórios',
+      badge: buildingB.name.includes('B') ? 'Edifício B' : (buildingB.order ? `Edifício ${buildingB.order}` : 'Edifício B'),
+      title: buildingB.name || 'Edifício Empresarial',
+      subtitle: buildingB.subtitle || 'Serviços & Escritórios Corporativos',
       actionText: 'Ver Detalhes',
       icon: Briefcase,
       isSpecial: false,
@@ -91,9 +96,9 @@ export default function Sobre() {
     },
     {
       id: 'btn-building-3',
-      badge: 'Edifício C',
-      title: buildingC.name.replace(/\s*\(C\)/i, ''),
-      subtitle: buildingC.subtitle || 'Lazer & Restauração',
+      badge: buildingC.name.includes('C') ? 'Edifício C' : (buildingC.order ? `Edifício ${buildingC.order}` : 'Edifício C'),
+      title: buildingC.name || 'Edifício Lazer & Convivência',
+      subtitle: buildingC.subtitle || 'Restaurantes, Rooftop & Bem-Estar',
       actionText: 'Ver Detalhes',
       icon: Utensils,
       isSpecial: false,
@@ -115,48 +120,39 @@ export default function Sobre() {
     <>
       <Navbar />
 
-      <main className="flex-grow pt-16 sm:pt-[72px] bg-white flex flex-col justify-between">
-        {/* Compact Hero Banner Section */}
-        <section className="relative bg-gradient-to-r from-primary-dark via-primary to-primary-dark py-3.5 sm:py-4 text-white text-center overflow-hidden">
-          <div 
-            className="absolute inset-0 z-0 bg-cover bg-center opacity-30" 
-            style={{ backgroundImage: `url('${heroBgImage}')` }} 
-          />
-          {/* Decorative watermarks */}
-          <Palmtree className="absolute -left-16 -bottom-16 w-40 h-40 text-green/10 pointer-events-none transform rotate-45" />
-          <Palmtree className="absolute -right-16 -top-16 w-40 h-40 text-white/5 pointer-events-none transform -rotate-12" />
+      <main className="flex-grow pt-16 sm:pt-[72px] relative bg-gradient-to-r from-primary-dark via-primary to-primary-dark text-white overflow-hidden flex flex-col justify-between">
+        {/* Background Image & Decorative Watermarks */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center opacity-30 pointer-events-none" 
+          style={{ backgroundImage: `url('${heroBgImage}')` }} 
+        />
+        <Palmtree className="absolute -left-16 -bottom-16 w-52 h-52 text-green/10 pointer-events-none transform rotate-45" />
+        <Palmtree className="absolute -right-16 -top-16 w-52 h-52 text-white/5 pointer-events-none transform -rotate-12" />
 
-          <div className="relative z-10 max-w-3xl mx-auto px-4">
-            <h1 className="text-lg sm:text-xl md:text-2xl font-serif font-bold mb-1.5 tracking-tight">
-              Saiba Mais
-            </h1>
-            <p className="text-white/80 text-[11px] sm:text-xs font-light max-w-md mx-auto leading-relaxed">
-              Descubra o propósito, a localização e a infraestrutura concebida para transformar Homoíne e impulsionar o seu negócio.
-            </p>
-          </div>
-        </section>
-
-        {/* Quem Somos & 4 Botões de Acção dos Edifícios */}
-        <section className="py-2.5 sm:py-3.5 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex flex-col justify-center">
+        {/* Unified Content Section on same background */}
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex flex-col justify-center py-5 sm:py-7 text-center">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center max-w-3xl mx-auto mb-3 sm:mb-4"
+            className="max-w-3xl mx-auto mb-5 sm:mb-6"
           >
-            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-green/10 border border-green/20 text-green text-[10px] font-bold uppercase tracking-wider mb-1.5">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold mb-1.5 tracking-tight text-white">
+              Saiba Mais
+            </h1>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-green/15 border border-green/30 text-green text-[10px] font-bold uppercase tracking-wider mb-2">
               <Building className="w-3 h-3" /> Quem Somos & O Nosso Conceito
             </div>
-            <h2 className="text-lg sm:text-xl font-serif font-bold text-primary mb-1 leading-tight">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-white mb-2 leading-tight">
               Um Complexo Comercial Moderno e Multifuncional
             </h2>
-            <p className="text-primary/75 leading-relaxed text-[11px] sm:text-xs">
-              A <strong className="text-primary font-semibold">Miriam Mall – Soc. Unipessoal, Lda.</strong> é uma empresa moçambicana de gestão e arrendamento de imóveis comerciais em Homoíne, Inhambane. Reúne num único complexo lojas de retalho, serviços bancários, espaços gastronómicos e áreas de lazer, com segurança 24h e infraestrutura de padrão internacional.
+            <p className="text-white/80 leading-relaxed text-[11px] sm:text-xs max-w-2xl mx-auto">
+              A <strong className="text-white font-semibold">Miriam Mall – Soc. Unipessoal, Lda.</strong> é uma empresa moçambicana de gestão e arrendamento de imóveis comerciais em Homoíne, Inhambane. Reúne num único complexo lojas de retalho, serviços bancários, espaços gastronómicos e áreas de lazer, com segurança 24h e infraestrutura de padrão internacional.
             </p>
           </motion.div>
 
           {/* 4 Botões de Acção Direta */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             {actionButtons.map((btn) => {
               const Icon = btn.icon;
 
@@ -164,47 +160,47 @@ export default function Sobre() {
                 <div 
                   className={`h-full p-4 rounded-xl border transition-all duration-300 flex flex-col justify-between text-left group cursor-pointer ${
                     btn.isSpecial
-                      ? 'bg-gradient-to-br from-primary to-primary-dark text-white border-green/30 hover:border-green hover:shadow-lg hover:-translate-y-0.5'
-                      : 'bg-slate-50/80 hover:bg-white text-primary border-slate-200/70 hover:border-green/40 hover:shadow-lg hover:-translate-y-0.5'
+                      ? 'bg-gradient-to-br from-green to-green-dark text-primary border-green shadow-xl hover:shadow-green-glow hover:-translate-y-1'
+                      : 'bg-white/95 hover:bg-white text-primary border-white/20 shadow-xl hover:border-green hover:shadow-2xl hover:-translate-y-1 backdrop-blur-sm'
                   }`}
                 >
                   <div>
                     {/* Top row with icon & badge */}
-                    <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center justify-between mb-2.5">
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
                         btn.isSpecial 
-                          ? 'bg-green/20 text-green group-hover:bg-green group-hover:text-primary' 
-                          : 'bg-white text-primary border border-slate-200/60 group-hover:border-green group-hover:text-green'
+                          ? 'bg-primary text-green group-hover:bg-primary-dark' 
+                          : 'bg-primary/5 text-primary border border-primary/10 group-hover:bg-primary group-hover:text-green'
                       }`}>
                         <Icon className="w-4 h-4" />
                       </div>
                       <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
                         btn.isSpecial
-                          ? 'bg-green text-primary font-semibold'
-                          : 'bg-primary/5 text-primary/70 group-hover:bg-green/10 group-hover:text-green'
+                          ? 'bg-primary text-green font-bold'
+                          : 'bg-primary/5 text-primary/70 group-hover:bg-green/15 group-hover:text-green-dark'
                       }`}>
                         {btn.badge}
                       </span>
                     </div>
 
                     {/* Title and Subtitle */}
-                    <h3 className={`font-serif font-bold text-sm sm:text-base mb-0.5 transition-colors ${
-                      btn.isSpecial ? 'text-white' : 'text-primary group-hover:text-green'
+                    <h3 className={`font-serif font-bold text-sm sm:text-base mb-1 transition-colors ${
+                      btn.isSpecial ? 'text-primary' : 'text-primary group-hover:text-primary-dark'
                     }`}>
                       {btn.title}
                     </h3>
                     <p className={`text-[11px] line-clamp-2 leading-relaxed ${
-                      btn.isSpecial ? 'text-white/70' : 'text-primary/60'
+                      btn.isSpecial ? 'text-primary/80 font-medium' : 'text-primary/65'
                     }`}>
                       {btn.subtitle}
                     </p>
                   </div>
 
                   {/* Bottom Action Hint */}
-                  <div className={`mt-3 pt-2 border-t flex items-center justify-between text-[11px] font-semibold ${
+                  <div className={`mt-3.5 pt-2 border-t flex items-center justify-between text-[11px] font-semibold ${
                     btn.isSpecial 
-                      ? 'border-white/10 text-green group-hover:text-white' 
-                      : 'border-slate-200/60 text-primary/70 group-hover:text-green'
+                      ? 'border-primary/20 text-primary group-hover:text-primary-dark' 
+                      : 'border-slate-200/80 text-primary/70 group-hover:text-green'
                   }`}>
                     <span>{btn.actionText}</span>
                     {btn.isSpecial ? (
@@ -236,7 +232,7 @@ export default function Sobre() {
               );
             })}
           </div>
-        </section>
+        </div>
       </main>
 
       {/* Building Detail Modal when user clicks to appreciate the building */}
