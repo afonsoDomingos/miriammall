@@ -49,9 +49,6 @@ export default function Footer() {
                 className="h-8 sm:h-9 w-auto object-contain brightness-0 invert"
               />
             </Link>
-            <p className="text-white/70 text-xs max-w-xs leading-relaxed">
-              O novo centro de compras, negócios, lazer e investimento no Distrito de Homoíne, Inhambane.
-            </p>
             {/* Redes Sociais */}
             <div className="flex items-center gap-3 pt-1">
               <a
@@ -131,9 +128,7 @@ export default function Footer() {
             <div className="flex items-start gap-2.5 text-xs text-white/80">
               <MapPin className="w-4 h-4 text-green shrink-0 mt-0.5" />
               <p className="leading-relaxed">
-                Miriam Mall, Distrito de Homoíne,<br />
-                Município da Vila de Homoíne,<br />
-                Província de Inhambane, Moçambique
+                MOÇAMBIQUE / HOMOÍNE / MUNICÍPIO DA VILA DE HOMOÍNE
               </p>
             </div>
           </div>
