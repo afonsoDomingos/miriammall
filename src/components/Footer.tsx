@@ -30,15 +30,16 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export default function Footer() {
   const pathname = usePathname();
   const isAdminRoute = pathname?.startsWith('/admin');
+  const isSobrePage = pathname === '/sobre';
 
   if (isAdminRoute) return null;
 
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary-dark text-white border-t border-green/15 py-10 sm:py-12">
+    <footer className={`bg-primary-dark text-white border-t border-green/15 ${isSobrePage ? 'py-3 sm:py-3.5' : 'py-10 sm:py-12'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 items-center text-center md:text-left">
+        <div className={`grid grid-cols-1 md:grid-cols-3 ${isSobrePage ? 'gap-3 sm:gap-4' : 'gap-8 sm:gap-12'} items-center text-center md:text-left`}>
           {/* 1. Logo & Redes Sociais */}
           <div className="flex flex-col items-center md:items-start gap-4">
             <Link href="/" className="inline-block">
@@ -135,7 +136,7 @@ export default function Footer() {
         </div>
 
         {/* Linha de Copyright Simples */}
-        <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center text-[11px] text-white/50">
+        <div className={`border-t border-white/10 ${isSobrePage ? 'mt-3 sm:mt-4 pt-2 sm:pt-3' : 'mt-10 pt-6'} flex flex-col sm:flex-row items-center justify-between gap-2 text-center text-[11px] text-white/50`}>
           <p>© {currentYear} Shopping Miriam Mall. Todos os direitos reservados.</p>
           <div className="flex items-center gap-4">
             <Link href="/sobre" className="hover:text-green transition-colors">

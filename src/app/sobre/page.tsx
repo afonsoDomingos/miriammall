@@ -115,71 +115,71 @@ export default function Sobre() {
     <>
       <Navbar />
 
-      <main className="flex-grow pt-24 bg-white min-h-[calc(100vh-80px)] flex flex-col justify-between">
+      <main className="flex-grow pt-16 sm:pt-[72px] bg-white flex flex-col justify-between">
         {/* Compact Hero Banner Section */}
-        <section className="relative bg-gradient-to-r from-primary-dark via-primary to-primary-dark py-10 sm:py-12 text-white text-center overflow-hidden">
+        <section className="relative bg-gradient-to-r from-primary-dark via-primary to-primary-dark py-3.5 sm:py-4 text-white text-center overflow-hidden">
           <div 
             className="absolute inset-0 z-0 bg-cover bg-center opacity-30" 
             style={{ backgroundImage: `url('${heroBgImage}')` }} 
           />
           {/* Decorative watermarks */}
-          <Palmtree className="absolute -left-16 -bottom-16 w-56 h-56 text-green/10 pointer-events-none transform rotate-45" />
-          <Palmtree className="absolute -right-16 -top-16 w-56 h-56 text-white/5 pointer-events-none transform -rotate-12" />
+          <Palmtree className="absolute -left-16 -bottom-16 w-40 h-40 text-green/10 pointer-events-none transform rotate-45" />
+          <Palmtree className="absolute -right-16 -top-16 w-40 h-40 text-white/5 pointer-events-none transform -rotate-12" />
 
           <div className="relative z-10 max-w-3xl mx-auto px-4">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold mb-2 tracking-tight">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-serif font-bold mb-1 tracking-tight">
               Saiba Mais
             </h1>
-            <div className="w-12 h-1 bg-green mx-auto mb-3 rounded-full" />
-            <p className="text-white/80 text-xs sm:text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed">
+            <div className="w-8 h-0.5 bg-green mx-auto mb-1.5 rounded-full" />
+            <p className="text-white/80 text-[11px] sm:text-xs font-light max-w-md mx-auto leading-relaxed">
               Descubra o propósito, a localização e a infraestrutura concebida para transformar Homoíne e impulsionar o seu negócio.
             </p>
           </div>
         </section>
 
         {/* Quem Somos & 4 Botões de Acção dos Edifícios */}
-        <section className="py-8 sm:py-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex flex-col justify-center">
+        <section className="py-2.5 sm:py-3.5 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex flex-col justify-center">
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto mb-8 sm:mb-10"
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-3xl mx-auto mb-3 sm:mb-4"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green/10 border border-green/20 text-green text-xs font-bold uppercase tracking-wider mb-3">
-              <Building className="w-3.5 h-3.5" /> Quem Somos & O Nosso Conceito
+            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-green/10 border border-green/20 text-green text-[10px] font-bold uppercase tracking-wider mb-1.5">
+              <Building className="w-3 h-3" /> Quem Somos & O Nosso Conceito
             </div>
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-primary mb-3 leading-tight">
+            <h2 className="text-lg sm:text-xl font-serif font-bold text-primary mb-1 leading-tight">
               Um Complexo Comercial Moderno e Multifuncional
             </h2>
-            <p className="text-primary/75 leading-relaxed text-xs sm:text-sm md:text-base">
+            <p className="text-primary/75 leading-relaxed text-[11px] sm:text-xs">
               A <strong className="text-primary font-semibold">Miriam Mall – Soc. Unipessoal, Lda.</strong> é uma empresa moçambicana de gestão e arrendamento de imóveis comerciais em Homoíne, Inhambane. Reúne num único complexo lojas de retalho, serviços bancários, espaços gastronómicos e áreas de lazer, com segurança 24h e infraestrutura de padrão internacional.
             </p>
           </motion.div>
 
           {/* 4 Botões de Acção Direta */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-            {actionButtons.map((btn, index) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {actionButtons.map((btn) => {
               const Icon = btn.icon;
 
               const CardContent = (
                 <div 
-                  className={`h-full p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between text-left group cursor-pointer ${
+                  className={`h-full p-4 rounded-xl border transition-all duration-300 flex flex-col justify-between text-left group cursor-pointer ${
                     btn.isSpecial
-                      ? 'bg-gradient-to-br from-primary to-primary-dark text-white border-green/30 hover:border-green hover:shadow-xl hover:-translate-y-1'
-                      : 'bg-slate-50/80 hover:bg-white text-primary border-slate-200/70 hover:border-green/40 hover:shadow-xl hover:-translate-y-1'
+                      ? 'bg-gradient-to-br from-primary to-primary-dark text-white border-green/30 hover:border-green hover:shadow-lg hover:-translate-y-0.5'
+                      : 'bg-slate-50/80 hover:bg-white text-primary border-slate-200/70 hover:border-green/40 hover:shadow-lg hover:-translate-y-0.5'
                   }`}
                 >
                   <div>
                     {/* Top row with icon & badge */}
-                    <div className="flex items-center justify-between mb-3">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                    <div className="flex items-center justify-between mb-2">
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
                         btn.isSpecial 
                           ? 'bg-green/20 text-green group-hover:bg-green group-hover:text-primary' 
                           : 'bg-white text-primary border border-slate-200/60 group-hover:border-green group-hover:text-green'
                       }`}>
-                        <Icon className="w-5 h-5" />
+                        <Icon className="w-4 h-4" />
                       </div>
-                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                      <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
                         btn.isSpecial
                           ? 'bg-green text-primary font-semibold'
                           : 'bg-primary/5 text-primary/70 group-hover:bg-green/10 group-hover:text-green'
@@ -189,12 +189,12 @@ export default function Sobre() {
                     </div>
 
                     {/* Title and Subtitle */}
-                    <h3 className={`font-serif font-bold text-base sm:text-lg mb-1 transition-colors ${
+                    <h3 className={`font-serif font-bold text-sm sm:text-base mb-0.5 transition-colors ${
                       btn.isSpecial ? 'text-white' : 'text-primary group-hover:text-green'
                     }`}>
                       {btn.title}
                     </h3>
-                    <p className={`text-xs line-clamp-2 leading-relaxed ${
+                    <p className={`text-[11px] line-clamp-2 leading-relaxed ${
                       btn.isSpecial ? 'text-white/70' : 'text-primary/60'
                     }`}>
                       {btn.subtitle}
@@ -202,16 +202,16 @@ export default function Sobre() {
                   </div>
 
                   {/* Bottom Action Hint */}
-                  <div className={`mt-4 pt-3 border-t flex items-center justify-between text-xs font-semibold ${
+                  <div className={`mt-3 pt-2 border-t flex items-center justify-between text-[11px] font-semibold ${
                     btn.isSpecial 
                       ? 'border-white/10 text-green group-hover:text-white' 
                       : 'border-slate-200/60 text-primary/70 group-hover:text-green'
                   }`}>
                     <span>{btn.actionText}</span>
                     {btn.isSpecial ? (
-                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     ) : (
-                      <Eye className="w-4 h-4 transition-transform group-hover:scale-110" />
+                      <Eye className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
                     )}
                   </div>
                 </div>
