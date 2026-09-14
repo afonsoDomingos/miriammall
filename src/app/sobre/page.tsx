@@ -127,10 +127,9 @@ export default function Sobre() {
           <Palmtree className="absolute -right-16 -top-16 w-40 h-40 text-white/5 pointer-events-none transform -rotate-12" />
 
           <div className="relative z-10 max-w-3xl mx-auto px-4">
-            <h1 className="text-lg sm:text-xl md:text-2xl font-serif font-bold mb-1 tracking-tight">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-serif font-bold mb-1.5 tracking-tight">
               Saiba Mais
             </h1>
-            <div className="w-8 h-0.5 bg-green mx-auto mb-1.5 rounded-full" />
             <p className="text-white/80 text-[11px] sm:text-xs font-light max-w-md mx-auto leading-relaxed">
               Descubra o propósito, a localização e a infraestrutura concebida para transformar Homoíne e impulsionar o seu negócio.
             </p>
