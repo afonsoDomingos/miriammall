@@ -123,8 +123,8 @@ export default function Sobre() {
             transition={{ duration: 0.4 }}
             className="max-w-3xl mx-auto mb-8 sm:mb-10"
           >
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white tracking-tight mb-3 leading-tight">
-              Um Complexo Comercial <span className="text-green-light">Moderno e Multifuncional</span>
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white tracking-tight mb-4 leading-tight sm:whitespace-nowrap">
+              Complexo Comercial <span className="text-green-light">e Multifuncional</span>
             </h1>
             
             <div className="max-w-2xl mx-auto rounded-xl border border-white/70 bg-black/25 backdrop-blur-md p-4 sm:p-5 shadow-md">
