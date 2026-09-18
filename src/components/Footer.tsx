@@ -37,98 +37,98 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={`bg-primary-dark text-white border-t border-green/15 ${isSobrePage ? 'py-2.5 sm:py-3' : 'py-6 sm:py-8'}`}>
+    <footer className={`bg-primary-dark text-white border-t border-green/15 ${isSobrePage ? 'py-1.5 sm:py-2' : 'py-3 sm:py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`grid grid-cols-1 md:grid-cols-3 ${isSobrePage ? 'gap-3 sm:gap-4' : 'gap-6 sm:gap-8'} items-start text-center md:text-left`}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-4 items-start text-center md:text-left">
           {/* 1. Logo & Redes Sociais */}
-          <div className="flex flex-col items-center md:items-start gap-2.5">
+          <div className="flex flex-col items-center md:items-start gap-1.5">
             <Link href="/" className="inline-block">
               <img
                 src="/miriam-logo.png"
                 alt="Miriam Mall"
-                style={{ maxHeight: '32px' }}
-                className="h-7 sm:h-8 w-auto object-contain brightness-0 invert"
+                style={{ maxHeight: '26px' }}
+                className="h-6 w-auto object-contain brightness-0 invert"
               />
             </Link>
             {/* Redes Sociais */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
+                className="w-7 h-7 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
               >
-                <FacebookIcon className="w-3.5 h-3.5" />
+                <FacebookIcon className="w-3 h-3" />
               </a>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
+                className="w-7 h-7 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
               >
-                <InstagramIcon className="w-3.5 h-3.5" />
+                <InstagramIcon className="w-3 h-3" />
               </a>
               <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
+                className="w-7 h-7 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
               >
-                <LinkedinIcon className="w-3.5 h-3.5" />
+                <LinkedinIcon className="w-3 h-3" />
               </a>
               <a
                 href="https://wa.me/258865543026"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
+                className="w-7 h-7 rounded-full bg-white/5 hover:bg-green hover:text-primary flex items-center justify-center transition-all duration-300 text-white/80"
               >
-                <MessageCircle className="w-3.5 h-3.5" />
+                <MessageCircle className="w-3 h-3" />
               </a>
             </div>
           </div>
 
           {/* 2. Informações de Contacto */}
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <h4 className="text-xs uppercase font-bold tracking-widest text-green leading-none mb-0.5">
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <h4 className="text-[11px] uppercase font-bold tracking-widest text-green leading-none mb-0.5">
               Contacto
             </h4>
             <a
               href="tel:+258865543026"
-              className="flex items-center gap-2 text-xs text-white/80 hover:text-green transition-colors"
+              className="flex items-center gap-1.5 text-[11px] text-white/80 hover:text-green transition-colors"
             >
-              <Phone className="w-3.5 h-3.5 text-green shrink-0" />
+              <Phone className="w-3 h-3 text-green shrink-0" />
               <span>+258 86 554 3026 / +258 84 000 0000</span>
             </a>
             <a
               href="mailto:info@miriammall.com"
-              className="flex items-center gap-2 text-xs text-white/80 hover:text-green transition-colors"
+              className="flex items-center gap-1.5 text-[11px] text-white/80 hover:text-green transition-colors"
             >
-              <Mail className="w-3.5 h-3.5 text-green shrink-0" />
+              <Mail className="w-3 h-3 text-green shrink-0" />
               <span>info@miriammall.com</span>
             </a>
             <a
               href="https://wa.me/258865543026"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs text-white/80 hover:text-green transition-colors"
+              className="flex items-center gap-1.5 text-[11px] text-white/80 hover:text-green transition-colors"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-green shrink-0" />
+              <MessageCircle className="w-3 h-3 text-green shrink-0" />
               <span>Atendimento via WhatsApp</span>
             </a>
           </div>
 
           {/* 3. Localização */}
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <h4 className="text-xs uppercase font-bold tracking-widest text-green leading-none mb-0.5">
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <h4 className="text-[11px] uppercase font-bold tracking-widest text-green leading-none mb-0.5">
               Localização
             </h4>
-            <div className="flex items-start gap-2 text-xs text-white/80">
-              <MapPin className="w-3.5 h-3.5 text-green shrink-0 mt-0.5" />
-              <p className="leading-relaxed">
+            <div className="flex items-start gap-1.5 text-[11px] text-white/80">
+              <MapPin className="w-3 h-3 text-green shrink-0 mt-0.5" />
+              <p className="leading-snug">
                 MOÇAMBIQUE / HOMOÍNE / MUNICÍPIO DA VILA DE HOMOÍNE
               </p>
             </div>
@@ -136,9 +136,8 @@ export default function Footer() {
         </div>
 
         {/* Linha de Copyright Simples */}
-        <div className={`border-t border-white/10 ${isSobrePage ? 'mt-2.5 pt-2' : 'mt-6 pt-4'} flex flex-col sm:flex-row items-center justify-between gap-2 text-center text-[11px] text-white/50`}>
-          <p>© {currentYear} Shopping Miriam Mall. Todos os direitos reservados.</p>
-          <div className="flex items-center gap-4">
+        <div className="border-t border-white/10 mt-1.5 pt-1.5 flex flex-col sm:flex-row items-center justify-between gap-1.5 text-center text-[10px] text-white/50">
+          <div className="flex items-center gap-3">
             <Link href="/sobre" className="hover:text-green transition-colors">
               Sobre Nós
             </Link>
@@ -149,6 +148,7 @@ export default function Footer() {
               Contacto
             </Link>
           </div>
+          <p>© {currentYear} Shopping Miriam Mall. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
