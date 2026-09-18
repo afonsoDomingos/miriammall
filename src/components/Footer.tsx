@@ -135,8 +135,11 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Linha separadora */}
+        <hr className="border-0 border-t border-white/25 mt-3 mb-0" />
+
         {/* Linha de Copyright Simples */}
-        <div className="border-t border-white/10 mt-1.5 pt-1.5 flex flex-col sm:flex-row items-center justify-between gap-1.5 text-center text-[10px] text-white/50">
+        <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-1.5 text-center text-[10px] text-white/50">
           <div className="flex items-center gap-3">
             <Link href="/sobre" className="hover:text-green transition-colors">
               Sobre Nós
