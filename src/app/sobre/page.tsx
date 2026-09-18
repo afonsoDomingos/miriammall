@@ -69,41 +69,35 @@ export default function Sobre() {
   const buildingB = getBuilding(1);
   const buildingC = getBuilding(2);
 
+  // Remove prefixo "Edifício X –" para deixar apenas o nome principal da área
+  const getCleanName = (name?: string) => {
+    if (!name) return '';
+    return name.replace(/^edif[ií]cio\s*[0-9A-Za-z]*\s*[-–—:]*\s*/i, '').trim();
+  };
+
   const actionButtons = [
     {
       id: 'btn-building-1',
-      badge: 'Edifício 1',
-      title: buildingA.name || 'Edifício 1 – Centro Comercial',
-      actionText: 'Ver Detalhes',
+      title: getCleanName(buildingA.name) || 'Centro Comercial',
       icon: Store,
-      isSpecial: false,
       onClick: () => setSelectedBuilding(buildingA)
     },
     {
       id: 'btn-building-2',
-      badge: 'Edifício 2',
-      title: buildingB.name || 'Edifício 2 – Área Comercial e Hospedagem',
-      actionText: 'Ver Detalhes',
+      title: getCleanName(buildingB.name) || 'Área Comercial e Hospedagem',
       icon: Briefcase,
-      isSpecial: false,
       onClick: () => setSelectedBuilding(buildingB)
     },
     {
       id: 'btn-building-3',
-      badge: 'Edifício 3',
-      title: buildingC.name || 'Edifício 3 – Área Logística e Operacional',
-      actionText: 'Ver Detalhes',
+      title: getCleanName(buildingC.name) || 'Área Logística e Operacional',
       icon: Building2,
-      isSpecial: false,
       onClick: () => setSelectedBuilding(buildingC)
     },
     {
       id: 'btn-espacos',
-      badge: 'Disponibilidade',
       title: 'Espaços Comerciais',
-      actionText: 'Explorar Espaços',
       icon: Layers,
-      isSpecial: true,
       href: '/espacos'
     }
   ];
