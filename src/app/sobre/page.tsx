@@ -11,12 +11,13 @@ import {
   Building2,
   Store,
   Briefcase,
-  Utensils,
   Layers,
-  ArrowUpRight,
+  ArrowRight,
   Eye,
-  Palmtree,
-  Sparkles
+  ShieldCheck,
+  MapPin,
+  Sparkles,
+  Phone
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -35,8 +36,8 @@ export default function Sobre() {
   const defaultBuildings: BuildingType[] = [
     {
       id: 'building-1',
-      name: 'Edifício Principal (A)',
-      subtitle: 'Centro Comercial & Âncoras',
+      name: 'Edifício 1 – Centro Comercial',
+      subtitle: 'Shopping & Lojas de Retalho',
       description: 'Espaço central do complexo destinado a grandes marcas, supermercado âncora, praça de restauração e serviços essenciais de alto fluxo comercial.',
       image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80',
       features: ['Lojas Âncora e Boutiques', 'Supermercado e Farmácia', 'Praça de Alimentação Climatizada', 'Escadas Rolantes e Elevadores Panorâmicos'],
@@ -44,20 +45,20 @@ export default function Sobre() {
     },
     {
       id: 'building-2',
-      name: 'Edifício Empresarial (B)',
-      subtitle: 'Serviços & Escritórios Corporativos',
-      description: 'Ambiente executivo e moderno ideal para agências bancárias, telecomunicações, consultórios médicos, escritórios corporativos e multinacionais.',
+      name: 'Edifício 2 – Área Comercial e Hospedagem',
+      subtitle: 'Serviços, Escritórios & Hospedagem',
+      description: 'Ambiente executivo e moderno ideal para agências bancárias, telecomunicações, consultórios médicos, escritórios corporativos e unidades de hospedagem.',
       image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
-      features: ['Escritórios Modulares & Coworking', 'Agências Bancárias e Seguradoras', 'Salas de Reuniões Equipadas', 'Acesso Controlado e Portaria Executiva'],
+      features: ['Escritórios Modulares & Coworking', 'Agências Bancárias e Seguradoras', 'Alojamento e Suítes Confortáveis', 'Acesso Controlado e Portaria Executiva'],
       order: 2
     },
     {
       id: 'building-3',
-      name: 'Edifício Lazer & Convivência (C)',
-      subtitle: 'Restaurantes, Rooftop & Bem-Estar',
-      description: 'Área dedicada a momentos gastronómicos e de lazer em família, com restaurantes de alta gastronomia, esplanadas ao ar livre e ambientes verdes.',
-      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
-      features: ['Restaurantes & Cafés Temáticos', 'Rooftop com Vista Panorâmica', 'Espaço Infantil Seguro', 'Esplanadas com Ambientes Verdes'],
+      name: 'Edifício 3 – Área Logística e Operacional',
+      subtitle: 'Ferragens e Armazéns',
+      description: 'Estrutura reforçada especialmente projetada para carga e descarga, grandes volumes, materiais de construção, ferragens e centros de distribuição regional.',
+      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
+      features: ['Pé-direito Alto para Armazenamento', 'Docas de Carga e Descarga', 'Área Exclusiva para Ferragens', 'Acesso Facilitado a Camiões'],
       order: 3
     }
   ];
@@ -76,9 +77,8 @@ export default function Sobre() {
   const actionButtons = [
     {
       id: 'btn-building-1',
-      badge: buildingA.name.includes('A') ? 'Edifício A' : (buildingA.order ? `Edifício ${buildingA.order}` : 'Edifício A'),
-      title: buildingA.name || 'Edifício Principal',
-      subtitle: buildingA.subtitle || 'Comércio & Âncoras',
+      badge: 'Edifício 1',
+      title: buildingA.name || 'Edifício 1 – Centro Comercial',
       actionText: 'Ver Detalhes',
       icon: Store,
       isSpecial: false,
@@ -86,9 +86,8 @@ export default function Sobre() {
     },
     {
       id: 'btn-building-2',
-      badge: buildingB.name.includes('B') ? 'Edifício B' : (buildingB.order ? `Edifício ${buildingB.order}` : 'Edifício B'),
-      title: buildingB.name || 'Edifício Empresarial',
-      subtitle: buildingB.subtitle || 'Serviços & Escritórios Corporativos',
+      badge: 'Edifício 2',
+      title: buildingB.name || 'Edifício 2 – Área Comercial e Hospedagem',
       actionText: 'Ver Detalhes',
       icon: Briefcase,
       isSpecial: false,
@@ -96,11 +95,10 @@ export default function Sobre() {
     },
     {
       id: 'btn-building-3',
-      badge: buildingC.name.includes('C') ? 'Edifício C' : (buildingC.order ? `Edifício ${buildingC.order}` : 'Edifício C'),
-      title: buildingC.name || 'Edifício Lazer & Convivência',
-      subtitle: buildingC.subtitle || 'Restaurantes, Rooftop & Bem-Estar',
+      badge: 'Edifício 3',
+      title: buildingC.name || 'Edifício 3 – Área Logística e Operacional',
       actionText: 'Ver Detalhes',
-      icon: Utensils,
+      icon: Building2,
       isSpecial: false,
       onClick: () => setSelectedBuilding(buildingC)
     },
@@ -108,7 +106,6 @@ export default function Sobre() {
       id: 'btn-espacos',
       badge: 'Disponibilidade',
       title: 'Espaços Comerciais',
-      subtitle: 'Arrendar Lojas & Salas',
       actionText: 'Explorar Espaços',
       icon: Layers,
       isSpecial: true,
@@ -116,100 +113,119 @@ export default function Sobre() {
     }
   ];
 
+  const corePillars = [
+    {
+      icon: MapPin,
+      title: 'Localização Estratégica',
+      desc: 'No centro de Homoíne, província de Inhambane, com acessos rápidos e grande fluxo.'
+    },
+    {
+      icon: ShieldCheck,
+      title: 'Segurança 24 Horas',
+      desc: 'Videovigilância contínua e equipa de vigilância permanente para total tranquilidade.'
+    },
+    {
+      icon: Sparkles,
+      title: 'Padrão Internacional',
+      desc: 'Construção moderna, energia com gerador de suporte e climatização eficiente.'
+    },
+    {
+      icon: Building,
+      title: 'Complexo Multifuncional',
+      desc: 'Integração de compras, serviços corporativos, gastronomia, hotelaria e logística.'
+    }
+  ];
+
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#0f0404] text-slate-900 dark:text-slate-100 transition-colors">
       <Navbar />
 
-      <main className="flex-grow pt-16 sm:pt-[72px] relative bg-gradient-to-r from-primary-dark via-primary to-primary-dark text-white overflow-hidden flex flex-col justify-between">
-        {/* Background Image & Decorative Watermarks */}
-        <div 
-          className="absolute inset-0 z-0 bg-cover bg-center opacity-30 pointer-events-none" 
-          style={{ backgroundImage: `url('${heroBgImage}')` }} 
-        />
-        <Palmtree className="absolute -left-16 -bottom-16 w-52 h-52 text-green/10 pointer-events-none transform rotate-45" />
-        <Palmtree className="absolute -right-16 -top-16 w-52 h-52 text-white/5 pointer-events-none transform -rotate-12" />
+      <main className="flex-grow pt-20 sm:pt-24 pb-16">
+        {/* Hero Institucional Limpo e Sofisticado */}
+        <section className="relative overflow-hidden bg-gradient-to-b from-primary-dark via-primary to-primary-dark text-white py-12 sm:py-16 shadow-md">
+          {/* Imagem de Fundo Sutil */}
+          <div 
+            className="absolute inset-0 z-0 bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none" 
+            style={{ backgroundImage: `url('${heroBgImage}')` }} 
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
 
-        {/* Unified Content Section on same background */}
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex flex-col justify-center py-5 sm:py-7 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-3xl mx-auto mb-5 sm:mb-6"
-          >
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold mb-1.5 tracking-tight text-white">
-              Saiba Mais
-            </h1>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-green/15 border border-green/30 text-green text-[10px] font-bold uppercase tracking-wider mb-2">
-              <Building className="w-3 h-3" /> Quem Somos & O Nosso Conceito
-            </div>
-            <h2 className="text-lg sm:text-xl md:text-2xl font-serif font-bold text-white mb-2 leading-tight">
-              Um Complexo Comercial Moderno e Multifuncional
-            </h2>
-            <p className="text-white/80 leading-relaxed text-[11px] sm:text-xs max-w-2xl mx-auto">
-              A <strong className="text-white font-semibold">Miriam Mall – Soc. Unipessoal, Lda.</strong> é uma empresa moçambicana de gestão e arrendamento de imóveis comerciais em Homoíne, Inhambane. Reúne num único complexo lojas de retalho, serviços bancários, espaços gastronómicos e áreas de lazer, com segurança 24h e infraestrutura de padrão internacional.
-            </p>
-          </motion.div>
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
 
-          {/* 4 Botões de Acção Direta */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-            {actionButtons.map((btn) => {
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white tracking-tight mb-3 leading-tight">
+                Um Complexo Comercial <span className="text-green-light">Moderno e Multifuncional</span>
+              </h1>
+              
+              <p className="text-white/90 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-normal">
+                A <strong className="text-white font-semibold">Miriam Mall – Soc. Unipessoal, Lda.</strong> é uma empresa moçambicana de gestão e arrendamento de imóveis comerciais em Homoíne, Inhambane. Reúne num único complexo lojas de retalho, serviços bancários, espaços gastronómicos e áreas de lazer, com segurança 24h e infraestrutura de padrão internacional.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Cards Reduzidos dos Edifícios (Limpos, Compactos e Apenas com os Nomes) */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 relative z-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {actionButtons.map((btn, idx) => {
               const Icon = btn.icon;
 
               const CardContent = (
-                <div 
-                  className={`h-full p-4 rounded-xl border transition-all duration-300 flex flex-col justify-between text-left group cursor-pointer ${
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: idx * 0.08 }}
+                  className={`h-full p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between text-left group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 ${
                     btn.isSpecial
-                      ? 'bg-gradient-to-br from-green to-green-dark text-primary border-green shadow-xl hover:shadow-green-glow hover:-translate-y-1'
-                      : 'bg-white/95 hover:bg-white text-primary border-white/20 shadow-xl hover:border-green hover:shadow-2xl hover:-translate-y-1 backdrop-blur-sm'
+                      ? 'bg-gradient-to-br from-green-600 via-green to-green-dark text-white border-green-400 hover:border-green-300'
+                      : 'bg-white dark:bg-[#1a0707] text-slate-900 dark:text-white border-slate-200/90 dark:border-red-950/60 hover:border-primary/40 dark:hover:border-green/50'
                   }`}
                 >
                   <div>
-                    {/* Top row with icon & badge */}
-                    <div className="flex items-center justify-between mb-2.5">
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
-                        btn.isSpecial 
-                          ? 'bg-primary text-green group-hover:bg-primary-dark' 
-                          : 'bg-primary/5 text-primary border border-primary/10 group-hover:bg-primary group-hover:text-green'
+                    {/* Topo com Ícone e Badge */}
+                    <div className="flex items-center justify-between mb-3.5">
+                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
+                        btn.isSpecial
+                          ? 'bg-white/20 text-white'
+                          : 'bg-primary/10 dark:bg-white/5 text-primary dark:text-green group-hover:bg-primary group-hover:text-white dark:group-hover:bg-green dark:group-hover:text-primary'
                       }`}>
                         <Icon className="w-4 h-4" />
                       </div>
-                      <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                      <span className={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
                         btn.isSpecial
-                          ? 'bg-primary text-green font-bold'
-                          : 'bg-primary/5 text-primary/70 group-hover:bg-green/15 group-hover:text-green-dark'
+                          ? 'bg-black/20 text-white'
+                          : 'bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 group-hover:bg-primary/10 group-hover:text-primary dark:group-hover:text-green'
                       }`}>
                         {btn.badge}
                       </span>
                     </div>
 
-                    {/* Title and Subtitle */}
-                    <h3 className={`font-serif font-bold text-sm sm:text-base mb-1 transition-colors ${
-                      btn.isSpecial ? 'text-primary' : 'text-primary group-hover:text-primary-dark'
+                    {/* Nome do Edifício */}
+                    <h3 className={`font-serif font-bold text-base sm:text-[17px] leading-snug transition-colors ${
+                      btn.isSpecial ? 'text-white' : 'text-slate-900 dark:text-white group-hover:text-primary dark:group-hover:text-green-light'
                     }`}>
                       {btn.title}
                     </h3>
-                    <p className={`text-[11px] line-clamp-2 leading-relaxed ${
-                      btn.isSpecial ? 'text-primary/80 font-medium' : 'text-primary/65'
-                    }`}>
-                      {btn.subtitle}
-                    </p>
                   </div>
 
-                  {/* Bottom Action Hint */}
-                  <div className={`mt-3.5 pt-2 border-t flex items-center justify-between text-[11px] font-semibold ${
+                  {/* Rodapé de Ação Rápida */}
+                  <div className={`mt-5 pt-3 border-t flex items-center justify-between text-xs font-semibold transition-colors ${
                     btn.isSpecial 
-                      ? 'border-primary/20 text-primary group-hover:text-primary-dark' 
-                      : 'border-slate-200/80 text-primary/70 group-hover:text-green'
+                      ? 'border-white/20 text-white/90 group-hover:text-white' 
+                      : 'border-slate-100 dark:border-white/5 text-slate-500 dark:text-slate-400 group-hover:text-primary dark:group-hover:text-green'
                   }`}>
                     <span>{btn.actionText}</span>
                     {btn.isSpecial ? (
-                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     ) : (
                       <Eye className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
                     )}
                   </div>
-                </div>
+                </motion.div>
               );
 
               if (btn.href) {
@@ -232,10 +248,75 @@ export default function Sobre() {
               );
             })}
           </div>
-        </div>
+        </section>
+
+        {/* Pilares Estratégicos (Limpos & Diretos) */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-14">
+          <div className="text-center mb-8">
+            <span className="text-green font-semibold text-xs uppercase tracking-widest block mb-1">
+              Diferenciais do Complexo
+            </span>
+            <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 dark:text-white">
+              Por que Escolher o Miriam Mall?
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {corePillars.map((pilar, i) => {
+              const PillarIcon = pilar.icon;
+              return (
+                <div 
+                  key={i}
+                  className="bg-white dark:bg-[#1a0707] p-5 rounded-2xl border border-slate-200/80 dark:border-red-950/60 shadow-sm hover:border-green/40 transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 dark:bg-white/5 text-primary dark:text-green flex items-center justify-center mb-3">
+                    <PillarIcon className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-serif font-bold text-sm sm:text-base text-slate-900 dark:text-white mb-1.5">
+                    {pilar.title}
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
+                    {pilar.desc}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* CTA Simples para Contacto & Arrendamento */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+          <div className="bg-white dark:bg-[#180505] rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 shadow-sm text-center flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div className="text-center sm:text-left">
+              <h3 className="text-lg sm:text-xl font-serif font-bold text-slate-900 dark:text-white mb-1">
+                Interessado em Arrendar um Espaço?
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm">
+                Consulte as lojas e salas disponíveis ou contacte diretamente a nossa administração.
+              </p>
+            </div>
+            <div className="flex items-center gap-2.5 flex-shrink-0">
+              <Link
+                href="/espacos"
+                className="px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-light text-white font-semibold text-xs transition-colors shadow-sm"
+              >
+                Ver Espaços
+              </Link>
+              <a
+                href="https://wa.me/258865543026?text=Olá! Gostaria de informações sobre os espaços comerciais do Miriam Mall."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2.5 rounded-xl bg-green hover:bg-green-light text-primary font-bold text-xs transition-colors shadow-sm flex items-center gap-1.5"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
 
-      {/* Building Detail Modal when user clicks to appreciate the building */}
+      {/* Modal de Detalhes do Edifício */}
       {selectedBuilding && (
         <BuildingDetailModal
           building={selectedBuilding}
@@ -244,6 +325,6 @@ export default function Sobre() {
       )}
 
       <Footer />
-    </>
+    </div>
   );
 }
