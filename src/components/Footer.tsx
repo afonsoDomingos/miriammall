@@ -142,13 +142,13 @@ export default function Footer() {
         <div className="pt-2 grid grid-cols-1 md:grid-cols-3 gap-1.5 text-[10px] text-white/50">
           {/* Coluna 1: Links (alinha com logo) */}
           <div className="flex items-center justify-center md:justify-start gap-3">
-            <Link href="/sobre" className="hover:text-green transition-colors">
+            <Link href="/sobre" className="text-green hover:text-green-light transition-colors font-medium">
               Sobre Nós
             </Link>
-            <Link href="/espacos" className="hover:text-green transition-colors">
+            <Link href="/espacos" className="text-green hover:text-green-light transition-colors font-medium">
               Espaços
             </Link>
-            <Link href="/contato" className="hover:text-green transition-colors">
+            <Link href="/contato" className="text-green hover:text-green-light transition-colors font-medium">
               Contacto
             </Link>
           </div>
