@@ -243,7 +243,7 @@ export default function Sobre() {
           </motion.div>
 
           {/* 6 Botões em 2 Colunas — 1,2,3 | 1,2,3 */}
-          <div className="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 max-w-2xl md:max-w-none">
             {/* Coluna 1: Edifícios */}
             <div className="flex flex-col gap-3">
               {col1Buttons.map((btn, idx) => renderButton(btn, idx + 1, idx))}
