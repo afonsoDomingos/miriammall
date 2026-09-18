@@ -7,17 +7,12 @@ import { useDatabase } from '../../context/DatabaseContext';
 import { Building as BuildingType, Banner } from '../../utils/mockData';
 import BuildingDetailModal from '../../components/BuildingDetailModal';
 import { 
-  Building, 
   Building2,
   Store,
   Briefcase,
   Layers,
   ArrowRight,
-  Eye,
-  ShieldCheck,
-  MapPin,
-  Sparkles,
-  Phone
+  Eye
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -113,28 +108,6 @@ export default function Sobre() {
     }
   ];
 
-  const corePillars = [
-    {
-      icon: MapPin,
-      title: 'Localização Estratégica',
-      desc: 'No centro de Homoíne, província de Inhambane, com acessos rápidos e grande fluxo.'
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Segurança 24 Horas',
-      desc: 'Videovigilância contínua e equipa de vigilância permanente para total tranquilidade.'
-    },
-    {
-      icon: Sparkles,
-      title: 'Padrão Internacional',
-      desc: 'Construção moderna, energia com gerador de suporte e climatização eficiente.'
-    },
-    {
-      icon: Building,
-      title: 'Complexo Multifuncional',
-      desc: 'Integração de compras, serviços corporativos, gastronomia, hotelaria e logística.'
-    }
-  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#0f0404] text-slate-900 dark:text-slate-100 transition-colors">
@@ -231,71 +204,6 @@ export default function Sobre() {
                 </button>
               );
             })}
-          </div>
-        </section>
-
-        {/* Pilares Estratégicos (Limpos & Diretos) */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-10">
-          <div className="text-center mb-6">
-            <span className="text-green font-semibold text-xs uppercase tracking-widest block mb-1">
-              Diferenciais do Complexo
-            </span>
-            <h2 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 dark:text-white">
-              Por que Escolher o Miriam Mall?
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {corePillars.map((pilar, i) => {
-              const PillarIcon = pilar.icon;
-              return (
-                <div 
-                  key={i}
-                  className="bg-white dark:bg-[#1a0707] p-5 rounded-2xl border border-slate-200/80 dark:border-red-950/60 shadow-sm hover:border-green/40 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 dark:bg-white/5 text-primary dark:text-green flex items-center justify-center mb-3">
-                    <PillarIcon className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-serif font-bold text-sm sm:text-base text-slate-900 dark:text-white mb-1.5">
-                    {pilar.title}
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
-                    {pilar.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* CTA Simples para Contacto & Arrendamento */}
-        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8">
-          <div className="bg-white dark:bg-[#180505] rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 shadow-sm text-center flex flex-col sm:flex-row items-center justify-between gap-5">
-            <div className="text-center sm:text-left">
-              <h3 className="text-lg sm:text-xl font-serif font-bold text-slate-900 dark:text-white mb-1">
-                Interessado em Arrendar um Espaço?
-              </h3>
-              <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm">
-                Consulte as lojas e salas disponíveis ou contacte diretamente a nossa administração.
-              </p>
-            </div>
-            <div className="flex items-center gap-2.5 flex-shrink-0">
-              <Link
-                href="/espacos"
-                className="px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-light text-white font-semibold text-xs transition-colors shadow-sm"
-              >
-                Ver Espaços
-              </Link>
-              <a
-                href="https://wa.me/258865543026?text=Olá! Gostaria de informações sobre os espaços comerciais do Miriam Mall."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2.5 rounded-xl bg-green hover:bg-green-light text-primary font-bold text-xs transition-colors shadow-sm flex items-center gap-1.5"
-              >
-                <Phone className="w-3.5 h-3.5" />
-                WhatsApp
-              </a>
-            </div>
           </div>
         </section>
       </main>
