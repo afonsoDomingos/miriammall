@@ -139,8 +139,9 @@ export default function Footer() {
         <hr className="border-0 border-t border-white/25 mt-3 mb-0" />
 
         {/* Linha de Copyright Simples */}
-        <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-1.5 text-center text-[10px] text-white/50">
-          <div className="flex items-center gap-3">
+        <div className="pt-2 grid grid-cols-1 md:grid-cols-3 gap-1.5 text-[10px] text-white/50">
+          {/* Coluna 1: Links (alinha com logo) */}
+          <div className="flex items-center justify-center md:justify-start gap-3">
             <Link href="/sobre" className="hover:text-green transition-colors">
               Sobre Nós
             </Link>
@@ -151,7 +152,10 @@ export default function Footer() {
               Contacto
             </Link>
           </div>
-          <p>© {currentYear} Shopping Miriam Mall. Todos os direitos reservados.</p>
+          {/* Coluna 2: vazia */}
+          <div />
+          {/* Coluna 3: Copyright (alinha com Localização) */}
+          <p className="text-center md:text-left">© {currentYear} Shopping Miriam Mall. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
