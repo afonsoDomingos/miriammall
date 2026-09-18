@@ -138,8 +138,8 @@ export default function Sobre() {
             </p>
           </motion.div>
 
-          {/* 4 Cards Finos e Perfeitamente Alinhados */}
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 items-stretch">
+          {/* 4 Botões Uniformizados com o Estilo Apreciar/Arrendar */}
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 items-stretch">
             {actionButtons.map((btn, idx) => {
               const Icon = btn.icon;
 
@@ -148,36 +148,12 @@ export default function Sobre() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.25, delay: idx * 0.05 }}
-                  className={`w-full h-full min-h-[64px] px-4 py-3 rounded-xl border transition-all duration-300 flex items-center justify-between text-left group cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-0.5 ${
-                    btn.isSpecial
-                      ? 'bg-gradient-to-r from-green to-green-dark text-white border-green/60 hover:border-green-light'
-                      : 'bg-white hover:bg-slate-50 text-slate-900 border-white/20 hover:border-green/40 shadow-slate-950/20'
-                  }`}
+                  className="w-full h-full min-h-[52px] sm:min-h-[58px] px-3 sm:px-4 py-2.5 sm:py-3.5 rounded border border-white/80 hover:border-white hover:bg-white hover:text-primary text-white text-[11px] sm:text-xs md:text-[13px] font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 sm:gap-2.5 text-center group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 bg-white/5 backdrop-blur-sm"
                 >
-                  <div className="flex items-center gap-3 min-w-0 pr-2">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                      btn.isSpecial
-                        ? 'bg-black/20 text-white'
-                        : 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white'
-                    }`}>
-                      <Icon className="w-4 h-4" />
-                    </div>
-
-                    {/* Nome do Edifício */}
-                    <h3 className={`font-serif font-bold text-xs sm:text-[13px] leading-tight transition-colors line-clamp-2 ${
-                      btn.isSpecial ? 'text-white' : 'text-slate-900 group-hover:text-primary'
-                    }`}>
-                      {btn.title}
-                    </h3>
-                  </div>
-
-                  <div className="shrink-0 opacity-50 group-hover:opacity-100 transition-opacity">
-                    {btn.isSpecial ? (
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                    ) : (
-                      <Eye className="w-4 h-4 transition-transform group-hover:scale-110" />
-                    )}
-                  </div>
+                  <Icon className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" />
+                  <span className="leading-snug">
+                    {btn.title}
+                  </span>
                 </motion.div>
               );
 
