@@ -135,6 +135,8 @@ const BuildingSchema = new Schema({
   image: { type: String, default: '' },
   features: { type: [String], default: [] },
   order: { type: Number, default: 0 },
+  floor1Images: { type: [String], default: [] },
+  floor2Images: { type: [String], default: [] },
 }, { timestamps: true });
 
 // 12. Note Schema

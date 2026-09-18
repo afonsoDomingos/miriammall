@@ -19,6 +19,8 @@ export interface Building {
   image: string;
   features: string[];
   order: number;
+  floor1Images?: string[];
+  floor2Images?: string[];
 }
 
 export interface Note {

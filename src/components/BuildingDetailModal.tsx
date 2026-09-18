@@ -10,8 +10,8 @@ interface BuildingDetailModalProps {
   onClose: () => void;
 }
 
-// Floor image data mapped by building order
-const FLOOR_DATA: Record<number, { floor1: string[]; floor2: string[] }> = {
+// Fallback floor images per building order (used when admin hasn't uploaded images yet)
+const FALLBACK_FLOOR_DATA: Record<number, { floor1: string[]; floor2: string[] }> = {
   1: {
     floor1: [
       'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80',
@@ -92,8 +92,19 @@ export default function BuildingDetailModal({ building, onClose }: BuildingDetai
   if (!building) return null;
 
   const buildingOrder = building.order ?? 1;
-  const floorData = FLOOR_DATA[buildingOrder] ?? FLOOR_DATA[1];
-  const floorImages = selectedFloor === 1 ? floorData.floor1 : floorData.floor2;
+  const fallback = FALLBACK_FLOOR_DATA[buildingOrder] ?? FALLBACK_FLOOR_DATA[1];
+
+  // Use admin-uploaded images if they exist, otherwise use fallback
+  const floor1Imgs =
+    building.floor1Images && building.floor1Images.length > 0
+      ? building.floor1Images
+      : fallback.floor1;
+  const floor2Imgs =
+    building.floor2Images && building.floor2Images.length > 0
+      ? building.floor2Images
+      : fallback.floor2;
+
+  const floorImages = selectedFloor === 1 ? floor1Imgs : floor2Imgs;
 
   const floorLabel = (n: 1 | 2) => (n === 1 ? '1º Piso' : '2º Piso');
 
@@ -203,7 +214,7 @@ export default function BuildingDetailModal({ building, onClose }: BuildingDetai
                             {floorLabel(floor)}
                           </p>
                           <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                            {floorData[`floor${floor}` as 'floor1' | 'floor2'].length} imagens
+                            {(floor === 1 ? floor1Imgs : floor2Imgs).length} imagens
                           </p>
                         </div>
 
