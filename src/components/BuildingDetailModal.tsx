@@ -83,19 +83,11 @@ export default function BuildingDetailModal({ building, onClose }: BuildingDetai
               <X className="w-5 h-5" />
             </button>
 
-            {/* Title & Subtitle Badge */}
+            {/* Title */}
             <div className="absolute bottom-6 left-6 right-6 z-10 text-white">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-green text-primary mb-3 shadow-md">
-                <Building2 className="w-3.5 h-3.5" /> Miriam Mall • Complexo
-              </span>
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-white leading-tight">
                 {building.name}
               </h2>
-              {building.subtitle && (
-                <p className="text-sm sm:text-base text-white/80 font-medium mt-1">
-                  {building.subtitle}
-                </p>
-              )}
             </div>
           </div>
 
