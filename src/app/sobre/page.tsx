@@ -110,40 +110,36 @@ export default function Sobre() {
 
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#0f0404] text-slate-900 dark:text-slate-100 transition-colors">
+    <div className="min-h-screen flex flex-col bg-primary-dark text-white transition-colors">
       <Navbar />
 
-      <main className="flex-grow pt-16 sm:pt-20 pb-6 sm:pb-8">
-        {/* Hero Institucional Limpo e Sofisticado */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-primary-dark via-primary to-primary-dark text-white py-8 sm:py-12 shadow-md">
-          {/* Imagem de Fundo Sutil */}
-          <div 
-            className="absolute inset-0 z-0 bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none" 
-            style={{ backgroundImage: `url('${heroBgImage}')` }} 
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
+      <main className="flex-grow pt-16 sm:pt-20 relative bg-gradient-to-b from-primary-dark via-primary to-primary-dark text-white flex flex-col justify-center py-10 sm:py-16 overflow-hidden">
+        {/* Imagem de Fundo Sutil */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center opacity-20 mix-blend-overlay pointer-events-none" 
+          style={{ backgroundImage: `url('${heroBgImage}')` }} 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-transparent to-primary-dark/60 pointer-events-none" />
 
-          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center text-center">
+          {/* Cabeçalho Institucional */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="max-w-3xl mx-auto mb-8 sm:mb-10"
+          >
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white tracking-tight mb-3 leading-tight">
+              Um Complexo Comercial <span className="text-green-light">Moderno e Multifuncional</span>
+            </h1>
+            
+            <p className="text-white/85 text-xs sm:text-sm md:text-base leading-relaxed font-normal max-w-2xl mx-auto">
+              A <strong className="text-white font-semibold">Miriam Mall – Soc. Unipessoal, Lda.</strong> é uma empresa moçambicana de gestão e arrendamento de imóveis comerciais em Homoíne, Inhambane. Reúne num único complexo lojas de retalho, serviços bancários, espaços gastronómicos e áreas de lazer, com segurança 24h e infraestrutura de padrão internacional.
+            </p>
+          </motion.div>
 
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white tracking-tight mb-3 leading-tight">
-                Um Complexo Comercial <span className="text-green-light">Moderno e Multifuncional</span>
-              </h1>
-              
-              <p className="text-white/90 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-normal">
-                A <strong className="text-white font-semibold">Miriam Mall – Soc. Unipessoal, Lda.</strong> é uma empresa moçambicana de gestão e arrendamento de imóveis comerciais em Homoíne, Inhambane. Reúne num único complexo lojas de retalho, serviços bancários, espaços gastronómicos e áreas de lazer, com segurança 24h e infraestrutura de padrão internacional.
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Cards Reduzidos dos Edifícios (Limpos, Compactos e Apenas com os Nomes) */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 relative z-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* 4 Cards Finos e Perfeitamente Alinhados */}
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 items-stretch">
             {actionButtons.map((btn, idx) => {
               const Icon = btn.icon;
 
@@ -152,24 +148,24 @@ export default function Sobre() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.25, delay: idx * 0.05 }}
-                  className={`h-full px-3.5 py-3 rounded-xl border transition-all duration-300 flex items-center justify-between text-left group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-0.5 ${
+                  className={`w-full h-full min-h-[64px] px-4 py-3 rounded-xl border transition-all duration-300 flex items-center justify-between text-left group cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-0.5 ${
                     btn.isSpecial
-                      ? 'bg-gradient-to-r from-green-600 via-green to-green-dark text-white border-green-400 hover:border-green-300'
-                      : 'bg-white dark:bg-[#1a0707] text-slate-900 dark:text-white border-slate-200/90 dark:border-red-950/60 hover:border-primary/40 dark:hover:border-green/50'
+                      ? 'bg-gradient-to-r from-green to-green-dark text-white border-green/60 hover:border-green-light'
+                      : 'bg-white hover:bg-slate-50 text-slate-900 border-white/20 hover:border-green/40 shadow-slate-950/20'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0 pr-2">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
                       btn.isSpecial
-                        ? 'bg-white/20 text-white'
-                        : 'bg-primary/10 dark:bg-white/5 text-primary dark:text-green group-hover:bg-primary group-hover:text-white dark:group-hover:bg-green dark:group-hover:text-primary'
+                        ? 'bg-black/20 text-white'
+                        : 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white'
                     }`}>
                       <Icon className="w-4 h-4" />
                     </div>
 
                     {/* Nome do Edifício */}
-                    <h3 className={`font-serif font-bold text-xs sm:text-sm leading-tight transition-colors line-clamp-2 ${
-                      btn.isSpecial ? 'text-white' : 'text-slate-900 dark:text-white group-hover:text-primary dark:group-hover:text-green-light'
+                    <h3 className={`font-serif font-bold text-xs sm:text-[13px] leading-tight transition-colors line-clamp-2 ${
+                      btn.isSpecial ? 'text-white' : 'text-slate-900 group-hover:text-primary'
                     }`}>
                       {btn.title}
                     </h3>
@@ -177,9 +173,9 @@ export default function Sobre() {
 
                   <div className="shrink-0 opacity-50 group-hover:opacity-100 transition-opacity">
                     {btn.isSpecial ? (
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                     ) : (
-                      <Eye className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
+                      <Eye className="w-4 h-4 transition-transform group-hover:scale-110" />
                     )}
                   </div>
                 </motion.div>
@@ -205,7 +201,7 @@ export default function Sobre() {
               );
             })}
           </div>
-        </section>
+        </div>
       </main>
 
       {/* Modal de Detalhes do Edifício */}
