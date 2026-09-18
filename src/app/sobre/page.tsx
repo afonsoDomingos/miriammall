@@ -133,9 +133,11 @@ export default function Sobre() {
               Um Complexo Comercial <span className="text-green-light">Moderno e Multifuncional</span>
             </h1>
             
-            <p className="text-white/85 text-xs sm:text-sm md:text-base leading-relaxed font-normal max-w-2xl mx-auto">
-              A <strong className="text-white font-semibold">Miriam Mall – Soc. Unipessoal, Lda.</strong> é uma empresa moçambicana de gestão e arrendamento de imóveis comerciais em Homoíne, Inhambane. Reúne num único complexo lojas de retalho, serviços bancários, espaços gastronómicos e áreas de lazer, com segurança 24h e infraestrutura de padrão internacional.
-            </p>
+            <div className="max-w-2xl mx-auto rounded-xl border border-white/70 bg-black/25 backdrop-blur-md p-4 sm:p-5 shadow-md">
+              <p className="text-white/90 text-xs sm:text-sm md:text-[15px] leading-relaxed font-normal">
+                A <strong className="text-white font-semibold">Miriam Mall – Soc. Unipessoal, Lda.</strong> é uma empresa moçambicana de gestão e arrendamento de imóveis comerciais em Homoíne, Inhambane. Reúne num único complexo lojas de retalho, serviços bancários, espaços gastronómicos e áreas de lazer, com segurança 24h e infraestrutura de padrão internacional.
+              </p>
+            </div>
           </motion.div>
 
           {/* 4 Botões Uniformizados com o Estilo Apreciar/Arrendar */}
