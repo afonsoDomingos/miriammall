@@ -140,9 +140,9 @@ export default function Sobre() {
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#0f0404] text-slate-900 dark:text-slate-100 transition-colors">
       <Navbar />
 
-      <main className="flex-grow pt-20 sm:pt-24 pb-16">
+      <main className="flex-grow pt-16 sm:pt-20 pb-6 sm:pb-8">
         {/* Hero Institucional Limpo e Sofisticado */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-primary-dark via-primary to-primary-dark text-white py-12 sm:py-16 shadow-md">
+        <section className="relative overflow-hidden bg-gradient-to-b from-primary-dark via-primary to-primary-dark text-white py-8 sm:py-12 shadow-md">
           {/* Imagem de Fundo Sutil */}
           <div 
             className="absolute inset-0 z-0 bg-cover bg-center opacity-15 mix-blend-overlay pointer-events-none" 
@@ -176,51 +176,35 @@ export default function Sobre() {
 
               const CardContent = (
                 <motion.div
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: idx * 0.08 }}
-                  className={`h-full p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between text-left group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 ${
+                  transition={{ duration: 0.25, delay: idx * 0.05 }}
+                  className={`h-full px-3.5 py-3 rounded-xl border transition-all duration-300 flex items-center justify-between text-left group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-0.5 ${
                     btn.isSpecial
-                      ? 'bg-gradient-to-br from-green-600 via-green to-green-dark text-white border-green-400 hover:border-green-300'
+                      ? 'bg-gradient-to-r from-green-600 via-green to-green-dark text-white border-green-400 hover:border-green-300'
                       : 'bg-white dark:bg-[#1a0707] text-slate-900 dark:text-white border-slate-200/90 dark:border-red-950/60 hover:border-primary/40 dark:hover:border-green/50'
                   }`}
                 >
-                  <div>
-                    {/* Topo com Ícone e Badge */}
-                    <div className="flex items-center justify-between mb-3.5">
-                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
-                        btn.isSpecial
-                          ? 'bg-white/20 text-white'
-                          : 'bg-primary/10 dark:bg-white/5 text-primary dark:text-green group-hover:bg-primary group-hover:text-white dark:group-hover:bg-green dark:group-hover:text-primary'
-                      }`}>
-                        <Icon className="w-4 h-4" />
-                      </div>
-                      <span className={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
-                        btn.isSpecial
-                          ? 'bg-black/20 text-white'
-                          : 'bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 group-hover:bg-primary/10 group-hover:text-primary dark:group-hover:text-green'
-                      }`}>
-                        {btn.badge}
-                      </span>
+                  <div className="flex items-center gap-3 min-w-0 pr-2">
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                      btn.isSpecial
+                        ? 'bg-white/20 text-white'
+                        : 'bg-primary/10 dark:bg-white/5 text-primary dark:text-green group-hover:bg-primary group-hover:text-white dark:group-hover:bg-green dark:group-hover:text-primary'
+                    }`}>
+                      <Icon className="w-4 h-4" />
                     </div>
 
                     {/* Nome do Edifício */}
-                    <h3 className={`font-serif font-bold text-base sm:text-[17px] leading-snug transition-colors ${
+                    <h3 className={`font-serif font-bold text-xs sm:text-sm leading-tight transition-colors line-clamp-2 ${
                       btn.isSpecial ? 'text-white' : 'text-slate-900 dark:text-white group-hover:text-primary dark:group-hover:text-green-light'
                     }`}>
                       {btn.title}
                     </h3>
                   </div>
 
-                  {/* Rodapé de Ação Rápida */}
-                  <div className={`mt-5 pt-3 border-t flex items-center justify-between text-xs font-semibold transition-colors ${
-                    btn.isSpecial 
-                      ? 'border-white/20 text-white/90 group-hover:text-white' 
-                      : 'border-slate-100 dark:border-white/5 text-slate-500 dark:text-slate-400 group-hover:text-primary dark:group-hover:text-green'
-                  }`}>
-                    <span>{btn.actionText}</span>
+                  <div className="shrink-0 opacity-50 group-hover:opacity-100 transition-opacity">
                     {btn.isSpecial ? (
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                     ) : (
                       <Eye className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
                     )}
@@ -251,8 +235,8 @@ export default function Sobre() {
         </section>
 
         {/* Pilares Estratégicos (Limpos & Diretos) */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-14">
-          <div className="text-center mb-8">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-10">
+          <div className="text-center mb-6">
             <span className="text-green font-semibold text-xs uppercase tracking-widest block mb-1">
               Diferenciais do Complexo
             </span>
@@ -285,7 +269,7 @@ export default function Sobre() {
         </section>
 
         {/* CTA Simples para Contacto & Arrendamento */}
-        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8">
           <div className="bg-white dark:bg-[#180505] rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 shadow-sm text-center flex flex-col sm:flex-row items-center justify-between gap-5">
             <div className="text-center sm:text-left">
               <h3 className="text-lg sm:text-xl font-serif font-bold text-slate-900 dark:text-white mb-1">
