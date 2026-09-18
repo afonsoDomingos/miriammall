@@ -213,13 +213,13 @@ export default function Sobre() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-transparent to-primary-dark/60 pointer-events-none" />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-start text-left">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-start text-left">
           {/* Título */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="max-w-3xl mb-8 sm:mb-10"
+            className="mb-8 sm:mb-10"
           >
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white tracking-tight mb-6 leading-tight">
               Complexo Comercial{' '}
@@ -227,7 +227,7 @@ export default function Sobre() {
             </h1>
 
             {/* Descrição em quadro */}
-            <div className="max-w-2xl rounded-xl border border-white/70 bg-black/25 backdrop-blur-md p-4 sm:p-5 shadow-md">
+            <div className="max-w-xl rounded-xl border border-white/70 bg-black/25 backdrop-blur-md p-4 sm:p-5 shadow-md">
               <p className="text-white/90 text-xs sm:text-sm md:text-[15px] leading-relaxed font-normal">
                 A{' '}
                 <strong className="text-white font-semibold">
