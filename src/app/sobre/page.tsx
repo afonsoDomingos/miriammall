@@ -164,7 +164,7 @@ export default function Sobre() {
         onClick?: undefined;
       };
 
-  const renderButton = (btn: ButtonDef, idx: number) => {
+  const renderButton = (btn: ButtonDef, num: number, idx: number) => {
     const Icon = btn.icon;
     const inner = (
       <motion.div
@@ -173,6 +173,9 @@ export default function Sobre() {
         transition={{ duration: 0.25, delay: idx * 0.05 }}
         className="w-full min-h-[52px] px-5 py-3 rounded-lg border border-white/70 hover:border-white hover:bg-white hover:text-primary text-white text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-start gap-3 text-left group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 bg-white/5 backdrop-blur-sm"
       >
+        <span className="w-5 h-5 rounded-full bg-white/20 group-hover:bg-primary/20 flex items-center justify-center text-[10px] font-extrabold shrink-0 leading-none">
+          {num}
+        </span>
         <Icon className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" />
         <span className="leading-snug">{btn.title}</span>
       </motion.div>
@@ -210,21 +213,21 @@ export default function Sobre() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-transparent to-primary-dark/60 pointer-events-none" />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-start text-left">
           {/* Título */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="max-w-3xl mx-auto mb-8 sm:mb-10"
+            className="max-w-3xl mb-8 sm:mb-10"
           >
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white tracking-tight mb-6 leading-tight whitespace-nowrap">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white tracking-tight mb-6 leading-tight">
               Complexo Comercial{' '}
               <span className="text-green-light">e Multifuncional</span>
             </h1>
 
             {/* Descrição em quadro */}
-            <div className="max-w-2xl mx-auto rounded-xl border border-white/70 bg-black/25 backdrop-blur-md p-4 sm:p-5 shadow-md">
+            <div className="max-w-2xl rounded-xl border border-white/70 bg-black/25 backdrop-blur-md p-4 sm:p-5 shadow-md">
               <p className="text-white/90 text-xs sm:text-sm md:text-[15px] leading-relaxed font-normal">
                 A{' '}
                 <strong className="text-white font-semibold">
@@ -243,12 +246,12 @@ export default function Sobre() {
           <div className="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             {/* Coluna 1: Edifícios */}
             <div className="flex flex-col gap-3">
-              {col1Buttons.map((btn, idx) => renderButton(btn, idx))}
+              {col1Buttons.map((btn, idx) => renderButton(btn, idx + 1, idx))}
             </div>
 
             {/* Coluna 2: Serviços & Espaços */}
             <div className="flex flex-col gap-3">
-              {col2Buttons.map((btn, idx) => renderButton(btn, idx + 3))}
+              {col2Buttons.map((btn, idx) => renderButton(btn, idx + 4, idx + 3))}
             </div>
           </div>
         </div>
