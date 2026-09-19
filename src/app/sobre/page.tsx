@@ -13,6 +13,9 @@ import {
   Layers,
   ShoppingBag,
   Utensils,
+  HeartPulse,
+  Landmark,
+  Car,
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -88,6 +91,54 @@ export default function Sobre() {
       ],
       order: 3,
     },
+    {
+      id: 'building-4',
+      name: 'Edifício 4 – Área de Saúde e Bem-Estar',
+      subtitle: 'Clínicas, Farmácias & Bem-Estar',
+      description:
+        'Espaço dedicado à saúde, consultas especializadas, laboratórios de análises clínicas, fisioterapia, estética e bem-estar.',
+      image:
+        'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80',
+      features: [
+        'Consultórios Médicos e Dentários',
+        'Clínica de Atendimento Especializado',
+        'Centro de Estética e Fisioterapia',
+        'Acessibilidade e Conforto Total',
+      ],
+      order: 4,
+    },
+    {
+      id: 'building-5',
+      name: 'Edifício 5 – Centro Corporativo e Financeiro',
+      subtitle: 'Bancos, Seguros & Negócios',
+      description:
+        'Polo empresarial com escritórios de advocacia, consultorias, serviços financeiros, seguros e salas de reunião modernas.',
+      image:
+        'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
+      features: [
+        'Salas de Reunião e Conferência',
+        'Escritórios para Serviços Financeiros',
+        'Internet de Alta Velocidade e Rede Dedicada',
+        'Recepção e Segurança Executiva',
+      ],
+      order: 5,
+    },
+    {
+      id: 'building-6',
+      name: 'Edifício 6 – Área de Estacionamento & Apoio',
+      subtitle: 'Parque, Lavagem & Apoio',
+      description:
+        'Ampla área com estacionamento vigiado 24 horas, serviços de lavagem automóvel, postos de carregamento e suporte a transportes.',
+      image:
+        'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=800&q=80',
+      features: [
+        'Estacionamento Seguro 24h',
+        'Serviços Rápidos de Lavagem Automóvel',
+        'Pontos de Carga e Abastecimento',
+        'Controle de Acesso Digital',
+      ],
+      order: 6,
+    },
   ];
 
   const getBuilding = (index: number) => {
@@ -98,6 +149,9 @@ export default function Sobre() {
   const buildingA = getBuilding(0);
   const buildingB = getBuilding(1);
   const buildingC = getBuilding(2);
+  const buildingD = getBuilding(3);
+  const buildingE = getBuilding(4);
+  const buildingF = getBuilding(5);
 
   // Remove prefixo "Edifício X –" para deixar apenas o nome da área
   const getCleanName = (name?: string) => {
@@ -145,6 +199,27 @@ export default function Sobre() {
       title: 'Restaurantes e Lazer',
       icon: Utensils,
       href: '/restaurantes',
+    },
+  ];
+
+  const col3Buttons = [
+    {
+      id: 'btn-building-4',
+      title: getCleanName(buildingD.name) || 'Área de Saúde e Bem-Estar',
+      icon: HeartPulse,
+      onClick: () => setSelectedBuilding(buildingD),
+    },
+    {
+      id: 'btn-building-5',
+      title: getCleanName(buildingE.name) || 'Centro Corporativo e Financeiro',
+      icon: Landmark,
+      onClick: () => setSelectedBuilding(buildingE),
+    },
+    {
+      id: 'btn-building-6',
+      title: getCleanName(buildingF.name) || 'Área de Estacionamento & Apoio',
+      icon: Car,
+      onClick: () => setSelectedBuilding(buildingF),
     },
   ];
 
@@ -219,7 +294,7 @@ export default function Sobre() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="mb-8 sm:mb-10 w-full max-w-2xl md:max-w-3xl"
+            className="mb-8 sm:mb-10 w-full max-w-2xl md:max-w-4xl lg:max-w-6xl"
           >
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white tracking-tight mb-6 leading-tight">
               Complexo Comercial{' '}
@@ -242,16 +317,21 @@ export default function Sobre() {
             </div>
           </motion.div>
 
-          {/* 6 Botões em 2 Colunas — 1,2,3 | 1,2,3 */}
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 max-w-2xl md:max-w-3xl">
-            {/* Coluna 1: Edifícios */}
+          {/* 9 Botões em 3 Colunas — 1,2,3 | 4,5,6 | 7,8,9 */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-2xl md:max-w-4xl lg:max-w-6xl">
+            {/* Coluna 1: Edifícios 1, 2, 3 */}
             <div className="flex flex-col gap-3">
               {col1Buttons.map((btn, idx) => renderButton(btn, idx + 1, idx))}
             </div>
 
-            {/* Coluna 2: Serviços & Espaços */}
+            {/* Coluna 2: Serviços & Espaços (4, 5, 6) */}
             <div className="flex flex-col gap-3">
               {col2Buttons.map((btn, idx) => renderButton(btn, idx + 4, idx + 3))}
+            </div>
+
+            {/* Coluna 3: Edifícios 4, 5, 6 (Numeração 7, 8, 9) */}
+            <div className="flex flex-col gap-3">
+              {col3Buttons.map((btn, idx) => renderButton(btn, idx + 7, idx + 6))}
             </div>
           </div>
         </div>
