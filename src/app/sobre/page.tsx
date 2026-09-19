@@ -93,7 +93,7 @@ export default function Sobre() {
     },
     {
       id: 'building-4',
-      name: 'Edifício 4 – Posto de Abastecimento',
+      name: 'Edifício 4 – Posto de Abastecimento de Combustíveis',
       subtitle: 'Combustíveis, Loja de Conveniência & Serviços',
       description:
         'Posto moderno de abastecimento de combustíveis com serviços rápidos, loja de conveniência 24h e suporte a frotas.',
@@ -159,23 +159,30 @@ export default function Sobre() {
     return name.replace(/^edif[ií]cio\s+\d+\s*[–-]\s*/i, '').trim();
   };
 
+  // Converte texto para Sentence case (apenas a primeira letra maiúscula)
+  const toSentenceCase = (text: string) => {
+    if (!text) return '';
+    const trimmed = text.trim();
+    return trimmed.charAt(0).toUpperCase() + trimmed.slice(1).toLowerCase();
+  };
+
   const col1Buttons = [
     {
       id: 'btn-building-1',
-      title: getCleanName(buildingA.name) || 'Centro Comercial',
+      title: getCleanName(buildingA.name) || 'Centro comercial',
       icon: Store,
       onClick: () => setSelectedBuilding(buildingA),
     },
     {
       id: 'btn-building-2',
-      title: getCleanName(buildingB.name) || 'Área Comercial e Hospedagem',
+      title: getCleanName(buildingB.name) || 'Área comercial e hospedagem',
       icon: Briefcase,
       onClick: () => setSelectedBuilding(buildingB),
     },
     {
       id: 'btn-building-3',
       title:
-        getCleanName(buildingC.name) || 'Área Logística e Operacional',
+        getCleanName(buildingC.name) || 'Área logística e operacional',
       icon: Building2,
       onClick: () => setSelectedBuilding(buildingC),
     },
@@ -184,19 +191,19 @@ export default function Sobre() {
   const col2Buttons = [
     {
       id: 'btn-espacos',
-      title: 'Espaços Comerciais',
+      title: 'Espaços comerciais',
       icon: Layers,
       href: '/espacos',
     },
     {
       id: 'btn-lojas',
-      title: 'Lojas e Serviços',
+      title: 'Lojas e serviços',
       icon: ShoppingBag,
       href: '/lojas',
     },
     {
       id: 'btn-restaurantes',
-      title: 'Restaurantes e Lazer',
+      title: 'Restaurantes e lazer',
       icon: Utensils,
       href: '/restaurantes',
     },
@@ -205,19 +212,19 @@ export default function Sobre() {
   const col3Buttons = [
     {
       id: 'btn-building-4',
-      title: getCleanName(buildingD.name) || 'Posto de abastecimento',
+      title: getCleanName(buildingD.name) || 'Posto de abastecimento de combustíveis',
       icon: Fuel,
       onClick: () => setSelectedBuilding(buildingD),
     },
     {
       id: 'btn-building-5',
-      title: getCleanName(buildingE.name) || 'Centro Corporativo',
+      title: getCleanName(buildingE.name) || 'Centro corporativo',
       icon: Landmark,
       onClick: () => setSelectedBuilding(buildingE),
     },
     {
       id: 'btn-building-6',
-      title: getCleanName(buildingF.name) || 'Área de Estacionamento',
+      title: getCleanName(buildingF.name) || 'Área de estacionamento',
       icon: Car,
       onClick: () => setSelectedBuilding(buildingF),
     },
@@ -246,13 +253,13 @@ export default function Sobre() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, delay: idx * 0.05 }}
-        className="w-full min-h-[52px] px-5 py-3 rounded-lg border border-white/70 hover:border-white hover:bg-white hover:text-primary text-white text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-start gap-3 text-left group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 bg-white/5 backdrop-blur-sm"
+        className="w-full min-h-[52px] px-5 py-3 rounded-lg border border-white/70 hover:border-white hover:bg-white hover:text-primary text-white text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center justify-start gap-3 text-left group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 bg-white/5 backdrop-blur-sm"
       >
         <span className="w-5 h-5 rounded-full bg-white/20 group-hover:bg-primary/20 flex items-center justify-center text-[10px] font-extrabold shrink-0 leading-none">
           {num}
         </span>
         <Icon className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" />
-        <span className="leading-snug">{btn.title}</span>
+        <span className="leading-snug">{toSentenceCase(btn.title)}</span>
       </motion.div>
     );
 
