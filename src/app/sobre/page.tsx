@@ -287,7 +287,7 @@ export default function Sobre() {
     <div className="min-h-screen flex flex-col bg-primary-dark text-white">
       <Navbar />
 
-      <main className="flex-grow pt-16 sm:pt-20 relative bg-gradient-to-b from-primary-dark via-primary to-primary-dark text-white flex flex-col justify-center overflow-hidden min-h-[70vh]">
+      <main className="flex-grow pt-16 sm:pt-20 relative bg-gradient-to-b from-primary-dark via-primary to-primary-dark text-white flex flex-col justify-start overflow-hidden min-h-[70vh]">
         {/* Imagem de fundo sutil */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center opacity-20 mix-blend-overlay pointer-events-none"
@@ -295,7 +295,7 @@ export default function Sobre() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-transparent to-primary-dark/60 pointer-events-none" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-start text-left py-10 sm:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-start text-left pt-6 sm:pt-8 pb-8 sm:pb-10">
           {/* Título */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
