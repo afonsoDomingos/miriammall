@@ -96,6 +96,7 @@ export default function Footer() {
             <h4 className="text-[11px] uppercase font-bold tracking-widest text-green leading-none mb-0.5">
               Contacto
             </h4>
+            <div className="w-6 h-[1.5px] bg-white/80 rounded-full mb-1" />
             <a
               href="tel:+258865543026"
               className="flex items-center gap-1.5 text-[11px] text-white/80 hover:text-green transition-colors"
@@ -126,6 +127,7 @@ export default function Footer() {
             <h4 className="text-[11px] uppercase font-bold tracking-widest text-green leading-none mb-0.5">
               Localização
             </h4>
+            <div className="w-6 h-[1.5px] bg-white/80 rounded-full mb-1" />
             <div className="flex items-start gap-1.5 text-[11px] text-white/80">
               <MapPin className="w-3 h-3 text-green shrink-0 mt-0.5" />
               <p className="leading-snug">
