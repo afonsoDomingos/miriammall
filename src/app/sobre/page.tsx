@@ -219,7 +219,7 @@ export default function Sobre() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="mb-8 sm:mb-10"
+            className="mb-8 sm:mb-10 w-full max-w-2xl md:max-w-3xl"
           >
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white tracking-tight mb-6 leading-tight">
               Complexo Comercial{' '}
@@ -227,7 +227,7 @@ export default function Sobre() {
             </h1>
 
             {/* Descrição em quadro */}
-            <div className="max-w-xl rounded-xl border border-white/70 bg-black/25 backdrop-blur-md p-4 sm:p-5 shadow-md">
+            <div className="w-full rounded-xl border border-white/70 bg-black/25 backdrop-blur-md p-4 sm:p-5 shadow-md">
               <p className="text-white/90 text-xs sm:text-sm md:text-[15px] leading-relaxed font-normal">
                 A{' '}
                 <strong className="text-white font-semibold">
