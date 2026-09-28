@@ -215,7 +215,10 @@ export default function BuildingSpacesPage() {
               {floorSpaces.length > 0 && (
                 <div className="mb-8">
                   <h3 className="text-lg font-serif font-bold text-primary mb-4">Planta Interactiva</h3>
-                  <InteractiveMap buildingId={Array.isArray(buildingId) ? buildingId[0] : buildingId} />
+                  <InteractiveMap 
+                    buildingId={Array.isArray(buildingId) ? buildingId[0] : buildingId}
+                    selectedFloor={selectedFloor}
+                  />
                 </div>
               )}
 

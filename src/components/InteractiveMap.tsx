@@ -8,13 +8,18 @@ import Link from 'next/link';
 
 interface InteractiveMapProps {
   buildingId?: string;
+  selectedFloor?: number;
 }
 
-export default function InteractiveMap({ buildingId }: InteractiveMapProps) {
+export default function InteractiveMap({ buildingId, selectedFloor: propSelectedFloor }: InteractiveMapProps) {
   const { spaces } = useDatabase();
-  const [selectedFloor, setSelectedFloor] = useState<number>(1);
+  const [internalSelectedFloor, setInternalSelectedFloor] = useState<number>(1);
   const [hoveredSpace, setHoveredSpace] = useState<Space | null>(null);
   const [selectedSpace, setSelectedSpace] = useState<Space | null>(null);
+
+  // Use prop if provided, otherwise use internal state
+  const selectedFloor = propSelectedFloor !== undefined ? propSelectedFloor : internalSelectedFloor;
+  const canChangeFloor = propSelectedFloor === undefined;
 
   // Filter spaces by building and floor
   const buildingSpaces = buildingId 
@@ -28,10 +33,10 @@ export default function InteractiveMap({ buildingId }: InteractiveMapProps) {
 
   // Set default floor to first available if current selection doesn't exist
   React.useEffect(() => {
-    if (uniqueFloors.length > 0 && !uniqueFloors.includes(selectedFloor)) {
-      setSelectedFloor(uniqueFloors[0]);
+    if (canChangeFloor && uniqueFloors.length > 0 && !uniqueFloors.includes(selectedFloor)) {
+      setInternalSelectedFloor(uniqueFloors[0]);
     }
-  }, [uniqueFloors, selectedFloor]);
+  }, [uniqueFloors, selectedFloor, canChangeFloor]);
 
   // Helper to get status colors
   const getStatusColor = (status: Space['status'], isActive: boolean) => {
@@ -72,26 +77,28 @@ export default function InteractiveMap({ buildingId }: InteractiveMapProps) {
 
   return (
     <div className="bg-slate-50/50 p-4 sm:p-6 rounded-xl">
-      {/* Floor Selector */}
-      <div className="flex flex-wrap justify-center gap-3 mb-6 sm:mb-8">
-        {uniqueFloors.length === 0 ? (
-          <p className="text-xs text-primary/60">Sem pisos disponíveis</p>
-        ) : (
-          uniqueFloors.map((floor) => (
-            <button
-              key={floor}
-              onClick={() => setSelectedFloor(floor)}
-              className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all duration-300 ${
-                selectedFloor === floor
-                  ? 'bg-primary text-green border border-green'
-                  : 'bg-white text-primary border border-primary/10 hover:border-green/50'
-              }`}
-            >
-              Piso {floor}
-            </button>
-          ))
-        )}
-      </div>
+      {/* Floor Selector - only show if no external floor control */}
+      {canChangeFloor && (
+        <div className="flex flex-wrap justify-center gap-3 mb-6 sm:mb-8">
+          {uniqueFloors.length === 0 ? (
+            <p className="text-xs text-primary/60">Sem pisos disponíveis</p>
+          ) : (
+            uniqueFloors.map((floor) => (
+              <button
+                key={floor}
+                onClick={() => setInternalSelectedFloor(floor)}
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all duration-300 ${
+                  selectedFloor === floor
+                    ? 'bg-primary text-green border border-green'
+                    : 'bg-white text-primary border border-primary/10 hover:border-green/50'
+                }`}
+              >
+                Piso {floor}
+              </button>
+            ))
+          )}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8">
         {/* SVG Map (Left 3 cols) */}
