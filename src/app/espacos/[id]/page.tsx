@@ -134,6 +134,12 @@ export default function EspacoDetalhe() {
                 <p className="text-primary/75 text-sm sm:text-base leading-relaxed">
                   {space.description}
                 </p>
+                {space.conditions && (
+                  <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                    <h4 className="text-xs font-bold uppercase text-primary/70 mb-2">Condições de Arrendamento</h4>
+                    <p className="text-sm text-primary/70">{space.conditions}</p>
+                  </div>
+                )}
               </div>
 
               {/* Infrastructure */}

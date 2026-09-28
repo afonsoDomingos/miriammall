@@ -13,9 +13,6 @@ import {
   Layers,
   ShoppingBag,
   Utensils,
-  Fuel,
-  Landmark,
-  Car,
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -45,99 +42,51 @@ export default function Sobre() {
   const defaultBuildings: BuildingType[] = [
     {
       id: 'building-1',
-      name: 'Edifício 1 – Centro Comercial',
-      subtitle: 'Shopping & Lojas de Retalho',
+      name: 'Edifício Principal — Shopping',
+      subtitle: 'Centro Comercial',
       description:
-        'Espaço central do complexo destinado a grandes marcas, supermercado âncora, praça de restauração e serviços essenciais de alto fluxo comercial.',
+        'Edifício principal do complexo destinado a lojas comerciais, restaurantes e serviços. 3 pisos com espaços variados para arrendamento.',
       image:
         'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80',
       features: [
-        'Lojas Âncora e Boutiques',
-        'Supermercado e Farmácia',
-        'Praça de Alimentação Climatizada',
-        'Escadas Rolantes e Elevadores Panorâmicos',
+        'Lojas comerciais',
+        'Restaurante',
+        'Áreas administrativas',
+        '3 pisos',
       ],
       order: 1,
     },
     {
       id: 'building-2',
-      name: 'Edifício 2 – Área Comercial e Hospedagem',
-      subtitle: 'Serviços, Escritórios & Hospedagem',
+      name: 'Edifício de Hospedagem',
+      subtitle: 'Serviços, Escritórios & Alojamento',
       description:
-        'Ambiente executivo e moderno ideal para agências bancárias, telecomunicações, consultórios médicos, escritórios corporativos e unidades de hospedagem.',
+        'Edifício multifuncional com espaços comerciais, escritórios, quartos e refeitório. Ideal para serviços e alojamento.',
       image:
         'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
       features: [
-        'Escritórios Modulares & Coworking',
-        'Agências Bancárias e Seguradoras',
-        'Alojamento e Suítes Confortáveis',
-        'Acesso Controlado e Portaria Executiva',
+        'Ferragens e armazéns',
+        'Escritórios',
+        'Quartos suíte',
+        'Refeitório',
       ],
       order: 2,
     },
     {
       id: 'building-3',
-      name: 'Edifício 3 – Área Logística e Operacional',
-      subtitle: 'Ferragens e Armazéns',
+      name: 'Bloco de Armazéns',
+      subtitle: 'Armazenamento Logístico',
       description:
-        'Estrutura reforçada especialmente projetada para carga e descarga, grandes volumes, materiais de construção, ferragens e centros de distribuição regional.',
+        'Bloco dedicado ao armazenamento com 4 espaços de diferentes dimensões. Estrutura reforçada para carga e descarga.',
       image:
         'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
       features: [
-        'Pé-direito Alto para Armazenamento',
-        'Docas de Carga e Descarga',
-        'Área Exclusiva para Ferragens',
-        'Acesso Facilitado a Camiões',
+        '4 armazéns',
+        'Pé-direito alto',
+        'Acesso facilitado',
+        'Segurança 24h',
       ],
       order: 3,
-    },
-    {
-      id: 'building-4',
-      name: 'Edifício 4 – Posto de Abastecimento de Combustíveis',
-      subtitle: 'Combustíveis, Loja de Conveniência & Serviços',
-      description:
-        'Posto moderno de abastecimento de combustíveis com serviços rápidos, loja de conveniência 24h e suporte a frotas.',
-      image:
-        'https://images.unsplash.com/photo-1545459720-aac8509eb02c?auto=format&fit=crop&w=800&q=80',
-      features: [
-        'Bombas Multicombustível de Alta Eficiência',
-        'Loja de Conveniência 24 Horas',
-        'Calibração e Serviços Rápidos',
-        'Atendimento Rápido e Seguro',
-      ],
-      order: 4,
-    },
-    {
-      id: 'building-5',
-      name: 'Edifício 5 – Centro Corporativo',
-      subtitle: 'Escritórios, Negócios & Serviços',
-      description:
-        'Espaço empresarial moderno para escritórios corporativos, instituições financeiras, consultorias e salas de reunião.',
-      image:
-        'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
-      features: [
-        'Salas de Reunião Executivas',
-        'Escritórios Modulares & Coworking',
-        'Internet Dedicada de Alta Velocidade',
-        'Recepção e Segurança 24h',
-      ],
-      order: 5,
-    },
-    {
-      id: 'building-6',
-      name: 'Edifício 6 – Área de Estacionamento',
-      subtitle: 'Estacionamento Seguro & Apoio',
-      description:
-        'Ampla área de estacionamento pavimentada, iluminada e com segurança 24 horas para clientes e visitantes do shopping.',
-      image:
-        'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=800&q=80',
-      features: [
-        'Estacionamento Amplo e Seguro 24h',
-        'Vigilância e Câmaras de Segurança',
-        'Acesso Facilitado a Todos os Edifícios',
-        'Vagas para Cargas e Descargas',
-      ],
-      order: 6,
     },
   ];
 
@@ -149,9 +98,6 @@ export default function Sobre() {
   const buildingA = getBuilding(0);
   const buildingB = getBuilding(1);
   const buildingC = getBuilding(2);
-  const buildingD = getBuilding(3);
-  const buildingE = getBuilding(4);
-  const buildingF = getBuilding(5);
 
   // Remove prefixo "Edifício X –" para deixar apenas o nome da área
   const getCleanName = (name?: string) => {
@@ -206,27 +152,6 @@ export default function Sobre() {
       title: 'Restaurantes e lazer',
       icon: Utensils,
       href: '/restaurantes',
-    },
-  ];
-
-  const col3Buttons = [
-    {
-      id: 'btn-building-4',
-      title: getCleanName(buildingD.name) || 'Posto de abastecimento de combustíveis',
-      icon: Fuel,
-      onClick: () => setSelectedBuilding(buildingD),
-    },
-    {
-      id: 'btn-building-5',
-      title: getCleanName(buildingE.name) || 'Centro corporativo',
-      icon: Landmark,
-      onClick: () => setSelectedBuilding(buildingE),
-    },
-    {
-      id: 'btn-building-6',
-      title: getCleanName(buildingF.name) || 'Área de estacionamento',
-      icon: Car,
-      onClick: () => setSelectedBuilding(buildingF),
     },
   ];
 
@@ -324,8 +249,8 @@ export default function Sobre() {
             </div>
           </motion.div>
 
-          {/* 9 Botões em 3 Colunas — 1,2,3 | 4,5,6 | 7,8,9 */}
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-2xl md:max-w-4xl lg:max-w-6xl">
+          {/* 6 Botões em 2 Colunas — 1,2,3 | 4,5,6 */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 max-w-2xl md:max-w-4xl lg:max-w-5xl">
             {/* Coluna 1: Edifícios 1, 2, 3 */}
             <div className="flex flex-col gap-3">
               {col1Buttons.map((btn, idx) => renderButton(btn, idx + 1, idx))}
@@ -334,11 +259,6 @@ export default function Sobre() {
             {/* Coluna 2: Serviços & Espaços (4, 5, 6) */}
             <div className="flex flex-col gap-3">
               {col2Buttons.map((btn, idx) => renderButton(btn, idx + 4, idx + 3))}
-            </div>
-
-            {/* Coluna 3: Edifícios 4, 5, 6 (Numeração 7, 8, 9) */}
-            <div className="flex flex-col gap-3">
-              {col3Buttons.map((btn, idx) => renderButton(btn, idx + 7, idx + 6))}
             </div>
           </div>
         </div>

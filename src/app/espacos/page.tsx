@@ -86,9 +86,10 @@ const defaultSpaces: Space[] = [
 ];
 
 export default function Espacos() {
-  const { spaces, isLoaded } = useDatabase();
+  const { spaces, isLoaded, buildings } = useDatabase();
   const [filterFloor, setFilterFloor] = useState<string>('todos');
   const [filterStatus, setFilterStatus] = useState<string>('todos');
+  const [filterBuilding, setFilterBuilding] = useState<string>('todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const allSpaces = spaces && spaces.length > 0 ? spaces : defaultSpaces;
@@ -98,10 +99,12 @@ export default function Espacos() {
       filterFloor === 'todos' || space.floor.toString() === filterFloor;
     const matchesStatus =
       filterStatus === 'todos' || space.status === filterStatus;
+    const matchesBuilding =
+      filterBuilding === 'todos' || space.buildingId === filterBuilding;
     const matchesSearch =
       space.number.toLowerCase().includes(searchQuery.toLowerCase()) ||
       space.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesFloor && matchesStatus && matchesSearch;
+    return matchesFloor && matchesStatus && matchesBuilding && matchesSearch;
   });
 
   return (
@@ -143,6 +146,19 @@ export default function Espacos() {
                 <div className="flex items-center gap-2 text-xs font-bold text-primary/70 uppercase">
                   <Filter className="w-4 h-4 text-green" /> Filtrar Por:
                 </div>
+                {/* Building Filter */}
+                <select
+                  value={filterBuilding}
+                  onChange={(e) => setFilterBuilding(e.target.value)}
+                  className="bg-white border border-primary/10 rounded px-3 py-2 text-xs text-primary/80 focus:outline-none focus:border-green"
+                >
+                  <option value="todos">Todos os Edifícios</option>
+                  {buildings.map((building) => (
+                    <option key={building.id} value={building.id}>
+                      {building.name}
+                    </option>
+                  ))}
+                </select>
                 {/* Floor Filter */}
                 <select
                   value={filterFloor}
@@ -150,8 +166,11 @@ export default function Espacos() {
                   className="bg-white border border-primary/10 rounded px-3 py-2 text-xs text-primary/80 focus:outline-none focus:border-green"
                 >
                   <option value="todos">Todos os Pisos</option>
-                  <option value="0">Piso 0 (Térreo)</option>
-                  <option value="1">Piso 1 (1º Andar)</option>
+                  {Array.from(new Set(allSpaces.map((s) => s.floor))).sort((a, b) => a - b).map((floor) => (
+                    <option key={floor} value={floor.toString()}>
+                      Piso {floor}
+                    </option>
+                  ))}
                 </select>
 
                 {/* Status Filter */}
@@ -164,6 +183,9 @@ export default function Espacos() {
                   <option value="disponivel">Disponível</option>
                   <option value="reservado">Reservado</option>
                   <option value="ocupado">Ocupado</option>
+                  <option value="indisponivel">Indisponível</option>
+                  <option value="em_preparacao">Em Preparação</option>
+                  <option value="em_construcao">Em Construção</option>
                 </select>
               </div>
 
@@ -171,7 +193,7 @@ export default function Espacos() {
               <div className="w-full md:w-64">
                 <input
                   type="text"
-                  placeholder="Pesquisar loja..."
+                  placeholder="Pesquisar espaço..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-white border border-primary/10 rounded px-3 py-2 text-xs text-primary/80 focus:outline-none focus:border-green"
@@ -205,12 +227,17 @@ export default function Espacos() {
                               ? 'bg-emerald-500 text-white'
                               : space.status === 'reservado'
                               ? 'bg-amber-500 text-white'
+                              : space.status === 'ocupado'
+                              ? 'bg-slate-500 text-white'
+                              : space.status === 'em_construcao'
+                              ? 'bg-orange-500 text-white'
                               : 'bg-slate-500 text-white'
                           }`}
                         >
                           {space.status === 'disponivel' && <CheckCircle className="w-3.5 h-3.5" />}
                           {space.status === 'reservado' && <Clock className="w-3.5 h-3.5" />}
-                          {space.status === 'ocupado' && <AlertTriangle className="w-3.5 h-3.5" />}
+                          {(space.status === 'ocupado' || space.status === 'indisponivel' || space.status === 'em_preparacao') && <AlertTriangle className="w-3.5 h-3.5" />}
+                          {space.status === 'em_construcao' && <AlertTriangle className="w-3.5 h-3.5" />}
                           {space.status}
                         </span>
                       </div>
@@ -234,7 +261,7 @@ export default function Espacos() {
                       >
                         <Eye className="w-3.5 h-3.5" /> Detalhes
                       </Link>
-                      {space.status !== 'ocupado' ? (
+                      {space.status !== 'ocupado' && space.status !== 'em_construcao' ? (
                         <Link
                           href={`/contato?espaco=${space.number}`}
                           className="flex-1 text-center bg-green hover:bg-green-light text-primary text-xs font-bold uppercase tracking-wider py-2.5 rounded transition-colors"
@@ -246,7 +273,7 @@ export default function Espacos() {
                           disabled
                           className="flex-1 text-center bg-slate-100 text-slate-400 text-xs font-bold uppercase tracking-wider py-2.5 rounded cursor-not-allowed"
                         >
-                          Indisponível
+                          {space.status === 'em_construcao' ? 'Em Construção' : 'Indisponível'}
                         </button>
                       )}
                     </div>

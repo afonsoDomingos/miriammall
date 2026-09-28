@@ -6,14 +6,32 @@ import { useDatabase } from '../context/DatabaseContext';
 import { Info, HelpCircle, X, CheckCircle, Clock, AlertTriangle, Palmtree } from 'lucide-react';
 import Link from 'next/link';
 
-export default function InteractiveMap() {
+interface InteractiveMapProps {
+  buildingId?: string;
+}
+
+export default function InteractiveMap({ buildingId }: InteractiveMapProps) {
   const { spaces } = useDatabase();
-  const [selectedFloor, setSelectedFloor] = useState<number>(0);
+  const [selectedFloor, setSelectedFloor] = useState<number>(1);
   const [hoveredSpace, setHoveredSpace] = useState<Space | null>(null);
   const [selectedSpace, setSelectedSpace] = useState<Space | null>(null);
 
-  // Filter spaces by floor
-  const floorSpaces = spaces.filter((s) => s.floor === selectedFloor);
+  // Filter spaces by building and floor
+  const buildingSpaces = buildingId 
+    ? spaces.filter((s) => s.buildingId === buildingId)
+    : spaces;
+  
+  const floorSpaces = buildingSpaces.filter((s) => s.floor === selectedFloor);
+
+  // Get unique floors for this building
+  const uniqueFloors = Array.from(new Set(buildingSpaces.map((s) => s.floor))).sort((a, b) => a - b);
+
+  // Set default floor to first available if current selection doesn't exist
+  React.useEffect(() => {
+    if (uniqueFloors.length > 0 && !uniqueFloors.includes(selectedFloor)) {
+      setSelectedFloor(uniqueFloors[0]);
+    }
+  }, [uniqueFloors, selectedFloor]);
 
   // Helper to get status colors
   const getStatusColor = (status: Space['status'], isActive: boolean) => {
@@ -24,55 +42,55 @@ export default function InteractiveMap() {
         return isActive ? 'fill-amber-500/35 stroke-amber-500' : 'fill-amber-500/15 stroke-amber-500/60';
       case 'ocupado':
         return isActive ? 'fill-primary/60 stroke-primary-light' : 'fill-primary/45 stroke-primary-light/50';
+      case 'em_construcao':
+        return isActive ? 'fill-orange-500/35 stroke-orange-500' : 'fill-orange-500/15 stroke-orange-500/60';
       default:
         return 'fill-slate-100 stroke-slate-300';
     }
   };
 
-  // Coordinates mapping for stores (mock SVG representation)
-  // We represent them as rectangles in a Grid layout
-  const getSpaceCoordinates = (number: string) => {
-    // Return x, y, width, height for SVG rectangles
-    switch (number) {
-      // Floor 0
-      case 'Loja 101': return { x: 50, y: 50, w: 100, h: 100 };
-      case 'Loja 102': return { x: 160, y: 50, w: 120, h: 100 };
-      case 'Loja 103': return { x: 290, y: 50, w: 220, h: 120 }; // Large Anchor Space
-      case 'Loja 104': return { x: 520, y: 50, w: 110, h: 100 };
-      case 'Loja 105': return { x: 640, y: 50, w: 90, h: 100 };
-      // Floor 1
-      case 'Loja 201': return { x: 50, y: 50, w: 140, h: 100 };
-      case 'Loja 202': return { x: 200, y: 50, w: 150, h: 100 };
-      case 'Loja 203': return { x: 360, y: 50, w: 200, h: 100 }; // Large Food Space
-      case 'Loja 204': return { x: 570, y: 50, w: 160, h: 100 };
-      default: return { x: 50, y: 50, w: 100, h: 100 };
-    }
+  // Dynamic coordinates based on space count (grid layout)
+  const getSpaceCoordinates = (index: number, totalSpaces: number) => {
+    const cols = Math.ceil(Math.sqrt(totalSpaces));
+    const row = Math.floor(index / cols);
+    const col = index % cols;
+    
+    const padding = 30;
+    const availableWidth = 800 - (padding * 2);
+    const availableHeight = 250 - (padding * 2);
+    
+    const cellWidth = (availableWidth / cols) - 10;
+    const cellHeight = (availableHeight / Math.ceil(totalSpaces / cols)) - 10;
+    
+    return {
+      x: padding + (col * (cellWidth + 10)),
+      y: padding + (row * (cellHeight + 10)),
+      w: Math.max(cellWidth, 60),
+      h: Math.max(cellHeight, 50)
+    };
   };
 
   return (
     <div className="bg-slate-50/50 p-4 sm:p-6 rounded-xl">
       {/* Floor Selector */}
       <div className="flex flex-wrap justify-center gap-3 mb-6 sm:mb-8">
-        <button
-          onClick={() => setSelectedFloor(0)}
-          className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all duration-300 ${
-            selectedFloor === 0
-              ? 'bg-primary text-green border border-green'
-              : 'bg-white text-primary border border-primary/10 hover:border-green/50'
-          }`}
-        >
-          Piso 0 (Térreo)
-        </button>
-        <button
-          onClick={() => setSelectedFloor(1)}
-          className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all duration-300 ${
-            selectedFloor === 1
-              ? 'bg-primary text-green border border-green'
-              : 'bg-white text-primary border border-primary/10 hover:border-green/50'
-          }`}
-        >
-          Piso 1 (Primeiro Andar)
-        </button>
+        {uniqueFloors.length === 0 ? (
+          <p className="text-xs text-primary/60">Sem pisos disponíveis</p>
+        ) : (
+          uniqueFloors.map((floor) => (
+            <button
+              key={floor}
+              onClick={() => setSelectedFloor(floor)}
+              className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all duration-300 ${
+                selectedFloor === floor
+                  ? 'bg-primary text-green border border-green'
+                  : 'bg-white text-primary border border-primary/10 hover:border-green/50'
+              }`}
+            >
+              Piso {floor}
+            </button>
+          ))
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8">
@@ -117,87 +135,95 @@ export default function InteractiveMap() {
               )}
 
               {/* Render Spaces */}
-              {floorSpaces.map((space) => {
-                const { x, y, w, h } = getSpaceCoordinates(space.number);
-                const isHovered = hoveredSpace?.id === space.id;
-                const isSelected = selectedSpace?.id === space.id;
+              {floorSpaces.length === 0 ? (
+                <text x="400" y="150" textAnchor="middle" className="fill-slate-400 text-sm">
+                  Sem espaços neste piso
+                </text>
+              ) : (
+                floorSpaces.map((space, index) => {
+                  const { x, y, w, h } = getSpaceCoordinates(index, floorSpaces.length);
+                  const isHovered = hoveredSpace?.id === space.id;
+                  const isSelected = selectedSpace?.id === space.id;
 
-                return (
-                  <g
-                    key={space.id}
-                    className="cursor-pointer"
-                    onMouseEnter={() => setHoveredSpace(space)}
-                    onMouseLeave={() => setHoveredSpace(null)}
-                    onClick={() => setSelectedSpace(space)}
-                  >
-                    {/* Outer glow for hovered/selected spaces */}
-                    {(isHovered || isSelected) && (
+                  return (
+                    <g
+                      key={space.id}
+                      className="cursor-pointer"
+                      onMouseEnter={() => setHoveredSpace(space)}
+                      onMouseLeave={() => setHoveredSpace(null)}
+                      onClick={() => setSelectedSpace(space)}
+                    >
+                      {/* Outer glow for hovered/selected spaces */}
+                      {(isHovered || isSelected) && (
+                        <rect
+                          x={x - 4}
+                          y={y - 4}
+                          width={w + 8}
+                          height={h + 8}
+                          rx="8"
+                          fill="none"
+                          stroke="#10B981"
+                          strokeWidth="2"
+                          strokeOpacity="0.4"
+                        />
+                      )}
+
+                      {/* Main space block */}
                       <rect
-                        x={x - 4}
-                        y={y - 4}
-                        width={w + 8}
-                        height={h + 8}
-                        rx="8"
-                        fill="none"
-                        stroke="#10B981"
+                        x={x}
+                        y={y}
+                        width={w}
+                        height={h}
+                        rx="4"
+                        className={`transition-all duration-300 ${getStatusColor(space.status, isHovered || isSelected)}`}
                         strokeWidth="2"
-                        strokeOpacity="0.4"
                       />
-                    )}
 
-                    {/* Main space block */}
-                    <rect
-                      x={x}
-                      y={y}
-                      width={w}
-                      height={h}
-                      rx="4"
-                      className={`transition-all duration-300 ${getStatusColor(space.status, isHovered || isSelected)}`}
-                      strokeWidth="2"
-                    />
+                      {/* Label inside */}
+                      <text
+                        x={x + w / 2}
+                        y={y + h / 2 - 5}
+                        textAnchor="middle"
+                        className={`text-xs font-semibold ${
+                          space.status === 'ocupado' ? 'fill-white' : 'fill-primary'
+                        }`}
+                      >
+                        {space.number.length > 8 ? space.number.substring(0, 8) + '...' : space.number}
+                      </text>
 
-                    {/* Label inside */}
-                    <text
-                      x={x + w / 2}
-                      y={y + h / 2 - 5}
-                      textAnchor="middle"
-                      className={`text-xs font-semibold ${
-                        space.status === 'ocupado' ? 'fill-white' : 'fill-primary'
-                      }`}
-                    >
-                      {space.number}
-                    </text>
+                      {/* Sub-label showing area */}
+                      <text
+                        x={x + w / 2}
+                        y={y + h / 2 + 15}
+                        textAnchor="middle"
+                        className={`text-[10px] opacity-75 ${
+                          space.status === 'ocupado' ? 'fill-white/80' : 'fill-primary/70'
+                        }`}
+                      >
+                        {space.area} m²
+                      </text>
 
-                    {/* Sub-label showing area */}
-                    <text
-                      x={x + w / 2}
-                      y={y + h / 2 + 15}
-                      textAnchor="middle"
-                      className={`text-[10px] opacity-75 ${
-                        space.status === 'ocupado' ? 'fill-white/80' : 'fill-primary/70'
-                      }`}
-                    >
-                      {space.area} m²
-                    </text>
-
-                    {/* Status Badge text */}
-                    <text
-                      x={x + w / 2}
-                      y={y + h - 12}
-                      textAnchor="middle"
-                      className={`text-[8px] font-bold uppercase tracking-wider ${
-                        space.status === 'disponivel'
-                          ? 'fill-emerald-600'
-                          : space.status === 'reservado'
-                          ? 'fill-amber-600'
-                          : 'fill-white/50'
-                      }`}
-                    >
-                      {space.status}
-                    </text>
-                  </g>
-                );
-              })}
+                      {/* Status Badge text */}
+                      <text
+                        x={x + w / 2}
+                        y={y + h - 12}
+                        textAnchor="middle"
+                        className={`text-[8px] font-bold uppercase tracking-wider ${
+                          space.status === 'disponivel'
+                            ? 'fill-emerald-600'
+                            : space.status === 'reservado'
+                            ? 'fill-amber-600'
+                            : space.status === 'em_construcao'
+                            ? 'fill-orange-600'
+                            : 'fill-white/50'
+                        }`}
+                      >
+                        {space.status === 'em_construcao' ? 'Const.' : space.status.substring(0, 4)}
+                      </text>
+                    </g>
+                  );
+                })
+              )}
             </svg>
           </div>
 
@@ -208,9 +234,9 @@ export default function InteractiveMap() {
               style={{
                 left: `${Math.min(
                   550,
-                  Math.max(50, getSpaceCoordinates(hoveredSpace.number).x + getSpaceCoordinates(hoveredSpace.number).w / 2 - 96)
+                  Math.max(50, getSpaceCoordinates(floorSpaces.indexOf(hoveredSpace), floorSpaces.length).x + getSpaceCoordinates(floorSpaces.indexOf(hoveredSpace), floorSpaces.length).w / 2 - 96)
                 )}px`,
-                top: `${getSpaceCoordinates(hoveredSpace.number).y - 65}px`,
+                top: `${getSpaceCoordinates(floorSpaces.indexOf(hoveredSpace), floorSpaces.length).y - 65}px`,
               }}
             >
               <div className="font-bold flex justify-between border-b border-white/10 pb-1 mb-1">
@@ -307,12 +333,15 @@ export default function InteractiveMap() {
                       ? 'bg-emerald-50 text-emerald-600'
                       : selectedSpace.status === 'reservado'
                       ? 'bg-amber-50 text-amber-600'
+                      : selectedSpace.status === 'em_construcao'
+                      ? 'bg-orange-50 text-orange-600'
                       : 'bg-slate-100 text-slate-600'
                   }`}
                 >
                   {selectedSpace.status === 'disponivel' && <CheckCircle className="w-3.5 h-3.5" />}
                   {selectedSpace.status === 'reservado' && <Clock className="w-3.5 h-3.5" />}
-                  {selectedSpace.status === 'ocupado' && <AlertTriangle className="w-3.5 h-3.5" />}
+                  {(selectedSpace.status === 'ocupado' || selectedSpace.status === 'indisponivel' || selectedSpace.status === 'em_preparacao') && <AlertTriangle className="w-3.5 h-3.5" />}
+                  {selectedSpace.status === 'em_construcao' && <AlertTriangle className="w-3.5 h-3.5" />}
                   {selectedSpace.status}
                 </span>
               </div>
@@ -341,7 +370,7 @@ export default function InteractiveMap() {
                 >
                   Ver Detalhes do Espaço
                 </Link>
-                {selectedSpace.status !== 'ocupado' && (
+                {selectedSpace.status !== 'ocupado' && selectedSpace.status !== 'em_construcao' && (
                   <Link
                     href={`/contato?espaco=${selectedSpace.number}`}
                     onClick={() => setSelectedSpace(null)}

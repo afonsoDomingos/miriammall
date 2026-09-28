@@ -106,6 +106,32 @@ export async function GET(req: Request) {
       );
     }
 
+    // Seed Buildings if empty
+    const buildingCount = await Building.countDocuments({});
+    if (buildingCount === 0 && initialBuildings.length > 0) {
+      for (const b of initialBuildings) {
+        const newBuilding = new Building({
+          ...b,
+          _id: b.id || `building-${Date.now()}`
+        });
+        await newBuilding.save();
+      }
+      seeded = true;
+    }
+
+    // Seed Spaces if empty
+    const spaceCount = await Space.countDocuments({});
+    if (spaceCount === 0 && initialSpaces.length > 0) {
+      for (const s of initialSpaces) {
+        const newSpace = new Space({
+          ...s,
+          _id: s.id || `space-${Date.now()}`
+        });
+        await newSpace.save();
+      }
+      seeded = true;
+    }
+
     return NextResponse.json({
       success: true,
       message: seeded ? 'Database initialized with Admin user and banners.' : 'Database already initialized.',

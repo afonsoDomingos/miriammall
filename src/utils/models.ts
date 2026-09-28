@@ -4,14 +4,17 @@ import mongoose, { Schema } from 'mongoose';
 const SpaceSchema = new Schema({
   _id: { type: String, required: true },
   number: { type: String, required: true },
+  buildingId: { type: String, required: true },
   floor: { type: Number, required: true },
   area: { type: Number, required: true },
-  status: { type: String, enum: ['disponivel', 'reservado', 'ocupado'], required: true },
+  status: { type: String, enum: ['disponivel', 'reservado', 'ocupado', 'indisponivel', 'em_preparacao', 'em_construcao'], required: true },
   price: { type: String, required: true },
   description: { type: String, required: true },
+  spaceType: { type: String, enum: ['loja', 'restaurante', 'escritorio', 'quarto', 'armazem', 'ferragem', 'salao', 'sala_reunioes', 'refeitorio', 'outro'], required: true },
   amenities: { type: [String], default: [] },
   image: { type: String, required: true },
   blueprint: { type: String, required: true },
+  conditions: { type: String, default: '' },
 }, { timestamps: true });
 
 // 2. Banner Schema

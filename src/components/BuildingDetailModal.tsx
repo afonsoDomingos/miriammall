@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Building } from '../utils/mockData';
-import { X, Building2, ArrowLeft, ChevronRight } from 'lucide-react';
+import { X, Building2, ArrowLeft, ChevronRight, Layers } from 'lucide-react';
+import Link from 'next/link';
 
 interface BuildingDetailModalProps {
   building: Building | null;
@@ -222,6 +223,15 @@ export default function BuildingDetailModal({ building, onClose }: BuildingDetai
                       </button>
                     ))}
                   </div>
+
+                  {/* Link to building spaces page */}
+                  <Link
+                    href={`/edificios/${building.id}`}
+                    onClick={onClose}
+                    className="mt-6 w-full text-center flex items-center justify-center gap-2 bg-green hover:bg-green-light text-primary text-xs font-bold uppercase tracking-wider py-3 rounded-xl transition-all duration-300"
+                  >
+                    <Layers className="w-4 h-4" /> Ver Espaços Disponíveis
+                  </Link>
                 </motion.div>
               ) : (
                 /* Floor Images Gallery */
@@ -260,6 +270,15 @@ export default function BuildingDetailModal({ building, onClose }: BuildingDetai
                       </motion.button>
                     ))}
                   </div>
+
+                  {/* Link to building spaces page */}
+                  <Link
+                    href={`/edificios/${building.id}`}
+                    onClick={onClose}
+                    className="mt-6 w-full text-center flex items-center justify-center gap-2 bg-green hover:bg-green-light text-primary text-xs font-bold uppercase tracking-wider py-3 rounded-xl transition-all duration-300"
+                  >
+                    <Layers className="w-4 h-4" /> Ver Espaços Disponíveis
+                  </Link>
                 </motion.div>
               )}
             </AnimatePresence>
