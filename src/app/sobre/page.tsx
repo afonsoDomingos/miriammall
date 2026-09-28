@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useDatabase } from '../../context/DatabaseContext';
 import { Building as BuildingType, Banner } from '../../utils/mockData';
-import BuildingDetailModal from '../../components/BuildingDetailModal';
 import {
   Building2,
   Store,
@@ -35,9 +34,6 @@ export default function Sobre() {
       : cleanBanners.length > 0
       ? cleanBanners[0].image
       : defaultHeroImage;
-
-  const [selectedBuilding, setSelectedBuilding] =
-    useState<BuildingType | null>(null);
 
   const defaultBuildings: BuildingType[] = [
     {
@@ -117,20 +113,20 @@ export default function Sobre() {
       id: 'btn-building-1',
       title: getCleanName(buildingA.name) || 'Centro comercial',
       icon: Store,
-      onClick: () => setSelectedBuilding(buildingA),
+      href: `/edificios/${buildingA.id}`,
     },
     {
       id: 'btn-building-2',
       title: getCleanName(buildingB.name) || 'Área comercial e hospedagem',
       icon: Briefcase,
-      onClick: () => setSelectedBuilding(buildingB),
+      href: `/edificios/${buildingB.id}`,
     },
     {
       id: 'btn-building-3',
       title:
         getCleanName(buildingC.name) || 'Área logística e operacional',
       icon: Building2,
-      onClick: () => setSelectedBuilding(buildingC),
+      href: `/edificios/${buildingC.id}`,
     },
   ];
 
@@ -155,56 +151,23 @@ export default function Sobre() {
     },
   ];
 
-  type ButtonDef =
-    | {
-        id: string;
-        title: string;
-        icon: React.ElementType;
-        onClick: () => void;
-        href?: undefined;
-      }
-    | {
-        id: string;
-        title: string;
-        icon: React.ElementType;
-        href: string;
-        onClick?: undefined;
-      };
-
-  const renderButton = (btn: ButtonDef, num: number, idx: number) => {
+  const renderButton = (btn: { id: string; title: string; icon: React.ElementType; href: string }, num: number, idx: number) => {
     const Icon = btn.icon;
-    const inner = (
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25, delay: idx * 0.05 }}
-        className="w-full min-h-[52px] px-5 py-3 rounded-lg border border-white/70 hover:border-white hover:bg-white hover:text-primary text-white text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center justify-start gap-3 text-left group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 bg-white/5 backdrop-blur-sm"
-      >
-        <span className="w-5 h-5 rounded-full bg-white/20 group-hover:bg-primary/20 flex items-center justify-center text-[10px] font-extrabold shrink-0 leading-none">
-          {num}
-        </span>
-        <Icon className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" />
-        <span className="leading-snug">{toSentenceCase(btn.title)}</span>
-      </motion.div>
-    );
-
-    if (btn.href) {
-      return (
-        <Link key={btn.id} href={btn.href} className="block w-full">
-          {inner}
-        </Link>
-      );
-    }
-
     return (
-      <button
-        key={btn.id}
-        onClick={btn.onClick}
-        type="button"
-        className="block w-full text-left"
-      >
-        {inner}
-      </button>
+      <Link key={btn.id} href={btn.href} className="block w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25, delay: idx * 0.05 }}
+          className="w-full min-h-[52px] px-5 py-3 rounded-lg border border-white/70 hover:border-white hover:bg-white hover:text-primary text-white text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center justify-start gap-3 text-left group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 bg-white/5 backdrop-blur-sm"
+        >
+          <span className="w-5 h-5 rounded-full bg-white/20 group-hover:bg-primary/20 flex items-center justify-center text-[10px] font-extrabold shrink-0 leading-none">
+            {num}
+          </span>
+          <Icon className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" />
+          <span className="leading-snug">{toSentenceCase(btn.title)}</span>
+        </motion.div>
+      </Link>
     );
   };
 
@@ -263,14 +226,6 @@ export default function Sobre() {
           </div>
         </div>
       </main>
-
-      {/* Modal de Detalhes do Edifício */}
-      {selectedBuilding && (
-        <BuildingDetailModal
-          building={selectedBuilding}
-          onClose={() => setSelectedBuilding(null)}
-        />
-      )}
 
       <Footer />
     </div>
