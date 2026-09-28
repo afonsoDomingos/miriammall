@@ -195,14 +195,6 @@ export default function BuildingSpacesPage() {
                   </div>
                 </>
               )}
-
-              {/* Interactive Map for all floors */}
-              {buildingSpaces.length > 0 && (
-                <div className="mt-12">
-                  <h2 className="text-2xl font-serif font-bold text-primary mb-6">Planta Interactiva</h2>
-                  <InteractiveMap buildingId={Array.isArray(buildingId) ? buildingId[0] : buildingId} />
-                </div>
-              )}
             </div>
           ) : (
             <div>
@@ -218,6 +210,14 @@ export default function BuildingSpacesPage() {
                   Piso {selectedFloor}
                 </h2>
               </div>
+
+              {/* Interactive Map for selected floor */}
+              {floorSpaces.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-lg font-serif font-bold text-primary mb-4">Planta Interactiva</h3>
+                  <InteractiveMap buildingId={Array.isArray(buildingId) ? buildingId[0] : buildingId} />
+                </div>
+              )}
 
               {/* Spaces Grid */}
               {floorSpaces.length === 0 ? (
