@@ -160,7 +160,6 @@ export default function BuildingSpacesPage() {
                 <>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                     {uniqueFloors.map((floor) => {
-                      const floorSpaceCount = buildingSpaces.filter((s: Space) => s.floor === floor).length;
                       return (
                         <button
                           key={floor}
@@ -176,7 +175,6 @@ export default function BuildingSpacesPage() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                             <div className="absolute bottom-3 left-3 right-3">
                               <div className="text-white font-bold text-lg">{floor}º Piso</div>
-                              <div className="text-white/80 text-xs">{floorSpaceCount} imagem{floorSpaceCount !== 1 ? 's' : ''}</div>
                             </div>
                           </div>
                         </button>
