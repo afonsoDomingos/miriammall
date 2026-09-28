@@ -16,17 +16,15 @@ export default function BuildingSpacesPage() {
   const { buildings, spaces, isLoaded } = useDatabase();
   const [selectedFloor, setSelectedFloor] = useState<number | null>(null);
 
-  const building = buildings?.find((b: BuildingType) => b.id === buildingId);
+  // Handle buildingId which might be an array
+  const buildingIdStr = Array.isArray(buildingId) ? buildingId[0] : buildingId;
 
-  if (!isLoaded) {
-    return (
-      <div className="min-h-screen bg-white flex flex-col justify-between">
-        <Navbar />
-        <div className="text-center py-20 text-primary/60 text-sm">A carregar edifício...</div>
-        <Footer />
-      </div>
-    );
-  }
+  // Fallback to mock data if database is not loaded or building not found
+  const { initialBuildings, initialSpaces } = require('../../../utils/mockData');
+  const fallbackBuildings = buildings && buildings.length > 0 ? buildings : initialBuildings;
+  const fallbackSpaces = spaces && spaces.length > 0 ? spaces : initialSpaces;
+
+  const building = fallbackBuildings?.find((b: BuildingType) => b.id === buildingIdStr);
 
   if (!building) {
     return (
@@ -44,11 +42,11 @@ export default function BuildingSpacesPage() {
   }
 
   // Get unique floors for this building
-  const buildingSpaces = spaces.filter((s: Space) => s.buildingId === buildingId);
-  const uniqueFloors = Array.from(new Set(buildingSpaces.map((s: Space) => s.floor))).sort((a, b) => a - b);
+  const buildingSpaces = fallbackSpaces.filter((s: Space) => s.buildingId === buildingIdStr);
+  const uniqueFloors = Array.from(new Set(buildingSpaces.map((s: Space) => s.floor))).sort((a, b) => Number(a) - Number(b));
 
   // Filter spaces by selected floor
-  const floorSpaces = selectedFloor !== null 
+  const floorSpaces = selectedFloor !== null
     ? buildingSpaces.filter((s: Space) => s.floor === selectedFloor)
     : [];
 
@@ -87,8 +85,8 @@ export default function BuildingSpacesPage() {
     }
   };
 
-  const getSpaceTypeLabel = (type: Space['spaceType']) => {
-    const labels: Record<Space['spaceType'], string> = {
+  const getSpaceTypeLabel = (type: string) => {
+    const labels: Record<string, string> = {
       loja: 'Loja',
       restaurante: 'Restaurante',
       escritorio: 'Escritório',
@@ -134,7 +132,7 @@ export default function BuildingSpacesPage() {
               {building.description}
             </p>
             <div className="flex flex-wrap gap-2">
-              {building.features.map((feature, idx) => (
+              {building.features.map((feature: string, idx: number) => (
                 <span
                   key={idx}
                   className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-semibold rounded-full"
@@ -160,21 +158,22 @@ export default function BuildingSpacesPage() {
                 <>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                     {uniqueFloors.map((floor) => {
+                      const floorNum = Number(floor);
                       return (
                         <button
-                          key={floor}
-                          onClick={() => setSelectedFloor(floor)}
+                          key={floorNum}
+                          onClick={() => setSelectedFloor(floorNum)}
                           className="bg-white border-2 border-slate-200 hover:border-green rounded-xl overflow-hidden text-left transition-all duration-300 hover:shadow-lg group"
                         >
                           <div className="h-32 bg-primary-dark relative">
                             <img
                               src={building.image}
-                              alt={`Piso ${floor}`}
+                              alt={`Piso ${floorNum}`}
                               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                             <div className="absolute bottom-3 left-3 right-3">
-                              <div className="text-white font-bold text-lg">{floor}º Piso</div>
+                              <div className="text-white font-bold text-lg">{floorNum}º Piso</div>
                             </div>
                           </div>
                         </button>
@@ -214,7 +213,7 @@ export default function BuildingSpacesPage() {
                 <div className="mb-8">
                   <h3 className="text-lg font-serif font-bold text-primary mb-4">Planta Interactiva</h3>
                   <InteractiveMap 
-                    buildingId={Array.isArray(buildingId) ? buildingId[0] : buildingId}
+                    buildingId={buildingIdStr}
                     selectedFloor={selectedFloor}
                   />
                 </div>
@@ -228,7 +227,7 @@ export default function BuildingSpacesPage() {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {floorSpaces.map((space) => (
+                  {floorSpaces.map((space: Space) => (
                     <div
                       key={space.id}
                       className="bg-white rounded-xl overflow-hidden border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300"
@@ -240,7 +239,7 @@ export default function BuildingSpacesPage() {
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute top-4 left-4 bg-primary/80 backdrop-blur-sm px-2.5 py-0.5 rounded text-[10px] text-green font-bold uppercase tracking-wider">
-                          {getSpaceTypeLabel(space.spaceType)}
+                          {getSpaceTypeLabel(space.spaceType || 'outro')}
                         </div>
                         <div className="absolute top-4 right-4">
                           {getStatusBadge(space.status)}
