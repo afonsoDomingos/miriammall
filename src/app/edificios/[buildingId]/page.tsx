@@ -148,7 +148,8 @@ export default function BuildingSpacesPage() {
           {/* Floor Selection */}
           {selectedFloor === null ? (
             <div>
-              <h2 className="text-2xl font-serif font-bold text-primary mb-6">Seleccione um Piso</h2>
+              <h2 className="text-xl sm:text-2xl font-serif font-bold text-primary mb-2">Edifício {building.order} - {building.subtitle}</h2>
+              <p className="text-primary/60 text-sm mb-6">SELECIONE O PISO PARA VER AS IMAGENS</p>
               {uniqueFloors.length === 0 ? (
                 <div className="bg-slate-50 border border-slate-200 rounded-xl p-8 text-center">
                   <Info className="w-12 h-12 text-slate-400 mx-auto mb-4" />
@@ -156,27 +157,43 @@ export default function BuildingSpacesPage() {
                   <p className="text-slate-400 text-xs mt-2">Contacte a administração para mais informações.</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {uniqueFloors.map((floor) => {
-                    const floorSpaceCount = buildingSpaces.filter((s: Space) => s.floor === floor).length;
-                    return (
-                      <button
-                        key={floor}
-                        onClick={() => setSelectedFloor(floor)}
-                        className="bg-white border-2 border-slate-200 hover:border-green rounded-xl p-6 text-left transition-all duration-300 hover:shadow-lg group"
-                      >
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="w-12 h-12 rounded-full bg-primary/10 group-hover:bg-green/10 flex items-center justify-center transition-colors">
-                            <Layers className="w-6 h-6 text-green" />
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                    {uniqueFloors.map((floor) => {
+                      const floorSpaceCount = buildingSpaces.filter((s: Space) => s.floor === floor).length;
+                      return (
+                        <button
+                          key={floor}
+                          onClick={() => setSelectedFloor(floor)}
+                          className="bg-white border-2 border-slate-200 hover:border-green rounded-xl overflow-hidden text-left transition-all duration-300 hover:shadow-lg group"
+                        >
+                          <div className="h-32 bg-primary-dark relative">
+                            <img
+                              src={building.image}
+                              alt={`Piso ${floor}`}
+                              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <div className="absolute bottom-3 left-3 right-3">
+                              <div className="text-white font-bold text-lg">{floor}º Piso</div>
+                              <div className="text-white/80 text-xs">{floorSpaceCount} imagem{floorSpaceCount !== 1 ? 's' : ''}</div>
+                            </div>
                           </div>
-                          <span className="text-2xl font-bold text-primary">{floor}º</span>
-                        </div>
-                        <h3 className="font-semibold text-primary mb-1">Piso {floor}</h3>
-                        <p className="text-sm text-primary/60">{floorSpaceCount} espaço{floorSpaceCount !== 1 ? 's' : ''}</p>
-                      </button>
-                    );
-                  })}
-                </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* VER ESPAÇOS DISPONÍVEIS Button */}
+                  <div className="text-center">
+                    <Link
+                      href="/espacos"
+                      className="inline-block bg-green hover:bg-green-light text-primary font-bold uppercase tracking-wider py-3 px-8 rounded-lg transition-colors text-sm"
+                    >
+                      VER ESPAÇOS DISPONÍVEIS
+                    </Link>
+                  </div>
+                </>
               )}
 
               {/* Interactive Map for all floors */}
