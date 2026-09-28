@@ -10,6 +10,8 @@ import {
   Store,
   Briefcase,
   Layers,
+  ShoppingBag,
+  Utensils,
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -134,6 +136,18 @@ export default function Sobre() {
       title: 'Espaços comerciais',
       icon: Layers,
       href: '/espacos',
+    },
+    {
+      id: 'btn-lojas',
+      title: 'Lojas e serviços',
+      icon: ShoppingBag,
+      href: '/lojas',
+    },
+    {
+      id: 'btn-restaurantes',
+      title: 'Restaurantes e lazer',
+      icon: Utensils,
+      href: '/restaurantes',
     },
   ];
 
