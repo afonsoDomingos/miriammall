@@ -14,11 +14,13 @@ const defaultSpaces: Space[] = [
   {
     id: 'space-1',
     number: 'Loja 101 (Âncora Principal)',
+    buildingId: 'building-1',
     floor: 0,
     area: 120,
     status: 'disponivel',
     price: 'Sob Consulta',
     description: 'Espaço premium com montra panorâmica no piso térreo, ideal para supermercado, loja âncora ou grande marca de moda.',
+    spaceType: 'loja',
     amenities: ['Montra de Alta Visibilidade', 'Climatização Central', 'Ponto de Água e Esgoto', 'Acesso Facilitado para Cargas'],
     image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80',
     blueprint: '/blueprints/default.png'
@@ -26,11 +28,13 @@ const defaultSpaces: Space[] = [
   {
     id: 'space-2',
     number: 'Loja 102 (Comércio & Retalho)',
+    buildingId: 'building-1',
     floor: 0,
     area: 55,
     status: 'disponivel',
     price: 'Sob Consulta',
     description: 'Excelente loja para boutique de vestuário, calçado, perfumaria ou ótica localizada no corredor principal de alto fluxo pedonal.',
+    spaceType: 'loja',
     amenities: ['Iluminação LED Moderna', 'Segurança 24h', 'Ligação Fibra Ótica'],
     image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80',
     blueprint: '/blueprints/default.png'
@@ -38,11 +42,13 @@ const defaultSpaces: Space[] = [
   {
     id: 'space-3',
     number: 'Loja 201 (Escritórios & Serviços)',
+    buildingId: 'building-1',
     floor: 1,
     area: 75,
     status: 'disponivel',
     price: 'Sob Consulta',
     description: 'Espaço corporativo modular no 1º andar, perfeito para agência de seguros, consultoria, advocacia ou serviços de saúde.',
+    spaceType: 'escritorio',
     amenities: ['Ambiente Executivo Silencioso', 'Piso Técnico', 'Portaria Executiva', 'Elevador Panorâmico'],
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
     blueprint: '/blueprints/default.png'
@@ -50,11 +56,13 @@ const defaultSpaces: Space[] = [
   {
     id: 'space-4',
     number: 'Loja 202 (Praça de Restauração)',
+    buildingId: 'building-1',
     floor: 1,
     area: 85,
     status: 'disponivel',
     price: 'Sob Consulta',
     description: 'Unidade com conduta de extração de fumos e água, preparada para restaurante, pizzaria, hamburgueria ou café.',
+    spaceType: 'restaurante',
     amenities: ['Extração de Fumos', 'Gás Canalizado', 'Área de Mesas Partilhada', 'Ponto de Água'],
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
     blueprint: '/blueprints/default.png'
@@ -62,11 +70,13 @@ const defaultSpaces: Space[] = [
   {
     id: 'space-5',
     number: 'Loja 103 (Farmácia / Bem-Estar)',
+    buildingId: 'building-1',
     floor: 0,
     area: 60,
     status: 'reservado',
     price: 'Sob Consulta',
     description: 'Posicionada junto à entrada principal com fácil acessibilidade para clientes e estacionamento.',
+    spaceType: 'loja',
     amenities: ['Acesso Térreo Direto', 'Montra Envidraçada', 'Climatização'],
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80',
     blueprint: '/blueprints/default.png'
@@ -74,11 +84,13 @@ const defaultSpaces: Space[] = [
   {
     id: 'space-6',
     number: 'Loja 203 (Tecnologia & Telecom)',
+    buildingId: 'building-1',
     floor: 1,
     area: 45,
     status: 'disponivel',
     price: 'Sob Consulta',
     description: 'Espaço compacto e eficiente para atendimento ao público, loja de telecomunicações, acessórios ou eletrónica.',
+    spaceType: 'loja',
     amenities: ['Fibra Ótica', 'Segurança 24h', 'Sistema Anti-incêndio'],
     image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=800&q=80',
     blueprint: '/blueprints/default.png'

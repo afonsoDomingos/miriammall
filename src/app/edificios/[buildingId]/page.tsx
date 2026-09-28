@@ -183,7 +183,7 @@ export default function BuildingSpacesPage() {
               {buildingSpaces.length > 0 && (
                 <div className="mt-12">
                   <h2 className="text-2xl font-serif font-bold text-primary mb-6">Planta Interactiva</h2>
-                  <InteractiveMap buildingId={buildingId} />
+                  <InteractiveMap buildingId={Array.isArray(buildingId) ? buildingId[0] : buildingId} />
                 </div>
               )}
             </div>
